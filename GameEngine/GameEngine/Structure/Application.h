@@ -12,6 +12,7 @@
 #include "AudioManager.h"
 #include "Scene.h"
 #include "GameTime.h"
+#include "Editor.h"
 
 namespace DrageEngine
 {
@@ -31,16 +32,17 @@ namespace DrageEngine
             AssetManager *assets;
             Input *input;
             AudioManager *audio;
+            Editor *editor;
 
             const Scene* GetActiveScene() const;
             void SetActiveScene(Scene *scene);
         
         private:
-            static const bool EDITOR;
             bool m_init;
             bool m_quit;
             int m_fps;
             Scene *m_activeScene;
+            bool editMode;
     };
 
     extern Application *app;

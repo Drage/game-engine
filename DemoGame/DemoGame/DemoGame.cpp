@@ -7,6 +7,10 @@ using namespace DrageEngine;
 void DemoGame::Load()
 {
     m_scene = new Scene("Demo.scene");
+}
+
+void DemoGame::Start()
+{
     m_scene->Start();
 }
 

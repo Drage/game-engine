@@ -11,7 +11,6 @@ namespace DrageEngine
         public:
             ~LightComponent();
             void Init(const ParamList &params);
-            void Start();
             void Update();
     };
 }

@@ -10,6 +10,7 @@ namespace DrageEngine
     {
         public:
             virtual void Load() = 0;
+            virtual void Start() = 0;
             virtual void Update() = 0;
             virtual void Render(Renderer *renderer) = 0;
     };

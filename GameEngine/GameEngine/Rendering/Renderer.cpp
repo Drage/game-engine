@@ -132,7 +132,7 @@ void Renderer::RevertRenderOptions(int options) const
         glDepthMask(GL_TRUE);
     
     if (options & RenderOption::NO_DEPTH_TEST)
-         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST);
 }
 
 void Renderer::Render(const Renderable *renderable, const Transform *transform, const Material *material, int options) const

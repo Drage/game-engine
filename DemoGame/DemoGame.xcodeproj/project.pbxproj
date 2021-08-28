@@ -13,7 +13,6 @@
 		406327DE234B7DE9009B243F /* Camera3rdPerson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */; };
 		406414752355F8DC000F994F /* Clouds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406414742355F8DC000F994F /* Clouds.cpp */; };
 		406DCA6F233E4076008C088E /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA6E233E4076008C088E /* Rotate.cpp */; };
-		406DCA8A234100CF008C088E /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA89234100CF008C088E /* CameraController.cpp */; };
 		40DD5597234FA00100BBA4A9 /* GameEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401184E9232E4B33000B19FB /* GameEngine.framework */; };
 		40DD5598234FA00100BBA4A9 /* GameEngine.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 401184E9232E4B33000B19FB /* GameEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D06899742412E2C300ACAB1C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06899732412E2C300ACAB1C /* SDL2.framework */; };
@@ -95,8 +94,6 @@
 		406DCA6C233E3C47008C088E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		406DCA6D233E4076008C088E /* Rotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
 		406DCA6E233E4076008C088E /* Rotate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
-		406DCA88234100CF008C088E /* CameraController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
-		406DCA89234100CF008C088E /* CameraController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraController.cpp; sourceTree = "<group>"; };
 		406DCA8B2341C0B3008C088E /* Demo.scene */ = {isa = PBXFileReference; lastKnownFileType = text; path = Demo.scene; sourceTree = "<group>"; };
 		4083B4E02324CB2A00A72B43 /* Lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Lighting.frag; sourceTree = "<group>"; };
 		4083B4E223250D4C00A72B43 /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
@@ -144,8 +141,6 @@
 				401B788F231B73B500E6B4F0 /* DemoGame.cpp */,
 				406DCA6D233E4076008C088E /* Rotate.h */,
 				406DCA6E233E4076008C088E /* Rotate.cpp */,
-				406DCA88234100CF008C088E /* CameraController.h */,
-				406DCA89234100CF008C088E /* CameraController.cpp */,
 				406327D9234B6F4D009B243F /* Racer.h */,
 				406327DA234B6F4D009B243F /* Racer.cpp */,
 				406327DC234B7DE9009B243F /* Camera3rdPerson.h */,
@@ -315,7 +310,6 @@
 				406DCA6F233E4076008C088E /* Rotate.cpp in Sources */,
 				406414752355F8DC000F994F /* Clouds.cpp in Sources */,
 				401B7890231B73B500E6B4F0 /* DemoGame.cpp in Sources */,
-				406DCA8A234100CF008C088E /* CameraController.cpp in Sources */,
 				4048AEEC2312E01700A7152A /* Main.cpp in Sources */,
 				406327DE234B7DE9009B243F /* Camera3rdPerson.cpp in Sources */,
 			);
@@ -438,10 +432,10 @@
 		4048AEF02312E01700A7152A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CZ644E2TTF;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../\"/**",
 					"$(PROJECT_DIR)",
@@ -466,10 +460,10 @@
 		4048AEF12312E01700A7152A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CZ644E2TTF;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../\"/**",
 					"$(PROJECT_DIR)",

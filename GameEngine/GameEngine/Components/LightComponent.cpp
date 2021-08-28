@@ -13,10 +13,6 @@ void LightComponent::Init(const ParamList &params)
     m_ambientCoefficient = params.Get<float>("ambient");
     m_attenuation = params.Get<float>("attenuation");
     m_coneAngle = params.Get<float>("angle");
-}
-
-void LightComponent::Start()
-{
     app->renderer->AddLight(this);
 }
 

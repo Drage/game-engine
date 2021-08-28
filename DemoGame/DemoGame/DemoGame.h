@@ -10,6 +10,7 @@ class DemoGame : public Game
 {
     public:
         virtual void Load();
+        virtual void Start();
         virtual void Update();
         virtual void Render(Renderer *renderer);
     

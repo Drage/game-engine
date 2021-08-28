@@ -6,21 +6,17 @@
 #include "Application.h"
 #include "Debug.h"
 #include "Timer.h"
+#include "Editor.h"
 
 using namespace DrageEngine;
 
 Application *DrageEngine::app = new Application();
 
-#ifdef EDITOR
-const bool Application::EDITOR = true;
-#else
-const bool Application::EDITOR = false;
-#endif
-
 Application::Application()
 {
     m_init = false;
     m_fps = 60;
+    editMode = true;
     window = new Window();
 }
  
@@ -41,6 +37,7 @@ bool Application::Init()
     assets = new AssetManager();
     input = new Input();
     audio = new AudioManager();
+    editor = new Editor();
     
     m_init = true;
     return true;
@@ -61,6 +58,9 @@ void Application::Run(Game *game)
 {
     game->Load();
     
+    if (!editMode)
+        game->Start();
+    
     Time::Init();
 
     while (!m_quit)
@@ -76,7 +76,11 @@ void Application::Run(Game *game)
         }
         
         Time::Update();
-        game->Update();
+        
+        if (!editMode)
+            game->Update();
+        else
+            editor->Update();
 
         renderer->BeginRender();
         game->Render(renderer);

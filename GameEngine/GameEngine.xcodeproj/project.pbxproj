@@ -153,6 +153,10 @@
 		40DD559C234FA04700BBA4A9 /* GameTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40DD559A234FA04700BBA4A9 /* GameTime.cpp */; };
 		40EC7A0D234E117F00CA8DB3 /* TerrainComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 40EC7A0B234E117F00CA8DB3 /* TerrainComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40EC7A0E234E117F00CA8DB3 /* TerrainComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40EC7A0C234E117F00CA8DB3 /* TerrainComponent.cpp */; };
+		D02BBDE126D8DBF900B3B639 /* EditorCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */; };
+		D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02BBDE226D8DF5400B3B639 /* Editor.cpp */; };
+		D02BBDE726D8E20D00B3B639 /* Editor.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDE626D8E0A200B3B639 /* Editor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -305,6 +309,10 @@
 		40DD559A234FA04700BBA4A9 /* GameTime.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameTime.cpp; sourceTree = "<group>"; };
 		40EC7A0B234E117F00CA8DB3 /* TerrainComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TerrainComponent.h; sourceTree = "<group>"; };
 		40EC7A0C234E117F00CA8DB3 /* TerrainComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainComponent.cpp; sourceTree = "<group>"; };
+		D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorCamera.h; sourceTree = "<group>"; };
+		D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorCamera.cpp; sourceTree = "<group>"; };
+		D02BBDE226D8DF5400B3B639 /* Editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Editor.cpp; sourceTree = "<group>"; };
+		D02BBDE626D8E0A200B3B639 /* Editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor.h; sourceTree = "<group>"; };
 		D06899702412E27700ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -407,6 +415,7 @@
 				4062B911231A7A8900F44658 /* Info.plist */,
 				4062B910231A7A8900F44658 /* GameEngine.h */,
 				406DCA5923392239008C088E /* Structure */,
+				D02BBDDE26D8DBAA00B3B639 /* Editor */,
 				406DCA66233BC00D008C088E /* Components */,
 				40837765231A8F2600A63D8F /* Math */,
 				401B7931231D62D000E6B4F0 /* Assets */,
@@ -614,6 +623,17 @@
 			path = Terrain;
 			sourceTree = "<group>";
 		};
+		D02BBDDE26D8DBAA00B3B639 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */,
+				D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */,
+				D02BBDE226D8DF5400B3B639 /* Editor.cpp */,
+				D02BBDE626D8E0A200B3B639 /* Editor.h */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -622,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4083777C231A8F2600A63D8F /* Matrix3x3.h in Headers */,
+				D02BBDE726D8E20D00B3B639 /* Editor.h in Headers */,
 				40837790231ADE4900A63D8F /* Vector3.h in Headers */,
 				40607DB32344DED700F985CD /* AudioSourceComponent.h in Headers */,
 				401B7892231B750E00E6B4F0 /* Game.h in Headers */,
@@ -630,6 +651,7 @@
 				40607DAB2343D0CF00F985CD /* AudioFactory.h in Headers */,
 				406DCA5C23392257008C088E /* GameObject.h in Headers */,
 				406DCA79233FC23B008C088E /* Window.h in Headers */,
+				D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */,
 				401B792A231BC38A00E6B4F0 /* Color.h in Headers */,
 				40837780231A8F2600A63D8F /* Vector4.h in Headers */,
 				406DCA602339227D008C088E /* Component.h in Headers */,
@@ -729,7 +751,7 @@
 		4062B904231A7A8900F44658 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = Drage;
 				TargetAttributes = {
 					4062B90C231A7A8900F44658 = {
@@ -825,6 +847,7 @@
 				4083B4CA2320107F00A72B43 /* ImageTGA.cpp in Sources */,
 				40DD559C234FA04700BBA4A9 /* GameTime.cpp in Sources */,
 				406414722354DFA3000F994F /* BillboardComponent.cpp in Sources */,
+				D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */,
 				406DCA5D23392257008C088E /* GameObject.cpp in Sources */,
 				4083B4E623251A0900A72B43 /* XMLDocument.cpp in Sources */,
 				406414C8235DFAAC000F994F /* ParticleAnimParameter.cpp in Sources */,
@@ -852,6 +875,7 @@
 				40837782231A8F2600A63D8F /* Quaternion.cpp in Sources */,
 				406414B8235C693E000F994F /* Particle.cpp in Sources */,
 				40607DAC2343D0CF00F985CD /* AudioFactory.cpp in Sources */,
+				D02BBDE126D8DBF900B3B639 /* EditorCamera.cpp in Sources */,
 				401B7940231D6D0500E6B4F0 /* ImagePNG.cpp in Sources */,
 				408377A6231B6DD500A63D8F /* Random.cpp in Sources */,
 				4083777A231A8F2600A63D8F /* Matrix4x4.cpp in Sources */,
@@ -994,7 +1018,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 40837761231A811500A63D8F /* Config.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1033,7 +1057,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 40837761231A811500A63D8F /* Config.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
