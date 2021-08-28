@@ -15,24 +15,24 @@ using namespace DrageEngine;
 
 ComponentFactory::ComponentFactory()
 {
-    m_factory.Register<MeshRendererComponent>("MeshRenderer");
-    m_factory.Register<LightComponent>("Light");
-    m_factory.Register<CameraComponent>("Camera");
-    m_factory.Register<CubeComponent>("Cube");
-    m_factory.Register<PlaneComponent>("Plane");
-    m_factory.Register<AudioListenerComponent>("AudioListener");
-    m_factory.Register<AudioSourceComponent>("AudioSource");
-    m_factory.Register<SkyboxComponent>("Skybox");
-    m_factory.Register<TerrainComponent>("Terrain");
-    m_factory.Register<BillboardComponent>("Billboard");
+    factory.Register<MeshRendererComponent>("MeshRenderer");
+    factory.Register<LightComponent>("Light");
+    factory.Register<CameraComponent>("Camera");
+    factory.Register<CubeComponent>("Cube");
+    factory.Register<PlaneComponent>("Plane");
+    factory.Register<AudioListenerComponent>("AudioListener");
+    factory.Register<AudioSourceComponent>("AudioSource");
+    factory.Register<SkyboxComponent>("Skybox");
+    factory.Register<TerrainComponent>("Terrain");
+    factory.Register<BillboardComponent>("Billboard");
 }
 
 Component* ComponentFactory::Create(const std::string &type)
 {
-    return m_factory.Create(type);
+    return factory.Create(type);
 }
 
 bool ComponentFactory::IsSupported(const std::string &type) const
 {
-    return m_factory.IsSupported(type);
+    return factory.IsSupported(type);
 }

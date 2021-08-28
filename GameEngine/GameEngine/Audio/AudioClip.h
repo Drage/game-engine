@@ -17,7 +17,7 @@ namespace DrageEngine
             unsigned GetID() const;
         
         private:
-            unsigned m_id;
+            unsigned id;
     };
 }
 

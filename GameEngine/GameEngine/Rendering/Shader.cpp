@@ -17,18 +17,18 @@ using namespace DrageEngine;
 
 Shader::Shader()
 {
-    m_id = 0;
+    id = 0;
 }
 
 Shader::~Shader()
 {
-    if(m_id != 0)
-        glDeleteProgram(m_id);
+    if(id != 0)
+        glDeleteProgram(id);
 }
 
 bool Shader::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     
     XMLDocument xml;
     if (!xml.Load(filename))
@@ -52,35 +52,35 @@ bool Shader::Load(const std::string &filename)
     unsigned vertexShaderID = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
     unsigned fragmentShaderID = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
     
-    m_id = CompileProgram(vertexShaderID, fragmentShaderID);
+    id = CompileProgram(vertexShaderID, fragmentShaderID);
     
     const XMLDocument::Element *defaults = xml.root.GetSubElement("defaults");
     if (defaults != NULL)
-        defaults->ToParamList(m_defaults);
+        defaults->ToParamList(this->defaults);
 
     LoadUniforms();
     
-    return m_id != 0;
+    return id != 0;
 }
 
 unsigned Shader::GetID() const
 {
-    return m_id;
+    return id;
 }
 
 const std::string& Shader::GetName() const
 {
-    return m_name;
+    return name;
 }
 
 int Shader::GetAttributeLocation(const std::string &name) const
 {
-    return glGetAttribLocation(m_id, name.c_str());
+    return glGetAttribLocation(id, name.c_str());
 }
 
 int Shader::GetUniformLocation(const std::string &name) const
 {
-    int loc = glGetUniformLocation(m_id, name.c_str());
+    int loc = glGetUniformLocation(id, name.c_str());
     return loc;
 }
 
@@ -318,7 +318,7 @@ bool Shader::IsUniformBuiltIn(const std::string &uniform) const
 void Shader::LoadUniforms()
 {
     GLint count;
-    glGetProgramiv(m_id, GL_ACTIVE_UNIFORMS, &count);
+    glGetProgramiv(id, GL_ACTIVE_UNIFORMS, &count);
     for (GLint i = 0; i < count; i++)
     {
         const GLsizei bufSize = 64;
@@ -326,7 +326,7 @@ void Shader::LoadUniforms()
         GLsizei length;
         GLint size;
         GLenum type;
-        glGetActiveUniform(m_id, (GLuint)i, bufSize, &length, &size, &type, name);
+        glGetActiveUniform(id, (GLuint)i, bufSize, &length, &size, &type, name);
         
         std::string uniformName = std::string(name);
         if (!IsUniformBuiltIn(uniformName))
@@ -335,18 +335,18 @@ void Shader::LoadUniforms()
             uniform.location = GetUniformLocation(uniformName);
             uniform.name = uniformName;
             uniform.type = (Uniform::Type)type;
-            m_uniforms.push_back(uniform);
+            uniforms.push_back(uniform);
         }
     }
 }
 
 const Shader::UniformList& Shader::GetActiveUniforms() const
 {
-    return m_uniforms;
+    return uniforms;
 }
 
 const ParamList& Shader::GetDefaultUniformValues() const
 {
-    return m_defaults;
+    return defaults;
 }
 

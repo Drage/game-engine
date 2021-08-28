@@ -39,17 +39,17 @@ namespace DrageEngine
             static int HandleInputEvents(void* data, SDL_Event* event);
             void CaptureInput(SDL_Event* event);
         
-            std::vector<Key::Code> m_keyPresses;
-            std::vector<Key::Code> m_keyReleases;
-            bool m_keyState[Key::KEY_COUNT];
+            std::vector<Key::Code> keyPresses;
+            std::vector<Key::Code> keyReleases;
+            bool keyState[Key::KEY_COUNT];
         
-            std::vector<Mouse::Button> m_mouseButtonPresses;
-            std::vector<Mouse::Button> m_mouseButtonReleases;
-            bool m_mouseButtonState[Mouse::BUTTON_COUNT];
-            Vector2 m_mousePosition;
-            Vector2 m_mouseDelta;
+            std::vector<Mouse::Button> mouseButtonPresses;
+            std::vector<Mouse::Button> mouseButtonReleases;
+            bool mouseButtonState[Mouse::BUTTON_COUNT];
+            Vector2 mousePosition;
+            Vector2 mouseDelta;
         
-            std::vector<SDL_Joystick*> m_joysticks;
+            std::vector<SDL_Joystick*> joysticks;
             typedef struct JoystickInput
             {
                 Vector2 axis[Joystick::AXIS_COUNT];
@@ -58,7 +58,7 @@ namespace DrageEngine
                 std::vector<Joystick::Button> buttonPresses;
                 std::vector<Joystick::Button> buttonReleases;
             } JoystickInput;
-            std::vector<JoystickInput> m_joystickInput;
+            std::vector<JoystickInput> joystickInput;
         
     };
 }

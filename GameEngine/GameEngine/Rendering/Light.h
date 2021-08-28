@@ -17,13 +17,13 @@ namespace DrageEngine
         protected:
             Light();
         
-            Type m_type;
-            Vector4 m_position;
-            Color m_color;
-            float m_attenuation;
-            float m_ambientCoefficient;
-            Vector3 m_coneDirection;
-            float m_coneAngle;
+            Type type;
+            Vector4 position;
+            Color color;
+            float attenuation;
+            float ambientCoefficient;
+            Vector3 coneDirection;
+            float coneAngle;
     };
 }
 

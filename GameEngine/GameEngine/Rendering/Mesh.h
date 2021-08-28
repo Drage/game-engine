@@ -32,11 +32,11 @@ namespace DrageEngine
             void Render() const;
         
         private:
-            unsigned m_vao;
-            unsigned m_vbo;
-            std::string m_name;
-            int m_vertexCount;
-            Material *m_material;
+            unsigned vao;
+            unsigned vbo;
+            std::string name;
+            int vertexCount;
+            Material *material;
     };
 }
 

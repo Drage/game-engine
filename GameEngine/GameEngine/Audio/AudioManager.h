@@ -13,8 +13,8 @@ namespace DrageEngine
             ~AudioManager();
         
         private:
-            ALCdevice *m_device;
-            ALCcontext *m_context;
+            ALCdevice *device;
+            ALCcontext *context;
         
     };
 }

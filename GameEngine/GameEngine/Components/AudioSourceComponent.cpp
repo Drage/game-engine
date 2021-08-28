@@ -10,15 +10,15 @@ void AudioSourceComponent::Init(const ParamList &params)
     std::string clipName = params.Get<std::string>("clip");
     if (!String::IsNullOrEmpty(clipName))
     {
-        m_clip = app->assets->GetAudio(clipName);
-        SetClip(m_clip);
+        clip = app->assets->GetAudio(clipName);
+        SetClip(clip);
     }
 }
 
 void AudioSourceComponent::Update()
 {
     SetPosition(transform->position);
-    SetVelocity(transform->position - m_lastPosition);
+    SetVelocity(transform->position - lastPosition);
     
-    m_lastPosition = transform->position;
+    lastPosition = transform->position;
 }

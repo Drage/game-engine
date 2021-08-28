@@ -23,7 +23,7 @@ namespace DrageEngine
             void LoadRLEData(unsigned char *data);
             void BGRtoRGB();
         
-            char m_encoding;
+            char encoding;
         
             typedef struct
             {

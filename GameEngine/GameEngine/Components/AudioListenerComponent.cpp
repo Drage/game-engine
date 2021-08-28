@@ -7,7 +7,7 @@ void AudioListenerComponent::Update()
 {
     SetPosition(transform->position);
     SetOrientation(transform->rotation);
-    SetVelocity(transform->position - m_lastPosition);
+    SetVelocity(transform->position - lastPosition);
     
-    m_lastPosition = transform->position;
+    lastPosition = transform->position;
 }

@@ -15,7 +15,7 @@ class DemoGame : public Game
         virtual void Render(Renderer *renderer);
     
     private:
-        Scene *m_scene;
+        Scene *scene;
 };
 
 #endif

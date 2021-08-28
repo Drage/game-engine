@@ -20,11 +20,11 @@ namespace DrageEngine
             const std::string& GetName() const;
         
         protected:
-            std::string m_name;
-            int m_size;
-            int m_frequency;
-            int m_format;
-            unsigned char *m_data;
+            std::string name;
+            int size;
+            int frequency;
+            int format;
+            unsigned char *data;
     };
 }
 

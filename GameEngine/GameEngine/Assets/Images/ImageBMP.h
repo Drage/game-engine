@@ -20,7 +20,7 @@ namespace DrageEngine
             bool LoadData(unsigned char *data);
             void BGRtoRGB();
         
-            unsigned m_pixelDataOffset;
+            unsigned pixelDataOffset;
         
             typedef struct Header
             {

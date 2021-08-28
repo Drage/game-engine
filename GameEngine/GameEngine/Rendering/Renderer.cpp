@@ -15,10 +15,10 @@ using namespace DrageEngine;
 
 Renderer::Renderer()
 {
-    m_camera = NULL;
+    camera = NULL;
     
-    m_clearColor = Color(0.161f, 0.169f, 0.204f);
-    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+    clearColor = Color(0.161f, 0.169f, 0.204f);
+    glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
@@ -44,42 +44,42 @@ void Renderer::ViewportResized(int width, int height)
 
 void Renderer::SetClearColor(const Color &color)
 {
-    m_clearColor = color;
-    glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+    clearColor = color;
+    glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
 }
 
 const Color& Renderer::GetClearColor() const
 {
-    return m_clearColor;
+    return clearColor;
 }
 
 void Renderer::SetActiveCamera(Camera *camera)
 {
-    m_camera = camera;
+    this->camera = camera;
 }
 
 Camera* Renderer::GetActiveCamera()
 {
-    return m_camera;
+    return camera;
 }
 
 void Renderer::AddLight(Light *light)
 {
-    for (std::vector<Light*>::iterator i = m_lights.begin(); i != m_lights.end(); i++)
+    for (std::vector<Light*>::iterator i = lights.begin(); i != lights.end(); i++)
     {
         if (*i == light)
             return;
     }
-    m_lights.push_back(light);
+    lights.push_back(light);
 }
 
 bool Renderer::RemoveLight(Light *light)
 {
-    for (std::vector<Light*>::iterator i = m_lights.begin(); i != m_lights.end(); i++)
+    for (std::vector<Light*>::iterator i = lights.begin(); i != lights.end(); i++)
     {
         if (*i == light)
         {
-            m_lights.erase(i);
+            lights.erase(i);
             return true;
         }
     }
@@ -89,7 +89,7 @@ bool Renderer::RemoveLight(Light *light)
 void Renderer::BeginRender()
 {
     static bool noCamErrorShown = false;
-    if (!m_camera)
+    if (!camera)
     {
         if (!noCamErrorShown)
         {
@@ -101,9 +101,9 @@ void Renderer::BeginRender()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    m_projectionMatrix = m_camera->GetProjectionMatrix();
-    m_viewMatrix = m_camera->GetViewMatrix();
-    m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
+    projectionMatrix = camera->GetProjectionMatrix();
+    viewMatrix = camera->GetViewMatrix();
+    viewProjectionMatrix = projectionMatrix * viewMatrix;
 }
 
 void Renderer::EndRender()
@@ -144,18 +144,18 @@ void Renderer::Render(const Renderable *renderable, const Transform *transform, 
 
     material->ApplyUniforms();
     
-    shader->SetUniform("cameraPosition", m_camera->GetPosition());
-    shader->SetUniform("numLights", (int)m_lights.size());
-    for (int i = 0; i < m_lights.size(); i++)
-        m_lights[i]->ApplyUniforms(shader, i);
+    shader->SetUniform("cameraPosition", camera->GetPosition());
+    shader->SetUniform("numLights", (int)lights.size());
+    for (int i = 0; i < lights.size(); i++)
+        lights[i]->ApplyUniforms(shader, i);
     
     shader->SetUniform("time", Time::RunTime());
     shader->SetUniform("modelMatrix", modelMatrix);
-    shader->SetUniform("viewMatrix", m_viewMatrix);
-    shader->SetUniform("projectionMatrix", m_projectionMatrix);
-    shader->SetUniform("modelViewMatrix", m_viewMatrix * modelMatrix);
-    shader->SetUniform("viewProjectionMatrix", m_viewProjectionMatrix);
-    shader->SetUniform("modelViewProjectionMatrix", m_viewProjectionMatrix * modelMatrix);
+    shader->SetUniform("viewMatrix", viewMatrix);
+    shader->SetUniform("projectionMatrix", projectionMatrix);
+    shader->SetUniform("modelViewMatrix", viewMatrix * modelMatrix);
+    shader->SetUniform("viewProjectionMatrix", viewProjectionMatrix);
+    shader->SetUniform("modelViewProjectionMatrix", viewProjectionMatrix * modelMatrix);
     
     ApplyRenderOptions(options);
     

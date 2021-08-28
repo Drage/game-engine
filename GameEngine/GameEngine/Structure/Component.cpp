@@ -6,11 +6,11 @@ using namespace DrageEngine;
 
 void Component::SetEnabled(bool enabled)
 {
-    m_enabled = enabled;
+    this->enabled = enabled;
 }
 
 bool Component::IsEnabled() const
 {
-    return m_enabled;
+    return enabled;
 }
 

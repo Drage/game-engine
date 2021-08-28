@@ -20,14 +20,14 @@ namespace DrageEngine
                 char manufacturer, version, encoding, bitsPerPixel;
                 short int xMin, yMin, xMax, yMax;
                 char other[116];
-            } m_header;
+            } header;
         
             static const int PALETTE_SIZE = 768;
         
             bool ReadHeader(unsigned char *data);
             bool LoadData(unsigned char *data);
         
-            unsigned long m_fileSize;
+            unsigned long fileSize;
     };
 }
 

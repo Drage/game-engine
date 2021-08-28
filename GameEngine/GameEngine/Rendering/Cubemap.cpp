@@ -12,17 +12,17 @@ using namespace DrageEngine;
 
 Cubemap::Cubemap()
 {
-    m_id = 0;
+    id = 0;
 }
 
 Cubemap::~Cubemap()
 {
-    glDeleteTextures(1, &m_id);
+    glDeleteTextures(1, &id);
 }
 
 bool Cubemap::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     
     XMLDocument xml;
     if (!xml.Load(filename))
@@ -42,13 +42,13 @@ bool Cubemap::Load(const std::string &filename)
     
     Generate(faces);
     
-    return m_id != 0;
+    return id != 0;
 }
 
 unsigned Cubemap::Generate(const std::vector<std::string> &faces)
 {
-    glGenTextures(1, &m_id);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, m_id);
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, id);
     
     for (int i = 0; i < faces.size(); i++)
     {
@@ -70,15 +70,15 @@ unsigned Cubemap::Generate(const std::vector<std::string> &faces)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
     
-    return m_id;
+    return id;
 }
 
 const std::string& Cubemap::GetName() const
 {
-    return m_name;
+    return name;
 }
 
 unsigned Cubemap::GetID() const
 {
-    return m_id;
+    return id;
 }

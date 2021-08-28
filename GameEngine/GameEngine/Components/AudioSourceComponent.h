@@ -16,8 +16,8 @@ namespace DrageEngine
             void Update();
         
         private:
-            AudioClip *m_clip;
-            Vector3 m_lastPosition;
+            AudioClip *clip;
+            Vector3 lastPosition;
     };
 }
 

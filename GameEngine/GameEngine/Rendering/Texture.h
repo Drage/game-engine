@@ -21,10 +21,10 @@ namespace DrageEngine
             const std::string& GetName() const;
         
         private:
-            std::string m_name;
-            unsigned m_width;
-            unsigned m_height;
-            unsigned m_id;
+            std::string name;
+            unsigned width;
+            unsigned height;
+            unsigned id;
     };
 }
 

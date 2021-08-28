@@ -13,15 +13,15 @@ ImageBMP::ImageBMP()
 
 ImageBMP::ImageBMP(const Image &other)
 {
-    m_width = other.GetWidth();
-    m_height = other.GetHeight();
-    m_bpp = other.GetBPP();
-    m_imageSize = other.GetSize();
+    width = other.GetWidth();
+    height = other.GetHeight();
+    bpp = other.GetBPP();
+    imageSize = other.GetSize();
     
-    if (m_pixels)
-        delete m_pixels;
-    m_pixels = new unsigned char[m_imageSize];
-    memcpy(m_pixels, other.GetPixels(), m_imageSize);
+    if (pixels)
+        delete pixels;
+    pixels = new unsigned char[imageSize];
+    memcpy(pixels, other.GetPixels(), imageSize);
 }
 
 ImageBMP::ImageBMP(const std::string &filename)
@@ -31,7 +31,7 @@ ImageBMP::ImageBMP(const std::string &filename)
 
 bool ImageBMP::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     unsigned long fileSize;
     unsigned char* fileData = NULL;
     std::ifstream file;
@@ -71,7 +71,7 @@ bool ImageBMP::Load(const std::string &filename)
             throw std::exception();
         }
         
-        if (!LoadData(&fileData[m_pixelDataOffset]))
+        if (!LoadData(&fileData[pixelDataOffset]))
         {
             ERROR("Failed to load image - Insufficient memory: " + filename);
             throw std::exception();
@@ -104,15 +104,15 @@ bool ImageBMP::ReadHeader(unsigned char *data)
         return false;
     
     // Offset from start of file to pixel data
-    memcpy(&m_pixelDataOffset, &data[10], 4);
+    memcpy(&pixelDataOffset, &data[10], 4);
     
     // Image dimensions
-    memcpy(&m_width, &data[18], 4);
-    memcpy(&m_height, &data[22], 4);
+    memcpy(&width, &data[18], 4);
+    memcpy(&height, &data[22], 4);
     
     // Bits per pixel
-    memcpy(&m_bpp, &data[28], 2);
-    if (m_bpp != 24)
+    memcpy(&bpp, &data[28], 2);
+    if (bpp != 24)
         return false;
     
     // Compression method
@@ -122,19 +122,19 @@ bool ImageBMP::ReadHeader(unsigned char *data)
         return false;
     
     // Get image size
-    m_imageSize = (m_width * m_height * (m_bpp/8));
+    imageSize = (width * height * (bpp/8));
     return true;
 }
 
 bool ImageBMP::LoadData(unsigned char *data)
 {
     // Allocate memory for pixel data
-    m_pixels = new unsigned char[m_imageSize];
-    if (m_pixels == NULL)
+    pixels = new unsigned char[imageSize];
+    if (pixels == NULL)
         return false;
     
     // Copy pixel data
-    memcpy(m_pixels, data, m_width * m_height * (m_bpp/8));
+    memcpy(pixels, data, width * height * (bpp/8));
     return true;
 }
 
@@ -145,11 +145,11 @@ void ImageBMP::BGRtoRGB()
     unsigned char temp;
     short pixelSize;
     
-    cur = m_pixels;
-    numPixels = m_width * m_height;
+    cur = pixels;
+    numPixels = width * height;
     
     // Get pixel size in bytes
-    pixelSize = m_bpp/8;
+    pixelSize = bpp/8;
     
     for (int i = 0; i != numPixels; i++)
     {
@@ -164,7 +164,7 @@ void ImageBMP::BGRtoRGB()
 bool ImageBMP::Save(const std::string &filePath)
 {
     // Cant save if we haven't got any data
-    if (!m_pixels)
+    if (!pixels)
     {
         ERROR("Failed to save image - No pixel data: " + filePath);
         return false;
@@ -190,23 +190,23 @@ bool ImageBMP::Save(const std::string &filePath)
     Header header;
     header.signature[0] = 'B';
     header.signature[1] = 'M';
-    EndianSwap((unsigned int)m_imageSize + 50, header.fileSize);
+    EndianSwap((unsigned int)imageSize + 50, header.fileSize);
     EndianSwap((unsigned int)0, header.padding);
     EndianSwap((unsigned int)50, header.imageOffset);
     EndianSwap((unsigned int)40, header.bitmapInfoHeaderSize);
-    EndianSwap(m_width, header.width);
-    EndianSwap(m_height, header.height);
+    EndianSwap(width, header.width);
+    EndianSwap(height, header.height);
     EndianSwap((unsigned short)1, header.numPlanes);
-    EndianSwap((unsigned short)m_bpp, header.pixelDepth);
+    EndianSwap((unsigned short)bpp, header.pixelDepth);
     EndianSwap((unsigned int)0, header.compressionType);
-    EndianSwap((unsigned int)m_imageSize, header.imageSize);
+    EndianSwap((unsigned int)imageSize, header.imageSize);
     EndianSwap((unsigned int)2800, header.horizResolution);
     EndianSwap((unsigned int)2800, header.vertResolution);
     EndianSwap((unsigned int)0, header.importantColours);
     file.write((char*)&header, sizeof(Header));
     
     // Write pixels
-    file.write((char*)m_pixels, m_imageSize);
+    file.write((char*)pixels, imageSize);
     
     file.close();
     return true;

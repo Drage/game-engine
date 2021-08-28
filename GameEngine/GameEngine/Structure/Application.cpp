@@ -14,8 +14,8 @@ Application *DrageEngine::app = new Application();
 
 Application::Application()
 {
-    m_init = false;
-    m_fps = 60;
+    init = false;
+    fps = 60;
     editMode = true;
     window = new Window();
 }
@@ -39,7 +39,7 @@ bool Application::Init()
     audio = new AudioManager();
     editor = new Editor();
     
-    m_init = true;
+    init = true;
     return true;
 }
 
@@ -50,7 +50,7 @@ bool Application::EditorInit()
     input = new Input();
     audio = new AudioManager();
     
-    m_init = true;
+    init = true;
     return true;
 }
 
@@ -63,7 +63,7 @@ void Application::Run(Game *game)
     
     Time::Init();
 
-    while (!m_quit)
+    while (!quit)
     {
         input->Clear();
         
@@ -72,7 +72,7 @@ void Application::Run(Game *game)
         {
             // Clicked on close button or press escape
             if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
-                m_quit = true;
+                quit = true;
         }
         
         Time::Update();
@@ -91,15 +91,15 @@ void Application::Run(Game *game)
 
 void Application::Quit()
 {
-    m_quit = true;
+    quit = true;
 }
 
 const Scene* Application::GetActiveScene() const
 {
-    return m_activeScene;
+    return activeScene;
 }
 
 void Application::SetActiveScene(Scene *scene)
 {
-    m_activeScene = scene;
+    activeScene = scene;
 }

@@ -16,7 +16,7 @@ namespace DrageEngine
             bool ExtensionSupported(const std::string &extension) const;
         
         private:
-            Factory<Audio, std::string> m_factory;
+            Factory<Audio, std::string> factory;
     };
 }
 

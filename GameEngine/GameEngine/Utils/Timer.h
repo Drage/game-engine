@@ -19,10 +19,10 @@ namespace DrageEngine
             float ElapsedSeconds() const;
         
         private:
-            unsigned long m_startTicks;
-            unsigned long m_pausedTicks;
-            bool m_paused;
-            bool m_started;
+            unsigned long startTicks;
+            unsigned long pausedTicks;
+            bool paused;
+            bool started;
     };
 }
 

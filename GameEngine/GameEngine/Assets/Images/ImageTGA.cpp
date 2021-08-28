@@ -8,31 +8,31 @@ using namespace DrageEngine;
 
 ImageTGA::ImageTGA()
 {
-    m_encoding = 0;
+    encoding = 0;
 }
 
 ImageTGA::ImageTGA(const std::string &filename)
 {
-    m_encoding = 0;
+    encoding = 0;
     Load(filename);
 }
 
 ImageTGA::ImageTGA(const Image &other)
 {
-    m_width = other.GetWidth();
-    m_height = other.GetHeight();
-    m_bpp = other.GetBPP();
-    m_imageSize = other.GetSize();
+    width = other.GetWidth();
+    height = other.GetHeight();
+    bpp = other.GetBPP();
+    imageSize = other.GetSize();
     
-    if (m_pixels)
-        delete m_pixels;
-    m_pixels = new unsigned char[m_imageSize];
-    memcpy(m_pixels, other.GetPixels(), m_imageSize);
+    if (pixels)
+        delete pixels;
+    pixels = new unsigned char[imageSize];
+    memcpy(pixels, other.GetPixels(), imageSize);
 }
 
 bool ImageTGA::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     unsigned long fileSize;
     unsigned char* fileData = NULL;
     std::ifstream file;
@@ -72,9 +72,9 @@ bool ImageTGA::Load(const std::string &filename)
             throw std::exception();
         }
         
-        if (m_encoding == RAW_RGB_ENCODING)
+        if (encoding == RAW_RGB_ENCODING)
             LoadRawData(fileData);
-        else if (m_encoding == RLE_RGB_ENCODING)
+        else if (encoding == RLE_RGB_ENCODING)
             LoadRLEData(fileData);
         
         // Swap order of colour bytes
@@ -99,8 +99,8 @@ bool ImageTGA::Load(const std::string &filename)
 
 bool ImageTGA::ReadHeader(unsigned char* data)
 {
-    m_encoding = data[2];
-    if (m_encoding != RAW_RGB_ENCODING && m_encoding != RLE_RGB_ENCODING)
+    encoding = data[2];
+    if (encoding != RAW_RGB_ENCODING && encoding != RLE_RGB_ENCODING)
         return false;
     
     // Get image width & height
@@ -109,16 +109,16 @@ bool ImageTGA::ReadHeader(unsigned char* data)
     memcpy(&y1, &data[10], 2);
     memcpy(&x2, &data[12], 2);
     memcpy(&y2, &data[14], 2);
-    m_width = (x2 - x1);
-    m_height = (y2 - y1);
+    width = (x2 - x1);
+    height = (y2 - y1);
     
     // Bits per Pixel
-    m_bpp = (unsigned int) data[16];
+    bpp = (unsigned int) data[16];
     
     // Allocate memory for pixel data
-    m_imageSize = (m_width * m_height * (m_bpp/8));
-    m_pixels = new unsigned char[m_imageSize];
-    return m_pixels != NULL;
+    imageSize = (width * height * (bpp/8));
+    pixels = new unsigned char[imageSize];
+    return pixels != NULL;
 }
 
 void ImageTGA::LoadRawData(unsigned char* data)
@@ -126,7 +126,7 @@ void ImageTGA::LoadRawData(unsigned char* data)
     // Set offset to start of image data (after header)
     short offset = data[0] + 18;
     
-    memcpy(m_pixels, &data[offset], m_imageSize);
+    memcpy(pixels, &data[offset], imageSize);
 }
 
 void ImageTGA::LoadRLEData(unsigned char* data)
@@ -140,13 +140,13 @@ void ImageTGA::LoadRLEData(unsigned char* data)
     offset = data[0] + 18;
     
     // Get pixel size in bytes
-    pixelSize = m_bpp/8;
+    pixelSize = bpp/8;
     
     // Set pointer to the beginning of the image data
     cur = &data[offset];
     
     // Decode RLE
-    while (index < m_imageSize)
+    while (index < imageSize)
     {
         if (*cur & 0x80) // 10000000
         {
@@ -156,7 +156,7 @@ void ImageTGA::LoadRLEData(unsigned char* data)
             
             // Repeat the next pixel numPixels times
             for (int i = 0; i != numPixels; i++, index += pixelSize)
-                memcpy(&m_pixels[index], cur, pixelSize);
+                memcpy(&pixels[index], cur, pixelSize);
             
             cur += pixelSize;
         }
@@ -167,7 +167,7 @@ void ImageTGA::LoadRLEData(unsigned char* data)
             cur++;
             
             for (int i = 0; i != numPixels; i++, index += pixelSize, cur += pixelSize)
-                memcpy(&m_pixels[index], cur, pixelSize);
+                memcpy(&pixels[index], cur, pixelSize);
         }
     }
 }
@@ -179,11 +179,11 @@ void ImageTGA::BGRtoRGB()
     unsigned char temp;
     short pixelSize;
     
-    cur = m_pixels;
-    numPixels = m_width * m_height;
+    cur = pixels;
+    numPixels = width * height;
     
     // Get pixel size in bytes
-    pixelSize = m_bpp/8;
+    pixelSize = bpp/8;
     
     for (int i = 0; i != numPixels; i++)
     {
@@ -198,7 +198,7 @@ void ImageTGA::BGRtoRGB()
 bool ImageTGA::Save(const std::string &filePath)
 {
     // Cant save if we haven't got any data
-    if (!m_pixels)
+    if (!pixels)
     {
         ERROR("Failed to save image - No pixel data: " + filePath);
         return false;
@@ -229,18 +229,18 @@ bool ImageTGA::Save(const std::string &filePath)
         header.colourMap[i] = 0;
     EndianSwap((unsigned short)0, header.xOrigin);
     EndianSwap((unsigned short)0, header.yOrigin);
-    EndianSwap((unsigned short)m_width, header.width);
-    EndianSwap((unsigned short)m_height, header.height);
-    header.pixelDepth = m_bpp;
+    EndianSwap((unsigned short)width, header.width);
+    EndianSwap((unsigned short)height, header.height);
+    header.pixelDepth = bpp;
     header.imageDescriptor = 0;
     file.write((char*)&header, sizeof(Header));
     
     // Write pixels
-    for (unsigned i = 0; i < m_width * m_height; i++)
+    for (unsigned i = 0; i < width * height; i++)
     {
-        file.write((char*)&m_pixels[i*3+2], 1);
-        file.write((char*)&m_pixels[i*3+1], 1);
-        file.write((char*)&m_pixels[i*3], 1);
+        file.write((char*)&pixels[i*3+2], 1);
+        file.write((char*)&pixels[i*3+1], 1);
+        file.write((char*)&pixels[i*3], 1);
     }
     
     file.close();

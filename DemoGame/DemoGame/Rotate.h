@@ -13,8 +13,8 @@ class Rotate : public Component
         void Update();
     
     private:
-        float m_speed;
-        Vector3 m_axis;
+        float speed;
+        Vector3 axis;
 };
 
 #endif

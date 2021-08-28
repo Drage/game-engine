@@ -82,10 +82,10 @@ namespace DrageEngine
             bool IsUniformBuiltIn(const std::string &uniform) const;
             void LoadUniforms();
         
-            std::string m_name;
-            unsigned m_id;
-            UniformList m_uniforms;
-            ParamList m_defaults;
+            std::string name;
+            unsigned id;
+            UniformList uniforms;
+            ParamList defaults;
     };
 }
 

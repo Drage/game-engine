@@ -47,7 +47,7 @@ namespace DrageEngine
             template<typename T>
             void RegisterComponent(const std::string &name)
             {
-                m_componentFactory.Register<T>(name);
+                componentFactory.Register<T>(name);
             }
         
         
@@ -55,19 +55,19 @@ namespace DrageEngine
             friend class Application;
             AssetManager();
         
-            PathMap m_pathMap;
+            PathMap pathMap;
         
-            ImageFactory m_imageFactory;
-            ModelFactory m_modelFactory;
-            AudioFactory m_audioFactory;
-            ComponentFactory m_componentFactory;
+            ImageFactory imageFactory;
+            ModelFactory modelFactory;
+            AudioFactory audioFactory;
+            ComponentFactory componentFactory;
         
-            TextureCache m_textureCache;
-            CubemapCache m_cubemapCache;
-            ShaderCache m_shaderCache;
-            MaterialCache m_materialCache;
-            ModelCache m_modelCache;
-            AudioCache m_audioCache;
+            TextureCache textureCache;
+            CubemapCache cubemapCache;
+            ShaderCache shaderCache;
+            MaterialCache materialCache;
+            ModelCache modelCache;
+            AudioCache audioCache;
     };
 }
 

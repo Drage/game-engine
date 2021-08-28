@@ -11,8 +11,8 @@ using namespace DrageEngine;
 
 Terrain::Terrain()
 {
-    m_maxHeight = 10;
-    m_resolution = 1;
+    maxHeight = 10;
+    resolution = 1;
 }
 
 Terrain::Terrain(const std::string &heightmap, float maxHeight, float resolution)
@@ -22,21 +22,21 @@ Terrain::Terrain(const std::string &heightmap, float maxHeight, float resolution
 
 Terrain::~Terrain()
 {
-    m_heightmap.Deallocate();
+    heightmap.Deallocate();
 }
 
-bool Terrain::Load(const std::string &heightmap, float maxHeight, float resolution)
+bool Terrain::Load(const std::string &heightmapImageFile, float maxHeight, float resolution)
 {
-    Image *img = app->assets->GetImage(heightmap);
+    Image *img = app->assets->GetImage(heightmapImageFile);
     if (!img)
         return false;
     
-    m_maxHeight = maxHeight;
-    m_resolution = resolution;
+    this->maxHeight = maxHeight;
+    this->resolution = resolution;
     
     int sizeX = img->GetWidth();
     int sizeZ = img->GetHeight();
-    m_heightmap.Allocate(sizeX, sizeZ);
+    heightmap.Allocate(sizeX, sizeZ);
     
     unsigned char *pixels = img->GetPixels();
     int bpp = img->GetBPP();
@@ -45,11 +45,11 @@ bool Terrain::Load(const std::string &heightmap, float maxHeight, float resoluti
         for (int x = 0; x < sizeX; x++)
         {
             unsigned char *pixelValue = &pixels[(z * sizeX + x) * bpp / 8];
-            m_heightmap(x, z) = GetHeightFromPixelData(pixelValue, bpp);
+            heightmap(x, z) = GetHeightFromPixelData(pixelValue, bpp);
         }
     }
     
-    m_normals.Allocate(sizeX, sizeZ);
+    normals.Allocate(sizeX, sizeZ);
     
     InitRenderBuffers();
     return true;
@@ -77,11 +77,11 @@ float Terrain::HeightAt(const Vector3 &worldPosition) const
 
 float Terrain::HeightAt(float x, float z) const
 {
-    x /= m_resolution;
-    z /= m_resolution;
+    x /= resolution;
+    z /= resolution;
     
-    const int sizeX = m_heightmap.GetWidth();
-    const int sizeZ = m_heightmap.GetHeight();
+    const int sizeX = heightmap.GetWidth();
+    const int sizeZ = heightmap.GetHeight();
     
     int u0 = (int)floor(x);
     int u1 = u0 + 1;
@@ -91,10 +91,10 @@ float Terrain::HeightAt(float x, float z) const
     if (u0 < 0 || u1 >= sizeX || v0 < 0 || v1 >= sizeZ)
         return 0;
 
-    float h00 = m_heightmap(u0, v0);
-    float h10 = m_heightmap(u1, v0);
-    float h01 = m_heightmap(u0, v1);
-    float h11 = m_heightmap(u1, v1);
+    float h00 = heightmap(u0, v0);
+    float h10 = heightmap(u1, v0);
+    float h01 = heightmap(u0, v1);
+    float h11 = heightmap(u1, v1);
     
     float percentU = x - u0;
     float percentV = z - v0;
@@ -111,7 +111,7 @@ float Terrain::HeightAt(float x, float z) const
         dV = h01 - h00;
     }
     
-    return (h00 + (dU * percentU) + (dV * percentV)) * m_maxHeight;
+    return (h00 + (dU * percentU) + (dV * percentV)) * maxHeight;
 }
 
 Vector3 Terrain::NormalAt(const Vector3 &worldPosition) const
@@ -121,11 +121,11 @@ Vector3 Terrain::NormalAt(const Vector3 &worldPosition) const
 
 Vector3 Terrain::NormalAt(float x, float z) const
 {
-    x /= m_resolution;
-    z /= m_resolution;
+    x /= resolution;
+    z /= resolution;
     
-    const int sizeX = m_heightmap.GetWidth();
-    const int sizeZ = m_heightmap.GetHeight();
+    const int sizeX = heightmap.GetWidth();
+    const int sizeZ = heightmap.GetHeight();
     
     int u0 = (int)floor(x);
     int u1 = u0 + 1;
@@ -135,10 +135,10 @@ Vector3 Terrain::NormalAt(float x, float z) const
     if (u0 < 0 || u1 >= sizeX || v0 < 0 || v1 >= sizeZ)
         return 0;
     
-    Vector3 n00 = m_normals(u0, v0);
-    Vector3 n10 = m_normals(u1, v0);
-    Vector3 n01 = m_normals(u0, v1);
-    Vector3 n11 = m_normals(u1, v1);
+    Vector3 n00 = normals(u0, v0);
+    Vector3 n10 = normals(u1, v0);
+    Vector3 n01 = normals(u0, v1);
+    Vector3 n11 = normals(u1, v1);
     
     float percentU = x - u0;
     float percentV = z - v0;
@@ -160,8 +160,8 @@ Vector3 Terrain::NormalAt(float x, float z) const
 
 void Terrain::InitRenderBuffers()
 {
-    const int sizeX = m_heightmap.GetWidth();
-    const int sizeZ = m_heightmap.GetHeight();
+    const int sizeX = heightmap.GetWidth();
+    const int sizeZ = heightmap.GetHeight();
     
     const int numVerts = sizeX * sizeZ;
     std::vector<Vector3> positionBuffer(numVerts);
@@ -169,21 +169,21 @@ void Terrain::InitRenderBuffers()
     std::vector<Vector2> texBuffer(numVerts);
     std::vector<Vector2> texBuffer2(numVerts);
     
-    float worldScaleX = (sizeX - 1) * m_resolution;
-    float worldScaleZ = (sizeZ - 1) * m_resolution;
+    float worldScaleX = (sizeX - 1) * resolution;
+    float worldScaleZ = (sizeZ - 1) * resolution;
     
     for (int z = 0; z < sizeZ - 1; z++)
     {
         for (int x = 0; x < sizeX - 1; x++)
         {
             int index = (z * sizeX) + x;
-            float height = m_heightmap(x, z);
+            float height = heightmap(x, z);
 
             float S = (x / (float)(sizeX - 1));
             float T = (z / (float)(sizeZ - 1));
 
             float X = S * worldScaleX;
-            float Y = height * m_maxHeight;
+            float Y = height * maxHeight;
             float Z = T * worldScaleZ;
 
             positionBuffer[index] = Vector3(X, Y, Z);
@@ -195,8 +195,8 @@ void Terrain::InitRenderBuffers()
     }
     
     const int numTriangles = (sizeX - 1) * (sizeZ - 1) * 2;
-    m_numIndexes = numTriangles * 3;
-    std::vector<unsigned> indexBuffer(m_numIndexes);
+    numIndexes = numTriangles * 3;
+    std::vector<unsigned> indexBuffer(numIndexes);
     unsigned index = 0;
     for (int z = 0; z < sizeZ - 1; z++)
     {
@@ -234,11 +234,11 @@ void Terrain::InitRenderBuffers()
     for (int z = 0; z < sizeZ; z++)
     {
         for (int x = 0; x < sizeX; x++)
-            m_normals(x, z) = normalBuffer[z * sizeX + x];
+            normals(x, z) = normalBuffer[z * sizeX + x];
     }
     
-    glGenVertexArrays(1, &m_vao);
-    glBindVertexArray(m_vao);
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
     
     GLuint vbos[5];
     glGenBuffers(5, vbos);
@@ -273,7 +273,7 @@ void Terrain::InitRenderBuffers()
 
 void Terrain::Render() const
 {
-    glBindVertexArray(m_vao);
-    glDrawElements(GL_TRIANGLES, m_numIndexes, GL_UNSIGNED_INT, NULL);
+    glBindVertexArray(vao);
+    glDrawElements(GL_TRIANGLES, numIndexes, GL_UNSIGNED_INT, NULL);
     glBindVertexArray(0);
 }

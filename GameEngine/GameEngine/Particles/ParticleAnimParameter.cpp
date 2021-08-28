@@ -6,41 +6,41 @@ using namespace DrageEngine;
 
 ParticleAnimParameter::ParticleAnimParameter()
 {
-    m_value = 0;
-    m_variance = 0;
+    value = 0;
+    variance = 0;
 }
 
 ParticleAnimParameter::ParticleAnimParameter(float value)
 {
-    m_value = value;
-    m_variance = 0;
+    this->value = value;
+    this->variance = 0;
 }
 
 ParticleAnimParameter::ParticleAnimParameter(float value, float variance)
 {
-    m_value = value;
-    m_variance = variance;
+    this->value = value;
+    this->variance = variance;
 }
 
 ParticleAnimParameter::ParticleAnimParameter(float value, float variance, const std::vector<Vector2> &curve)
 {
-    m_value = value;
-    m_variance = variance;
-    m_curve = curve;
+    this->value = value;
+    this->variance = variance;
+    this->curve = curve;
 }
 
 float ParticleAnimParameter::GetBaseValue() const
 {
-    return m_value + Random::Float(-m_variance, m_variance);
+    return value + Random::Float(-variance, variance);
 }
 
 float ParticleAnimParameter::GetAnimationValue(float t) const
 {
-    if (m_curve.size() == 0)
+    if (curve.size() == 0)
         return 1;
         
-    std::vector<Vector2> tmp = m_curve;
-    int i = (int)m_curve.size() - 1;
+    std::vector<Vector2> tmp = curve;
+    int i = (int)curve.size() - 1;
     while (i > 0)
     {
         for (int k = 0; k < i; k++)

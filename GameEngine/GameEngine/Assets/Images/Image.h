@@ -37,12 +37,12 @@ namespace DrageEngine
             static void EndianSwap(unsigned int x, char *result);
             void FlipVertical();
         
-            std::string m_name;
-            unsigned m_width;
-            unsigned m_height;
-            unsigned m_bpp;
-            unsigned char *m_pixels;
-            unsigned long m_imageSize;
+            std::string name;
+            unsigned width;
+            unsigned height;
+            unsigned bpp;
+            unsigned char *pixels;
+            unsigned long imageSize;
     };
 }
 

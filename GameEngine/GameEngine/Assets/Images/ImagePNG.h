@@ -35,19 +35,19 @@ namespace DrageEngine
             void FilterPaeth(unsigned char *scanline, unsigned char *previous);
             void ApplyPalette();
         
-            bool m_readIHDR;
-            unsigned char m_bitDepth;
-            unsigned char m_colourType;
-            unsigned char m_compression;
-            unsigned char m_filter;
-            unsigned char m_interlace;
+            bool readIHDR;
+            unsigned char bitDepth;
+            unsigned char colourType;
+            unsigned char compression;
+            unsigned char filter;
+            unsigned char interlace;
         
-            bool m_readPLTE;
-            unsigned char *m_palette;
-            unsigned char *m_pixelIndexes;
+            bool readPLTE;
+            unsigned char *palette;
+            unsigned char *pixelIndexes;
         
-            unsigned char *m_dataStartPos;
-            unsigned char *m_dataConcatenatePos;
+            unsigned char *dataStartPos;
+            unsigned char *dataConcatenatePos;
         };
 }
 

@@ -15,8 +15,8 @@ namespace DrageEngine
             void Render(Renderer *renderer, const Transform *transform = NULL) const;
         
         private:
-            Material *m_material;
-            Cube m_mesh;
+            Material *material;
+            Cube mesh;
     };
 }
 

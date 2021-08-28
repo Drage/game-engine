@@ -6,67 +6,67 @@ using namespace DrageEngine;
 
 Timer::Timer()
 {
-    m_startTicks = 0;
-    m_pausedTicks = 0;
-    m_paused = false;
-    m_started = false;
+    startTicks = 0;
+    pausedTicks = 0;
+    paused = false;
+    started = false;
 }
 
 void Timer::Start()
 {
-    if (m_paused)
+    if (paused)
     {
-        m_paused = false;
-        m_startTicks = SDL_GetPerformanceCounter() - m_pausedTicks;
-        m_pausedTicks = 0;
+        paused = false;
+        startTicks = SDL_GetPerformanceCounter() - pausedTicks;
+        pausedTicks = 0;
     }
     else
     {
-        m_started = true;
-        m_startTicks = SDL_GetPerformanceCounter();
+        started = true;
+        startTicks = SDL_GetPerformanceCounter();
     }
 }
 
 void Timer::Stop()
 {
-    m_started = false;
-    m_paused = false;
-    m_pausedTicks = 0;
-    m_startTicks = 0;
+    started = false;
+    paused = false;
+    pausedTicks = 0;
+    startTicks = 0;
 }
 
 void Timer::Reset()
 {
-    m_started = true;
-    m_paused = false;
-    m_pausedTicks = 0;
-    m_startTicks = SDL_GetPerformanceCounter();
+    started = true;
+    paused = false;
+    pausedTicks = 0;
+    startTicks = SDL_GetPerformanceCounter();
 }
 
 void Timer::Pause()
 {
-    if (m_started && !m_paused)
+    if (started && !paused)
     {
-        m_paused = true;
-        m_pausedTicks = SDL_GetPerformanceCounter() - m_startTicks;
+        paused = true;
+        pausedTicks = SDL_GetPerformanceCounter() - startTicks;
     }
 }
 
 bool Timer::IsPaused() const
 {
-    return m_paused;
+    return paused;
 }
 
 bool Timer::IsStarted() const
 {
-    return m_started;
+    return started;
 }
 
 float Timer::ElapsedSeconds() const
 {
-    if (m_started)
+    if (started)
     {
-        unsigned long ticks = m_paused ? m_pausedTicks : SDL_GetPerformanceCounter() - m_startTicks;
+        unsigned long ticks = paused ? pausedTicks : SDL_GetPerformanceCounter() - startTicks;
         return ticks / (float)SDL_GetPerformanceFrequency();
     }
     return 0;

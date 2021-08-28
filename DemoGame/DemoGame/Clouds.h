@@ -26,16 +26,16 @@ class Clouds : public Component
             Material *material;
         };
     
-        Cloud *m_clouds;
-        Billboard m_billboardQuad;
-        int m_numClouds;
-        float m_orbitRadius;
-        float m_minYPos;
-        float m_maxYPos;
-        float m_minSpeed;
-        float m_maxSpeed;
-        float m_minSize;
-        float m_maxSize;
+        Cloud *clouds;
+        Billboard billboardQuad;
+        int numClouds;
+        float orbitRadius;
+        float minYPos;
+        float maxYPos;
+        float minSpeed;
+        float maxSpeed;
+        float minSize;
+        float maxSize;
 };
 
 #endif

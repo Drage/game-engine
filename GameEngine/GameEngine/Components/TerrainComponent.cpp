@@ -13,12 +13,12 @@ void TerrainComponent::Init(const ParamList &params)
     Load(heightmap, maxHeight, resolution);
     
     std::string materialName = params.Get<std::string>("material");
-    m_material = app->assets->GetMaterial(materialName);
+    material = app->assets->GetMaterial(materialName);
     
-    m_disableDepthWrite = params.Get<bool>("disableDepthWrite");
+    disableDepthWrite = params.Get<bool>("disableDepthWrite");
 }
 
 void TerrainComponent::Render(Renderer *renderer, const Transform *transform) const
 {
-    renderer->Render(this, transform, m_material, m_disableDepthWrite ? RenderOption::NO_DEPTH_WRITE : 0);
+    renderer->Render(this, transform, material, disableDepthWrite ? RenderOption::NO_DEPTH_WRITE : 0);
 }

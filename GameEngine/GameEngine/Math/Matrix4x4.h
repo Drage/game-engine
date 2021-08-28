@@ -58,7 +58,7 @@ namespace DrageEngine
             static Matrix4x4 Parse(const std::string &str);
         
         private:
-            float m_values[16];
+            float values[16];
     };
 }
 

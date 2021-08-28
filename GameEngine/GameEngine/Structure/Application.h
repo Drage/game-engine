@@ -38,10 +38,10 @@ namespace DrageEngine
             void SetActiveScene(Scene *scene);
         
         private:
-            bool m_init;
-            bool m_quit;
-            int m_fps;
-            Scene *m_activeScene;
+            bool init;
+            bool quit;
+            int fps;
+            Scene *activeScene;
             bool editMode;
     };
 

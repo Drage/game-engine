@@ -16,7 +16,7 @@ AssetManager::AssetManager()
         for (std::vector<std::string>::iterator i = files.begin(); i != files.end(); i++)
         {
             std::string filename = GetFileName(*i);
-            m_pathMap[filename] = *i;
+            pathMap[filename] = *i;
         }
     }
 }
@@ -24,9 +24,9 @@ AssetManager::AssetManager()
 Image* AssetManager::GetImage(const std::string &filename)
 {
     std::string extension = GetFileExtension(filename);
-    if (m_imageFactory.ExtensionSupported(extension))
+    if (imageFactory.ExtensionSupported(extension))
     {
-        Image *image = m_imageFactory.Create(extension);
+        Image *image = imageFactory.Create(extension);
         if (image->Load(GetAssetPath(filename)))
             return image;
     }
@@ -39,18 +39,18 @@ Image* AssetManager::GetImage(const std::string &filename)
 
 Texture* AssetManager::GetTexture(const std::string &filename)
 {
-    TextureCache::iterator i = m_textureCache.find(filename);
-    if (i != m_textureCache.end())
+    TextureCache::iterator i = textureCache.find(filename);
+    if (i != textureCache.end())
         return i->second;
     
     std::string extension = GetFileExtension(filename);
-    if (m_imageFactory.ExtensionSupported(extension))
+    if (imageFactory.ExtensionSupported(extension))
     {
-        Image *image = m_imageFactory.Create(extension);
+        Image *image = imageFactory.Create(extension);
         if (image->Load(GetAssetPath(filename)))
         {
             Texture *texture = new Texture(image);
-            m_textureCache[filename] = texture;
+            textureCache[filename] = texture;
             delete image;
             return texture;
         }
@@ -64,8 +64,8 @@ Texture* AssetManager::GetTexture(const std::string &filename)
 
 Cubemap* AssetManager::GetCubemap(const std::string &filename)
 {
-    CubemapCache::iterator i = m_cubemapCache.find(filename);
-    if (i != m_cubemapCache.end())
+    CubemapCache::iterator i = cubemapCache.find(filename);
+    if (i != cubemapCache.end())
         return i->second;
     
     std::string extension = GetFileExtension(filename);
@@ -74,7 +74,7 @@ Cubemap* AssetManager::GetCubemap(const std::string &filename)
         Cubemap *cubemap = new Cubemap();
         if (cubemap->Load(GetAssetPath(filename)))
         {
-            m_cubemapCache[filename] = cubemap;
+            cubemapCache[filename] = cubemap;
             return cubemap;
         }
     }
@@ -87,8 +87,8 @@ Cubemap* AssetManager::GetCubemap(const std::string &filename)
 
 Shader* AssetManager::GetShader(const std::string &filename)
 {
-    ShaderCache::iterator i = m_shaderCache.find(filename);
-    if (i != m_shaderCache.end())
+    ShaderCache::iterator i = shaderCache.find(filename);
+    if (i != shaderCache.end())
         return i->second;
     
     std::string extension = GetFileExtension(filename);
@@ -97,7 +97,7 @@ Shader* AssetManager::GetShader(const std::string &filename)
         Shader *shader = new Shader();
         if (shader->Load(GetAssetPath(filename)))
         {
-            m_shaderCache[filename] = shader;
+            shaderCache[filename] = shader;
             return shader;
         }
     }
@@ -110,8 +110,8 @@ Shader* AssetManager::GetShader(const std::string &filename)
 
 Material* AssetManager::GetMaterial(const std::string &filename)
 {
-    MaterialCache::iterator i = m_materialCache.find(filename);
-    if (i != m_materialCache.end())
+    MaterialCache::iterator i = materialCache.find(filename);
+    if (i != materialCache.end())
         return i->second;
     
     std::string extension = GetFileExtension(filename);
@@ -120,7 +120,7 @@ Material* AssetManager::GetMaterial(const std::string &filename)
         Material *material = new Material();
         if (material->Load(GetAssetPath(filename)))
         {
-            m_materialCache[filename] = material;
+            materialCache[filename] = material;
             return material;
         }
     }
@@ -133,14 +133,14 @@ Material* AssetManager::GetMaterial(const std::string &filename)
 
 Model* AssetManager::GetModel(const std::string &filename)
 {
-    ModelCache::iterator i = m_modelCache.find(filename);
-    if (i != m_modelCache.end())
+    ModelCache::iterator i = modelCache.find(filename);
+    if (i != modelCache.end())
         return i->second;
     
     std::string extension = GetFileExtension(filename);
-    if (m_modelFactory.ExtensionSupported(extension))
+    if (modelFactory.ExtensionSupported(extension))
     {
-        Model *model = m_modelFactory.Create(extension);
+        Model *model = modelFactory.Create(extension);
         if (model->Load(GetAssetPath(filename)))
             return model;
     }
@@ -153,18 +153,18 @@ Model* AssetManager::GetModel(const std::string &filename)
 
 AudioClip* AssetManager::GetAudio(const std::string &filename)
 {
-    AudioCache::iterator i = m_audioCache.find(filename);
-    if (i != m_audioCache.end())
+    AudioCache::iterator i = audioCache.find(filename);
+    if (i != audioCache.end())
         return i->second;
     
     std::string extension = GetFileExtension(filename);
-    if (m_audioFactory.ExtensionSupported(extension))
+    if (audioFactory.ExtensionSupported(extension))
     {
-        Audio *audio = m_audioFactory.Create(extension);
+        Audio *audio = audioFactory.Create(extension);
         if (audio->Load(GetAssetPath(filename)))
         {
             AudioClip *clip = new AudioClip(audio);
-            m_audioCache[filename] = clip;
+            audioCache[filename] = clip;
             delete audio;
             return clip;
         }
@@ -178,9 +178,9 @@ AudioClip* AssetManager::GetAudio(const std::string &filename)
 
 Component* AssetManager::GetComponent(const std::string &name)
 {
-    if (m_componentFactory.IsSupported(name))
+    if (componentFactory.IsSupported(name))
     {
-        Component *component = m_componentFactory.Create(name);
+        Component *component = componentFactory.Create(name);
         return component;
     }
     else
@@ -192,14 +192,14 @@ Component* AssetManager::GetComponent(const std::string &name)
 
 bool AssetManager::IsValidComponentType(const std::string &name)
 {
-    return m_componentFactory.IsSupported(name);
+    return componentFactory.IsSupported(name);
 }
 
 std::string AssetManager::GetAssetPath(const std::string &name)
 {
-    if (m_pathMap[name] != "")
+    if (pathMap[name] != "")
     {
-        return m_pathMap[name];
+        return pathMap[name];
     }
     else
     {

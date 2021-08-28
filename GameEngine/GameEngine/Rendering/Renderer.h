@@ -42,14 +42,14 @@ namespace DrageEngine
             friend class Application;
             Renderer();
         
-            Color m_clearColor;
+            Color clearColor;
         
-            Camera *m_camera;
-            std::vector<Light*> m_lights;
+            Camera *camera;
+            std::vector<Light*> lights;
         
-            Matrix4x4 m_viewMatrix;
-            Matrix4x4 m_projectionMatrix;
-            Matrix4x4 m_viewProjectionMatrix;
+            Matrix4x4 viewMatrix;
+            Matrix4x4 projectionMatrix;
+            Matrix4x4 viewProjectionMatrix;
     };
 
     class RenderOption

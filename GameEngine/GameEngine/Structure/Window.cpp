@@ -9,27 +9,27 @@ using namespace DrageEngine;
 
 Window::Window()
 {
-    m_flags = 0;
-    m_width = 0;
-    m_height = 0;
-    m_fullscreen = false;
-    m_vsync = true;
+    flags = 0;
+    width = 0;
+    height = 0;
+    fullscreen = false;
+    vsync = true;
 }
 
 Window::~Window()
 {
-    SDL_GL_DeleteContext(m_glContext);
-    SDL_DestroyWindow(m_window);
+    SDL_GL_DeleteContext(glContext);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
 bool Window::Create(int width, int height, bool fullscreen, const std::string &caption)
 {
-    m_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE;
-    m_width = width;
-    m_height = height;
-    m_fullscreen = fullscreen;
-    m_caption = caption;
+    flags = SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE;
+    this->width = width;
+    this->height = height;
+    this->fullscreen = fullscreen;
+    this->caption = caption;
     
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -49,15 +49,15 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
     
     // Create application window
     int x = SDL_WINDOWPOS_UNDEFINED, y = SDL_WINDOWPOS_UNDEFINED;
-    m_window = SDL_CreateWindow(m_caption.c_str(), x, y, m_width, m_height, m_flags);
-    if (!m_window)
+    window = SDL_CreateWindow(caption.c_str(), x, y, width, height, flags);
+    if (!window)
     {
         ERROR("Failed to create window");
         return false;
     }
     
-    m_glContext = SDL_GL_CreateContext(m_window);
-    if (!m_glContext)
+    glContext = SDL_GL_CreateContext(window);
+    if (!glContext)
     {
         ERROR("Failed to create the openGL context");
         return false;
@@ -65,12 +65,12 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
     
     // Fix window size if not what we asked for
     int drawableWidth, drawableHeight;
-    SDL_GL_GetDrawableSize(m_window, &drawableWidth, &drawableHeight);
-    m_scaleFactor = drawableHeight / m_height;
-    SDL_SetWindowSize(m_window, m_width / m_scaleFactor, m_height / m_scaleFactor);
+    SDL_GL_GetDrawableSize(window, &drawableWidth, &drawableHeight);
+    scaleFactor = drawableHeight / height;
+    SDL_SetWindowSize(window, width / scaleFactor, height / scaleFactor);
     
     // Use Vsync
-    if (SDL_GL_SetSwapInterval(m_vsync) < 0)
+    if (SDL_GL_SetSwapInterval(vsync) < 0)
     {
         WARNING("Unable to set VSync");
         WARNING(SDL_GetError());
@@ -78,17 +78,17 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
     
     SDL_DisplayMode mode;
     SDL_GetDisplayMode(0, 0, &mode);
-    m_refreshRate = mode.refresh_rate;
+    refreshRate = mode.refresh_rate;
     
     // Listen for resize events
-    SDL_AddEventWatch(HandleWindowEvents, m_window);
+    SDL_AddEventWatch(HandleWindowEvents, window);
     
     return true;
 }
 
 void Window::SwapBuffers()
 {
-    SDL_GL_SwapWindow(m_window);
+    SDL_GL_SwapWindow(window);
 }
 
 int Window::HandleWindowEvents(void* data, SDL_Event* event)
@@ -103,65 +103,65 @@ int Window::HandleWindowEvents(void* data, SDL_Event* event)
 
 void Window::HandleResize()
 {
-    SDL_GetWindowSize(m_window, &m_width, &m_height);
-    m_width *= m_scaleFactor;
-    m_height *= m_scaleFactor;
-    app->renderer->ViewportResized(m_width, m_height);
+    SDL_GetWindowSize(window, &width, &height);
+    width *= scaleFactor;
+    height *= scaleFactor;
+    app->renderer->ViewportResized(width, height);
 }
 
 int Window::GetWidth() const
 {
-    return m_width;
+    return width;
 }
 
 int Window::GetHeight() const
 {
-    return m_height;
+    return height;
 }
 
 float Window::GetAspectRatio() const
 {
-    return 1.0f * m_width / m_height;
+    return 1.0f * width / height;
 }
 
 void Window::SetSize(int width, int height)
 {
-    m_width = width;
-    m_height = height;
+    width = width;
+    height = height;
     app->renderer->ViewportResized(width, height);
 }
 
 void Window::EnableFullscreen()
 {
-    if (!m_fullscreen)
+    if (!fullscreen)
     {
-        m_fullscreen = true;
-        m_flags = m_flags | SDL_WINDOW_FULLSCREEN_DESKTOP;
-        SDL_SetWindowFullscreen(m_window, m_flags);
+        fullscreen = true;
+        flags = flags | SDL_WINDOW_FULLSCREEN_DESKTOP;
+        SDL_SetWindowFullscreen(window, flags);
     }
 }
 
 void Window::DisableFullscreen()
 {
-    if (m_fullscreen)
+    if (fullscreen)
     {
-        m_fullscreen = false;
-        m_flags = m_flags - SDL_WINDOW_FULLSCREEN_DESKTOP;
-        SDL_SetWindowFullscreen(m_window, m_flags);
+        fullscreen = false;
+        flags = flags - SDL_WINDOW_FULLSCREEN_DESKTOP;
+        SDL_SetWindowFullscreen(window, flags);
     }
 }
 
 bool Window::IsFullscreen() const
 {
-    return m_fullscreen;
+    return fullscreen;
 }
 
 bool Window::VSync() const
 {
-    return m_vsync;
+    return vsync;
 }
 
 int Window::GetRefreshRate() const
 {
-    return m_refreshRate;
+    return refreshRate;
 }

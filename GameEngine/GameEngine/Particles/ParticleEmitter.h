@@ -25,17 +25,17 @@ namespace DrageEngine
             void SpawnParticle();
         
         private:
-            Material *m_particleMaterial;
-            float m_particleLifetime;
-            ParticleAnimParameter m_particleSize;
-            ParticleAnimParameter m_particleVelocity;
-            ParticleAnimParameter m_particleAngularVelocity;
-            ParticleAnimParameter m_particleAcceleration;
+            Material *particleMaterial;
+            float particleLifetime;
+            ParticleAnimParameter particleSize;
+            ParticleAnimParameter particleVelocity;
+            ParticleAnimParameter particleAngularVelocity;
+            ParticleAnimParameter particleAcceleration;
         
-            //ParticleEmitterVolume m_volume;
+            //ParticleEmitterVolume volume;
         
-            Vector3 m_particleDirection;
-            float m_particleDirectionInfluence; // 0 = ignore, 1 = follow direction strictly
+            Vector3 particleDirection;
+            float particleDirectionInfluence; // 0 = ignore, 1 = follow direction strictly
     };
 }
 

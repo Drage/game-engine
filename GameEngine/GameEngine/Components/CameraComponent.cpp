@@ -6,9 +6,9 @@ using namespace DrageEngine;
 
 void CameraComponent::Init(const ParamList &params)
 {   
-    m_fov = params.Get<float>("fov", 60);
-    m_nearClip = params.Get<float>("nearClip", 0.1f);
-    m_farClip = params.Get<float>("farClip", 1000);
+    fov = params.Get<float>("fov", 60);
+    nearClip = params.Get<float>("nearClip", 0.1f);
+    farClip = params.Get<float>("farClip", 1000);
 }
 
 void CameraComponent::Start()
@@ -18,6 +18,6 @@ void CameraComponent::Start()
 
 void CameraComponent::Update()
 {
-    m_position = transform->position;
-    m_direction = transform->Forward();
+    position = transform->position;
+    direction = transform->Forward();
 }

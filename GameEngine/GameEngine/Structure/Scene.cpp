@@ -21,29 +21,29 @@ Scene::~Scene()
 
 void Scene::Clear()
 {
-    for (GameObjectList::iterator i = m_objects.begin(); i != m_objects.end(); i++)
+    for (GameObjectList::iterator i = objects.begin(); i != objects.end(); i++)
         delete (*i);
-    m_objects.clear();
+    objects.clear();
 }
 
 void Scene::Start()
 {
     app->SetActiveScene(this);
     
-    for (GameObjectList::const_iterator i = m_objects.begin(); i != m_objects.end(); i++)
+    for (GameObjectList::const_iterator i = objects.begin(); i != objects.end(); i++)
         (*i)->Start();
 }
 
 void Scene::Update()
 {
-    if (m_objects.size() > 0)
+    if (objects.size() > 0)
     {
-        for (GameObjectList::iterator i = m_objects.begin(); i != (m_objects.end()--); )
+        for (GameObjectList::iterator i = objects.begin(); i != (objects.end()--); )
         {
             if ((*i)->IsDestroyed())
             {
                 delete *i;
-                i = m_objects.erase(i);
+                i = objects.erase(i);
             }
             else
             {
@@ -58,7 +58,7 @@ void Scene::Update()
 
 void Scene::Render(Renderer *renderer)
 {
-    for (GameObjectList::const_iterator i = m_objects.begin(); i != m_objects.end(); i++)
+    for (GameObjectList::const_iterator i = objects.begin(); i != objects.end(); i++)
     {
         if ((*i)->IsActive())
             (*i)->Render(renderer);
@@ -68,17 +68,17 @@ void Scene::Render(Renderer *renderer)
 void Scene::Add(GameObject *object)
 {
     if (object->GetParent() == NULL)
-        m_objects.push_back(object);
+        objects.push_back(object);
 }
 
 bool Scene::Remove(GameObject *object)
 {
-    for (GameObjectList::iterator i = m_objects.begin(); i != m_objects.end(); i++)
+    for (GameObjectList::iterator i = objects.begin(); i != objects.end(); i++)
     {
         if ((*i) == object)
         {
             delete (*i);
-            m_objects.erase(i);
+            objects.erase(i);
             return true;
         }
     }
@@ -185,7 +185,7 @@ GameObject* Scene::Find(const std::string &path, GameObject *parent) const
     
     if (!parent)
     {
-        for (GameObjectList::const_iterator i = m_objects.begin(); i != m_objects.end(); i++)
+        for (GameObjectList::const_iterator i = objects.begin(); i != objects.end(); i++)
         {
             if ((*i)->GetName() == name)
             {

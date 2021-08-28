@@ -29,7 +29,7 @@ namespace DrageEngine
         private:
             friend class GameObject;
         
-            bool m_enabled;
+            bool enabled;
     };
 }
 

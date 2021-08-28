@@ -14,15 +14,15 @@ ImagePCX::ImagePCX()
 
 ImagePCX::ImagePCX(const Image &other)
 {
-    m_width = other.GetWidth();
-    m_height = other.GetHeight();
-    m_bpp = other.GetBPP();
-    m_imageSize = other.GetSize();
+    width = other.GetWidth();
+    height = other.GetHeight();
+    bpp = other.GetBPP();
+    imageSize = other.GetSize();
     
-    if (m_pixels)
-        delete m_pixels;
-    m_pixels = new unsigned char[m_imageSize];
-    memcpy(m_pixels, other.GetPixels(), m_imageSize);
+    if (pixels)
+        delete pixels;
+    pixels = new unsigned char[imageSize];
+    memcpy(pixels, other.GetPixels(), imageSize);
 }
 
 ImagePCX::ImagePCX(const std::string &filename)
@@ -32,7 +32,7 @@ ImagePCX::ImagePCX(const std::string &filename)
 
 bool ImagePCX::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     unsigned char* fileData = NULL;
     std::ifstream file;
     
@@ -48,11 +48,11 @@ bool ImagePCX::Load(const std::string &filename)
         
         // Get file size
         file.seekg(0, std::ios_base::end);
-        m_fileSize = (long)file.tellg();
+        fileSize = (long)file.tellg();
         file.seekg(0, std::ios_base::beg);
         
         // Allocate memory
-        fileData = new unsigned char[m_fileSize];
+        fileData = new unsigned char[fileSize];
         
         if (fileData == NULL)
         {
@@ -61,7 +61,7 @@ bool ImagePCX::Load(const std::string &filename)
         }
         
         // Read the file into memory
-        file.read((char*)fileData, m_fileSize);
+        file.read((char*)fileData, fileSize);
         file.close();
         
         // Read header data
@@ -97,37 +97,37 @@ bool ImagePCX::Load(const std::string &filename)
 bool ImagePCX::ReadHeader(unsigned char *data)
 {
     // Read header
-    memcpy(&m_header, data, sizeof(Header));
+    memcpy(&header, data, sizeof(Header));
     
     // Image dimensions
-    m_width = m_header.xMax - m_header.xMin + 1;
-    m_height = m_header.yMax - m_header.yMin + 1;
+    width = header.xMax - header.xMin + 1;
+    height = header.yMax - header.yMin + 1;
     
     // Bits per pixel
-    m_bpp = 24;
+    bpp = 24;
     
     // Check encoding is supported
-    if (m_header.version != 5)
+    if (header.version != 5)
         return false;
     
     // Get image size
-    m_imageSize = (m_width * m_height * (m_bpp/8));
+    imageSize = (width * height * (bpp/8));
     return true;
 }
 
 bool ImagePCX::LoadData(unsigned char *data)
 {
     // Allocate memory
-    m_pixels = new unsigned char[m_imageSize];
-    unsigned char *buffer = new unsigned char[m_width * m_height];
+    pixels = new unsigned char[imageSize];
+    unsigned char *buffer = new unsigned char[width * height];
     unsigned char *palette = new unsigned char[PALETTE_SIZE];
-    if (m_pixels == NULL || buffer == NULL || palette == NULL)
+    if (pixels == NULL || buffer == NULL || palette == NULL)
         return false;
     
     // Decode RLE compression
     unsigned char *ptrData = data;
     unsigned bufferPosition = 0;
-    while (bufferPosition < (m_width * m_height))
+    while (bufferPosition < (width * height))
     {
         if (*ptrData > 0xbf)
         {
@@ -146,16 +146,16 @@ bool ImagePCX::LoadData(unsigned char *data)
     
     // Read palette
     for (int i = 0; i < PALETTE_SIZE; i++)
-        palette[i] = data[m_fileSize - sizeof(Header) - PALETTE_SIZE + i];
+        palette[i] = data[fileSize - sizeof(Header) - PALETTE_SIZE + i];
     
     // Apply palette
-    for (unsigned y = 0; y < m_height; y++)
+    for (unsigned y = 0; y < height; y++)
     {
-        for (unsigned x = 0; x < m_width; x++)
+        for (unsigned x = 0; x < width; x++)
         {
-            m_pixels[3 * (y * m_width + x) + 0] = palette[3 * buffer[y * m_width + x] + 0];
-            m_pixels[3 * (y * m_width + x) + 1] = palette[3 * buffer[y * m_width + x] + 1];
-            m_pixels[3 * (y * m_width + x) + 2] = palette[3 * buffer[y * m_width + x] + 2];
+            pixels[3 * (y * width + x) + 0] = palette[3 * buffer[y * width + x] + 0];
+            pixels[3 * (y * width + x) + 1] = palette[3 * buffer[y * width + x] + 1];
+            pixels[3 * (y * width + x) + 2] = palette[3 * buffer[y * width + x] + 2];
         }
     }
     

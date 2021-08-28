@@ -40,41 +40,41 @@ namespace DrageEngine
                     return normal;
             }
         
-            Vector3 m_position;
-            float m_rotation;
-            float m_scale;
+            Vector3 position;
+            float rotation;
+            float scale;
         
-            float m_birthTime;
-            float m_deathTime;
-            bool m_destroyed;
+            float birthTime;
+            float deathTime;
+            bool destroyed;
             
-            Vector3 m_velocity;
-            float m_angularVelocity;
-            float m_gravity;
+            Vector3 velocity;
+            float angularVelocity;
+            float gravity;
         
-            Color m_color;
-            float m_alpha;
+            Color color;
+            float alpha;
         
-            bool m_animateColor;
-            Color m_startColor;
-            Color m_normalColor;
-            Color m_endColor;
-            float m_colorInPercent;
-            float m_colorOutPercent;
+            bool animateColor;
+            Color startColor;
+            Color normalColor;
+            Color endColor;
+            float colorInPercent;
+            float colorOutPercent;
         
-            bool m_animateScale;
-            float m_startScale;
-            float m_normalScale;
-            float m_endScale;
-            float m_scaleInPercent;
-            float m_scaleOutPercent;
+            bool animateScale;
+            float startScale;
+            float normalScale;
+            float endScale;
+            float scaleInPercent;
+            float scaleOutPercent;
         
-            bool m_animateAlpha;
-            float m_startAlpha;
-            float m_normalAlpha;
-            float m_endAlpha;
-            float m_alphaInPercent;
-            float m_alphaOutPercent;
+            bool animateAlpha;
+            float startAlpha;
+            float normalAlpha;
+            float endAlpha;
+            float alphaInPercent;
+            float alphaOutPercent;
     };
 }
 

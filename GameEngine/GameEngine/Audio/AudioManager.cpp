@@ -8,15 +8,15 @@ using namespace DrageEngine;
 
 AudioManager::AudioManager()
 {
-    m_device = alcOpenDevice(NULL);
-    if (!m_device)
+    device = alcOpenDevice(NULL);
+    if (!device)
     {
         ERROR("No audio device found");
         return;
     }
     
-    m_context = alcCreateContext(m_device, NULL);
-    if (!alcMakeContextCurrent(m_context))
+    context = alcCreateContext(device, NULL);
+    if (!alcMakeContextCurrent(context))
     {
         ERROR("Could not initialize audio context");
         return;
@@ -26,6 +26,6 @@ AudioManager::AudioManager()
 AudioManager::~AudioManager()
 {
     alcMakeContextCurrent(NULL);
-    alcDestroyContext(m_context);
-    alcCloseDevice(m_device);
+    alcDestroyContext(context);
+    alcCloseDevice(device);
 }

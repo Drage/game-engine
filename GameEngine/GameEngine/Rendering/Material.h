@@ -19,8 +19,8 @@ namespace DrageEngine
             void ApplyUniforms() const;
         
         private:
-            std::string m_name;
-            Shader *m_shader;
+            std::string name;
+            Shader *shader;
         
             typedef struct Attribute
             {
@@ -38,10 +38,10 @@ namespace DrageEngine
                 attribute.type = type;
                 attribute.value = malloc(sizeof(T));
                 *(T*)(attribute.value) = value;
-                m_attributes.push_back(attribute);
+                attributes.push_back(attribute);
             }
         
-            AttributeList m_attributes;
+            AttributeList attributes;
     };
 }
 

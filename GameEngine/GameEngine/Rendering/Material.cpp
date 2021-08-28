@@ -19,7 +19,7 @@ Material::Material()
 
 bool Material::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     
     XMLDocument xml;
     if (!xml.Load(filename))
@@ -30,11 +30,11 @@ bool Material::Load(const std::string &filename)
     
     std::string shaderFilename = params.Get<std::string>("shader");
     
-    m_shader = app->assets->GetShader(shaderFilename);
+    shader = app->assets->GetShader(shaderFilename);
     
-    params.Merge(m_shader->GetDefaultUniformValues(), false);
+    params.Merge(shader->GetDefaultUniformValues(), false);
     
-    Shader::UniformList uniforms = m_shader->GetActiveUniforms();
+    Shader::UniformList uniforms = shader->GetActiveUniforms();
     for (int i = 0; i < uniforms.size(); i++)
     {
         Shader::Uniform u = uniforms[i];
@@ -69,7 +69,7 @@ bool Material::Load(const std::string &filename)
                 Texture *texture = app->assets->GetTexture(filename);
                 attribute.value = malloc(sizeof(int));
                 *(int*)(attribute.value) = texture != NULL ? texture->GetID() : 0;
-                m_attributes.push_back(attribute);
+                attributes.push_back(attribute);
                 break;
             }
                 
@@ -82,7 +82,7 @@ bool Material::Load(const std::string &filename)
                 Cubemap *cubemap = app->assets->GetCubemap(filename);
                 attribute.value = malloc(sizeof(int));
                 *(int*)(attribute.value) = cubemap != NULL ? cubemap->GetID() : 0;
-                m_attributes.push_back(attribute);
+                attributes.push_back(attribute);
                 break;
             }
         }
@@ -93,46 +93,46 @@ bool Material::Load(const std::string &filename)
 
 Shader* Material::GetShader() const
 {
-    return m_shader;
+    return shader;
 }
 
 void Material::ApplyUniforms() const
 {
     int textureIndex = 0;
-    for (int i = 0; i < m_attributes.size(); i++)
+    for (int i = 0; i < attributes.size(); i++)
     {
-        switch (m_attributes[i].type)
+        switch (attributes[i].type)
         {
             case Shader::Uniform::Float:
-                m_shader->SetUniform(m_attributes[i].location, *(float*)m_attributes[i].value);
+                shader->SetUniform(attributes[i].location, *(float*)attributes[i].value);
                 break;
                 
             case Shader::Uniform::Int:
-                m_shader->SetUniform(m_attributes[i].location, *(int*)m_attributes[i].value);
+                shader->SetUniform(attributes[i].location, *(int*)attributes[i].value);
                 break;
                 
             case Shader::Uniform::Vec2:
-                m_shader->SetUniform(m_attributes[i].location, *(Vector2*)m_attributes[i].value);
+                shader->SetUniform(attributes[i].location, *(Vector2*)attributes[i].value);
                 break;
                 
             case Shader::Uniform::Vec3:
-                m_shader->SetUniform(m_attributes[i].location, *(Vector3*)m_attributes[i].value);
+                shader->SetUniform(attributes[i].location, *(Vector3*)attributes[i].value);
                 break;
                 
             case Shader::Uniform::Vec4:
-                m_shader->SetUniform(m_attributes[i].location, *(Vector4*)m_attributes[i].value);
+                shader->SetUniform(attributes[i].location, *(Vector4*)attributes[i].value);
                 break;
                 
             case Shader::Uniform::Texture:
-                m_shader->SetUniform(m_attributes[i].location, textureIndex);
+                shader->SetUniform(attributes[i].location, textureIndex);
                 glActiveTexture(GL_TEXTURE0 + textureIndex++);
-                glBindTexture(GL_TEXTURE_2D, *(int*)m_attributes[i].value);
+                glBindTexture(GL_TEXTURE_2D, *(int*)attributes[i].value);
                 break;
                 
             case Shader::Uniform::Cubemap:
-                m_shader->SetUniform(m_attributes[i].location, textureIndex);
+                shader->SetUniform(attributes[i].location, textureIndex);
                 glActiveTexture(GL_TEXTURE0 + textureIndex++);
-                glBindTexture(GL_TEXTURE_CUBE_MAP, *(int*)m_attributes[i].value);
+                glBindTexture(GL_TEXTURE_CUBE_MAP, *(int*)attributes[i].value);
                 break;
         }
     }

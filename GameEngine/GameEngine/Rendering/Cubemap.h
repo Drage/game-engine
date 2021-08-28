@@ -20,8 +20,8 @@ namespace DrageEngine
             unsigned GetID() const;
         
         private:
-            std::string m_name;
-            unsigned m_id;
+            std::string name;
+            unsigned id;
     };
 }
 

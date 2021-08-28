@@ -6,20 +6,20 @@ using namespace DrageEngine;
 
 void DemoGame::Load()
 {
-    m_scene = new Scene("Demo.scene");
+    scene = new Scene("Demo.scene");
 }
 
 void DemoGame::Start()
 {
-    m_scene->Start();
+    scene->Start();
 }
 
 void DemoGame::Update()
 {
-    m_scene->Update();
+    scene->Update();
 }
 
 void DemoGame::Render(Renderer *renderer)
 {
-    m_scene->Render(renderer);
+    scene->Render(renderer);
 }

@@ -36,12 +36,12 @@ namespace DrageEngine
             void SetLooping(bool loop);
         
         private:
-            unsigned m_id;
-            float m_volume;
-            float m_pitch;
-            Vector3 m_position;
-            Vector3 m_velocity;
-            bool m_looping;
+            unsigned id;
+            float volume;
+            float pitch;
+            Vector3 position;
+            Vector3 velocity;
+            bool looping;
     };
 }
 

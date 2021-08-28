@@ -35,7 +35,7 @@ namespace DrageEngine
         
             typedef std::vector<GameObject*> GameObjectList;
         
-            GameObjectList m_objects;
+            GameObjectList objects;
     };
 }
 

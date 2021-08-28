@@ -18,11 +18,11 @@ namespace DrageEngine
             template<typename T>
             void Register(const std::string &type)
             {
-                m_factory.Register<T>(type);
+                factory.Register<T>(type);
             }
         
         private:
-            Factory<Component, std::string> m_factory;
+            Factory<Component, std::string> factory;
     };
 }
 

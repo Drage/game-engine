@@ -36,12 +36,12 @@ namespace DrageEngine
         
             bool IsSupported(Key id) const
             {
-                return m_constructorMap.find(id) != m_constructorMap.end();
+                return constructorMap.find(id) != constructorMap.end();
             }
         
             BaseType* Create(Key id)
             {
-                Creator* creator = m_constructorMap[id];
+                Creator* creator = constructorMap[id];
                 if (creator)
                     return creator->Create();
                 else
@@ -53,8 +53,8 @@ namespace DrageEngine
         
             virtual ~Factory()
             {
-                typename std::map<Key, Creator*>::iterator i = m_constructorMap.begin();
-                while (i != m_constructorMap.end())
+                typename std::map<Key, Creator*>::iterator i = constructorMap.begin();
+                while (i != constructorMap.end())
                 {
                     delete (*i).second;
                     i++;
@@ -64,10 +64,10 @@ namespace DrageEngine
         private:
             void Register(Key id, Creator* constructor)
             {
-                m_constructorMap[id] = constructor;
+                constructorMap[id] = constructor;
             }
         
-            std::map<Key, Creator*> m_constructorMap;
+            std::map<Key, Creator*> constructorMap;
     };
 }
 

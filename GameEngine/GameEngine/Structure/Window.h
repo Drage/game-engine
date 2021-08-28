@@ -33,17 +33,17 @@ namespace DrageEngine
             static int HandleWindowEvents(void* data, SDL_Event* event);
             void HandleResize();
         
-            int m_flags;
-            int m_width;
-            int m_height;
-            int m_scaleFactor;
-            bool m_fullscreen;
-            std::string m_caption;
-            bool m_vsync;
-            int m_refreshRate;
+            int flags;
+            int width;
+            int height;
+            int scaleFactor;
+            bool fullscreen;
+            std::string caption;
+            bool vsync;
+            int refreshRate;
         
-            SDL_Window *m_window;
-            SDL_GLContext m_glContext;
+            SDL_Window *window;
+            SDL_GLContext glContext;
     };
 }
 

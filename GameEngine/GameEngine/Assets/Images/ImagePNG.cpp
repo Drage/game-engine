@@ -12,45 +12,45 @@ const int ImagePNG::signature[] = { 137, 80, 78, 71, 13, 10, 26, 10 };
 
 ImagePNG::ImagePNG()
 {
-    m_readIHDR = false;
-    m_readPLTE = false;
-    m_bitDepth = 0;
-    m_colourType = 0;
-    m_compression = 0;
-    m_filter = 0;
-    m_interlace = 0;
-    m_dataStartPos = NULL;
+    readIHDR = false;
+    readPLTE = false;
+    bitDepth = 0;
+    colourType = 0;
+    compression = 0;
+    filter = 0;
+    interlace = 0;
+    dataStartPos = NULL;
 }
 
 ImagePNG::ImagePNG(const Image &other)
 {
-    m_width = other.GetWidth();
-    m_height = other.GetHeight();
-    m_bpp = other.GetBPP();
-    m_imageSize = other.GetSize();
+    width = other.GetWidth();
+    height = other.GetHeight();
+    bpp = other.GetBPP();
+    imageSize = other.GetSize();
     
-    if (m_pixels)
-        delete m_pixels;
-    m_pixels = new unsigned char[m_imageSize];
-    memcpy(m_pixels, other.GetPixels(), m_imageSize);
+    if (pixels)
+        delete pixels;
+    pixels = new unsigned char[imageSize];
+    memcpy(pixels, other.GetPixels(), imageSize);
 }
 
 ImagePNG::ImagePNG(const std::string &filename)
 {
-    m_readIHDR = false;
-    m_readPLTE = false;
-    m_bitDepth = 0;
-    m_colourType = 0;
-    m_compression = 0;
-    m_filter = 0;
-    m_interlace = 0;
-    m_dataStartPos = NULL;
+    readIHDR = false;
+    readPLTE = false;
+    bitDepth = 0;
+    colourType = 0;
+    compression = 0;
+    filter = 0;
+    interlace = 0;
+    dataStartPos = NULL;
     Load(filename);
 }
 
 bool ImagePNG::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     unsigned long fileSize;
     unsigned char* fileData = NULL;
     std::ifstream file;
@@ -135,7 +135,7 @@ bool ImagePNG::Load(const std::string &filename)
         }
         
         // Reconstruct image from palette
-        if (m_colourType == INDEXED)
+        if (colourType == INDEXED)
             ApplyPalette();
         
         // Reconstruct image from scanline filtering
@@ -195,90 +195,90 @@ void ImagePNG::GetChunkInfo(unsigned char* chunk, unsigned &length, char type[],
 bool ImagePNG::ReadIHDR(unsigned char* data)
 {
     // Get image dimensions
-    m_width = data[0];
-    m_width = (m_width << 8) + data[1];
-    m_width = (m_width << 8) + data[2];
-    m_width = (m_width << 8) + data[3];
+    width = data[0];
+    width = (width << 8) + data[1];
+    width = (width << 8) + data[2];
+    width = (width << 8) + data[3];
     
-    m_height = data[4];
-    m_height = (m_height << 8) + data[5];
-    m_height = (m_height << 8) + data[6];
-    m_height = (m_height << 8) + data[7];
+    height = data[4];
+    height = (height << 8) + data[5];
+    height = (height << 8) + data[6];
+    height = (height << 8) + data[7];
     
     // Get other metadata
-    m_bitDepth = data[8];
-    m_colourType = data[9];
-    m_compression = data[10];
-    m_filter = data[11];
-    m_interlace = data[12];
+    bitDepth = data[8];
+    colourType = data[9];
+    compression = data[10];
+    filter = data[11];
+    interlace = data[12];
     
     // Don't load unsupported file formats
-    if (m_colourType == GREYSCALE + ALPHA || m_bitDepth != 8 || m_interlace != NO_INTERLACE || m_compression != 0 || m_filter != 0)
+    if (colourType == GREYSCALE + ALPHA || bitDepth != 8 || interlace != NO_INTERLACE || compression != 0 || filter != 0)
         return false;
     
     // Calculate number of bits-per-pixel
-    switch (m_colourType)
+    switch (colourType)
     {
         case GREYSCALE:
-            m_bpp = m_bitDepth;
+            bpp = bitDepth;
             break;
         case TRUECOLOUR:
-            m_bpp = 3 * m_bitDepth;
+            bpp = 3 * bitDepth;
             break;
         case INDEXED:
-            m_bpp = 24;
+            bpp = 24;
             break;
         case (GREYSCALE + ALPHA):
-            m_bpp = 2 * m_bitDepth;
+            bpp = 2 * bitDepth;
             break;
         case (TRUECOLOUR + ALPHA):
-            m_bpp = 4 * m_bitDepth;
+            bpp = 4 * bitDepth;
             break;
     }
     
     // Allocate memory for pixel data: image size * bytes-per-pixel + one extra byte per scanline for filter type
-    m_imageSize = (m_width * m_height * m_bpp/8) + m_height;
-    m_pixels = new unsigned char[m_imageSize];
+    imageSize = (width * height * bpp/8) + height;
+    pixels = new unsigned char[imageSize];
     
-    m_readIHDR = true;
+    readIHDR = true;
     
-    return m_pixels != NULL;
+    return pixels != NULL;
 }
 
 void ImagePNG::ReadPLTE(unsigned char* data)
 {
-    m_palette = data;
-    m_readPLTE = true;
+    palette = data;
+    readPLTE = true;
 }
 
 void ImagePNG::ReadIDAT(unsigned char* data, unsigned length)
 {
-    if (m_dataStartPos == NULL)
+    if (dataStartPos == NULL)
     {
-        m_dataStartPos = data;
-        m_dataConcatenatePos = m_dataStartPos + length;
+        dataStartPos = data;
+        dataConcatenatePos = dataStartPos + length;
     }
     else
     {
-        memcpy(m_dataConcatenatePos, data, length);
-        m_dataConcatenatePos += length;
+        memcpy(dataConcatenatePos, data, length);
+        dataConcatenatePos += length;
     }
 }
 
 bool ImagePNG::Decompress()
 {
     // Use zlib to decompress image data
-    return uncompress(m_pixels, &m_imageSize, m_dataStartPos, m_dataConcatenatePos - m_dataStartPos) == Z_OK;
+    return uncompress(pixels, &imageSize, dataStartPos, dataConcatenatePos - dataStartPos) == Z_OK;
 }
 
 void ImagePNG::ApplyFiltering()
 {
-    unsigned char *currentRow = m_pixels;
-    unsigned char *lastRow = m_pixels + 1;
-    unsigned char *compactedPosition = m_pixels;
+    unsigned char *currentRow = pixels;
+    unsigned char *lastRow = pixels + 1;
+    unsigned char *compactedPosition = pixels;
     
     // Apply filter to each scanline - each scanline can have a different filter
-    for (unsigned i = 0; i < m_height; i++)
+    for (unsigned i = 0; i < height; i++)
     {
         switch (currentRow[0])
         {
@@ -301,26 +301,26 @@ void ImagePNG::ApplyFiltering()
         lastRow = compactedPosition;
         
         // Compact data to remove filter type bytes
-        memcpy(compactedPosition, currentRow + 1, m_width * m_bpp/8);
-        compactedPosition += m_width * m_bpp/8;
+        memcpy(compactedPosition, currentRow + 1, width * bpp/8);
+        compactedPosition += width * bpp/8;
         
-        currentRow += m_width * m_bpp/8 + 1;
+        currentRow += width * bpp/8 + 1;
         
-        m_imageSize = m_width * m_height * (m_bpp/8);
+        imageSize = width * height * (bpp/8);
     }
 }
 
 void ImagePNG::FilterSub(unsigned char *scanline)
 {
     // Store last pixel's data, init to 0
-    unsigned char *last = new unsigned char[m_bpp/8];
-    for (unsigned i = 0; i < m_bpp/8; i++)
+    unsigned char *last = new unsigned char[bpp/8];
+    for (unsigned i = 0; i < bpp/8; i++)
         last[i] = 0;
     
     // Add pixel to the left to current pixel
-    for (unsigned i = 0; i < m_width * m_bpp/8; i++)
+    for (unsigned i = 0; i < width * bpp/8; i++)
     {
-        int lastIndex = i % (m_bpp/8);
+        int lastIndex = i % (bpp/8);
         scanline[i] = (scanline[i] + last[lastIndex]) % 256;
         last[lastIndex] = scanline[i];
     }
@@ -333,7 +333,7 @@ void ImagePNG::FilterUp(unsigned char *scanline, unsigned char *previous)
     if (scanline != previous)
     {
         // Add pixel above to current pixel
-        for (unsigned i = 0; i < m_width * m_bpp/8; i++)
+        for (unsigned i = 0; i < width * bpp/8; i++)
         {
             scanline[i] = (scanline[i] + previous[i]) % 256;
         }
@@ -343,25 +343,25 @@ void ImagePNG::FilterUp(unsigned char *scanline, unsigned char *previous)
 void ImagePNG::FilterAverage(unsigned char *scanline, unsigned char *previous)
 {
     // Store last pixel's data, init to 0
-    unsigned char *last = new unsigned char[m_bpp/8];
-    for (unsigned i = 0; i < m_bpp/8; i++)
+    unsigned char *last = new unsigned char[bpp/8];
+    for (unsigned i = 0; i < bpp/8; i++)
         last[i] = 0;
     
     // Add the average of the pixel to the left and the pixel above to the current pixel
     if (scanline != previous)
     {
-        for (unsigned i = 0; i < m_width * m_bpp/8; i++)
+        for (unsigned i = 0; i < width * bpp/8; i++)
         {
-            scanline[i] = (scanline[i] + (last[i % (m_bpp/8)] + previous[i]) / 2) % 256;
-            last[i % (m_bpp/8)] = scanline[i];
+            scanline[i] = (scanline[i] + (last[i % (bpp/8)] + previous[i]) / 2) % 256;
+            last[i % (bpp/8)] = scanline[i];
         }
     }
     else // If first scanline, assume previous row was all 0s
     {
-        for (unsigned i = 0; i < m_width * m_bpp/8; i++)
+        for (unsigned i = 0; i < width * bpp/8; i++)
         {
-            scanline[i] = (scanline[i] + last[i % (m_bpp/8)] / 2) % 256;
-            last[i % (m_bpp/8)] = scanline[i];
+            scanline[i] = (scanline[i] + last[i % (bpp/8)] / 2) % 256;
+            last[i % (bpp/8)] = scanline[i];
         }
     }
     
@@ -374,19 +374,19 @@ void ImagePNG::FilterPaeth(unsigned char *scanline, unsigned char *previous)
     int p, pa, pb, pc;
     
     // Store last pixel's data, init to 0
-    unsigned char *last = new unsigned char[m_bpp/8];
-    for (unsigned i = 0; i < m_bpp/8; i++)
+    unsigned char *last = new unsigned char[bpp/8];
+    for (unsigned i = 0; i < bpp/8; i++)
         last[i] = 0;
     
     // Store last pixel of the previous scanline's data, init to 0
-    unsigned char *prevLast = new unsigned char[m_bpp/8];
-    for (unsigned i = 0; i < m_bpp/8; i++)
+    unsigned char *prevLast = new unsigned char[bpp/8];
+    for (unsigned i = 0; i < bpp/8; i++)
         prevLast[i] = 0;
     
-    for (unsigned i = 0; i < m_width * m_bpp/8; i++)
+    for (unsigned i = 0; i < width * bpp/8; i++)
     {
         // get index of current pixel component (r,g,b,a...)
-        int lastIndex = i % (m_bpp/8);
+        int lastIndex = i % (bpp/8);
         
         a = last[lastIndex]; // a is pixel to the left
         
@@ -422,31 +422,31 @@ void ImagePNG::FilterPaeth(unsigned char *scanline, unsigned char *previous)
 
 void ImagePNG::ApplyPalette()
 {
-    if (!m_readPLTE)
+    if (!readPLTE)
         return;
     
     // Allocate memory for palette indexes
-    m_pixelIndexes = new unsigned char[m_width * m_height + m_height];
-    memcpy(m_pixelIndexes, m_pixels, m_width * m_height + m_height);
+    pixelIndexes = new unsigned char[width * height + height];
+    memcpy(pixelIndexes, pixels, width * height + height);
     
-    unsigned char *pixelPosition = m_pixels;
+    unsigned char *pixelPosition = pixels;
     
-    for (unsigned i = 0; i < m_width * m_height + m_height; i++)
+    for (unsigned i = 0; i < width * height + height; i++)
     {
-        if (i % (m_width + 1) == 0)
+        if (i % (width + 1) == 0)
         {
             // Copy filter type byte
-            memcpy(pixelPosition, &m_pixelIndexes[i], 1);
+            memcpy(pixelPosition, &pixelIndexes[i], 1);
             pixelPosition++;
         }
         else
         {
             // Copy RBG bytes from palette
-            memcpy(pixelPosition, m_palette + m_pixelIndexes[i] * 3, 3);
+            memcpy(pixelPosition, palette + pixelIndexes[i] * 3, 3);
             pixelPosition += 3;
         }
     }
     
     // Free pixel index data
-    delete[] m_pixelIndexes;
+    delete[] pixelIndexes;
 }

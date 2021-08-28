@@ -12,14 +12,14 @@ namespace DrageEngine
         public:
             Array2D()
             {
-                m_data = NULL;
-                m_width = 0;
-                m_height = 0;
+                data = NULL;
+                width = 0;
+                height = 0;
             }
 
             Array2D(int width, int height)
             {
-                m_data = NULL;
+                data = NULL;
                 Allocate(width, height);
             }
 
@@ -30,18 +30,18 @@ namespace DrageEngine
 
             bool Allocate(int width, int height)
             {
-                if (m_data)
+                if (data)
                     Deallocate();
 
-                m_width = width;
-                m_height = height;
+                this->width = width;
+                this->height = height;
     
                 try
                 {
-                    m_data = new T*[m_height];
+                    data = new T*[height];
 
-                    for (int i = 0; i < m_height; i++)
-                        m_data[i] = new T[m_width];
+                    for (int i = 0; i < height; i++)
+                        data[i] = new T[width];
 
                     return true;
                 }
@@ -53,61 +53,61 @@ namespace DrageEngine
 
             void Deallocate()
             {
-                if (m_data)
+                if (data)
                 {
-                    for (int i = 0; i < m_height; i++)
-                        delete[] m_data[i];
+                    for (int i = 0; i < height; i++)
+                        delete[] data[i];
 
-                    delete[] m_data;
+                    delete[] data;
 
-                    m_data = NULL;
+                    data = NULL;
                 }
             }
 
             bool IsAllocated() const
             {
-                return m_data != NULL;
+                return data != NULL;
             }
 
             int GetWidth() const
             {
-                return m_width;
+                return width;
             }
 
             int GetHeight() const
             {
-                return m_height;
+                return height;
             }
 
             T& operator() (int x, int y)
             {
-                if (x >= m_width || y >= m_height || x < 0 || y < 0)
+                if (x >= width || y >= height || x < 0 || y < 0)
                 {
                     ERROR("Array index out of bounds");
-                    return m_dummyValue;
+                    return dummyValue;
                 }
 
-                return m_data[y][x];
+                return data[y][x];
             }
 
             T operator() (int x, int y) const
             {
-                if (x >= m_width || y >= m_height || x < 0 || y < 0)
+                if (x >= width || y >= height || x < 0 || y < 0)
                 {
                     ERROR("Array index out of bounds");
-                    return m_dummyValue;
+                    return dummyValue;
                 }
 
-                return m_data[y][x];
+                return data[y][x];
             }
 
         private:
-            T** m_data;
+            T** data;
 
-            int m_width;
-            int m_height;
+            int width;
+            int height;
 
-            T m_dummyValue;
+            T dummyValue;
     };
 }
 

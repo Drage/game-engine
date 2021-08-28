@@ -18,8 +18,8 @@ namespace DrageEngine
             T Get(const std::string &name, T defaultValue = T()) const
             {
                 // Find param in map
-                ParamMapType::const_iterator i = m_params.find(name);
-                if (i == m_params.end())
+                ParamMapType::const_iterator i = params.find(name);
+                if (i == params.end())
                     return defaultValue;
                 
                 // Ugly hack to make strings return the whole string including spaces
@@ -42,7 +42,7 @@ namespace DrageEngine
                 s = out.str();
                 
                 // Update map
-                m_params[name] = s;
+                params[name] = s;
             }
         
             std::string Value(const std::string &name) const;
@@ -53,7 +53,7 @@ namespace DrageEngine
             static bool Load(const std::string &filename, ParamList &params);
         
         private:
-            ParamMapType m_params;
+            ParamMapType params;
     };
 }
 

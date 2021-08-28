@@ -19,7 +19,7 @@ ModelOBJ::ModelOBJ(const std::string &filename)
 
 bool ModelOBJ::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     
     std::ifstream file(filename);
     if (!file.is_open())
@@ -66,7 +66,7 @@ bool ModelOBJ::Load(const std::string &filename)
                 {
                     currentMesh->Generate(vertices);
                     currentMesh->SetMaterial(currentMaterial);
-                    m_meshList.push_back(currentMesh);
+                    meshList.push_back(currentMesh);
                 }
                 
                 std::string name;
@@ -115,12 +115,12 @@ bool ModelOBJ::Load(const std::string &filename)
                     vertex.texCoord[1] = textureCoords[vt[i] * 2 + 1];
                     vertices.push_back(vertex);
                     
-                    if (vertex.position.x < m_bounds.min.x) m_bounds.min.x = vertex.position.x;
-                    if (vertex.position.x > m_bounds.max.x) m_bounds.max.x = vertex.position.x;
-                    if (vertex.position.y < m_bounds.min.y) m_bounds.min.y = vertex.position.y;
-                    if (vertex.position.y > m_bounds.max.y) m_bounds.max.y = vertex.position.y;
-                    if (vertex.position.z < m_bounds.min.z) m_bounds.min.z = vertex.position.z;
-                    if (vertex.position.z > m_bounds.max.z) m_bounds.max.z = vertex.position.z;
+                    if (vertex.position.x < bounds.min.x) bounds.min.x = vertex.position.x;
+                    if (vertex.position.x > bounds.max.x) bounds.max.x = vertex.position.x;
+                    if (vertex.position.y < bounds.min.y) bounds.min.y = vertex.position.y;
+                    if (vertex.position.y > bounds.max.y) bounds.max.y = vertex.position.y;
+                    if (vertex.position.z < bounds.min.z) bounds.min.z = vertex.position.z;
+                    if (vertex.position.z > bounds.max.z) bounds.max.z = vertex.position.z;
                 }
                 break;
             }
@@ -145,7 +145,7 @@ bool ModelOBJ::Load(const std::string &filename)
     {
         currentMesh->Generate(vertices);
         currentMesh->SetMaterial(currentMaterial);
-        m_meshList.push_back(currentMesh);
+        meshList.push_back(currentMesh);
     }
     
     file.close();

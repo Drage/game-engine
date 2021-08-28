@@ -55,7 +55,7 @@ namespace DrageEngine
             static Matrix3x3 Parse(const std::string &str);
         
         private:
-            float m_values[9];
+            float values[9];
     };
 }
 

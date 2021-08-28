@@ -19,9 +19,9 @@ namespace DrageEngine
             float GetAnimationValue(float t) const;
         
         private:
-            float m_value;
-            float m_variance;
-            std::vector<Vector2> m_curve;
+            float value;
+            float variance;
+            std::vector<Vector2> curve;
     };
 }
 

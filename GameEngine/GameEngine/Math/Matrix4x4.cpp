@@ -17,32 +17,32 @@ Matrix4x4::Matrix4x4()
 
 Matrix4x4::Matrix4x4(const Matrix3x3 &other)
 {
-    m_values[0] = other[0];
-    m_values[1] = other[1];
-    m_values[2] = other[2];
-    m_values[3] = 0.0f;
-    m_values[4] = other[3];
-    m_values[5] = other[4];
-    m_values[6] = other[5];
-    m_values[7] = 0.0f;
-    m_values[8] = other[6];
-    m_values[9] = other[7];
-    m_values[10] = other[8];
-    m_values[11] = 0.0f;
-    m_values[12] = 0.0f;
-    m_values[13] = 0.0f;
-    m_values[14] = 0.0f;
-    m_values[15] = 1.0f;
+    values[0] = other[0];
+    values[1] = other[1];
+    values[2] = other[2];
+    values[3] = 0.0f;
+    values[4] = other[3];
+    values[5] = other[4];
+    values[6] = other[5];
+    values[7] = 0.0f;
+    values[8] = other[6];
+    values[9] = other[7];
+    values[10] = other[8];
+    values[11] = 0.0f;
+    values[12] = 0.0f;
+    values[13] = 0.0f;
+    values[14] = 0.0f;
+    values[15] = 1.0f;
 }
 
 void Matrix4x4::SetIdentity()
 {
     // Set all to 0
     for (int i = 0; i < 16; i++)
-        m_values[i] = 0.0f;
+        values[i] = 0.0f;
     
     // Fill diagonal with 1s
-    m_values[0] = m_values[5] = m_values[10] = m_values[15] = 1.0f;
+    values[0] = values[5] = values[10] = values[15] = 1.0f;
 }
 
 Matrix4x4 Matrix4x4::operator* (const Matrix4x4 &other) const
@@ -50,28 +50,28 @@ Matrix4x4 Matrix4x4::operator* (const Matrix4x4 &other) const
     Matrix4x4 result;
     
     // First Column
-    result[0 ] = m_values[0]*other[0 ] + m_values[4]*other[1 ] + m_values[8 ]*other[2 ] + m_values[12]*other[3 ];
-    result[1 ] = m_values[1]*other[0 ] + m_values[5]*other[1 ] + m_values[9 ]*other[2 ] + m_values[13]*other[3 ];
-    result[2 ] = m_values[2]*other[0 ] + m_values[6]*other[1 ] + m_values[10]*other[2 ] + m_values[14]*other[3 ];
-    result[3 ] = m_values[3]*other[0 ] + m_values[7]*other[1 ] + m_values[11]*other[2 ] + m_values[15]*other[3 ];
+    result[0 ] = values[0]*other[0 ] + values[4]*other[1 ] + values[8 ]*other[2 ] + values[12]*other[3 ];
+    result[1 ] = values[1]*other[0 ] + values[5]*other[1 ] + values[9 ]*other[2 ] + values[13]*other[3 ];
+    result[2 ] = values[2]*other[0 ] + values[6]*other[1 ] + values[10]*other[2 ] + values[14]*other[3 ];
+    result[3 ] = values[3]*other[0 ] + values[7]*other[1 ] + values[11]*other[2 ] + values[15]*other[3 ];
     
     // Second Column
-    result[4 ] = m_values[0]*other[4 ] + m_values[4]*other[5 ] + m_values[8 ]*other[6 ] + m_values[12]*other[7 ];
-    result[5 ] = m_values[1]*other[4 ] + m_values[5]*other[5 ] + m_values[9 ]*other[6 ] + m_values[13]*other[7 ];
-    result[6 ] = m_values[2]*other[4 ] + m_values[6]*other[5 ] + m_values[10]*other[6 ] + m_values[14]*other[7 ];
-    result[7 ] = m_values[3]*other[4 ] + m_values[7]*other[5 ] + m_values[11]*other[6 ] + m_values[15]*other[7 ];
+    result[4 ] = values[0]*other[4 ] + values[4]*other[5 ] + values[8 ]*other[6 ] + values[12]*other[7 ];
+    result[5 ] = values[1]*other[4 ] + values[5]*other[5 ] + values[9 ]*other[6 ] + values[13]*other[7 ];
+    result[6 ] = values[2]*other[4 ] + values[6]*other[5 ] + values[10]*other[6 ] + values[14]*other[7 ];
+    result[7 ] = values[3]*other[4 ] + values[7]*other[5 ] + values[11]*other[6 ] + values[15]*other[7 ];
     
     // Third Column
-    result[8 ] = m_values[0]*other[8 ] + m_values[4]*other[9 ] + m_values[8 ]*other[10] + m_values[12]*other[11];
-    result[9 ] = m_values[1]*other[8 ] + m_values[5]*other[9 ] + m_values[9 ]*other[10] + m_values[13]*other[11];
-    result[10] = m_values[2]*other[8 ] + m_values[6]*other[9 ] + m_values[10]*other[10] + m_values[14]*other[11];
-    result[11] = m_values[3]*other[8 ] + m_values[7]*other[9 ] + m_values[11]*other[10] + m_values[15]*other[11];
+    result[8 ] = values[0]*other[8 ] + values[4]*other[9 ] + values[8 ]*other[10] + values[12]*other[11];
+    result[9 ] = values[1]*other[8 ] + values[5]*other[9 ] + values[9 ]*other[10] + values[13]*other[11];
+    result[10] = values[2]*other[8 ] + values[6]*other[9 ] + values[10]*other[10] + values[14]*other[11];
+    result[11] = values[3]*other[8 ] + values[7]*other[9 ] + values[11]*other[10] + values[15]*other[11];
     
     // Fourth Column
-    result[12] = m_values[0]*other[12] + m_values[4]*other[13] + m_values[8 ]*other[14] + m_values[12]*other[15];
-    result[13] = m_values[1]*other[12] + m_values[5]*other[13] + m_values[9 ]*other[14] + m_values[13]*other[15];
-    result[14] = m_values[2]*other[12] + m_values[6]*other[13] + m_values[10]*other[14] + m_values[14]*other[15];
-    result[15] = m_values[3]*other[12] + m_values[7]*other[13] + m_values[11]*other[14] + m_values[15]*other[15];
+    result[12] = values[0]*other[12] + values[4]*other[13] + values[8 ]*other[14] + values[12]*other[15];
+    result[13] = values[1]*other[12] + values[5]*other[13] + values[9 ]*other[14] + values[13]*other[15];
+    result[14] = values[2]*other[12] + values[6]*other[13] + values[10]*other[14] + values[14]*other[15];
+    result[15] = values[3]*other[12] + values[7]*other[13] + values[11]*other[14] + values[15]*other[15];
     
     return result;
 }
@@ -81,7 +81,7 @@ Matrix4x4 Matrix4x4::operator+ (const Matrix4x4 &other) const
     Matrix4x4 result;
     
     for (int i = 0; i < 16; i++)
-        result[i] = m_values[i] + other[i];
+        result[i] = values[i] + other[i];
         
         return result;
 }
@@ -91,7 +91,7 @@ Matrix4x4 Matrix4x4::operator- (const Matrix4x4 &other) const
     Matrix4x4 result;
     
     for (int i = 0; i < 16; i++)
-        result[i] = m_values[i] - other[i];
+        result[i] = values[i] - other[i];
         
         return result;
 }
@@ -100,10 +100,10 @@ Vector3 Matrix4x4::operator* (const Vector3 &point) const
 {
     Vector3 result;
     
-    result[0] = m_values[0]*point[0] + m_values[4]*point[1] + m_values[8 ]*point[2] + m_values[12]*point[3];
-    result[1] = m_values[1]*point[0] + m_values[5]*point[1] + m_values[9 ]*point[2] + m_values[13]*point[3];
-    result[2] = m_values[2]*point[0] + m_values[6]*point[1] + m_values[10]*point[2] + m_values[14]*point[3];
-    result[3] = m_values[3]*point[0] + m_values[7]*point[1] + m_values[11]*point[2] + m_values[15]*point[3];
+    result[0] = values[0]*point[0] + values[4]*point[1] + values[8 ]*point[2] + values[12]*point[3];
+    result[1] = values[1]*point[0] + values[5]*point[1] + values[9 ]*point[2] + values[13]*point[3];
+    result[2] = values[2]*point[0] + values[6]*point[1] + values[10]*point[2] + values[14]*point[3];
+    result[3] = values[3]*point[0] + values[7]*point[1] + values[11]*point[2] + values[15]*point[3];
     
     return result;
 }
@@ -126,17 +126,17 @@ void Matrix4x4::operator-= (const Matrix4x4 &other)
 void Matrix4x4::SetTranslation(const Vector3 &translation)
 {
     SetIdentity();
-    m_values[12] = translation.x;
-    m_values[13] = translation.y;
-    m_values[14] = translation.z;
+    values[12] = translation.x;
+    values[13] = translation.y;
+    values[14] = translation.z;
 }
 
 void Matrix4x4::SetScale(const Vector3 &scale)
 {
     SetIdentity();
-    m_values[0] = scale.x;
-    m_values[5] = scale.y;
-    m_values[10] = scale.z;
+    values[0] = scale.x;
+    values[5] = scale.y;
+    values[10] = scale.z;
 }
 
 void Matrix4x4::SetRotation(const Vector3 &axis, float angle)
@@ -148,25 +148,25 @@ void Matrix4x4::SetRotation(const Vector3 &axis, float angle)
     float y2 = axis.y*axis.y;
     float z2 = axis.z*axis.z;
     
-    m_values[0] = x2 + (y2 + z2) * cosine;
-    m_values[4] = axis.x * axis.y * (1 - cosine) - axis.z * sine;
-    m_values[8] = axis.x * axis.z * (1 - cosine) + axis.y * sine;
-    m_values[12]= 0.0f;
+    values[0] = x2 + (y2 + z2) * cosine;
+    values[4] = axis.x * axis.y * (1 - cosine) - axis.z * sine;
+    values[8] = axis.x * axis.z * (1 - cosine) + axis.y * sine;
+    values[12]= 0.0f;
     
-    m_values[1] = axis.x * axis.y * (1 - cosine) + axis.z * sine;
-    m_values[5] = y2 + (x2 + z2) * cosine;
-    m_values[9] = axis.y * axis.z * (1 - cosine) - axis.x * sine;
-    m_values[13]= 0.0f;
+    values[1] = axis.x * axis.y * (1 - cosine) + axis.z * sine;
+    values[5] = y2 + (x2 + z2) * cosine;
+    values[9] = axis.y * axis.z * (1 - cosine) - axis.x * sine;
+    values[13]= 0.0f;
     
-    m_values[2] = axis.x * axis.z * (1 - cosine) - axis.y * sine;
-    m_values[6] = axis.y * axis.z * (1 - cosine) + axis.x * sine;
-    m_values[10]= z2 + (x2 + y2) * cosine;
-    m_values[14]= 0.0f;
+    values[2] = axis.x * axis.z * (1 - cosine) - axis.y * sine;
+    values[6] = axis.y * axis.z * (1 - cosine) + axis.x * sine;
+    values[10]= z2 + (x2 + y2) * cosine;
+    values[14]= 0.0f;
     
-    m_values[3] = 0.0f;
-    m_values[7] = 0.0f;
-    m_values[11]= 0.0f;
-    m_values[15]= 1.0f;
+    values[3] = 0.0f;
+    values[7] = 0.0f;
+    values[11]= 0.0f;
+    values[15]= 1.0f;
 }
 
 void Matrix4x4::SetRotation(const Vector3 &rotation)
@@ -187,36 +187,36 @@ void Matrix4x4::SetRotation(const Vector3 &rotation)
 
 void Matrix4x4::SetRotation(const Vector3 &right, const Vector3 &up, const Vector3 &forward)
 {
-    m_values[0] = right.x;      m_values[1] = right.y;      m_values[2] = right.z;      m_values[3] = 0;
-    m_values[4] = up.x;         m_values[5] = up.y;         m_values[6] = up.z;         m_values[7] = 0;
-    m_values[8] = forward.x;    m_values[9] = forward.y;    m_values[10] = forward.z;   m_values[11] = 0;
-    m_values[12] = 0;           m_values[13] = 0;           m_values[14] = 0;           m_values[15] = 1;
+    values[0] = right.x;      values[1] = right.y;      values[2] = right.z;      values[3] = 0;
+    values[4] = up.x;         values[5] = up.y;         values[6] = up.z;         values[7] = 0;
+    values[8] = forward.x;    values[9] = forward.y;    values[10] = forward.z;   values[11] = 0;
+    values[12] = 0;           values[13] = 0;           values[14] = 0;           values[15] = 1;
 }
 void Matrix4x4::SetRotation(const Quaternion &quat)
 {
     // First column
-    m_values[0] = 1 - 2 * (quat.y * quat.y + quat.z * quat.z);
-    m_values[1] = 2 * (quat.x * quat.y + quat.z * quat.w);
-    m_values[2] = 2 * (quat.x * quat.z - quat.y * quat.w);
-    m_values[3] = 0;
+    values[0] = 1 - 2 * (quat.y * quat.y + quat.z * quat.z);
+    values[1] = 2 * (quat.x * quat.y + quat.z * quat.w);
+    values[2] = 2 * (quat.x * quat.z - quat.y * quat.w);
+    values[3] = 0;
     
     // Second Column
-    m_values[4] = 2 * (quat.x * quat.y - quat.z * quat.w);
-    m_values[5] = 1 - 2 * (quat.x * quat.x + quat.z * quat.z);
-    m_values[6] = 2 * (quat.z * quat.y + quat.x * quat.w);
-    m_values[7] = 0;
+    values[4] = 2 * (quat.x * quat.y - quat.z * quat.w);
+    values[5] = 1 - 2 * (quat.x * quat.x + quat.z * quat.z);
+    values[6] = 2 * (quat.z * quat.y + quat.x * quat.w);
+    values[7] = 0;
     
     // Third Column
-    m_values[8] = 2 * (quat.x * quat.z + quat.y * quat.w);
-    m_values[9] = 2 * (quat.y * quat.z - quat.x * quat.w);
-    m_values[10] = 1 - 2 * (quat.x * quat.x + quat.y * quat.y);
-    m_values[11] = 0;
+    values[8] = 2 * (quat.x * quat.z + quat.y * quat.w);
+    values[9] = 2 * (quat.y * quat.z - quat.x * quat.w);
+    values[10] = 1 - 2 * (quat.x * quat.x + quat.y * quat.y);
+    values[11] = 0;
     
     // Fourth Column
-    m_values[12] = 0;
-    m_values[13] = 0;
-    m_values[14] = 0;
-    m_values[15] = 1;
+    values[12] = 0;
+    values[13] = 0;
+    values[14] = 0;
+    values[15] = 1;
 }
 
 void Matrix4x4::Invert()
@@ -227,7 +227,7 @@ void Matrix4x4::Invert()
 Matrix4x4 Matrix4x4::Inverse() const
 {
     Matrix4x4 inv;
-    const float *m = *(&m_values);
+    const float *m = *(&values);
 
     inv[0] = m[5]  * m[10] * m[15] -
              m[5]  * m[11] * m[14] -
@@ -366,10 +366,10 @@ Matrix4x4 Matrix4x4::Transposed() const
 {
     Matrix4x4 transpose;
     
-    transpose[0 ] = m_values[0];    transpose[1 ] = m_values[4];    transpose[2 ] = m_values[8];    transpose[3 ] = m_values[12];
-    transpose[4 ] = m_values[1];    transpose[5 ] = m_values[5];    transpose[6 ] = m_values[9];    transpose[7 ] = m_values[13];
-    transpose[8 ] = m_values[2];    transpose[9 ] = m_values[6];    transpose[10] = m_values[10];   transpose[7 ] = m_values[14];
-    transpose[12] = m_values[3];    transpose[13] = m_values[7];    transpose[14] = m_values[11];   transpose[15] = m_values[15];
+    transpose[0 ] = values[0];    transpose[1 ] = values[4];    transpose[2 ] = values[8];    transpose[3 ] = values[12];
+    transpose[4 ] = values[1];    transpose[5 ] = values[5];    transpose[6 ] = values[9];    transpose[7 ] = values[13];
+    transpose[8 ] = values[2];    transpose[9 ] = values[6];    transpose[10] = values[10];   transpose[7 ] = values[14];
+    transpose[12] = values[3];    transpose[13] = values[7];    transpose[14] = values[11];   transpose[15] = values[15];
     
     return transpose;
 }
@@ -379,25 +379,25 @@ void Matrix4x4::SetProjectionPerspective(float fov, float apectRatio, float near
     float size = nearClip * tanf(DegToRad(fov) / 2.0f);
     float left = -size, right = size, bottom = -size / apectRatio, top = size / apectRatio;
     
-    m_values[0] = 2 * nearClip / (right - left);
-    m_values[1] = 0;
-    m_values[2] = 0;
-    m_values[3] = 0;
+    values[0] = 2 * nearClip / (right - left);
+    values[1] = 0;
+    values[2] = 0;
+    values[3] = 0;
     
-    m_values[4] = 0;
-    m_values[5] = 2 * nearClip / (top - bottom);
-    m_values[6] = 0;
-    m_values[7] = 0;
+    values[4] = 0;
+    values[5] = 2 * nearClip / (top - bottom);
+    values[6] = 0;
+    values[7] = 0;
     
-    m_values[8] = (right + left) / (right - left);
-    m_values[9] = (top + bottom) / (top - bottom);
-    m_values[10] = -(farClip + nearClip) / (farClip - nearClip);
-    m_values[11] = -1;
+    values[8] = (right + left) / (right - left);
+    values[9] = (top + bottom) / (top - bottom);
+    values[10] = -(farClip + nearClip) / (farClip - nearClip);
+    values[11] = -1;
     
-    m_values[12] = 0;
-    m_values[13] = 0;
-    m_values[14] = -(2 * farClip * nearClip) / (farClip - nearClip);
-    m_values[15] = 0;
+    values[12] = 0;
+    values[13] = 0;
+    values[14] = -(2 * farClip * nearClip) / (farClip - nearClip);
+    values[15] = 0;
 }
 
 void Matrix4x4::SetProjectionOrthographic(int width, int height)
@@ -410,25 +410,25 @@ void Matrix4x4::SetProjectionOrthographic(int width, int height)
     near = -1;
     far = 1;
     
-    m_values[0] = 2.0f / (right - left);
-    m_values[1] = 0;
-    m_values[2] = 0;
-    m_values[3] = 0;
+    values[0] = 2.0f / (right - left);
+    values[1] = 0;
+    values[2] = 0;
+    values[3] = 0;
     
-    m_values[4] = 0;
-    m_values[5] = 2.0f / (top - bottom);
-    m_values[6] = 0;
-    m_values[7] = 0;
+    values[4] = 0;
+    values[5] = 2.0f / (top - bottom);
+    values[6] = 0;
+    values[7] = 0;
     
-    m_values[8] = 0;
-    m_values[9] = 0;
-    m_values[10] = -2.0f / (far - near);
-    m_values[11] = 0;
+    values[8] = 0;
+    values[9] = 0;
+    values[10] = -2.0f / (far - near);
+    values[11] = 0;
     
-    m_values[12] = -(right + left) / (right - left);
-    m_values[13] = -(top + bottom) / (top - bottom);
-    m_values[14] = -(far + near) / (far - near);
-    m_values[15] = 1;
+    values[12] = -(right + left) / (right - left);
+    values[13] = -(top + bottom) / (top - bottom);
+    values[14] = -(far + near) / (far - near);
+    values[15] = 1;
 }
 
 void Matrix4x4::SetView(const Vector3 &position, const Vector3 &direction, const Vector3 &upVector)
@@ -439,28 +439,28 @@ void Matrix4x4::SetView(const Vector3 &position, const Vector3 &direction, const
     up = Vector3::Cross(side, forward).Normalized();
     
     // First column
-    m_values[0 ] = side[0];
-    m_values[1 ] = up[0];
-    m_values[2 ] = -forward[0];
-    m_values[3 ] = 0.0f;
+    values[0 ] = side[0];
+    values[1 ] = up[0];
+    values[2 ] = -forward[0];
+    values[3 ] = 0.0f;
     
     // Second column
-    m_values[4 ] = side[1];
-    m_values[5 ] = up[1];
-    m_values[6 ] = -forward[1];
-    m_values[7 ] = 0.0f;
+    values[4 ] = side[1];
+    values[5 ] = up[1];
+    values[6 ] = -forward[1];
+    values[7 ] = 0.0f;
     
     // Third column
-    m_values[8 ] = side[2];
-    m_values[9 ] = up[2];
-    m_values[10] = -forward[2];
-    m_values[11] =  0.0f;
+    values[8 ] = side[2];
+    values[9 ] = up[2];
+    values[10] = -forward[2];
+    values[11] =  0.0f;
     
     // fourth column
-    m_values[12] = 0.0f;
-    m_values[13] = 0.0f;
-    m_values[14] = 0.0f;
-    m_values[15] = 1.0f;
+    values[12] = 0.0f;
+    values[13] = 0.0f;
+    values[14] = 0.0f;
+    values[15] = 1.0f;
     
     Matrix4x4 translation;
     translation.SetTranslation(-position);
@@ -469,26 +469,26 @@ void Matrix4x4::SetView(const Vector3 &position, const Vector3 &direction, const
 
 Vector3 Matrix4x4::GetTranslation() const
 {
-    return Vector3(m_values[12], m_values[13], m_values[14]);
+    return Vector3(values[12], values[13], values[14]);
 }
 
 Vector3 Matrix4x4::GetScale() const
 {
-    return Vector3(m_values[0], m_values[5], m_values[10]);
+    return Vector3(values[0], values[5], values[10]);
 }
 
 Quaternion Matrix4x4::GetRotation() const
 {
     Quaternion q;
     
-    q.w = sqrt(Max<float>(0, 1 + m_values[0] + m_values[5] + m_values[10])) / 2.0f;
-    q.x = sqrt(Max<float>(0, 1 + m_values[0] - m_values[5] - m_values[10])) / 2.0f;
-    q.y = sqrt(Max<float>(0, 1 - m_values[0] + m_values[5] - m_values[10])) / 2.0f;
-    q.z = sqrt(Max<float>(0, 1 - m_values[0] - m_values[5] + m_values[10])) / 2.0f;
+    q.w = sqrt(Max<float>(0, 1 + values[0] + values[5] + values[10])) / 2.0f;
+    q.x = sqrt(Max<float>(0, 1 + values[0] - values[5] - values[10])) / 2.0f;
+    q.y = sqrt(Max<float>(0, 1 - values[0] + values[5] - values[10])) / 2.0f;
+    q.z = sqrt(Max<float>(0, 1 - values[0] - values[5] + values[10])) / 2.0f;
     
-    q.x *= Sign<float>(q.x * (m_values[6] - m_values[9]));
-    q.y *= Sign<float>(q.y * (m_values[8] - m_values[2]));
-    q.z *= Sign<float>(q.z * (m_values[1] - m_values[4]));
+    q.x *= Sign<float>(q.x * (values[6] - values[9]));
+    q.y *= Sign<float>(q.y * (values[8] - values[2]));
+    q.z *= Sign<float>(q.z * (values[1] - values[4]));
     
     q.Normalize();
     return q;
@@ -497,28 +497,28 @@ Quaternion Matrix4x4::GetRotation() const
 float& Matrix4x4::operator[] (int i)
 {
     if (i >= 0 && i < 16)
-        return m_values[i];
+        return values[i];
     else
     {
         ERROR("Attempting to access invalid matrix index");
-        return m_values[0];
+        return values[0];
     }
 }
 
 const float& Matrix4x4::operator[] (int i) const
 {
     if (i >= 0 && i < 16)
-        return m_values[i];
+        return values[i];
     else
     {
         ERROR("Attempting to access invalid matrix index");
-        return m_values[0];
+        return values[0];
     }
 }
 
 const float* Matrix4x4::ToArray() const
 {
-    return m_values;
+    return values;
 }
 
 std::string Matrix4x4::ToString() const

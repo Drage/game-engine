@@ -13,15 +13,15 @@ ImageJPG::ImageJPG()
 
 ImageJPG::ImageJPG(const Image &other)
 {
-    m_width = other.GetWidth();
-    m_height = other.GetHeight();
-    m_bpp = other.GetBPP();
-    m_imageSize = other.GetSize();
+    width = other.GetWidth();
+    height = other.GetHeight();
+    bpp = other.GetBPP();
+    imageSize = other.GetSize();
     
-    if (m_pixels)
-        delete m_pixels;
-    m_pixels = new unsigned char[m_imageSize];
-    memcpy(m_pixels, other.GetPixels(), m_imageSize);
+    if (pixels)
+        delete pixels;
+    pixels = new unsigned char[imageSize];
+    memcpy(pixels, other.GetPixels(), imageSize);
 }
 
 ImageJPG::ImageJPG(const std::string &filename)
@@ -43,7 +43,7 @@ ImageJPG::~ImageJPG()
 
 bool ImageJPG::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     unsigned long fileSize;
     unsigned char* fileData = NULL;
     std::ifstream file;
@@ -301,8 +301,8 @@ void ImageJPG::DecodeSOF(unsigned char* &pos)
     if (pos[0] != 8)
         throw std::exception();
     
-    m_height = Decode16(pos+1);
-    m_width = Decode16(pos+3);
+    height = Decode16(pos+1);
+    width = Decode16(pos+3);
     
     int ncomp = pos[5];
     switch (ncomp)
@@ -313,8 +313,8 @@ void ImageJPG::DecodeSOF(unsigned char* &pos)
         default:
             throw std::exception();
     }
-    m_bpp = ncomp == 3 ? 24 : 8;
-    m_imageSize = m_width * m_height * ncomp;
+    bpp = ncomp == 3 ? 24 : 8;
+    imageSize = width * height * ncomp;
     
     pos += 6;
     
@@ -344,25 +344,25 @@ void ImageJPG::DecodeSOF(unsigned char* &pos)
             
     int mbsizex = ssxmax << 3;
     int mbsizey = ssymax << 3;
-    m_blockWidth = (m_width + mbsizex - 1) / mbsizex;
-    m_blockHeight = (m_height + mbsizey - 1) / mbsizey;
+    blockWidth = (width + mbsizex - 1) / mbsizex;
+    blockHeight = (height + mbsizey - 1) / mbsizey;
             
     for (i = 0, c = comp; i < ncomp; i++, c++)
     {
-        c->width = (m_width * c->ssx + ssxmax - 1) / ssxmax;
+        c->width = (width * c->ssx + ssxmax - 1) / ssxmax;
         c->stride = (c->width + 7) & 0x7FFFFFF8;
-        c->height = (m_height * c->ssy + ssymax - 1) / ssymax;
-        c->stride = m_blockWidth * mbsizex * c->ssx / ssxmax;
+        c->height = (height * c->ssy + ssymax - 1) / ssymax;
+        c->stride = blockWidth * mbsizex * c->ssx / ssxmax;
         
         if (((c->width < 3) && (c->ssx != ssxmax)) || ((c->height < 3) && (c->ssy != ssymax)))
             throw std::exception();
         
-        if (!(c->pixels = (unsigned char*)malloc(c->stride * (m_blockHeight * mbsizey * c->ssy / ssymax))))
+        if (!(c->pixels = (unsigned char*)malloc(c->stride * (blockHeight * mbsizey * c->ssy / ssymax))))
             throw std::exception();
     }
     
     if (ncomp == 3) {
-        rgb = (unsigned char*)malloc(m_width * m_height * ncomp);
+        rgb = (unsigned char*)malloc(width * height * ncomp);
         if (!rgb)
             throw std::exception();
     }
@@ -534,7 +534,7 @@ void ImageJPG::DecodeScan(unsigned char* &pos)
     Component* c;
     
     int length = DecodeLength(pos);
-    int ncomp = m_bpp / 8;
+    int ncomp = bpp / 8;
     if (length < (4 + 2 * ncomp) || pos[0] != ncomp)
         throw std::exception();
     unsigned char *end = pos + length;
@@ -567,10 +567,10 @@ void ImageJPG::DecodeScan(unsigned char* &pos)
             }
         }
         
-        if (++mbx >= m_blockWidth)
+        if (++mbx >= blockWidth)
         {
             mbx = 0;
-            if (++mby >= m_blockHeight)
+            if (++mby >= blockHeight)
                 break;
         }
         
@@ -679,19 +679,19 @@ void ImageJPG::Convert()
     int i;
     Component* c;
     
-    int ncomp = m_bpp / 8;
+    int ncomp = bpp / 8;
     for (i = 0, c = comp; i < ncomp; i++, c++)
     {
-        while ((c->width < m_width) || (c->height < m_height))
+        while ((c->width < width) || (c->height < height))
         {
-            if (c->width < m_width)
+            if (c->width < width)
                 UpsampleH(c);
 
-            if (c->height < m_height)
+            if (c->height < height)
                 UpsampleV(c);
         }
         
-        if ((c->width < m_width) || (c->height < m_height))
+        if ((c->width < width) || (c->height < height))
             throw std::exception();
     }
     
@@ -704,9 +704,9 @@ void ImageJPG::Convert()
         const unsigned char *pcb = comp[1].pixels;
         const unsigned char *pcr = comp[2].pixels;
         
-        for (yy = m_height; yy; yy--)
+        for (yy = height; yy; yy--)
         {
-            for (x = 0; x < m_width; x++)
+            for (x = 0; x < width; x++)
             {
                 int y = py[x] << 8;
                 int cb = pcb[x] - 128;
@@ -780,10 +780,10 @@ bool ImageJPG::Decode(unsigned char* fileData, unsigned long fileSize)
         
         Convert();
         
-        m_pixels = new unsigned char[m_imageSize];
-        if (!m_pixels)
+        pixels = new unsigned char[imageSize];
+        if (!pixels)
             return false;
-        memcpy(m_pixels, m_bpp == 8 ? comp[0].pixels : rgb, m_imageSize);
+        memcpy(pixels, bpp == 8 ? comp[0].pixels : rgb, imageSize);
         FlipVertical();
         
         for (int i = 0; i < 3; i++)

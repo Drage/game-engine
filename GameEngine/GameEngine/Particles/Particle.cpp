@@ -15,81 +15,81 @@ Particle::Particle(
     float angularVelocity,
     float gravity)
 {
-    m_position = position;
-    m_rotation = rotation;
-    m_scale = size;
+    this->position = position;
+    this->rotation = rotation;
+    this->scale = size;
     
-    m_birthTime = Time::RunTime();
-    m_deathTime = m_birthTime + lifeTime;
+    this->birthTime = Time::RunTime();
+    this->deathTime = birthTime + lifeTime;
 
-    m_velocity = velocity;
-    m_angularVelocity = angularVelocity;
-    m_gravity = gravity;
+    this->velocity = velocity;
+    this->angularVelocity = angularVelocity;
+    this->gravity = gravity;
     
-    m_color = color;
-    m_alpha = 1;
+    this->color = color;
+    this->alpha = 1;
 
-    m_animateScale = false;
-    m_animateColor = false;
-    m_animateAlpha = false;
+    this->animateScale = false;
+    this->animateColor = false;
+    this->animateAlpha = false;
 }
 
 void Particle::Update()
 {
     int currentTime = Time::RunTime();
-    if (currentTime > m_deathTime)
+    if (currentTime > deathTime)
     {
-        m_destroyed = true;
+        destroyed = true;
     }
     else
     {
-        float timePercent = (currentTime - m_birthTime) / (m_deathTime - m_birthTime);
+        float timePercent = (currentTime - birthTime) / (deathTime - birthTime);
 
-         if (m_animateScale)
-             m_scale = Animate(m_startScale, m_normalScale, m_endScale, m_scaleInPercent, m_scaleOutPercent, timePercent);
+         if (animateScale)
+             scale = Animate(startScale, normalScale, endScale, scaleInPercent, scaleOutPercent, timePercent);
         
-        if (m_animateColor)
-            m_color = Animate(m_startColor, m_normalColor, m_endColor, m_colorInPercent, m_colorOutPercent, timePercent);
+        if (animateColor)
+            color = Animate(startColor, normalColor, endColor, colorInPercent, colorOutPercent, timePercent);
 
-        if (m_animateAlpha)
-            m_alpha = Animate(m_startAlpha, m_normalAlpha, m_endAlpha, m_alphaInPercent, m_alphaOutPercent, timePercent);
+        if (animateAlpha)
+            alpha = Animate(startAlpha, normalAlpha, endAlpha, alphaInPercent, alphaOutPercent, timePercent);
 
         float deltaTime = Time::DeltaTime();
-        m_velocity.y -= m_gravity * deltaTime;
-        m_position += m_velocity * deltaTime;
-        m_rotation += m_angularVelocity * deltaTime;
+        velocity.y -= gravity * deltaTime;
+        position += velocity * deltaTime;
+        rotation += angularVelocity * deltaTime;
     }
 }
 
 void Particle::AnimateScale(float start, float end, float inPercent, float outPercent)
 {
-    m_animateScale = true;
-    m_startScale = start;
-    m_normalScale = m_scale;
-    m_endScale = end;
-    m_scaleInPercent = inPercent;
-    m_scaleOutPercent = outPercent;
-    m_scale = m_startScale;
+    animateScale = true;
+    startScale = start;
+    normalScale = scale;
+    endScale = end;
+    scaleInPercent = inPercent;
+    scaleOutPercent = outPercent;
+    scale = startScale;
 }
 
 void Particle::AnimateColor(const Color &start, const Color &end, float inPercent, float outPercent)
 {
-    m_animateColor = true;
-    m_startColor = start;
-    m_normalColor = m_color;
-    m_endColor = end;
-    m_colorInPercent = inPercent;
-    m_colorOutPercent = outPercent;
-    m_color = m_startColor;
+    animateColor = true;
+    startColor = start;
+    normalColor = color;
+    endColor = end;
+    colorInPercent = inPercent;
+    colorOutPercent = outPercent;
+    color = startColor;
 }
 
 void Particle::AnimateAlpha(float start, float end, float inPercent, float outPercent)
 {
-    m_animateAlpha = true;
-    m_startAlpha = start;
-    m_normalAlpha = m_alpha;
-    m_endAlpha = end;
-    m_alphaInPercent = inPercent;
-    m_alphaOutPercent = outPercent;
-    m_alpha = m_startAlpha;
+    animateAlpha = true;
+    startAlpha = start;
+    normalAlpha = alpha;
+    endAlpha = end;
+    alphaInPercent = inPercent;
+    alphaOutPercent = outPercent;
+    alpha = startAlpha;
 }

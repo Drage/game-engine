@@ -3,49 +3,49 @@
 
 void Camera3rdPerson::Init(const ParamList &params)
 {
-    m_height = params.Get<float>("height", 4.0f);
-    m_distanceBehind = params.Get<float>("distanceBehind", 8.0f);
-    m_lookAhead = params.Get<float>("lookAhead", 15.0f);
-    m_lookYOffset = params.Get<float>("lookYOffset", 1.0f);
-    m_moveSmoothing = params.Get<float>("moveSmoothing", 24);
-    m_lookSmoothing = params.Get<float>("lookSmoothing", 12);
-    m_targetPath = params.Get<std::string>("target");
+    height = params.Get<float>("height", 4.0f);
+    distanceBehind = params.Get<float>("distanceBehind", 8.0f);
+    lookAhead = params.Get<float>("lookAhead", 15.0f);
+    lookYOffset = params.Get<float>("lookYOffset", 1.0f);
+    moveSmoothing = params.Get<float>("moveSmoothing", 24);
+    lookSmoothing = params.Get<float>("lookSmoothing", 12);
+    targetPath = params.Get<std::string>("target");
 }
 
 void Camera3rdPerson::Start()
 {
-    if (!String::IsNullOrEmpty(m_targetPath))
+    if (!String::IsNullOrEmpty(targetPath))
     {
-        m_target = app->GetActiveScene()->Find(m_targetPath);
-        if (m_target)
+        target = app->GetActiveScene()->Find(targetPath);
+        if (target)
         {
-            m_lookAt = m_target->transform.position;
-            m_lastLookY = m_lookAt.y;
+            lookAt = target->transform.position;
+            lastLookY = lookAt.y;
         }
     }
 }
 
 void Camera3rdPerson::Update()
 {
-    if (m_target)
+    if (target)
     {
-        Vector3 targetPosition = m_target->transform.position;
+        Vector3 targetPosition = target->transform.position;
         
         // Transform forward vector to target's orientation
-        Vector3 forwards = m_target->transform.rotation * Vector3::FORWARD;
+        Vector3 forwards = target->transform.rotation * Vector3::FORWARD;
         
         // Update camera position
-        Vector3 targetCamPosition = targetPosition - forwards * m_distanceBehind;
-        targetCamPosition.y += m_height;
-        transform->position = Vector3::Lerp(transform->position, targetCamPosition, m_moveSmoothing * Time::DeltaTime());
+        Vector3 targetCamPosition = targetPosition - forwards * distanceBehind;
+        targetCamPosition.y += height;
+        transform->position = Vector3::Lerp(transform->position, targetCamPosition, moveSmoothing * Time::DeltaTime());
         
         // Update look position
-        Vector3 targetLookPosition = targetPosition + forwards * m_lookAhead + Vector3::UP * m_lookYOffset;
-        m_lastLookY = m_lookAt.y;
-        m_lookAt = Vector3::Lerp(m_lookAt, targetLookPosition, m_lookSmoothing * Time::DeltaTime());
-        m_lookAt.y = m_lastLookY + (m_lookAt.y - m_lastLookY) * m_lookSmoothing / 4 * Time::DeltaTime();
+        Vector3 targetLookPosition = targetPosition + forwards * lookAhead + Vector3::UP * lookYOffset;
+        lastLookY = lookAt.y;
+        lookAt = Vector3::Lerp(lookAt, targetLookPosition, lookSmoothing * Time::DeltaTime());
+        lookAt.y = lastLookY + (lookAt.y - lastLookY) * lookSmoothing / 4 * Time::DeltaTime();
         
         // Update camera rotation
-        transform->rotation = Quaternion::FromLookDirection(m_lookAt - transform->position);
+        transform->rotation = Quaternion::FromLookDirection(lookAt - transform->position);
     }
 }

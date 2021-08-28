@@ -18,19 +18,19 @@ void ParticleEmitter::SetupParticleProperties(
      const Vector3 &direction,
      float directionInfluence)
 {
-    m_particleMaterial = material;
-    m_particleLifetime = lifetime;
-    m_particleSize = size;
-    m_particleVelocity = velocity;
-    m_particleAngularVelocity = angularVelocity;
-    m_particleAcceleration = acceleration;
-    m_particleDirection = direction;
-    m_particleDirectionInfluence = directionInfluence;
+    particleMaterial = material;
+    particleLifetime = lifetime;
+    particleSize = size;
+    particleVelocity = velocity;
+    particleAngularVelocity = angularVelocity;
+    particleAcceleration = acceleration;
+    particleDirection = direction;
+    particleDirectionInfluence = directionInfluence;
 }
 
 void SpawnParticle()
 {
-    // Vector3 spawnLocation = m_volume.GetSpawnLocation();
+    // Vector3 spawnLocation = volume.GetSpawnLocation();
     
     
 }

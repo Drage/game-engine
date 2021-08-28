@@ -8,6 +8,6 @@ using namespace DrageEngine;
 
 bool AudioWAV::Load(const std::string &filename)
 {
-    alutLoadWAVFile((char*)filename.c_str(), &m_format, (void**)&m_data, &m_size, &m_frequency);
+    alutLoadWAVFile((char*)filename.c_str(), &format, (void**)&data, &size, &frequency);
     return true;
 }

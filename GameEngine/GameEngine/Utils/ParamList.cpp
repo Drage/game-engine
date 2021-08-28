@@ -7,8 +7,8 @@ using namespace DrageEngine;
 
 std::string ParamList::Value(const std::string &name) const
 {
-    ParamMapType::const_iterator i = m_params.find(name);
-    if (i == m_params.end())
+    ParamMapType::const_iterator i = params.find(name);
+    if (i == params.end())
         return std::string();
     else
         return i->second;
@@ -16,24 +16,24 @@ std::string ParamList::Value(const std::string &name) const
 
 void ParamList::Merge(const ParamList &other, bool otherOverride)
 {
-    for (ParamMapType::const_iterator i = other.m_params.begin(); i != other.m_params.end(); i++)
+    for (ParamMapType::const_iterator i = other.params.begin(); i != other.params.end(); i++)
     {
         if (!otherOverride)
         {
-            if (m_params[i->first] != "")
+            if (params[i->first] != "")
                 continue;
         }
-        m_params[i->first] = i->second;
+        params[i->first] = i->second;
     }
 }
 
 bool ParamList::Remove(const std::string &name)
 {
-    for (ParamMapType::iterator i = m_params.begin(); i != m_params.end(); i++)
+    for (ParamMapType::iterator i = params.begin(); i != params.end(); i++)
     {
         if (i->first == name)
         {
-            m_params.erase(i);
+            params.erase(i);
             return true;
         }
     }
@@ -42,12 +42,12 @@ bool ParamList::Remove(const std::string &name)
 
 const ParamMapType& ParamList::GetParamMap() const
 {
-    return m_params;
+    return params;
 }
 
 void ParamList::Clear()
 {
-    m_params.clear();
+    params.clear();
 }
 
 bool ParamList::Load(const std::string &filename, ParamList &params)

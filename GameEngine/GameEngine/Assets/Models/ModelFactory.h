@@ -16,7 +16,7 @@ namespace DrageEngine
             bool ExtensionSupported(const std::string &extension) const;
         
         private:
-            Factory<Model, std::string> m_factory;
+            Factory<Model, std::string> factory;
     };
 }
 

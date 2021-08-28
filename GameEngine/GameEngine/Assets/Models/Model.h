@@ -25,9 +25,9 @@ namespace DrageEngine
             const Bounds& GetBounds() const;
         
         protected:
-            std::string m_name;
-            std::vector<Mesh*> m_meshList;
-            Bounds m_bounds;
+            std::string name;
+            std::vector<Mesh*> meshList;
+            Bounds bounds;
     };
 }
 

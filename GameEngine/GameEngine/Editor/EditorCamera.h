@@ -18,10 +18,10 @@ namespace DrageEngine
             void Pan(const Vector2 &delta);
             void Zoom(float delta);
         
-            Vector3 m_focus;
-            float m_rotateSensitivity;
-            float m_panSensitivity;
-            float m_zoomSensitivity;
+            Vector3 focus;
+            float rotateSensitivity;
+            float panSensitivity;
+            float zoomSensitivity;
     };
 }
 

@@ -13,7 +13,7 @@ namespace DrageEngine
             void Update();
         
         private:
-            Vector3 m_lastPosition;
+            Vector3 lastPosition;
     };
 }
 

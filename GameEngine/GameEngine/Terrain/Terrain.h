@@ -30,12 +30,12 @@ namespace DrageEngine
             float GetHeightFromPixelData(unsigned char* data, unsigned bpp) const;
             void InitRenderBuffers();
         
-            float m_maxHeight;
-            float m_resolution;
-            Array2D<float> m_heightmap;
-            Array2D<Vector3> m_normals;
-            unsigned m_vao;
-            int m_numIndexes;
+            float maxHeight;
+            float resolution;
+            Array2D<float> heightmap;
+            Array2D<Vector3> normals;
+            unsigned vao;
+            int numIndexes;
     };
 }
 

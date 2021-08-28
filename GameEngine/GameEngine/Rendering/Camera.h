@@ -32,11 +32,11 @@ namespace DrageEngine
             Matrix4x4 GetProjectionMatrix() const;
         
         protected:
-            Vector3 m_position;
-            Vector3 m_direction;
-            float m_fov;
-            float m_nearClip;
-            float m_farClip;
+            Vector3 position;
+            Vector3 direction;
+            float fov;
+            float nearClip;
+            float farClip;
         };
 }
 

@@ -6,100 +6,100 @@ using namespace DrageEngine;
 
 AudioSource::AudioSource()
 {
-    alGenSources(1, &m_id);
+    alGenSources(1, &id);
 }
 
 AudioSource::~AudioSource()
 {
     Stop();
-    alDeleteSources(1, &m_id);
+    alDeleteSources(1, &id);
 }
 
 void AudioSource::SetClip(const AudioClip *clip)
 {
-    alSourcei(m_id, AL_BUFFER, clip->GetID());
+    alSourcei(id, AL_BUFFER, clip->GetID());
 }
 
 void AudioSource::Play(const AudioClip *clip)
 {
     Stop();
-    alSourcei(m_id, AL_BUFFER, clip->GetID());
-    alSourcePlay(m_id);
+    alSourcei(id, AL_BUFFER, clip->GetID());
+    alSourcePlay(id);
 }
 
 void AudioSource::Play()
 {
-    alSourcePlay(m_id);
+    alSourcePlay(id);
 }
 
 void AudioSource::Pause()
 {
-    alSourcePause(m_id);
+    alSourcePause(id);
 }
 
 void AudioSource::Stop()
 {
-    alSourceStop(m_id);
+    alSourceStop(id);
 }
 
 bool AudioSource::IsPlaying() const
 {
     int state;
-    alGetSourcei(m_id, AL_SOURCE_STATE, &state);
+    alGetSourcei(id, AL_SOURCE_STATE, &state);
     return state == AL_PLAYING;
 }
 
 float AudioSource::GetVolume() const
 {
-    return m_volume;
+    return volume;
 }
 
 void AudioSource::SetVolume(float volume)
 {
-    m_volume = volume;
-    alSourcef(m_id, AL_GAIN, m_volume);
+    volume = volume;
+    alSourcef(id, AL_GAIN, volume);
 }
 
 float AudioSource::GetPitch() const
 {
-    return m_pitch;
+    return pitch;
 }
 
 void AudioSource::SetPitch(float pitch)
 {
-    m_pitch = pitch;
-    alSourcef(m_id, AL_PITCH, pitch);
+    pitch = pitch;
+    alSourcef(id, AL_PITCH, pitch);
 }
 
 Vector3 AudioSource::GetPosition() const
 {
-    return m_position;
+    return position;
 }
 
 void AudioSource::SetPosition(const Vector3 &position)
 {
-    m_position = position;
-    alSource3f(m_id, AL_POSITION, m_position.x, m_position.y, m_position.z);
+    this->position = position;
+    alSource3f(id, AL_POSITION, position.x, position.y, position.z);
 }
 
 Vector3 AudioSource::GetVelocity() const
 {
-    return m_velocity;
+    return velocity;
 }
 
 void AudioSource::SetVelocity(const Vector3 &velocity)
 {
-    m_velocity = velocity;
-    alSource3f(m_id, AL_VELOCITY, m_velocity.x, m_velocity.y, m_velocity.z);
+    this->velocity = velocity;
+    alSource3f(id, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
 }
 
 bool AudioSource::IsLooping() const
 {
-    return m_looping;
+    return looping;
 }
 
 void AudioSource::SetLooping(bool loop)
 {
-    m_looping = loop;
-    alSourcei(m_id, AL_LOOPING, loop);
+    looping = loop;
+    alSourcei(id, AL_LOOPING, loop);
 }

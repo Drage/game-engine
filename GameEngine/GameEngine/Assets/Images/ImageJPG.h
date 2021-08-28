@@ -36,7 +36,7 @@ namespace DrageEngine
             } Component;
         
             static const char ZZ[64];
-            int m_blockWidth, m_blockHeight;
+            int blockWidth, blockHeight;
             Component comp[3];
             unsigned char qtab[4][64];
             VLCCode vlctab[4][65536];

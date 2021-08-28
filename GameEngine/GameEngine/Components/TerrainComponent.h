@@ -16,8 +16,8 @@ namespace DrageEngine
             void Render(Renderer *renderer, const Transform *transform = NULL) const;
         
         private:
-            Material *m_material;
-            bool m_disableDepthWrite;
+            Material *material;
+            bool disableDepthWrite;
     };
 }
 

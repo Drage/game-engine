@@ -6,28 +6,28 @@ using namespace DrageEngine;
 
 AudioClip::AudioClip()
 {
-    m_id = 0;
+    id = 0;
 }
 
 AudioClip::AudioClip(Audio *audio)
 {
-    m_id = 0;
+    id = 0;
     Generate(audio);
 }
 
 AudioClip::~AudioClip()
 {
-    alDeleteBuffers(1, &m_id);
+    alDeleteBuffers(1, &id);
 }
 
 unsigned AudioClip::Generate(Audio *audio)
 {
-    alGenBuffers(1, &m_id);
-    alBufferData(m_id, audio->GetFormat(), audio->GetData(), audio->GetSize(), audio->GetFrequency());
-    return m_id;
+    alGenBuffers(1, &id);
+    alBufferData(id, audio->GetFormat(), audio->GetData(), audio->GetSize(), audio->GetFrequency());
+    return id;
 }
 
 unsigned AudioClip::GetID() const
 {
-    return m_id;
+    return id;
 }

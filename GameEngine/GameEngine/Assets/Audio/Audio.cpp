@@ -7,49 +7,49 @@ using namespace DrageEngine;
 
 Audio::Audio()
 {
-    m_size = 0;
-    m_frequency = 0;
-    m_format = 0;
-    m_data = NULL;
+    size = 0;
+    frequency = 0;
+    format = 0;
+    data = NULL;
 }
 
 Audio::~Audio()
 {
-    if (m_data)
+    if (data)
     {
-        delete[] m_data;
-        m_data = NULL;
+        delete[] data;
+        data = NULL;
     }
 }
 
 bool Audio::Load(const std::string &filename)
 {
-    m_name = GetFileName(filename);
+    name = GetFileName(filename);
     ERROR("Cannot load audio as generic base type: " + filename);
     return false;
 }
 
 int Audio::GetFormat() const
 {
-    return m_format;
+    return format;
 }
 
 int Audio::GetSize() const
 {
-    return m_size;
+    return size;
 }
 
 int Audio::GetFrequency() const
 {
-    return m_frequency;
+    return frequency;
 }
 
 unsigned char* Audio::GetData() const
 {
-    return m_data;
+    return data;
 }
 
 const std::string& Audio::GetName() const
 {
-    return m_name;
+    return name;
 }
