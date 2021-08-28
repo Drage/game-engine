@@ -1,0 +1,4 @@
+<Material>
+    <shader>Water.shader</shader>
+    <diffuseMap>Water.tga</diffuseMap>
+</Material>

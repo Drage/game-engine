@@ -1,0 +1,5 @@
+<Material>
+    <shader>Standard.shader</shader>
+    <diffuseMap>Car0.tga</diffuseMap>
+    <shininess>0.7</shininess>
+</Material>

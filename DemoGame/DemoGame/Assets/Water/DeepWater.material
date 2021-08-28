@@ -1,0 +1,4 @@
+<Material>
+    <shader>Unlit.shader</shader>
+    <diffuseMap>DeepWater.tga</diffuseMap>
+</Material>

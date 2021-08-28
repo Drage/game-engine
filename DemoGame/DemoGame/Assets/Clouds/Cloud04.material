@@ -1,0 +1,4 @@
+<Material>
+    <shader>Billboard.shader</shader>
+    <diffuseMap>Cloud04.tga</diffuseMap>
+</Material>

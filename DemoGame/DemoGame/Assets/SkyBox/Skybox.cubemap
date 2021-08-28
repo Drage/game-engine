@@ -1,0 +1,8 @@
+<Cubemap>
+    <left>Side.tga</left>
+    <right>Side.tga</right>
+    <bottom>Bottom.tga</bottom>
+    <top>Top.tga</top>
+    <front>Side.tga</front>
+    <back>SideSun.tga</back>
+</Cubemap>

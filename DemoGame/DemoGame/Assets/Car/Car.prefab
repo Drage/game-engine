@@ -1,0 +1,64 @@
+<Prefab>
+    <name>Car</name>
+    <GameObject>
+        <name>Visual</name>
+        <GameObject>
+            <name>Offset</name>
+            <position>0, 0.2, 0</position>
+            <MeshRenderer>
+                <model>Car.obj</model>
+                <material>Car.material</material>
+            </MeshRenderer>
+            <GameObject>
+                <name>Wheel RL</name>
+                <position>0.75, 0.15, 0</position>
+                <MeshRenderer>
+                    <model>Wheel.obj</model>
+                    <material>Wheel.material</material>
+                </MeshRenderer>
+                <Rotate>
+                    <speed>10</speed>
+                    <axis>1, 0, 0</axis>
+                </Rotate>
+            </GameObject>
+            <GameObject>
+                <name>Wheel RR</name>
+                <position>-0.75, 0.15, 0</position>
+                <rotation>0, 180, 0</rotation>
+                <MeshRenderer>
+                    <model>Wheel.obj</model>
+                    <material>Wheel.material</material>
+                </MeshRenderer>
+                <Rotate>
+                    <speed>10</speed>
+                    <axis>-1, 0, 0</axis>
+                </Rotate>
+            </GameObject>
+            <GameObject>
+                <name>Wheel FL</name>
+                <position>0.75, 0.15, 1.68</position>
+                <MeshRenderer>
+                    <model>Wheel.obj</model>
+                    <material>Wheel.material</material>
+                </MeshRenderer>
+                <Rotate>
+                    <speed>10</speed>
+                    <axis>1, 0, 0</axis>
+                </Rotate>
+            </GameObject>
+            <GameObject>
+                <name>Wheel FR</name>
+                <position>-0.75, 0.15, 1.68</position>
+                <rotation>0, 180, 0</rotation>
+                <MeshRenderer>
+                    <model>Wheel.obj</model>
+                    <material>Wheel.material</material>
+                </MeshRenderer>
+                <Rotate>
+                    <speed>10</speed>
+                    <axis>-1, 0, 0</axis>
+                </Rotate>
+            </GameObject>
+        </GameObject>
+    </GameObject>
+</Prefab>

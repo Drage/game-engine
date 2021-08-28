@@ -1,0 +1,80 @@
+<Scene>
+    <GameObject>
+        <name>Camera</name>
+        <position>0, 2, 8</position>
+        <rotation>7, 180, 0</rotation>
+        <Camera></Camera>
+        <Camera3rdPerson>
+            <target>Player</target>
+        </Camera3rdPerson>
+        <AudioListener></AudioListener>
+        <Skybox>
+            <material>Skybox.material</material>
+        </Skybox>
+    </GameObject>
+    <GameObject>
+        <name>Terrain</name>
+        <Terrain>
+            <heightmap>Heightmap.tga</heightmap>
+            <maxHeight>10</maxHeight>
+            <material>Terrain.material</material>
+        </Terrain>
+    </GameObject>
+    <Prefab>
+        <prefab>Car.prefab</prefab>
+        <name>Player</name>
+        <position>335, 0, 135</position>
+        <rotation>0, 45, 0</position>
+        <Racer></Racer>
+    </Prefab>
+    <GameObject>
+        <name>DirectionalLight</name>
+        <rotation>45, 0, 0</rotation>
+        <Light>
+            <type>0</type>
+            <color>#4D4D4D</color>
+            <ambient>2.2</ambient>
+        </Light>
+    </GameObject>
+    <GameObject>
+        <name>Volcano</name>
+        <position>291, 0, 201</position>
+        <scale>5.876, 5.876, 5.876</scale>
+        <rotation>0, 180, 0</rotation>
+        <MeshRenderer>
+            <model>Volcano.obj</model>
+            <material>Volcano.material</material>
+        </MeshRenderer>
+    </GameObject>
+    <GameObject>
+           <name>DeepWater</name>
+           <position>286, 0.5, 286</position>
+           <scale>572, 0, 572</scale>
+           <Plane>
+               <material>DeepWater.material</material>
+           </Plane>
+       </GameObject>
+    <GameObject>
+        <name>Water</name>
+        <position>0, 1, 0</position>
+        <Terrain>
+            <heightmap>WaterHeightmap.png</heightmap>
+            <maxHeight>0.3</maxHeight>
+            <material>Water.material</material>
+            <disableDepthWrite>1</disableDepthWrite>
+        </Terrain>
+    </GameObject>
+    <GameObject>
+        <name>Clouds</name>
+        <Clouds>
+            <count>10</count>
+            <orbitRadius>500</orbitRadius>
+            <minYPosition>25</minYPosition>
+            <maxYPosition>75</maxYPosition>
+            <minSpeed>0.2</minSpeed>
+            <maxSpeed>0.7</maxSpeed>
+            <minSize>50</minSize>
+            <maxSize>90</maxSize>
+        </Clouds>
+    </GameObject>
+</Scene>

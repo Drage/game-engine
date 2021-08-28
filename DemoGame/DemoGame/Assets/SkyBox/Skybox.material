@@ -1,0 +1,4 @@
+<Material>
+    <shader>Skybox.shader</shader>
+    <cubemap>Skybox.cubemap</cubemap>
+</Material>

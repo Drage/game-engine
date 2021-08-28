@@ -1,0 +1,7 @@
+
+
+// Build-related files for the active build configuration go here
+CONFIGURATION_BUILD_DIR = $(SRCROOT)/Build/$CONFIGURATION
+
+// The final product executables and other build products go here
+BUILT_PRODUCTS_DIR = $(SRCROOT)/Build/$CONFIGURATION

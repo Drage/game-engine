@@ -1,0 +1,4 @@
+<Material>
+    <shader>Unlit.shader</shader>
+    <diffuseMap>Volcano.tga</diffuseMap>
+</Material>

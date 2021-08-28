@@ -1,0 +1,518 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		401B7890231B73B500E6B4F0 /* DemoGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 401B788F231B73B500E6B4F0 /* DemoGame.cpp */; };
+		4048AEEC2312E01700A7152A /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4048AEEB2312E01700A7152A /* Main.cpp */; };
+		406327DB234B6F4D009B243F /* Racer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406327DA234B6F4D009B243F /* Racer.cpp */; };
+		406327DE234B7DE9009B243F /* Camera3rdPerson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */; };
+		406414752355F8DC000F994F /* Clouds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406414742355F8DC000F994F /* Clouds.cpp */; };
+		406DCA6F233E4076008C088E /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA6E233E4076008C088E /* Rotate.cpp */; };
+		406DCA8A234100CF008C088E /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA89234100CF008C088E /* CameraController.cpp */; };
+		40DD5597234FA00100BBA4A9 /* GameEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401184E9232E4B33000B19FB /* GameEngine.framework */; };
+		40DD5598234FA00100BBA4A9 /* GameEngine.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 401184E9232E4B33000B19FB /* GameEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D06899742412E2C300ACAB1C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06899732412E2C300ACAB1C /* SDL2.framework */; };
+		D06899752412E2C300ACAB1C /* SDL2.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = D06899732412E2C300ACAB1C /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4048AEE62312E01700A7152A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		4048AEF22312E19100A7152A /* Copy Bundle Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				40DD5598234FA00100BBA4A9 /* GameEngine.framework in Copy Bundle Frameworks */,
+				D06899752412E2C300ACAB1C /* SDL2.framework in Copy Bundle Frameworks */,
+			);
+			name = "Copy Bundle Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		401184E9232E4B33000B19FB /* GameEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameEngine.framework; path = ../GameEngine/Build/Debug/GameEngine.framework; sourceTree = "<group>"; };
+		401B788E231B73B500E6B4F0 /* DemoGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoGame.h; sourceTree = "<group>"; };
+		401B788F231B73B500E6B4F0 /* DemoGame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DemoGame.cpp; sourceTree = "<group>"; };
+		4048AEE82312E01700A7152A /* DemoGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoGame; sourceTree = BUILT_PRODUCTS_DIR; };
+		4048AEEB2312E01700A7152A /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
+		4062B8FE231818E400F44658 /* Standard.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Standard.vert; sourceTree = "<group>"; };
+		4062B8FF2318196000F44658 /* Standard.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Standard.frag; sourceTree = "<group>"; };
+		406327D9234B6F4D009B243F /* Racer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Racer.h; sourceTree = "<group>"; };
+		406327DA234B6F4D009B243F /* Racer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Racer.cpp; sourceTree = "<group>"; };
+		406327DC234B7DE9009B243F /* Camera3rdPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera3rdPerson.h; sourceTree = "<group>"; };
+		406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera3rdPerson.cpp; sourceTree = "<group>"; };
+		4064146E2354D881000F994F /* Billboard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Billboard.shader; sourceTree = "<group>"; };
+		406414732355F8DC000F994F /* Clouds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Clouds.h; sourceTree = "<group>"; };
+		406414742355F8DC000F994F /* Clouds.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clouds.cpp; sourceTree = "<group>"; };
+		40641481235600C9000F994F /* Cloud07.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud07.material; sourceTree = "<group>"; };
+		40641482235600C9000F994F /* Cloud06.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud06.material; sourceTree = "<group>"; };
+		40641483235600C9000F994F /* Cloud01.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud01.material; sourceTree = "<group>"; };
+		40641488235600C9000F994F /* Cloud04.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud04.material; sourceTree = "<group>"; };
+		40641489235600C9000F994F /* Cloud05.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud05.material; sourceTree = "<group>"; };
+		4064148E235600C9000F994F /* Cloud08.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud08.material; sourceTree = "<group>"; };
+		4064148F235600C9000F994F /* Cloud03.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud03.material; sourceTree = "<group>"; };
+		40641490235600C9000F994F /* Cloud02.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud02.material; sourceTree = "<group>"; };
+		406414A82358D182000F994F /* DeepWater.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = DeepWater.tga; sourceTree = "<group>"; };
+		406414A92358D182000F994F /* DeepWater.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeepWater.material; sourceTree = "<group>"; };
+		406414AA2358D182000F994F /* Water.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Water.material; sourceTree = "<group>"; };
+		406414AB2358D182000F994F /* WaterHeightmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterHeightmap.png; sourceTree = "<group>"; };
+		406414AC2358D1B2000F994F /* Water.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Water.tga; sourceTree = "<group>"; };
+		406414AE2358D1D7000F994F /* Terrain.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Terrain.material; sourceTree = "<group>"; };
+		406414AF2358D1D7000F994F /* Heightmap.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Heightmap.tga; sourceTree = "<group>"; };
+		406414B02358D1D7000F994F /* Sand.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sand.tga; sourceTree = "<group>"; };
+		406414B12359D781000F994F /* Water.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Water.frag; sourceTree = "<group>"; };
+		406414B22359D790000F994F /* Water.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Water.shader; sourceTree = "<group>"; };
+		406414B32359DD83000F994F /* Water.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Water.vert; sourceTree = "<group>"; };
+		406414BE235C768E000F994F /* Car0.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Car0.tga; sourceTree = "<group>"; };
+		406414BF235C768E000F994F /* Wheel.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Wheel.material; sourceTree = "<group>"; };
+		406414C0235C768E000F994F /* Wheel.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Wheel.obj; sourceTree = "<group>"; };
+		406414C1235C768E000F994F /* Wheel.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Wheel.tga; sourceTree = "<group>"; };
+		406414C2235C768E000F994F /* Car.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Car.material; sourceTree = "<group>"; };
+		406414C3235C768E000F994F /* Car.prefab */ = {isa = PBXFileReference; lastKnownFileType = text; path = Car.prefab; sourceTree = "<group>"; };
+		406414C4235C768E000F994F /* Car.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Car.obj; sourceTree = "<group>"; };
+		40651BD523490D16003BBD50 /* EnvironmentMapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = EnvironmentMapping.frag; sourceTree = "<group>"; };
+		40651BDE234A0BA7003BBD50 /* Unlit.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Unlit.shader; sourceTree = "<group>"; };
+		40651BDF234A0BDC003BBD50 /* Unlit.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Unlit.frag; sourceTree = "<group>"; };
+		4065392F2354D52000644D01 /* Billboard.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Billboard.vert; sourceTree = "<group>"; };
+		4066CCF523477D5000496404 /* Skybox.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Skybox.vert; sourceTree = "<group>"; };
+		4066CCF623477F2000496404 /* Skybox.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Skybox.frag; sourceTree = "<group>"; };
+		4066CCF723477F9400496404 /* Skybox.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Skybox.shader; sourceTree = "<group>"; };
+		406DCA6C233E3C47008C088E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		406DCA6D233E4076008C088E /* Rotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		406DCA6E233E4076008C088E /* Rotate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		406DCA88234100CF008C088E /* CameraController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
+		406DCA89234100CF008C088E /* CameraController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraController.cpp; sourceTree = "<group>"; };
+		406DCA8B2341C0B3008C088E /* Demo.scene */ = {isa = PBXFileReference; lastKnownFileType = text; path = Demo.scene; sourceTree = "<group>"; };
+		4083B4E02324CB2A00A72B43 /* Lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Lighting.frag; sourceTree = "<group>"; };
+		4083B4E223250D4C00A72B43 /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
+		40978DA5233544A40082F63E /* Default.material */ = {isa = PBXFileReference; lastKnownFileType = text; name = Default.material; path = DemoGame/Assets/Default.material; sourceTree = SOURCE_ROOT; };
+		D06899732412E2C300ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4048AEE52312E01700A7152A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40DD5597234FA00100BBA4A9 /* GameEngine.framework in Frameworks */,
+				D06899742412E2C300ACAB1C /* SDL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4048AEDF2312E01700A7152A = {
+			isa = PBXGroup;
+			children = (
+				4048AEF52312E1F100A7152A /* Frameworks */,
+				4048AEEA2312E01700A7152A /* DemoGame */,
+				4048AEE92312E01700A7152A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4048AEE92312E01700A7152A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4048AEE82312E01700A7152A /* DemoGame */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4048AEEA2312E01700A7152A /* DemoGame */ = {
+			isa = PBXGroup;
+			children = (
+				4083B4C3231FEDDD00A72B43 /* Assets */,
+				406DCA6C233E3C47008C088E /* Info.plist */,
+				4048AEEB2312E01700A7152A /* Main.cpp */,
+				401B788E231B73B500E6B4F0 /* DemoGame.h */,
+				401B788F231B73B500E6B4F0 /* DemoGame.cpp */,
+				406DCA6D233E4076008C088E /* Rotate.h */,
+				406DCA6E233E4076008C088E /* Rotate.cpp */,
+				406DCA88234100CF008C088E /* CameraController.h */,
+				406DCA89234100CF008C088E /* CameraController.cpp */,
+				406327D9234B6F4D009B243F /* Racer.h */,
+				406327DA234B6F4D009B243F /* Racer.cpp */,
+				406327DC234B7DE9009B243F /* Camera3rdPerson.h */,
+				406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */,
+				406414732355F8DC000F994F /* Clouds.h */,
+				406414742355F8DC000F994F /* Clouds.cpp */,
+			);
+			path = DemoGame;
+			sourceTree = "<group>";
+		};
+		4048AEF52312E1F100A7152A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D06899732412E2C300ACAB1C /* SDL2.framework */,
+				401184E9232E4B33000B19FB /* GameEngine.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		40641480235600C9000F994F /* Clouds */ = {
+			isa = PBXGroup;
+			children = (
+				40641481235600C9000F994F /* Cloud07.material */,
+				40641482235600C9000F994F /* Cloud06.material */,
+				40641483235600C9000F994F /* Cloud01.material */,
+				40641488235600C9000F994F /* Cloud04.material */,
+				40641489235600C9000F994F /* Cloud05.material */,
+				4064148E235600C9000F994F /* Cloud08.material */,
+				4064148F235600C9000F994F /* Cloud03.material */,
+				40641490235600C9000F994F /* Cloud02.material */,
+			);
+			path = Clouds;
+			sourceTree = "<group>";
+		};
+		406414A72358D182000F994F /* Water */ = {
+			isa = PBXGroup;
+			children = (
+				406414A82358D182000F994F /* DeepWater.tga */,
+				406414A92358D182000F994F /* DeepWater.material */,
+				406414AA2358D182000F994F /* Water.material */,
+				406414AB2358D182000F994F /* WaterHeightmap.png */,
+				406414AC2358D1B2000F994F /* Water.tga */,
+			);
+			path = Water;
+			sourceTree = "<group>";
+		};
+		406414AD2358D1D7000F994F /* Terrain */ = {
+			isa = PBXGroup;
+			children = (
+				406414AE2358D1D7000F994F /* Terrain.material */,
+				406414AF2358D1D7000F994F /* Heightmap.tga */,
+				406414B02358D1D7000F994F /* Sand.tga */,
+			);
+			name = Terrain;
+			path = DemoGame/Assets/Terrain;
+			sourceTree = SOURCE_ROOT;
+		};
+		406414BD235C768E000F994F /* Car */ = {
+			isa = PBXGroup;
+			children = (
+				406414BE235C768E000F994F /* Car0.tga */,
+				406414BF235C768E000F994F /* Wheel.material */,
+				406414C0235C768E000F994F /* Wheel.obj */,
+				406414C1235C768E000F994F /* Wheel.tga */,
+				406414C2235C768E000F994F /* Car.material */,
+				406414C3235C768E000F994F /* Car.prefab */,
+				406414C4235C768E000F994F /* Car.obj */,
+			);
+			path = Car;
+			sourceTree = "<group>";
+		};
+		4083B4C3231FEDDD00A72B43 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				406414BD235C768E000F994F /* Car */,
+				406414AD2358D1D7000F994F /* Terrain */,
+				406414A72358D182000F994F /* Water */,
+				40641480235600C9000F994F /* Clouds */,
+				4083B4C5231FEE0000A72B43 /* Shaders */,
+				406DCA8B2341C0B3008C088E /* Demo.scene */,
+				40978DA5233544A40082F63E /* Default.material */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		4083B4C5231FEE0000A72B43 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				4083B4E223250D4C00A72B43 /* Standard.shader */,
+				4062B8FE231818E400F44658 /* Standard.vert */,
+				4062B8FF2318196000F44658 /* Standard.frag */,
+				4083B4E02324CB2A00A72B43 /* Lighting.frag */,
+				40651BD523490D16003BBD50 /* EnvironmentMapping.frag */,
+				40651BDE234A0BA7003BBD50 /* Unlit.shader */,
+				40651BDF234A0BDC003BBD50 /* Unlit.frag */,
+				4066CCF723477F9400496404 /* Skybox.shader */,
+				4066CCF523477D5000496404 /* Skybox.vert */,
+				4066CCF623477F2000496404 /* Skybox.frag */,
+				4064146E2354D881000F994F /* Billboard.shader */,
+				4065392F2354D52000644D01 /* Billboard.vert */,
+				406414B22359D790000F994F /* Water.shader */,
+				406414B32359DD83000F994F /* Water.vert */,
+				406414B12359D781000F994F /* Water.frag */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4048AEE72312E01700A7152A /* DemoGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4048AEEF2312E01700A7152A /* Build configuration list for PBXNativeTarget "DemoGame" */;
+			buildPhases = (
+				4048AEE42312E01700A7152A /* Sources */,
+				4048AEE52312E01700A7152A /* Frameworks */,
+				4048AEE62312E01700A7152A /* CopyFiles */,
+				4048AEF22312E19100A7152A /* Copy Bundle Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DemoGame;
+			productName = GameEngine;
+			productReference = 4048AEE82312E01700A7152A /* DemoGame */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4048AEE02312E01700A7152A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = Drage;
+				TargetAttributes = {
+					4048AEE72312E01700A7152A = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = 4048AEE32312E01700A7152A /* Build configuration list for PBXProject "DemoGame" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4048AEDF2312E01700A7152A;
+			productRefGroup = 4048AEE92312E01700A7152A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4048AEE72312E01700A7152A /* DemoGame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4048AEE42312E01700A7152A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				406327DB234B6F4D009B243F /* Racer.cpp in Sources */,
+				406DCA6F233E4076008C088E /* Rotate.cpp in Sources */,
+				406414752355F8DC000F994F /* Clouds.cpp in Sources */,
+				401B7890231B73B500E6B4F0 /* DemoGame.cpp in Sources */,
+				406DCA8A234100CF008C088E /* CameraController.cpp in Sources */,
+				4048AEEC2312E01700A7152A /* Main.cpp in Sources */,
+				406327DE234B7DE9009B243F /* Camera3rdPerson.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4048AEED2312E01700A7152A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4048AEEE2312E01700A7152A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4048AEF02312E01700A7152A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CZ644E2TTF;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../\"/**",
+					"$(PROJECT_DIR)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/SDL2.framework/Headers\"",
+					"\"$(SRCROOT)/../GameEngine/Build/Debug/GameEngine.framework/Headers\"",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SDL2,
+					"-framework",
+					GameEngine,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		4048AEF12312E01700A7152A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CZ644E2TTF;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../\"/**",
+					"$(PROJECT_DIR)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/SDL2.framework/Headers\"",
+					"\"$(SRCROOT)/../GameEngine/Build/Debug/GameEngine.framework/Headers\"",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SDL2,
+					"-framework",
+					GameEngine,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4048AEE32312E01700A7152A /* Build configuration list for PBXProject "DemoGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4048AEED2312E01700A7152A /* Debug */,
+				4048AEEE2312E01700A7152A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4048AEEF2312E01700A7152A /* Build configuration list for PBXNativeTarget "DemoGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4048AEF02312E01700A7152A /* Debug */,
+				4048AEF12312E01700A7152A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4048AEE02312E01700A7152A /* Project object */;
+}
