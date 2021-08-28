@@ -1,6 +1,6 @@
 
 #include "Component.h"
-#include "GameObject.h"
+#include "Entity.h"
 
 using namespace DrageEngine;
 

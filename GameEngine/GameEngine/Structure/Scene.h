@@ -3,7 +3,7 @@
 #define SCENE_H
 
 #include <vector>
-#include "GameObject.h"
+#include "Entity.h"
 #include "Renderer.h"
 #include "XMLDocument.h"
 
@@ -22,20 +22,20 @@ namespace DrageEngine
             void Update();
             void Render(Renderer *renderer);
         
-            void Add(GameObject *object);
-            bool Remove(GameObject *object);
+            void Add(Entity *entity);
+            bool Remove(Entity *entity);
         
             bool Load(const std::string &filename);
-            GameObject* LoadPrefab(const std::string &filename, ParamList *params = NULL);
+            Entity* LoadPrefab(const std::string &filename, ParamList *params = NULL);
         
-            GameObject* Find(const std::string &path, GameObject *parent = NULL) const;
+            Entity* Find(const std::string &path, Entity *parent = NULL) const;
         
         private:
-            void LoadObjects(const XMLDocument::Element *xml, GameObject *parent = NULL, ParamList *params = NULL);
+            void LoadEntities(const XMLDocument::Element *xml, Entity *parent = NULL, ParamList *params = NULL);
         
-            typedef std::vector<GameObject*> GameObjectList;
+            typedef std::vector<Entity*> EntityList;
         
-            GameObjectList objects;
+            EntityList entities;
     };
 }
 

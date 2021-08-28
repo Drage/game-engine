@@ -1,5 +1,5 @@
 <Scene>
-    <GameObject>
+    <Entity>
         <name>Camera</name>
         <position>0, 2, 8</position>
         <rotation>7, 180, 0</rotation>
@@ -11,15 +11,15 @@
         <Skybox>
             <material>Skybox.material</material>
         </Skybox>
-    </GameObject>
-    <GameObject>
+    </Entity>
+    <Entity>
         <name>Terrain</name>
         <Terrain>
             <heightmap>Heightmap.tga</heightmap>
             <maxHeight>10</maxHeight>
             <material>Terrain.material</material>
         </Terrain>
-    </GameObject>
+    </Entity>
     <Prefab>
         <prefab>Car.prefab</prefab>
         <name>Player</name>
@@ -27,7 +27,7 @@
         <rotation>0, 45, 0</position>
         <Racer></Racer>
     </Prefab>
-    <GameObject>
+    <Entity>
         <name>DirectionalLight</name>
         <rotation>45, 0, 0</rotation>
         <Light>
@@ -35,8 +35,8 @@
             <color>#4D4D4D</color>
             <ambient>2.2</ambient>
         </Light>
-    </GameObject>
-    <GameObject>
+    </Entity>
+    <Entity>
         <name>Volcano</name>
         <position>291, 0, 201</position>
         <scale>5.876, 5.876, 5.876</scale>
@@ -45,16 +45,16 @@
             <model>Volcano.obj</model>
             <material>Volcano.material</material>
         </MeshRenderer>
-    </GameObject>
-    <GameObject>
-           <name>DeepWater</name>
-           <position>286, 0.5, 286</position>
-           <scale>572, 0, 572</scale>
-           <Plane>
-               <material>DeepWater.material</material>
-           </Plane>
-       </GameObject>
-    <GameObject>
+    </Entity>
+    <Entity>
+       <name>DeepWater</name>
+       <position>286, 0.5, 286</position>
+       <scale>572, 0, 572</scale>
+       <Plane>
+           <material>DeepWater.material</material>
+       </Plane>
+    </Entity>
+    <Entity>
         <name>Water</name>
         <position>0, 1, 0</position>
         <Terrain>
@@ -63,8 +63,8 @@
             <material>Water.material</material>
             <disableDepthWrite>1</disableDepthWrite>
         </Terrain>
-    </GameObject>
-    <GameObject>
+    </Entity>
+    <Entity>
         <name>Clouds</name>
         <Clouds>
             <count>10</count>
@@ -76,5 +76,5 @@
             <minSize>50</minSize>
             <maxSize>90</maxSize>
         </Clouds>
-    </GameObject>
+    </Entity>
 </Scene>

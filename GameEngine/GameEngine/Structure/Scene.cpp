@@ -21,29 +21,29 @@ Scene::~Scene()
 
 void Scene::Clear()
 {
-    for (GameObjectList::iterator i = objects.begin(); i != objects.end(); i++)
+    for (EntityList::iterator i = entities.begin(); i != entities.end(); i++)
         delete (*i);
-    objects.clear();
+    entities.clear();
 }
 
 void Scene::Start()
 {
     app->SetActiveScene(this);
     
-    for (GameObjectList::const_iterator i = objects.begin(); i != objects.end(); i++)
+    for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
         (*i)->Start();
 }
 
 void Scene::Update()
 {
-    if (objects.size() > 0)
+    if (entities.size() > 0)
     {
-        for (GameObjectList::iterator i = objects.begin(); i != (objects.end()--); )
+        for (EntityList::iterator i = entities.begin(); i != (entities.end()--); )
         {
             if ((*i)->IsDestroyed())
             {
                 delete *i;
-                i = objects.erase(i);
+                i = entities.erase(i);
             }
             else
             {
@@ -58,27 +58,27 @@ void Scene::Update()
 
 void Scene::Render(Renderer *renderer)
 {
-    for (GameObjectList::const_iterator i = objects.begin(); i != objects.end(); i++)
+    for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
     {
         if ((*i)->IsActive())
             (*i)->Render(renderer);
     }
 }
 
-void Scene::Add(GameObject *object)
+void Scene::Add(Entity *entity)
 {
-    if (object->GetParent() == NULL)
-        objects.push_back(object);
+    if (entity->GetParent() == NULL)
+        entities.push_back(entity);
 }
 
-bool Scene::Remove(GameObject *object)
+bool Scene::Remove(Entity *entity)
 {
-    for (GameObjectList::iterator i = objects.begin(); i != objects.end(); i++)
+    for (EntityList::iterator i = entities.begin(); i != entities.end(); i++)
     {
-        if ((*i) == object)
+        if ((*i) == entity)
         {
             delete (*i);
-            objects.erase(i);
+            entities.erase(i);
             return true;
         }
     }
@@ -93,50 +93,50 @@ bool Scene::Load(const std::string &filename)
     if (!xml.Load(app->assets->GetAssetPath(filename)))
         return false;
 
-    LoadObjects(&xml.root);
+    LoadEntities(&xml.root);
     return true;
 }
 
-GameObject* Scene::LoadPrefab(const std::string &filename, ParamList *params)
+Entity* Scene::LoadPrefab(const std::string &filename, ParamList *params)
 {
     XMLDocument xml;
     if (!xml.Load(app->assets->GetAssetPath(filename)))
         return NULL;
 
-    GameObject *instance = new GameObject();
+    Entity *instance = new Entity();
     
     if (params)
         instance->Init(*params);
     
-    LoadObjects(&xml.root, instance);
+    LoadEntities(&xml.root, instance);
     
     Add(instance);
     
     return instance;
 }
 
-void Scene::LoadObjects(const XMLDocument::Element *xml, GameObject *parent, ParamList *overrideParams)
+void Scene::LoadEntities(const XMLDocument::Element *xml, Entity *parent, ParamList *overrideParams)
 {
     for (XMLDocument::ElementList::const_iterator i = xml->subElements.begin(); i != xml->subElements.end(); i++)
     {
         std::string tag = (*i)->name;
-        if (tag == "GameObject")
+        if (tag == "Entity")
         {
-            GameObject *gameObject = new GameObject();
+            Entity *entity = new Entity();
             
             if (parent)
-                parent->AddChild(gameObject);
+                parent->AddChild(entity);
             else
-                Add(gameObject);
+                Add(entity);
             
             ParamList params;
             (*i)->ToParamList(params);
             if (overrideParams)
                 params.Merge(*overrideParams, true);
              
-            gameObject->Init(params);
+            entity->Init(params);
             
-            LoadObjects((*i), gameObject);
+            LoadEntities((*i), entity);
         }
         else if (tag == "Prefab")
         {
@@ -146,8 +146,8 @@ void Scene::LoadObjects(const XMLDocument::Element *xml, GameObject *parent, Par
             std::string filename = params.Get<std::string>("prefab");
             params.Remove("prefab");
             
-            GameObject *instance = LoadPrefab(filename, &params);
-            LoadObjects((*i), instance);
+            Entity *instance = LoadPrefab(filename, &params);
+            LoadEntities((*i), instance);
             
             if (parent)
                 parent->AddChild(instance);
@@ -171,7 +171,7 @@ void Scene::LoadObjects(const XMLDocument::Element *xml, GameObject *parent, Par
     }
 }
 
-GameObject* Scene::Find(const std::string &path, GameObject *parent) const
+Entity* Scene::Find(const std::string &path, Entity *parent) const
 {
     std::string name = path;
     std::string subPath = "";
@@ -185,7 +185,7 @@ GameObject* Scene::Find(const std::string &path, GameObject *parent) const
     
     if (!parent)
     {
-        for (GameObjectList::const_iterator i = objects.begin(); i != objects.end(); i++)
+        for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
         {
             if ((*i)->GetName() == name)
             {
@@ -198,7 +198,7 @@ GameObject* Scene::Find(const std::string &path, GameObject *parent) const
     }
     else
     {
-        GameObject *child = parent->GetChild(name);
+        Entity *child = parent->GetChild(name);
         if (subPath == "")
             return child;
         else

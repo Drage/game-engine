@@ -70,7 +70,7 @@ class Racer : public Component
         float wheelieAngle;
     
         // Rendering
-        GameObject *visualGameObject;
+        Entity *visualEntity;
         float visualY;
         float visualYSmoothing;
 };

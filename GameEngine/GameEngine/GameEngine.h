@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "Game.h"
 #include "Scene.h"
-#include "GameObject.h"
+#include "Entity.h"
 #include "Component.h"
 
 // Components

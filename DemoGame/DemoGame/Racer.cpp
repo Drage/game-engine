@@ -58,7 +58,7 @@ void Racer::Init(const ParamList &params)
 void Racer::Start()
 {
     terrain = app->GetActiveScene()->Find("Terrain")->GetComponent<Terrain>();
-    visualGameObject = gameObject->GetChild("Visual");
+    visualEntity = entity->GetChild("Visual");
 }
 
 void Racer::Update()
@@ -260,12 +260,12 @@ void Racer::UpdateSmoothedDrawY()
     if (grounded)
     {
         visualY = Lerp(visualY, actualY, visualYSmoothing * Time::DeltaTime());
-        visualGameObject->transform.position.y = visualY - actualY;
+        visualEntity->transform.position.y = visualY - actualY;
     }
     else
     {
         visualY = actualY;
-        visualGameObject->transform.position.y = 0;
+        visualEntity->transform.position.y = 0;
     }
 }
 

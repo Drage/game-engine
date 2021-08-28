@@ -1,27 +1,27 @@
 
 #include <algorithm>
-#include "GameObject.h"
+#include "Entity.h"
 #include "Debug.h"
 
 using namespace DrageEngine;
 
-GameObject::GameObject()
+Entity::Entity()
 {
     parent = NULL;
     destroyed = false;
     started = false;
 }
 
-GameObject::~GameObject()
+Entity::~Entity()
 {
     for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
         delete (*i);
     
-    for (GameObjectList::iterator i = children.begin(); i != children.end(); i++)
+    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
         delete (*i);
 }
 
-void GameObject::Init(ParamList &params)
+void Entity::Init(ParamList &params)
 {
     active = params.Get<bool>("active", true);
     name = params.Get<std::string>("name");
@@ -30,18 +30,18 @@ void GameObject::Init(ParamList &params)
     transform.position = params.Get<Vector3>("position");
 }
 
-void GameObject::Start()
+void Entity::Start()
 {
     started = true;
     
     for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
         (*i)->Start();
     
-    for (GameObjectList::iterator i = children.begin(); i != children.end(); i++)
+    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
         (*i)->Start();
 }
 
-void GameObject::Update()
+void Entity::Update()
 {
     if (!started)
         Start();
@@ -52,11 +52,11 @@ void GameObject::Update()
             (*i)->Update();
     }
     
-    for (GameObjectList::iterator i = children.begin(); i != children.end(); i++)
+    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
         (*i)->Update();
 }
 
-void GameObject::Render(Renderer *renderer, const Transform *transform) const
+void Entity::Render(Renderer *renderer, const Transform *transform) const
 {
     Transform combinedTransform;
     if (!transform)
@@ -70,11 +70,11 @@ void GameObject::Render(Renderer *renderer, const Transform *transform) const
             (*i)->Render(renderer, &combinedTransform);
     }
 
-    for (GameObjectList::const_iterator i = children.begin(); i != children.end(); i++)
+    for (EntityList::const_iterator i = children.begin(); i != children.end(); i++)
         (*i)->Render(renderer, &combinedTransform);
 }
 
-void GameObject::SetParent(GameObject *obj)
+void Entity::SetParent(Entity *obj)
 {
     parent = obj;
     
@@ -82,7 +82,7 @@ void GameObject::SetParent(GameObject *obj)
         obj->children.push_back(this);
 }
 
-void GameObject::AddChild(GameObject *obj)
+void Entity::AddChild(Entity *obj)
 {
     if (std::find(obj->children.begin(), obj->children.end(), this) == obj->children.end())
         children.push_back(obj);
@@ -90,9 +90,9 @@ void GameObject::AddChild(GameObject *obj)
     obj->parent = this;
 }
 
-bool GameObject::RemoveChild(GameObject *obj)
+bool Entity::RemoveChild(Entity *obj)
 {
-    for (GameObjectList::iterator i = children.begin(); i != children.end(); i++)
+    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
     {
         if (*i == obj)
         {
@@ -103,9 +103,9 @@ bool GameObject::RemoveChild(GameObject *obj)
     return false;
 }
 
-GameObject* GameObject::GetChild(const std::string &name)
+Entity* Entity::GetChild(const std::string &name)
 {
-    for (GameObjectList::iterator i = children.begin(); i != children.end(); i++)
+    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
     {
         if ((*i)->GetName() == name)
             return *i;
@@ -113,20 +113,20 @@ GameObject* GameObject::GetChild(const std::string &name)
     return NULL;
 }
 
-void GameObject::AddComponent(Component *component)
+void Entity::AddComponent(Component *component)
 {
     if (component == NULL)
     {
-        ERROR("Attempting to add null component to GameObject: " + name);
+        ERROR("Attempting to add null component to Entity: " + name);
         return;
     }
         
     components.push_back(component);
-    component->gameObject = this;
+    component->entity = this;
     component->transform = &transform;
 }
 
-bool GameObject::RemoveComponent(Component *component)
+bool Entity::RemoveComponent(Component *component)
 {
     for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
     {

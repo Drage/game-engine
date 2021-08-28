@@ -1,6 +1,6 @@
 
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include <vector>
 #include <string>
@@ -11,11 +11,11 @@
 
 namespace DrageEngine
 {
-    class GameObject
+    class Entity
     {
         public:
-            GameObject();
-            ~GameObject();
+            Entity();
+            ~Entity();
         
             void Init(ParamList &params);
             void Start();
@@ -30,11 +30,11 @@ namespace DrageEngine
         
             inline const std::string& GetName() { return name; };
         
-            inline const GameObject* GetParent() const { return parent; }
-            void SetParent(GameObject *obj);
-            void AddChild(GameObject *obj);
-            bool RemoveChild(GameObject *obj);
-            GameObject* GetChild(const std::string &name);
+            inline const Entity* GetParent() const { return parent; }
+            void SetParent(Entity *obj);
+            void AddChild(Entity *obj);
+            bool RemoveChild(Entity *obj);
+            Entity* GetChild(const std::string &name);
         
             void AddComponent(Component *component);
             bool RemoveComponent(Component *component);
@@ -54,11 +54,11 @@ namespace DrageEngine
             Transform transform;
         
         private:        
-            typedef std::vector<GameObject*> GameObjectList;
+            typedef std::vector<Entity*> EntityList;
             typedef std::vector<Component*> ComponentList;
         
-            GameObject *parent;
-            GameObjectList children;
+            Entity *parent;
+            EntityList children;
         
             ComponentList components;
         

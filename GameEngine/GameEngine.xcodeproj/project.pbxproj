@@ -79,8 +79,8 @@
 		4066CCF423464A5300496404 /* Joystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 4066CCF323464A5300496404 /* Joystick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4066CCFA234781F000496404 /* Cubemap.h in Headers */ = {isa = PBXBuildFile; fileRef = 4066CCF8234781F000496404 /* Cubemap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4066CCFB234781F000496404 /* Cubemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4066CCF9234781F000496404 /* Cubemap.cpp */; };
-		406DCA5C23392257008C088E /* GameObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 406DCA5A23392257008C088E /* GameObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		406DCA5D23392257008C088E /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA5B23392257008C088E /* GameObject.cpp */; };
+		406DCA5C23392257008C088E /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 406DCA5A23392257008C088E /* Entity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		406DCA5D23392257008C088E /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA5B23392257008C088E /* Entity.cpp */; };
 		406DCA602339227D008C088E /* Component.h in Headers */ = {isa = PBXBuildFile; fileRef = 406DCA5E2339227D008C088E /* Component.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		406DCA612339227D008C088E /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA5F2339227D008C088E /* Component.cpp */; };
 		406DCA642339229C008C088E /* Scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 406DCA622339229C008C088E /* Scene.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -234,8 +234,8 @@
 		4066CCF323464A5300496404 /* Joystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Joystick.h; sourceTree = "<group>"; };
 		4066CCF8234781F000496404 /* Cubemap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cubemap.h; sourceTree = "<group>"; };
 		4066CCF9234781F000496404 /* Cubemap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cubemap.cpp; sourceTree = "<group>"; };
-		406DCA5A23392257008C088E /* GameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
-		406DCA5B23392257008C088E /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
+		406DCA5A23392257008C088E /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		406DCA5B23392257008C088E /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		406DCA5E2339227D008C088E /* Component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
 		406DCA5F2339227D008C088E /* Component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
 		406DCA622339229C008C088E /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
@@ -455,8 +455,8 @@
 				401B7891231B750E00E6B4F0 /* Game.h */,
 				406DCA622339229C008C088E /* Scene.h */,
 				406DCA632339229C008C088E /* Scene.cpp */,
-				406DCA5A23392257008C088E /* GameObject.h */,
-				406DCA5B23392257008C088E /* GameObject.cpp */,
+				406DCA5A23392257008C088E /* Entity.h */,
+				406DCA5B23392257008C088E /* Entity.cpp */,
 				406DCA5E2339227D008C088E /* Component.h */,
 				406DCA5F2339227D008C088E /* Component.cpp */,
 			);
@@ -649,7 +649,7 @@
 				40651BD82349D5D2003BBD50 /* Terrain.h in Headers */,
 				4010F52A23423F6A00D08A02 /* CubeComponent.h in Headers */,
 				40607DAB2343D0CF00F985CD /* AudioFactory.h in Headers */,
-				406DCA5C23392257008C088E /* GameObject.h in Headers */,
+				406DCA5C23392257008C088E /* Entity.h in Headers */,
 				406DCA79233FC23B008C088E /* Window.h in Headers */,
 				D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */,
 				401B792A231BC38A00E6B4F0 /* Color.h in Headers */,
@@ -848,7 +848,7 @@
 				40DD559C234FA04700BBA4A9 /* GameTime.cpp in Sources */,
 				406414722354DFA3000F994F /* BillboardComponent.cpp in Sources */,
 				D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */,
-				406DCA5D23392257008C088E /* GameObject.cpp in Sources */,
+				406DCA5D23392257008C088E /* Entity.cpp in Sources */,
 				4083B4E623251A0900A72B43 /* XMLDocument.cpp in Sources */,
 				406414C8235DFAAC000F994F /* ParticleAnimParameter.cpp in Sources */,
 				401B78A0231B76CC00E6B4F0 /* Renderer.cpp in Sources */,

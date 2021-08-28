@@ -8,7 +8,7 @@
 
 namespace DrageEngine
 {
-    class GameObject;
+    class Entity;
 
     class Component
     {
@@ -22,12 +22,12 @@ namespace DrageEngine
             bool IsEnabled() const;
         
         protected:
-            GameObject *gameObject;
+            Entity *entity;
             Transform *transform;
             
         
         private:
-            friend class GameObject;
+            friend class Entity;
         
             bool enabled;
     };

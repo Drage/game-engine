@@ -1,15 +1,15 @@
 <Prefab>
     <name>Car</name>
-    <GameObject>
+    <Entity>
         <name>Visual</name>
-        <GameObject>
+        <Entity>
             <name>Offset</name>
             <position>0, 0.2, 0</position>
             <MeshRenderer>
                 <model>Car.obj</model>
                 <material>Car.material</material>
             </MeshRenderer>
-            <GameObject>
+            <Entity>
                 <name>Wheel RL</name>
                 <position>0.75, 0.15, 0</position>
                 <MeshRenderer>
@@ -20,8 +20,8 @@
                     <speed>10</speed>
                     <axis>1, 0, 0</axis>
                 </Rotate>
-            </GameObject>
-            <GameObject>
+            </Entity>
+            <Entity>
                 <name>Wheel RR</name>
                 <position>-0.75, 0.15, 0</position>
                 <rotation>0, 180, 0</rotation>
@@ -33,8 +33,8 @@
                     <speed>10</speed>
                     <axis>-1, 0, 0</axis>
                 </Rotate>
-            </GameObject>
-            <GameObject>
+            </Entity>
+            <Entity>
                 <name>Wheel FL</name>
                 <position>0.75, 0.15, 1.68</position>
                 <MeshRenderer>
@@ -45,8 +45,8 @@
                     <speed>10</speed>
                     <axis>1, 0, 0</axis>
                 </Rotate>
-            </GameObject>
-            <GameObject>
+            </Entity>
+            <Entity>
                 <name>Wheel FR</name>
                 <position>-0.75, 0.15, 1.68</position>
                 <rotation>0, 180, 0</rotation>
@@ -58,7 +58,7 @@
                     <speed>10</speed>
                     <axis>-1, 0, 0</axis>
                 </Rotate>
-            </GameObject>
-        </GameObject>
-    </GameObject>
+            </Entity>
+        </Entity>
+    </Entity>
 </Prefab>

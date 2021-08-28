@@ -15,7 +15,7 @@ class Camera3rdPerson : public Component
     
     private:
         std::string targetPath;
-        GameObject *target;
+        Entity *target;
         float height;
         float distanceBehind;
         float lookAhead;
