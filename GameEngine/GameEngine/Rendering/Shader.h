@@ -38,6 +38,7 @@ namespace DrageEngine
             ~Shader();
         
             bool Load(const std::string &filename);
+            bool Compile(const std::string &vertexShaderCode, const std::string &fragmentShaderCode);
         
             unsigned GetID() const;
             const std::string& GetName() const;

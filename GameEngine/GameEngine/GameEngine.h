@@ -32,8 +32,6 @@
 #include "AssetManager.h"
 #include "Image.h"
 #include "Model.h"
-#include "ImageTGA.h"
-#include "ImageBMP.h"
 
 // Rendering
 #include "Renderer.h"

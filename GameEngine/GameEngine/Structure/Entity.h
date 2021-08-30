@@ -56,16 +56,17 @@ namespace DrageEngine
         private:        
             typedef std::vector<Entity*> EntityList;
             typedef std::vector<Component*> ComponentList;
-        
+            
             Entity *parent;
             EntityList children;
         
             ComponentList components;
         
+            std::string id;
+            std::string name;
             bool started;
             bool destroyed;
             bool active;
-            std::string name;
     };
 }
 

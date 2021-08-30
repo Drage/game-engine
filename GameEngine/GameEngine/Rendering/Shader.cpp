@@ -49,14 +49,21 @@ bool Shader::Load(const std::string &filename)
     InsertIncludes(vertexShaderCode);
     InsertIncludes(fragmentShaderCode);
     
-    unsigned vertexShaderID = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
-    unsigned fragmentShaderID = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
-    
-    id = CompileProgram(vertexShaderID, fragmentShaderID);
+    bool compileSuccess = Compile(vertexShaderCode, fragmentShaderCode);
     
     const XMLDocument::Element *defaults = xml.root.GetSubElement("defaults");
     if (defaults != NULL)
         defaults->ToParamList(this->defaults);
+    
+    return compileSuccess;
+}
+
+bool Shader::Compile(const std::string &vertexShaderCode, const std::string &fragmentShaderCode)
+{
+    unsigned vertexShaderID = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
+    unsigned fragmentShaderID = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
+    
+    id = CompileProgram(vertexShaderID, fragmentShaderID);
 
     LoadUniforms();
     

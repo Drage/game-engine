@@ -2,6 +2,7 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
+#include <string>
 #include "Quaternion.h"
 
 namespace DrageEngine
@@ -15,6 +16,7 @@ namespace DrageEngine
             static int Int(int min, int max);
             static bool Bool();
             static Quaternion Rotation();
+            static std::string UUID();
     };
 }
 

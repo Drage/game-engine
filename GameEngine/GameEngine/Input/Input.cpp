@@ -202,8 +202,8 @@ void Input::CaptureInput(SDL_Event* event)
     }
     else if (event->type == SDL_MOUSEMOTION)
     {
-        mousePosition.x = event->motion.x;
-        mousePosition.y = event->motion.y;
+        mousePosition.x = event->motion.x * app->window->GetScaleFactor();
+        mousePosition.y = event->motion.y * app->window->GetScaleFactor();
         mouseDelta.x = event->motion.xrel;
         mouseDelta.y = event->motion.yrel;
     }

@@ -2,6 +2,8 @@
 #ifndef RENDERABLE_H
 #define RENDERABLE_H
 
+#include <string>
+
 namespace DrageEngine
 {
     class Renderable

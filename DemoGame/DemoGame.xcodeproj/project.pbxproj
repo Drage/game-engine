@@ -99,6 +99,8 @@
 		4083B4E223250D4C00A72B43 /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
 		40978DA5233544A40082F63E /* Default.material */ = {isa = PBXFileReference; lastKnownFileType = text; name = Default.material; path = DemoGame/Assets/Default.material; sourceTree = SOURCE_ROOT; };
 		D06899732412E2C300ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		D0E64B7126DB45FA00B86CA3 /* EditorSelect.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = EditorSelect.frag; sourceTree = "<group>"; };
+		D0E64B7226DB461700B86CA3 /* EditorSelect.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelect.shader; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,8 @@
 				4083B4E223250D4C00A72B43 /* Standard.shader */,
 				4062B8FE231818E400F44658 /* Standard.vert */,
 				4062B8FF2318196000F44658 /* Standard.frag */,
+				D0E64B7126DB45FA00B86CA3 /* EditorSelect.frag */,
+				D0E64B7226DB461700B86CA3 /* EditorSelect.shader */,
 				4083B4E02324CB2A00A72B43 /* Lighting.frag */,
 				40651BD523490D16003BBD50 /* EnvironmentMapping.frag */,
 				40651BDE234A0BA7003BBD50 /* Unlit.shader */,

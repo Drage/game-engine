@@ -35,6 +35,9 @@ Renderer::Renderer()
     glEnable(GL_POLYGON_SMOOTH);
     
     ViewportResized(app->window->GetWidth(), app->window->GetHeight());
+    
+    editorSelectionMode = false;
+    editorSelectShader = app->assets->GetShader("EditorSelect.shader");
 }
 
 void Renderer::ViewportResized(int width, int height)
@@ -139,7 +142,7 @@ void Renderer::Render(const Renderable *renderable, const Transform *transform, 
 {
     Matrix4x4 modelMatrix = transform->ToMatrix();
     
-    Shader *shader = material->GetShader();
+    Shader *shader = editorSelectionMode ? editorSelectShader : material->GetShader();
     glUseProgram(shader->GetID());
 
     material->ApplyUniforms();
@@ -157,10 +160,38 @@ void Renderer::Render(const Renderable *renderable, const Transform *transform, 
     shader->SetUniform("viewProjectionMatrix", viewProjectionMatrix);
     shader->SetUniform("modelViewProjectionMatrix", viewProjectionMatrix * modelMatrix);
     
+    if (editorSelectionMode)
+    {
+        int r = (currentSceneIndex & 0x000000FF) >>  0;
+        int g = (currentSceneIndex & 0x0000FF00) >>  8;
+        int b = (currentSceneIndex & 0x00FF0000) >> 16;
+        shader->SetUniform("color", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
+    }
+    
     ApplyRenderOptions(options);
     
     renderable->Render();
     
     RevertRenderOptions(options);
     glUseProgram(NULL);
+}
+
+void Renderer::SetEditorSelectionModeEnabled(bool enabled)
+{
+    editorSelectionMode = enabled;
+}
+
+void Renderer::SetSceneIndex(int index)
+{
+    currentSceneIndex = index;
+}
+
+int Renderer::GetSceneObjectIndexAtScreenPosition(const Vector2 &coordinates)
+{
+    glFlush();
+    glFinish();
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    unsigned char data[4];
+    glReadPixels(coordinates.x, app->window->GetHeight() - coordinates.y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    return data[0] + data[1] * 256 + data[2] * 256*256;
 }

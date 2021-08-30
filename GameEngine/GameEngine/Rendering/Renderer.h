@@ -38,6 +38,10 @@ namespace DrageEngine
         
             void Render(const Renderable *renderable, const Transform *transform, const Material *material, int options = 0) const;
         
+            void SetEditorSelectionModeEnabled(bool enabled);
+            void SetSceneIndex(int index);
+            int GetSceneObjectIndexAtScreenPosition(const Vector2 &coordinates);
+        
         private:
             friend class Application;
             Renderer();
@@ -50,6 +54,10 @@ namespace DrageEngine
             Matrix4x4 viewMatrix;
             Matrix4x4 projectionMatrix;
             Matrix4x4 viewProjectionMatrix;
+        
+            bool editorSelectionMode;
+            Shader *editorSelectShader;
+            int currentSceneIndex;
     };
 
     class RenderOption

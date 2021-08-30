@@ -13,6 +13,7 @@ namespace DrageEngine
             int GetWidth() const;
             int GetHeight() const;
             float GetAspectRatio() const;
+            int GetScaleFactor() const;
             void SetSize(int width, int height);
         
             void EnableFullscreen();

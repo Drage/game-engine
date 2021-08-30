@@ -33,8 +33,8 @@ bool Application::Init()
     if (!window->Create(1280, 720, false, ""))
         return false;
 
-    renderer = new Renderer();
     assets = new AssetManager();
+    renderer = new Renderer();
     input = new Input();
     audio = new AudioManager();
     editor = new Editor();

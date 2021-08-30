@@ -28,8 +28,6 @@ void Scene::Clear()
 
 void Scene::Start()
 {
-    app->SetActiveScene(this);
-    
     for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
         (*i)->Start();
 }
@@ -56,10 +54,13 @@ void Scene::Update()
     }
 }
 
-void Scene::Render(Renderer *renderer)
+void Scene::Render(Renderer *renderer) const
 {
     for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
     {
+        int index = (int)(i - entities.begin());
+        renderer->SetSceneIndex(index);
+        
         if ((*i)->IsActive())
             (*i)->Render(renderer);
     }
@@ -94,6 +95,8 @@ bool Scene::Load(const std::string &filename)
         return false;
 
     LoadEntities(&xml.root);
+    
+    app->SetActiveScene(this);
     return true;
 }
 
@@ -206,4 +209,9 @@ Entity* Scene::Find(const std::string &path, Entity *parent) const
     }
     
     return NULL;
+}
+
+Entity* Scene::GetEntityByIndex(int index) const
+{
+    return index >= 0 && index < entities.size() ? entities[index] : NULL;
 }

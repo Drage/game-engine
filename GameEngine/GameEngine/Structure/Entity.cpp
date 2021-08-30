@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "Entity.h"
 #include "Debug.h"
+#include "Random.h"
 
 using namespace DrageEngine;
 
@@ -23,8 +24,9 @@ Entity::~Entity()
 
 void Entity::Init(ParamList &params)
 {
-    active = params.Get<bool>("active", true);
+    id = params.Get<std::string>("id", Random::UUID());
     name = params.Get<std::string>("name");
+    active = params.Get<bool>("active", true);
     transform.scale = params.Get<Vector3>("scale", Vector3::ONE);
     transform.rotation = params.Get<Quaternion>("rotation", Quaternion::IDENTITY);
     transform.position = params.Get<Vector3>("position");

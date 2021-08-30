@@ -20,7 +20,7 @@ namespace DrageEngine
         
             void Start();
             void Update();
-            void Render(Renderer *renderer);
+            void Render(Renderer *renderer) const;
         
             void Add(Entity *entity);
             bool Remove(Entity *entity);
@@ -29,12 +29,11 @@ namespace DrageEngine
             Entity* LoadPrefab(const std::string &filename, ParamList *params = NULL);
         
             Entity* Find(const std::string &path, Entity *parent = NULL) const;
+            Entity* GetEntityByIndex(int index) const;
         
         private:
-            void LoadEntities(const XMLDocument::Element *xml, Entity *parent = NULL, ParamList *params = NULL);
-        
             typedef std::vector<Entity*> EntityList;
-        
+            void LoadEntities(const XMLDocument::Element *xml, Entity *parent = NULL, ParamList *params = NULL);
             EntityList entities;
     };
 }

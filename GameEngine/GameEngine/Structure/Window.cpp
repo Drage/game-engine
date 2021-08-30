@@ -124,6 +124,11 @@ float Window::GetAspectRatio() const
     return 1.0f * width / height;
 }
 
+int Window::GetScaleFactor() const
+{
+    return scaleFactor;
+}
+
 void Window::SetSize(int width, int height)
 {
     width = width;
