@@ -75,3 +75,8 @@ void EditorCamera::Zoom(float delta)
     float zoom = Max(offset.Magnitude() + delta, 0.1f);
     position = focus + offset.Normalized() * zoom;
 }
+
+void EditorCamera::SetFocus(const Vector3 &focus)
+{
+    this->focus = focus;
+}

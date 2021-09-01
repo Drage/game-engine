@@ -3,6 +3,7 @@
 #define DEBUG_H
 
 #include <string>
+#include <iostream>
 
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
@@ -15,9 +16,26 @@ namespace DrageEngine
     class Debug
     {
         public:
-            static void Log(const std::string &message, const std::string &file, const int line);
-            static void LogWarning(const std::string &message, const std::string &file, const int line);
-            static void LogError(const std::string &message, const std::string &file, const int line);
+            template<class T>
+            static void Log(const T &message, const std::string &file, const int line)
+            {
+                std::cout << "ℹ️ " << message << "  [" << file << ":" << line << "]" << std::endl;
+                std::cout << Backtrace();
+            }
+        
+            template<class T>
+            static void LogWarning(const T &message, const std::string &file, const int line)
+            {
+                std::cout << "⚠️ " << message << "  [" << file << ":" << line << "]" << std::endl;
+                std::cout << Backtrace();
+            }
+
+            template<class T>
+            static void LogError(const T &message, const std::string &file, const int line)
+            {
+                std::cout << "🛑 " << message << "  [" << file << ":" << line << "]" << std::endl;
+                std::cout << Backtrace();
+            }
         
         private:
             static std::string Backtrace();

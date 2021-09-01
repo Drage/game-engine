@@ -68,7 +68,7 @@ void Application::Run(Game *game)
         input->Clear();
         
         SDL_Event event;
-        while (SDL_PollEvent(&event))
+        if (SDL_PollEvent(&event))
         {
             // Clicked on close button or press escape
             if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
@@ -102,4 +102,9 @@ const Scene* Application::GetActiveScene() const
 void Application::SetActiveScene(Scene *scene)
 {
     activeScene = scene;
+}
+
+bool Application::IsInEditMode() const
+{
+    return editMode;
 }

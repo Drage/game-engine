@@ -10,7 +10,7 @@ Camera::Camera()
     direction = Vector3(0, 0, -1);
     fov = 60;
     nearClip = 0.1f;
-    farClip = 1000.0f;
+    farClip = 10000.0f;
 }
 
 Camera::Camera(const Vector3 &position, const Vector3 &direction, float fov, float nearClip, float farClip)

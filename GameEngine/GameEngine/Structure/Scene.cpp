@@ -215,3 +215,13 @@ Entity* Scene::GetEntityByIndex(int index) const
 {
     return index >= 0 && index < entities.size() ? entities[index] : NULL;
 }
+
+int Scene::GetIndexOfEntity(const Entity* entity) const
+{
+    for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
+    {
+        if ((*i) == entity)
+            return (int)(i - entities.begin());
+    }
+    return -1;
+}

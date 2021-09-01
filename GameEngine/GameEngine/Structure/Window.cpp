@@ -25,7 +25,7 @@ Window::~Window()
 
 bool Window::Create(int width, int height, bool fullscreen, const std::string &caption)
 {
-    flags = SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE;
+    flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE; // SDL_WINDOW_ALLOW_HIGHDPI
     this->width = width;
     this->height = height;
     this->fullscreen = fullscreen;

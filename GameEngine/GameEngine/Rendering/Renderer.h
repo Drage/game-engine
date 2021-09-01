@@ -56,8 +56,12 @@ namespace DrageEngine
             Matrix4x4 viewProjectionMatrix;
         
             bool editorSelectionMode;
-            Shader *editorSelectShader;
             int currentSceneIndex;
+        
+            unsigned selectedObjectsMaskFbo;
+            unsigned selectedObjectsMaskTexture;
+            unsigned selectedObjectsMaskDepthBuffer;
+            Shader* editorSelectionShader;
     };
 
     class RenderOption

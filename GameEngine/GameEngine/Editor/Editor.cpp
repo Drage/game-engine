@@ -20,7 +20,11 @@ void Editor::Update()
 {
     camera->Update();
     
+    static Vector2 mouseDownPosition;
     if (app->input->GetMouseButtonDown(Mouse::Button::LEFT))
+        mouseDownPosition = app->input->GetMousePosition();
+
+    if (app->input->GetMouseButtonUp(Mouse::Button::LEFT) && (mouseDownPosition - app->input->GetMousePosition()).Magnitude() == 0)
     {
         app->renderer->SetEditorSelectionModeEnabled(true);
         
@@ -32,10 +36,27 @@ void Editor::Update()
         Vector2 mousePosition = app->input->GetMousePosition();
         int pickedIndex = app->renderer->GetSceneObjectIndexAtScreenPosition(mousePosition);
         
+        selection.clear();
         Entity* selected = scene->GetEntityByIndex(pickedIndex);
         if (selected)
-            LOG(selected->GetName());
+            selection.push_back(selected);
         
         app->renderer->SetEditorSelectionModeEnabled(false);
     }
+}
+
+const std::vector<Entity*>& Editor::GetSelection() const
+{
+    return selection;
+}
+
+const std::vector<int> Editor::GetSelectionSceneIndexes() const
+{
+    std::vector<int> indexes;
+    const Scene* scene = app->GetActiveScene();
+    
+    for (std::vector<Entity*>::const_iterator i = selection.begin(); i != selection.end(); i++)
+        indexes.push_back(scene->GetIndexOfEntity(*i));
+    
+    return indexes;
 }

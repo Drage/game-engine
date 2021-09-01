@@ -1,6 +1,7 @@
 
 #version 410 core
 
+#include "Core.frag"
 #include "Lighting.frag"
 
 uniform mat4 modelMatrix;
@@ -10,9 +11,7 @@ in vec3 fragPosition;
 in vec2 fragTexCoord;
 in vec3 fragNormal;
 
-out vec4 fragColor;
-
 void main()
 {
-    fragColor = ApplyLighting(modelMatrix, cameraPosition, fragPosition, fragNormal, fragTexCoord);
+    SetFinalOutput(ApplyLighting(modelMatrix, cameraPosition, fragPosition, fragNormal, fragTexCoord));
 }

@@ -272,7 +272,7 @@ void Shader::CheckAndLogStatus(unsigned shaderID, int statusType)
         
         std::vector<char> errorMessage(infoLogLength+1);
         glGetShaderInfoLog(shaderID, infoLogLength, NULL, &errorMessage[0]);
-        ERROR(&errorMessage[0]);
+        ERROR(name + ": " + &errorMessage[0]);
     }
 }
 

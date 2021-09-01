@@ -99,8 +99,15 @@
 		4083B4E223250D4C00A72B43 /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
 		40978DA5233544A40082F63E /* Default.material */ = {isa = PBXFileReference; lastKnownFileType = text; name = Default.material; path = DemoGame/Assets/Default.material; sourceTree = SOURCE_ROOT; };
 		D06899732412E2C300ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		D0E64B7126DB45FA00B86CA3 /* EditorSelect.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = EditorSelect.frag; sourceTree = "<group>"; };
-		D0E64B7226DB461700B86CA3 /* EditorSelect.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelect.shader; sourceTree = "<group>"; };
+		D0E64B7426DEA7E700B86CA3 /* Core.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Core.frag; sourceTree = "<group>"; };
+		D0E64B7526DF042700B86CA3 /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
+		D0E64B7626DF042E00B86CA3 /* FullScreenQuad.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = FullScreenQuad.vert; sourceTree = "<group>"; };
+		D0E64B7726DF087200B86CA3 /* Outline.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Outline.frag; sourceTree = "<group>"; };
+		D0E64B7A26DF513800B86CA3 /* Volcano.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Volcano.obj; sourceTree = "<group>"; };
+		D0E64B7B26DF513800B86CA3 /* Volcano.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Volcano.tga; sourceTree = "<group>"; };
+		D0E64B7C26DF513800B86CA3 /* Volcano.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Volcano.material; sourceTree = "<group>"; };
+		D0E64B8126DF51FA00B86CA3 /* Volcano.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Volcano.material; sourceTree = "<group>"; };
+		D0E64B8226DF521000B86CA3 /* Volcano.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Volcano.tga; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +199,8 @@
 		406414AD2358D1D7000F994F /* Terrain */ = {
 			isa = PBXGroup;
 			children = (
+				D0E64B7926DF513800B86CA3 /* Volcano */,
+				D0E64B7F26DF51C800B86CA3 /* Volcano */,
 				406414AE2358D1D7000F994F /* Terrain.material */,
 				406414AF2358D1D7000F994F /* Heightmap.tga */,
 				406414B02358D1D7000F994F /* Sand.tga */,
@@ -217,6 +226,7 @@
 		4083B4C3231FEDDD00A72B43 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D0E64B8026DF51E800B86CA3 /* Volcano */,
 				406414BD235C768E000F994F /* Car */,
 				406414AD2358D1D7000F994F /* Terrain */,
 				406414A72358D182000F994F /* Water */,
@@ -234,8 +244,10 @@
 				4083B4E223250D4C00A72B43 /* Standard.shader */,
 				4062B8FE231818E400F44658 /* Standard.vert */,
 				4062B8FF2318196000F44658 /* Standard.frag */,
-				D0E64B7126DB45FA00B86CA3 /* EditorSelect.frag */,
-				D0E64B7226DB461700B86CA3 /* EditorSelect.shader */,
+				D0E64B7426DEA7E700B86CA3 /* Core.frag */,
+				D0E64B7726DF087200B86CA3 /* Outline.frag */,
+				D0E64B7526DF042700B86CA3 /* EditorSelection.shader */,
+				D0E64B7626DF042E00B86CA3 /* FullScreenQuad.vert */,
 				4083B4E02324CB2A00A72B43 /* Lighting.frag */,
 				40651BD523490D16003BBD50 /* EnvironmentMapping.frag */,
 				40651BDE234A0BA7003BBD50 /* Unlit.shader */,
@@ -250,6 +262,34 @@
 				406414B12359D781000F994F /* Water.frag */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		D0E64B7926DF513800B86CA3 /* Volcano */ = {
+			isa = PBXGroup;
+			children = (
+				D0E64B7A26DF513800B86CA3 /* Volcano.obj */,
+				D0E64B7B26DF513800B86CA3 /* Volcano.tga */,
+				D0E64B7C26DF513800B86CA3 /* Volcano.material */,
+			);
+			name = Volcano;
+			path = DemoGame/Assets/Terrain/Volcano;
+			sourceTree = SOURCE_ROOT;
+		};
+		D0E64B7F26DF51C800B86CA3 /* Volcano */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Volcano;
+			path = ../Volcano;
+			sourceTree = "<group>";
+		};
+		D0E64B8026DF51E800B86CA3 /* Volcano */ = {
+			isa = PBXGroup;
+			children = (
+				D0E64B8226DF521000B86CA3 /* Volcano.tga */,
+				D0E64B8126DF51FA00B86CA3 /* Volcano.material */,
+			);
+			path = Volcano;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

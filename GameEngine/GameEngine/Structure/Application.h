@@ -37,6 +37,8 @@ namespace DrageEngine
             const Scene* GetActiveScene() const;
             void SetActiveScene(Scene *scene);
         
+            bool IsInEditMode() const;
+        
         private:
             bool init;
             bool quit;

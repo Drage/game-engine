@@ -628,8 +628,8 @@
 			children = (
 				D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */,
 				D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */,
-				D02BBDE226D8DF5400B3B639 /* Editor.cpp */,
 				D02BBDE626D8E0A200B3B639 /* Editor.h */,
+				D02BBDE226D8DF5400B3B639 /* Editor.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";

@@ -1,5 +1,4 @@
 
-#include <iostream>
 #include <execinfo.h>
 #include <sstream>
 #include <dlfcn.h>
@@ -8,24 +7,6 @@
 #include "StringUtils.h"
 
 using namespace DrageEngine;
-
-void Debug::Log(const std::string &message, const std::string &file, const int line)
-{
-    std::cout << "ℹ️ " << message << "  [" << file << ":" << line << "]" << std::endl;
-    std::cout << Backtrace();
-}
-
-void Debug::LogWarning(const std::string &message, const std::string &file, const int line)
-{
-    std::cout << "⚠️ " << message << "  [" << file << ":" << line << "]" << std::endl;
-    std::cout << Backtrace();
-}
-
-void Debug::LogError(const std::string &message, const std::string &file, const int line)
-{
-    std::cout << "🛑 " << message << "  [" << file << ":" << line << "]" << std::endl;
-    std::cout << Backtrace();
-}
 
 std::string Debug::Backtrace()
 {

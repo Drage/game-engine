@@ -37,12 +37,30 @@ Renderer::Renderer()
     ViewportResized(app->window->GetWidth(), app->window->GetHeight());
     
     editorSelectionMode = false;
-    editorSelectShader = app->assets->GetShader("EditorSelect.shader");
+    editorSelectionShader = app->assets->GetShader("EditorSelection.shader");
+    
+    glGenTextures(1, &selectedObjectsMaskTexture);
+    glBindTexture(GL_TEXTURE_2D, selectedObjectsMaskTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, app->window->GetWidth(), app->window->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glGenFramebuffers(1, &selectedObjectsMaskFbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, selectedObjectsMaskFbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, selectedObjectsMaskTexture, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void Renderer::ViewportResized(int width, int height)
 {
     glViewport(0, 0, width, height);
+    
+    glBindTexture(GL_TEXTURE_2D, selectedObjectsMaskTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, app->window->GetWidth(), app->window->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Renderer::SetClearColor(const Color &color)
@@ -89,31 +107,6 @@ bool Renderer::RemoveLight(Light *light)
     return false;
 }
 
-void Renderer::BeginRender()
-{
-    static bool noCamErrorShown = false;
-    if (!camera)
-    {
-        if (!noCamErrorShown)
-        {
-            noCamErrorShown = true;
-            ERROR("Unable to render - no camera set");
-        }
-        return;
-    }
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    projectionMatrix = camera->GetProjectionMatrix();
-    viewMatrix = camera->GetViewMatrix();
-    viewProjectionMatrix = projectionMatrix * viewMatrix;
-}
-
-void Renderer::EndRender()
-{
-
-}
-
 void Renderer::ApplyRenderOptions(int options) const
 {
     if (options & RenderOption::RENDER_BACKFACE)
@@ -138,11 +131,36 @@ void Renderer::RevertRenderOptions(int options) const
         glEnable(GL_DEPTH_TEST);
 }
 
+void Renderer::BeginRender()
+{
+    static bool noCamErrorShown = false;
+    if (!camera)
+    {
+        if (!noCamErrorShown)
+        {
+            noCamErrorShown = true;
+            ERROR("Unable to render - no camera set");
+        }
+        return;
+    }
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    projectionMatrix = camera->GetProjectionMatrix();
+    viewMatrix = camera->GetViewMatrix();
+    viewProjectionMatrix = projectionMatrix * viewMatrix;
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, selectedObjectsMaskFbo);
+    glClearColor(1, 1, 1, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 void Renderer::Render(const Renderable *renderable, const Transform *transform, const Material *material, int options) const
 {
     Matrix4x4 modelMatrix = transform->ToMatrix();
     
-    Shader *shader = editorSelectionMode ? editorSelectShader : material->GetShader();
+    Shader *shader = material->GetShader();
     glUseProgram(shader->GetID());
 
     material->ApplyUniforms();
@@ -160,12 +178,31 @@ void Renderer::Render(const Renderable *renderable, const Transform *transform, 
     shader->SetUniform("viewProjectionMatrix", viewProjectionMatrix);
     shader->SetUniform("modelViewProjectionMatrix", viewProjectionMatrix * modelMatrix);
     
+    shader->SetUniform("editorSelectMode", editorSelectionMode);
     if (editorSelectionMode)
     {
         int r = (currentSceneIndex & 0x000000FF) >>  0;
         int g = (currentSceneIndex & 0x0000FF00) >>  8;
         int b = (currentSceneIndex & 0x00FF0000) >> 16;
-        shader->SetUniform("color", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
+        shader->SetUniform("editorIndexColor", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
+    }
+
+    if (app->IsInEditMode())
+    {
+        const std::vector<int> selection = app->editor->GetSelectionSceneIndexes();
+        if (std::find(selection.begin(), selection.end(), currentSceneIndex) != selection.end())
+        {
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, selectedObjectsMaskFbo);
+            
+            GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
+            glDrawBuffers(1, &drawBuffer);
+            
+            shader->SetUniform("editorSelectionStencil", true);
+            renderable->Render();
+            shader->SetUniform("editorSelectionStencil", false);
+            
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+        }
     }
     
     ApplyRenderOptions(options);
@@ -174,6 +211,24 @@ void Renderer::Render(const Renderable *renderable, const Transform *transform, 
     
     RevertRenderOptions(options);
     glUseProgram(NULL);
+}
+
+void Renderer::EndRender()
+{
+    Shader *shader = editorSelectionShader;
+    glUseProgram(shader->GetID());
+    
+    shader->SetUniform("silhouette", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, selectedObjectsMaskTexture);
+    
+    shader->SetUniform("width", shader->GetDefaultUniformValues().Get<int>("width"));
+    shader->SetUniform("color", shader->GetDefaultUniformValues().Get<Vector4>("color"));
+    
+    unsigned vao;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void Renderer::SetEditorSelectionModeEnabled(bool enabled)

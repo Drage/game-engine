@@ -12,6 +12,7 @@ namespace DrageEngine
         public:
             EditorCamera();
             void Update();
+            void SetFocus(const Vector3 &focus);
         
         private:
             void Rotate(const Vector2 &delta);

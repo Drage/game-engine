@@ -30,6 +30,7 @@ namespace DrageEngine
         
             Entity* Find(const std::string &path, Entity *parent = NULL) const;
             Entity* GetEntityByIndex(int index) const;
+            int GetIndexOfEntity(const Entity* entity) const;
         
         private:
             typedef std::vector<Entity*> EntityList;
