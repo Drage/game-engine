@@ -6,6 +6,7 @@
 #include "Array2D.h"
 #include "Vector3.h"
 #include "Renderable.h"
+#include "Mesh.h"
 
 namespace DrageEngine
 {
@@ -34,8 +35,7 @@ namespace DrageEngine
             float resolution;
             Array2D<float> heightmap;
             Array2D<Vector3> normals;
-            unsigned vao;
-            int numIndexes;
+            Mesh mesh;
     };
 }
 

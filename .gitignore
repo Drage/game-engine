@@ -37,3 +37,4 @@ DemoGame/SDL2.framework
 
 #XCode
 GameEngine/Build
+*.xcuserstate

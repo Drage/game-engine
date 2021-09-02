@@ -164,10 +164,8 @@ void Terrain::InitRenderBuffers()
     const int sizeZ = heightmap.GetHeight();
     
     const int numVerts = sizeX * sizeZ;
-    std::vector<Vector3> positionBuffer(numVerts);
-    std::vector<Vector3> normalBuffer(numVerts);
-    std::vector<Vector2> texBuffer(numVerts);
-    std::vector<Vector2> texBuffer2(numVerts);
+    std::vector<Vertex> vertexBuffer(numVerts);
+    std::vector<Vector2> texCoordBuffer(numVerts);
     
     float worldScaleX = (sizeX - 1) * resolution;
     float worldScaleZ = (sizeZ - 1) * resolution;
@@ -185,17 +183,14 @@ void Terrain::InitRenderBuffers()
             float X = S * worldScaleX;
             float Y = height * maxHeight;
             float Z = T * worldScaleZ;
-
-            positionBuffer[index] = Vector3(X, Y, Z);
-            normalBuffer[index] = Vector3(0);
             
-            texBuffer[index] = Vector2(x, z);
-            texBuffer2[index] = Vector2(S, T);
+            vertexBuffer[index] = Vertex(Vector3(X, Y, Z), Vector2(x, z), Vector3(0));
+            texCoordBuffer[index] = Vector2(S, T);
         }
     }
     
     const int numTriangles = (sizeX - 1) * (sizeZ - 1) * 2;
-    numIndexes = numTriangles * 3;
+    const int numIndexes = numTriangles * 3;
     std::vector<unsigned> indexBuffer(numIndexes);
     unsigned index = 0;
     for (int z = 0; z < sizeZ - 1; z++)
@@ -216,64 +211,31 @@ void Terrain::InitRenderBuffers()
 
     for (int i = 0; i < indexBuffer.size(); i += 3)
     {
-        Vector3 v0 = positionBuffer[indexBuffer[i + 0]];
-        Vector3 v1 = positionBuffer[indexBuffer[i + 1]];
-        Vector3 v2 = positionBuffer[indexBuffer[i + 2]];
+        Vector3 v0 = vertexBuffer[indexBuffer[i + 0]].position;
+        Vector3 v1 = vertexBuffer[indexBuffer[i + 1]].position;
+        Vector3 v2 = vertexBuffer[indexBuffer[i + 2]].position;
 
         Vector3 normal = Vector3::Cross(v1 - v0, v2 - v0).Normalize();
 
-        normalBuffer[indexBuffer[i + 0]] += normal;
-        normalBuffer[indexBuffer[i + 1]] += normal;
-        normalBuffer[indexBuffer[i + 2]] += normal;
+        vertexBuffer[indexBuffer[i + 0]].normal += normal;
+        vertexBuffer[indexBuffer[i + 1]].normal += normal;
+        vertexBuffer[indexBuffer[i + 2]].normal += normal;
     }
-    for (int i = 0; i < normalBuffer.size(); i++)
+    for (int i = 0; i < vertexBuffer.size(); i++)
     {
-        normalBuffer[i].Normalize();
+        vertexBuffer[i].normal.Normalize();
     }
     
     for (int z = 0; z < sizeZ; z++)
     {
         for (int x = 0; x < sizeX; x++)
-            normals(x, z) = normalBuffer[z * sizeX + x];
+            normals(x, z) = vertexBuffer[z * sizeX + x].normal;
     }
     
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-    
-    GLuint vbos[5];
-    glGenBuffers(5, vbos);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[0]);
-    glBufferData(GL_ARRAY_BUFFER, positionBuffer.size() * sizeof(Vector3), positionBuffer.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[1]);
-    glBufferData(GL_ARRAY_BUFFER, texBuffer.size() * sizeof(Vector2), texBuffer.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[2]);
-    glBufferData(GL_ARRAY_BUFFER, normalBuffer.size() * sizeof(Vector3), normalBuffer.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[3]);
-    glBufferData(GL_ARRAY_BUFFER, texBuffer2.size() * sizeof(Vector2), texBuffer2.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(3);
-    glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-    
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbos[4]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBuffer.size() * sizeof(unsigned), indexBuffer.data(), GL_STATIC_DRAW);
-    
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    mesh.Generate(vertexBuffer, indexBuffer, texCoordBuffer);
 }
 
 void Terrain::Render() const
 {
-    glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, numIndexes, GL_UNSIGNED_INT, NULL);
-    glBindVertexArray(0);
+    mesh.Render();
 }

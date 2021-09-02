@@ -108,7 +108,7 @@ void Sphere::Init()
         }
     }
     
-    std::vector<int> indicies;
+    std::vector<unsigned> indicies;
     for (int i = 0; i < SLICES * STACKS + SLICES; i++)
     {
         indicies.push_back(i);
