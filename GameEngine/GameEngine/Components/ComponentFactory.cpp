@@ -4,6 +4,7 @@
 #include "LightComponent.h"
 #include "CameraComponent.h"
 #include "CubeComponent.h"
+#include "SphereComponent.h"
 #include "PlaneComponent.h"
 #include "AudioListenerComponent.h"
 #include "AudioSourceComponent.h"
@@ -19,6 +20,7 @@ ComponentFactory::ComponentFactory()
     factory.Register<LightComponent>("Light");
     factory.Register<CameraComponent>("Camera");
     factory.Register<CubeComponent>("Cube");
+    factory.Register<SphereComponent>("Sphere");
     factory.Register<PlaneComponent>("Plane");
     factory.Register<AudioListenerComponent>("AudioListener");
     factory.Register<AudioSourceComponent>("AudioSource");

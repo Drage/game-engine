@@ -1,0 +1,4 @@
+<Material>
+    <shader>Standard.shader</shader>
+    <diffuseMap>BricksAlbedo.jpg</diffuseMap>
+</Material>

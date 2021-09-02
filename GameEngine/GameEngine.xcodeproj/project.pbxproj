@@ -157,6 +157,8 @@
 		D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02BBDE226D8DF5400B3B639 /* Editor.cpp */; };
 		D02BBDE726D8E20D00B3B639 /* Editor.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDE626D8E0A200B3B639 /* Editor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */; };
+		D0E64B8626E0BC7C00B86CA3 /* SphereComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -314,6 +316,8 @@
 		D02BBDE226D8DF5400B3B639 /* Editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Editor.cpp; sourceTree = "<group>"; };
 		D02BBDE626D8E0A200B3B639 /* Editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor.h; sourceTree = "<group>"; };
 		D06899702412E27700ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereComponent.h; sourceTree = "<group>"; };
+		D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereComponent.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,6 +480,8 @@
 				406DCA7C233FD399008C088E /* CameraComponent.cpp */,
 				4010F52823423F6A00D08A02 /* CubeComponent.h */,
 				4010F52923423F6A00D08A02 /* CubeComponent.cpp */,
+				D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */,
+				D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */,
 				40607DAD2344DBFE00F985CD /* AudioListenerComponent.h */,
 				40607DAE2344DBFE00F985CD /* AudioListenerComponent.cpp */,
 				40607DB12344DED700F985CD /* AudioSourceComponent.h */,
@@ -658,6 +664,7 @@
 				408377A5231B6DD500A63D8F /* Random.h in Headers */,
 				40978D9B233532220082F63E /* Bounds.h in Headers */,
 				40651BDB2349D983003BBD50 /* Array2D.h in Headers */,
+				D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */,
 				406414C7235DFAAC000F994F /* ParticleAnimParameter.h in Headers */,
 				40837779231A8F2600A63D8F /* Vector2.h in Headers */,
 				406DCA872340C6B7008C088E /* MouseButtons.h in Headers */,
@@ -870,6 +877,7 @@
 				40651BD4234902D2003BBD50 /* SkyboxComponent.cpp in Sources */,
 				406DCA73233F5F2B008C088E /* LightComponent.cpp in Sources */,
 				406DCA652339229C008C088E /* Scene.cpp in Sources */,
+				D0E64B8626E0BC7C00B86CA3 /* SphereComponent.cpp in Sources */,
 				4083778F231ADE4900A63D8F /* Vector3.cpp in Sources */,
 				406DCA7E233FD399008C088E /* CameraComponent.cpp in Sources */,
 				40837782231A8F2600A63D8F /* Quaternion.cpp in Sources */,

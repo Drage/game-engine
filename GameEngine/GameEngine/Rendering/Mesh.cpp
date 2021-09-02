@@ -9,56 +9,41 @@ using namespace DrageEngine;
 Mesh::Mesh()
 {
     vao = 0;
-    vbo = 0;
+    verticesVbo = 0;
+    indicesVbo = 0;
     vertexCount = 0;
+    indexCount = 0;
     material = NULL;
 }
 
 Mesh::Mesh(const std::string &meshName)
 {
     vao = 0;
-    vbo = 0;
+    verticesVbo = 0;
+    indicesVbo = 0;
+    vertexCount = 0;
+    indexCount = 0;
+    material = NULL;
     name = meshName;
-    vertexCount = 0;
-    material = NULL;
-}
-
-Mesh::Mesh(const std::string &meshName, const std::vector<Vertex> &vertices)
-{
-    vao = 0;
-    vbo = 0;
-    name = meshName;
-    vertexCount = 0;
-    material = NULL;
-    Generate(vertices);
-}
-
-Mesh::Mesh(const std::vector<Vertex> &vertices)
-{
-    vao = 0;
-    vbo = 0;
-    vertexCount = 0;
-    material = NULL;
-    Generate(vertices);
 }
 
 Mesh::~Mesh()
 {
-    glDeleteBuffers(1, &vbo);
+    glDeleteBuffers(1, &verticesVbo);
+    glDeleteBuffers(1, &verticesVbo);
     glDeleteVertexArrays(1, &vao);
 }
 
 unsigned Mesh::Generate(const std::vector<Vertex> &vertices)
 {
     vertexCount = (int)vertices.size();
-    
+
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
     
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+    glGenBuffers(1, &verticesVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, verticesVbo);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), NULL);
@@ -75,6 +60,38 @@ unsigned Mesh::Generate(const std::vector<Vertex> &vertices)
     return vao;
 }
 
+unsigned Mesh::Generate(const std::vector<Vertex> &vertices, const std::vector<int> &indices)
+{
+    vertexCount = (int)vertices.size();
+    indexCount = (int)indices.size();
+
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+    
+    glGenBuffers(1, &verticesVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, verticesVbo);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+    
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), NULL);
+    
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)(3 * sizeof(GLfloat)));
+    
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)(5 * sizeof(GLfloat)));
+    
+    glGenBuffers(1, &indicesVbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVbo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(int), indices.data(), GL_STATIC_DRAW);
+    
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    
+    return vao;
+}
+
 unsigned Mesh::GetID() const
 {
     return vao;
@@ -83,11 +100,6 @@ unsigned Mesh::GetID() const
 const std::string& Mesh::GetName() const
 {
     return name;
-}
-
-int Mesh::GetVertexCount() const
-{
-    return vertexCount;
 }
 
 Material* Mesh::GetMaterial() const
@@ -103,6 +115,11 @@ void Mesh::SetMaterial(Material *material)
 void Mesh::Render() const
 {
     glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+    
+    if (indexCount != 0)
+        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, NULL);
+    else
+        glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+    
     glBindVertexArray(0);
 }

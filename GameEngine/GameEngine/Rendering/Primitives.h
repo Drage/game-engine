@@ -3,6 +3,7 @@
 #define PRIMITIVES_H
 
 #include "Renderable.h"
+#include "Mesh.h"
 
 namespace DrageEngine
 {
@@ -14,7 +15,7 @@ namespace DrageEngine
         private:
             static void Init();
             static bool init;
-            static unsigned vao;
+            static Mesh mesh;
     };
     
     class Sphere : public Renderable
@@ -27,7 +28,7 @@ namespace DrageEngine
             static const int SLICES;
             static const int STACKS;
             static bool init;
-            static unsigned vao;
+            static Mesh mesh;
     };
 
     class Plane : public Renderable
@@ -38,7 +39,7 @@ namespace DrageEngine
         private:
             static void Init();
             static bool init;
-            static unsigned vao;
+            static Mesh mesh;
     };
 
     class Billboard : public Renderable
@@ -49,7 +50,7 @@ namespace DrageEngine
         private:
             static void Init();
             static bool init;
-            static unsigned vao;
+            static Mesh mesh;
     };
 }
 

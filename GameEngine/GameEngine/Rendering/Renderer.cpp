@@ -214,7 +214,7 @@ void Renderer::Render(const Renderable *renderable, const Transform *transform, 
 }
 
 void Renderer::EndRender()
-{
+{    
     Shader *shader = editorSelectionShader;
     glUseProgram(shader->GetID());
     

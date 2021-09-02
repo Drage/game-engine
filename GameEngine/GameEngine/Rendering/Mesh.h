@@ -15,16 +15,13 @@ namespace DrageEngine
         public:
             Mesh();
             Mesh(const std::string &name);
-            Mesh(const std::string &name, const std::vector<Vertex> &vertices);
-            Mesh(const std::vector<Vertex> &vertices);
             ~Mesh();
 
             unsigned Generate(const std::vector<Vertex> &vertices);
+            unsigned Generate(const std::vector<Vertex> &vertices, const std::vector<int> &indices);
         
             unsigned GetID() const;
             const std::string& GetName() const;
-        
-            int GetVertexCount() const;
         
             Material* GetMaterial() const;
             void SetMaterial(Material *material);
@@ -33,9 +30,11 @@ namespace DrageEngine
         
         private:
             unsigned vao;
-            unsigned vbo;
-            std::string name;
+            unsigned verticesVbo;
+            unsigned indicesVbo;
             int vertexCount;
+            int indexCount;
+            std::string name;
             Material *material;
     };
 }
