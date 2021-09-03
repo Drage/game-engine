@@ -1,4 +1,7 @@
 
+#ifndef DRAGEENGINE_H
+#define DRAGEENGINE_H
+
 // Structure
 #include "Application.h"
 #include "Window.h"
@@ -44,6 +47,8 @@
 #include "Vertex.h"
 #include "Mesh.h"
 #include "Cubemap.h"
+#include "Renderable.h"
+#include "Primitives.h"
 
 // Input
 #include "KeyCodes.h"
@@ -75,3 +80,5 @@
 #include "FileSystem.h"
 #include "XMLDocument.h"
 #include "StringUtils.h"
+
+#endif

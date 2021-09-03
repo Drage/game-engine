@@ -109,14 +109,17 @@ void Mesh::SetMaterial(Material *material)
     this->material = material;
 }
 
-void Mesh::Render() const
+bool Mesh::HasIndices() const
 {
-    glBindVertexArray(vao);
-    
-    if (indexCount != 0)
-        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, NULL);
-    else
-        glDrawArrays(GL_TRIANGLES, 0, vertexCount);
-    
-    glBindVertexArray(0);
+    return indexCount > 0;
+}
+
+int Mesh::GetVertexCount() const
+{
+    return vertexCount;
+}
+
+int Mesh::GetIndexCount() const
+{
+    return indexCount;
 }

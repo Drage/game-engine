@@ -235,7 +235,7 @@ void Terrain::InitRenderBuffers()
     mesh.Generate(vertexBuffer, indexBuffer, texCoordBuffer);
 }
 
-void Terrain::Render() const
+const Mesh* Terrain::GetMesh() const
 {
-    mesh.Render();
+    return &mesh;
 }

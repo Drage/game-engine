@@ -23,7 +23,7 @@
     <Prefab>
         <prefab>Car.prefab</prefab>
         <name>Player</name>
-        <position>335, 0, 135</position>
+        <position>0, 3, 0</position>
         <rotation>0, 45, 0</position>
         <Racer></Racer>
     </Prefab>
@@ -66,7 +66,9 @@
     </Entity>
     <Entity>
         <name>Clouds</name>
+        <position>256, 0, 256</position>
         <Clouds>
+            <enabled>false</enabled>
             <count>10</count>
             <orbitRadius>500</orbitRadius>
             <minYPosition>25</minYPosition>
@@ -82,7 +84,14 @@
         <position>0, 10, 0</position>
         <scale>10, 10, 10</scale>
         <Sphere>
-            <enabled>false</enabled>
+            <material>Sphere.material</material>
+        </Sphere>
+    </Entity>
+    <Entity>
+        <name>Sphere2</name>
+        <position>20, 10, 0</position>
+        <scale>10, 10, 10</scale>
+        <Sphere>
             <material>Sphere.material</material>
         </Sphere>
     </Entity>

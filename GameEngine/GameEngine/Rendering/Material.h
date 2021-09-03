@@ -15,12 +15,17 @@ namespace DrageEngine
             Material();
             bool Load(const std::string &filename);
 
-            Shader* GetShader() const;
+            const Shader* GetShader() const;
             void ApplyUniforms() const;
+        
+            unsigned GetID() const;
+        
+            bool IsTransparent() const;
         
         private:
             std::string name;
             Shader *shader;
+            bool transparent;
         
             typedef struct Attribute
             {
@@ -42,6 +47,9 @@ namespace DrageEngine
             }
         
             AttributeList attributes;
+        
+            static unsigned nextMaterialId;
+            unsigned id;
     };
 }
 

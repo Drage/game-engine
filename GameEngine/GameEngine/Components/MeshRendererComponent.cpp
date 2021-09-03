@@ -11,10 +11,7 @@ void MeshRendererComponent::Init(const ParamList &params)
     
     std::string materialName = params.Get<std::string>("material");
     material = materialName != "" ? app->assets->GetMaterial(materialName) : NULL;
-}
-
-void MeshRendererComponent::Render(Renderer *renderer, const Transform *transform) const
-{
+    
     if (model)
     {
         for (int i = 0; i < model->GetMeshCount(); i++)
@@ -29,7 +26,13 @@ void MeshRendererComponent::Render(Renderer *renderer, const Transform *transfor
             if (!material)
                 material = app->assets->GetMaterial("Default.material");
             
-            renderer->Render(mesh, transform, material);
+            renderables.push_back(new Renderable(mesh, material, entity));
         }
     }
+}
+
+MeshRendererComponent::~MeshRendererComponent()
+{
+    for (int i = 0; i < renderables.size(); i++)
+        delete renderables[i];
 }

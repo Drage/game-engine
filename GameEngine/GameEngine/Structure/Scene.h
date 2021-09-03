@@ -4,7 +4,6 @@
 
 #include <vector>
 #include "Entity.h"
-#include "Renderer.h"
 #include "XMLDocument.h"
 
 namespace DrageEngine
@@ -20,7 +19,6 @@ namespace DrageEngine
         
             void Start();
             void Update();
-            void Render(Renderer *renderer) const;
         
             void Add(Entity *entity);
             bool Remove(Entity *entity);

@@ -6,11 +6,10 @@
 #include <string>
 #include "Vertex.h"
 #include "Material.h"
-#include "Renderable.h"
 
 namespace DrageEngine
 {
-    class Mesh : public Renderable
+    class Mesh
     {
         public:
             Mesh();
@@ -33,7 +32,9 @@ namespace DrageEngine
             Material* GetMaterial() const;
             void SetMaterial(Material *material);
         
-            void Render() const;
+            bool HasIndices() const;
+            int GetVertexCount() const;
+            int GetIndexCount() const;
         
         private:
             template<class T>

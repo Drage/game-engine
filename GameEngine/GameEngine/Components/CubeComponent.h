@@ -3,8 +3,7 @@
 #define CUBECOMPONENT_H
 
 #include "Component.h"
-#include "Material.h"
-#include "Primitives.h"
+#include "Renderable.h"
 
 namespace DrageEngine
 {
@@ -12,11 +11,10 @@ namespace DrageEngine
     {
         public:
             void Init(const ParamList &params);
-            void Render(Renderer *renderer, const Transform *transform = NULL) const;
+            ~CubeComponent();
         
         private:
-            Material *material;
-            Cube mesh;
+            Renderable *cube;
     };
 }
 

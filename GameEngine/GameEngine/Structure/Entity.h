@@ -6,8 +6,6 @@
 #include <string>
 #include "Component.h"
 #include "Transform.h"
-#include "Renderer.h"
-#include "Debug.h"
 
 namespace DrageEngine
 {
@@ -20,7 +18,6 @@ namespace DrageEngine
             void Init(ParamList &params);
             void Start();
             void Update();
-            void Render(Renderer *renderer, const Transform *transform = NULL) const;
         
             inline void Destroy() { destroyed = true; }
             inline bool IsDestroyed() const { return destroyed; }
@@ -51,6 +48,7 @@ namespace DrageEngine
                 return NULL;
             }
         
+            Transform GetGlobalTransform() const;
             Transform transform;
         
         private:        

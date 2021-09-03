@@ -5,12 +5,11 @@
 #include <string>
 #include "Array2D.h"
 #include "Vector3.h"
-#include "Renderable.h"
 #include "Mesh.h"
 
 namespace DrageEngine
 {
-    class Terrain : public Renderable
+    class Terrain
     {
         public:
             Terrain();
@@ -25,7 +24,7 @@ namespace DrageEngine
             Vector3 NormalAt(const Vector3 &worldPosition) const;
             Vector3 NormalAt(float x, float z) const;
         
-            void Render() const;
+            const Mesh* GetMesh() const;
         
         private:
             float GetHeightFromPixelData(unsigned char* data, unsigned bpp) const;

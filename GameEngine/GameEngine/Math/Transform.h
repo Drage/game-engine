@@ -20,6 +20,8 @@ namespace DrageEngine
             Transform(const Matrix4x4 &matrix);
             Transform(ParamList &params);
         
+            void operator= (const Transform &other);
+        
             Transform operator* (const Transform &other) const;
             void operator*= (const Transform &other);
         

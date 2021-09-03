@@ -11,11 +11,13 @@
 
 using namespace DrageEngine;
 
-bool Cube::init = false;
-Mesh Cube::mesh;
+Mesh* Primitive::cube = NULL;
 
-void Cube::Init()
+const Mesh* Primitive::Cube()
 {
+    if (cube != NULL)
+        return cube;
+    
     std::vector<Vertex> vertices
     {
         //        X    Y     Z       U     V           Normal
@@ -68,36 +70,32 @@ void Cube::Init()
         Vertex( 0.5f, 0.5f, 0.5f,   0.0f, 1.0f,   1.0f, 0.0f, 0.0f)
     };
     
-    mesh.Generate(vertices);
-    init = true;
+    cube = new Mesh();
+    cube->Generate(vertices);
+    return cube;
 }
 
-void Cube::Render() const
+
+Mesh* Primitive::sphere = NULL;
+
+const int Primitive::SPHERE_SLICES = 64;
+const int Primitive::SPHERE_STACKS = 64;
+
+const Mesh* Primitive::Sphere()
 {
-    if (!init)
-        Init();
+    if (sphere != NULL)
+        return sphere;
     
-    mesh.Render();
-}
-
-
-bool Sphere::init = false;
-Mesh Sphere::mesh;
-const int Sphere::SLICES = 64;
-const int Sphere::STACKS = 64;
-
-void Sphere::Init()
-{
     std::vector<Vertex> vertices;
     
-    for (int i = 0; i <= STACKS; i++)
+    for (int i = 0; i <= SPHERE_STACKS; i++)
     {
-        float v = i / (float)STACKS;
+        float v = i / (float)SPHERE_STACKS;
         float phi = v * PI;
 
-        for (int j = 0; j <= SLICES; j++)
+        for (int j = 0; j <= SPHERE_SLICES; j++)
         {
-            float u = j / (float)SLICES;
+            float u = j / (float)SPHERE_SLICES;
             float theta = u * PI * 2;
 
             float x = cos(theta) * sin(phi);
@@ -109,34 +107,30 @@ void Sphere::Init()
     }
     
     std::vector<unsigned> indicies;
-    for (int i = 0; i < SLICES * STACKS + SLICES; i++)
+    for (int i = 0; i < SPHERE_SLICES * SPHERE_STACKS + SPHERE_SLICES; i++)
     {
         indicies.push_back(i);
-        indicies.push_back(i + SLICES + 1);
-        indicies.push_back(i + SLICES);
+        indicies.push_back(i + SPHERE_SLICES + 1);
+        indicies.push_back(i + SPHERE_SLICES);
     
-        indicies.push_back(i + SLICES + 1);
+        indicies.push_back(i + SPHERE_SLICES + 1);
         indicies.push_back(i);
         indicies.push_back(i + 1);
     }
     
-    mesh.Generate(vertices, indicies);
-    init = true;
+    sphere = new Mesh();
+    sphere->Generate(vertices, indicies);
+    return sphere;
 }
 
-void Sphere::Render() const
+
+Mesh* Primitive::plane = NULL;
+
+const Mesh* Primitive::Plane()
 {
-    if (!init)
-        Init();
+    if (plane != NULL)
+        return plane;
     
-    mesh.Render();
-}
-
-bool Plane::init = false;
-Mesh Plane::mesh;
-
-void Plane::Init()
-{
     std::vector<Vertex> vertices
     {
         //       X     Y     Z       U     V           Normal
@@ -148,23 +142,19 @@ void Plane::Init()
         Vertex( 0.5f, 0.0f, 0.5f,   1.0f, 1.0f,   0.0f, 1.0f, 0.0f),
     };
     
-    mesh.Generate(vertices);
-    init = true;
+    plane = new Mesh();
+    plane->Generate(vertices);
+    return plane;
 }
 
-void Plane::Render() const
+
+Mesh* Primitive::billboard = NULL;
+
+const Mesh* Primitive::Billboard()
 {
-    if (!init)
-        Init();
+    if (billboard != NULL)
+        return billboard;
     
-    mesh.Render();
-}
-
-bool Billboard::init = false;
-Mesh Billboard::mesh;
-
-void Billboard::Init()
-{
     std::vector<Vertex> vertices
     {
         //       X    Y     Z        U     V      Normal
@@ -176,15 +166,7 @@ void Billboard::Init()
         Vertex(-0.5f,-0.5f, 0.0f,   0.0f, 0.0f,   0, 0, 0),
     };
     
-    mesh.Generate(vertices);
-    init = true;
+    billboard = new Mesh();
+    billboard->Generate(vertices);
+    return billboard;
 }
-
-void Billboard::Render() const
-{
-    if (!init)
-        Init();
-    
-    mesh.Render();
-}
-

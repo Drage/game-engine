@@ -18,8 +18,3 @@ void DemoGame::Update()
 {
     scene->Update();
 }
-
-void DemoGame::Render(Renderer *renderer)
-{
-    scene->Render(renderer);
-}

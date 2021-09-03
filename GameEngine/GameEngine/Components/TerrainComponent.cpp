@@ -16,9 +16,11 @@ void TerrainComponent::Init(const ParamList &params)
     material = app->assets->GetMaterial(materialName);
     
     disableDepthWrite = params.Get<bool>("disableDepthWrite");
+    
+    renderable = new Renderable(GetMesh(), material, entity, disableDepthWrite ? RenderOption::NO_DEPTH_WRITE : 0);
 }
 
-void TerrainComponent::Render(Renderer *renderer, const Transform *transform) const
+TerrainComponent::~TerrainComponent()
 {
-    renderer->Render(this, transform, material, disableDepthWrite ? RenderOption::NO_DEPTH_WRITE : 0);
+    delete renderable;
 }

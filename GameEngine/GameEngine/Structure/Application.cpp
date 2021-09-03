@@ -82,9 +82,7 @@ void Application::Run(Game *game)
         else
             editor->Update();
 
-        renderer->BeginRender();
-        game->Render(renderer);
-        renderer->EndRender();
+        renderer->Render();
         window->SwapBuffers();
     }
 }

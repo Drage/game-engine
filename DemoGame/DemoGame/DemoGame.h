@@ -12,7 +12,6 @@ class DemoGame : public Game
         virtual void Load();
         virtual void Start();
         virtual void Update();
-        virtual void Render(Renderer *renderer);
     
     private:
         Scene *scene;

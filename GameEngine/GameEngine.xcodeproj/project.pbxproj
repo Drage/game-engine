@@ -75,7 +75,6 @@
 		40651BD82349D5D2003BBD50 /* Terrain.h in Headers */ = {isa = PBXBuildFile; fileRef = 40651BD62349D5D2003BBD50 /* Terrain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40651BD92349D5D2003BBD50 /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40651BD72349D5D2003BBD50 /* Terrain.cpp */; };
 		40651BDB2349D983003BBD50 /* Array2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 40651BDA2349D983003BBD50 /* Array2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4065392D2354C16600644D01 /* Renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = 4065392B2354C16600644D01 /* Renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4066CCF423464A5300496404 /* Joystick.h in Headers */ = {isa = PBXBuildFile; fileRef = 4066CCF323464A5300496404 /* Joystick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4066CCFA234781F000496404 /* Cubemap.h in Headers */ = {isa = PBXBuildFile; fileRef = 4066CCF8234781F000496404 /* Cubemap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4066CCFB234781F000496404 /* Cubemap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4066CCF9234781F000496404 /* Cubemap.cpp */; };
@@ -157,7 +156,9 @@
 		D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02BBDE226D8DF5400B3B639 /* Editor.cpp */; };
 		D02BBDE726D8E20D00B3B639 /* Editor.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDE626D8E0A200B3B639 /* Editor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */; };
+		D054156A26E1C7E600600C98 /* Renderable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D054156926E1C7E600600C98 /* Renderable.cpp */; };
+		D054156B26E1E1C200600C98 /* Renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = D054156826E1C78100600C98 /* Renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E64B8626E0BC7C00B86CA3 /* SphereComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */; };
 /* End PBXBuildFile section */
 
@@ -232,7 +233,6 @@
 		40651BD62349D5D2003BBD50 /* Terrain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		40651BD72349D5D2003BBD50 /* Terrain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Terrain.cpp; sourceTree = "<group>"; };
 		40651BDA2349D983003BBD50 /* Array2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Array2D.h; sourceTree = "<group>"; };
-		4065392B2354C16600644D01 /* Renderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderable.h; sourceTree = "<group>"; };
 		4066CCF323464A5300496404 /* Joystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Joystick.h; sourceTree = "<group>"; };
 		4066CCF8234781F000496404 /* Cubemap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cubemap.h; sourceTree = "<group>"; };
 		4066CCF9234781F000496404 /* Cubemap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cubemap.cpp; sourceTree = "<group>"; };
@@ -315,6 +315,8 @@
 		D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorCamera.cpp; sourceTree = "<group>"; };
 		D02BBDE226D8DF5400B3B639 /* Editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Editor.cpp; sourceTree = "<group>"; };
 		D02BBDE626D8E0A200B3B639 /* Editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor.h; sourceTree = "<group>"; };
+		D054156826E1C78100600C98 /* Renderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderable.h; sourceTree = "<group>"; };
+		D054156926E1C7E600600C98 /* Renderable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderable.cpp; sourceTree = "<group>"; };
 		D06899702412E27700ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereComponent.h; sourceTree = "<group>"; };
 		D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereComponent.cpp; sourceTree = "<group>"; };
@@ -480,8 +482,8 @@
 				406DCA7C233FD399008C088E /* CameraComponent.cpp */,
 				4010F52823423F6A00D08A02 /* CubeComponent.h */,
 				4010F52923423F6A00D08A02 /* CubeComponent.cpp */,
-				D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */,
 				D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */,
+				D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */,
 				40607DAD2344DBFE00F985CD /* AudioListenerComponent.h */,
 				40607DAE2344DBFE00F985CD /* AudioListenerComponent.cpp */,
 				40607DB12344DED700F985CD /* AudioSourceComponent.h */,
@@ -574,7 +576,8 @@
 			children = (
 				401B7893231B76CC00E6B4F0 /* Renderer.h */,
 				401B7899231B76CC00E6B4F0 /* Renderer.cpp */,
-				4065392B2354C16600644D01 /* Renderable.h */,
+				D054156826E1C78100600C98 /* Renderable.h */,
+				D054156926E1C7E600600C98 /* Renderable.cpp */,
 				408377A9231B6E5700A63D8F /* Primitives.h */,
 				408377A8231B6E5700A63D8F /* Primitives.cpp */,
 				401B7894231B76CC00E6B4F0 /* Camera.h */,
@@ -675,7 +678,6 @@
 				40708D1C23266B0800A796AD /* Material.h in Headers */,
 				4066CCF423464A5300496404 /* Joystick.h in Headers */,
 				40978D91233512C30082F63E /* Vertex.h in Headers */,
-				4065392D2354C16600644D01 /* Renderable.h in Headers */,
 				40978D92233512C80082F63E /* Mesh.h in Headers */,
 				40978D9623352FF40082F63E /* Model.h in Headers */,
 				401B793F231D6D0500E6B4F0 /* ImagePNG.h in Headers */,
@@ -686,6 +688,7 @@
 				406414712354DFA3000F994F /* BillboardComponent.h in Headers */,
 				40978DA3233535280082F63E /* ModelFactory.h in Headers */,
 				40837778231A8F2600A63D8F /* Matrix4x4.h in Headers */,
+				D054156B26E1E1C200600C98 /* Renderable.h in Headers */,
 				40607D9E23434B6D00F985CD /* AudioClip.h in Headers */,
 				40607D9A2343480700F985CD /* AudioManager.h in Headers */,
 				401B7943231D6F4300E6B4F0 /* ArrayUtils.h in Headers */,
@@ -846,6 +849,7 @@
 				408377AA231B6E5700A63D8F /* Primitives.cpp in Sources */,
 				4083779C231AE9F500A63D8F /* Timer.cpp in Sources */,
 				40DCFED82329358100164DE9 /* StringUtils.cpp in Sources */,
+				D054156A26E1C7E600600C98 /* Renderable.cpp in Sources */,
 				400F3B47234A3C900062DBF5 /* Bounds.cpp in Sources */,
 				4066CCFB234781F000496404 /* Cubemap.cpp in Sources */,
 				406DCA852340AB9B008C088E /* Input.cpp in Sources */,

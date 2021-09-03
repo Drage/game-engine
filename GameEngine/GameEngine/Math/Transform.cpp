@@ -29,6 +29,13 @@ Transform::Transform(ParamList &params)
     scale = params.Get<Vector3>("scale", Vector3::ONE);
 }
 
+void Transform::operator= (const Transform &other)
+{
+    position = other.position;
+    rotation = other.rotation;
+    scale = other.scale;
+}
+
 Transform Transform::operator* (const Transform &other) const
 {
     Transform result;

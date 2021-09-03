@@ -3,6 +3,7 @@
 #define LIGHTCOMPONENT_H
 
 #include "Component.h"
+#include "Light.h"
 
 namespace DrageEngine
 {

@@ -3,6 +3,7 @@
 #define CAMERACOMPONENT_H
 
 #include "Component.h"
+#include "Camera.h"
 
 namespace DrageEngine
 {

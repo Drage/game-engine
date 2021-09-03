@@ -16,8 +16,7 @@ namespace DrageEngine
         
             void Update();
         
-            const std::vector<Entity*>& GetSelection() const;
-            const std::vector<int> GetSelectionSceneIndexes() const;
+            bool IsSelected(Entity* entity) const;
         
             EditorCamera *camera;
         

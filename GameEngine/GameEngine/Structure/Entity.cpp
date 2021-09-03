@@ -58,24 +58,6 @@ void Entity::Update()
         (*i)->Update();
 }
 
-void Entity::Render(Renderer *renderer, const Transform *transform) const
-{
-    Transform combinedTransform;
-    if (!transform)
-        combinedTransform = this->transform;
-    else
-        combinedTransform = (*transform) * this->transform;
-    
-    for (ComponentList::const_iterator i = components.begin(); i != components.end(); i++)
-    {
-        if ((*i)->IsEnabled())
-            (*i)->Render(renderer, &combinedTransform);
-    }
-
-    for (EntityList::const_iterator i = children.begin(); i != children.end(); i++)
-        (*i)->Render(renderer, &combinedTransform);
-}
-
 void Entity::SetParent(Entity *obj)
 {
     parent = obj;
@@ -139,4 +121,16 @@ bool Entity::RemoveComponent(Component *component)
         }
     }
     return false;
+}
+
+Transform Entity::GetGlobalTransform() const
+{
+    Transform global = this->transform;
+    const Entity *entity = this;
+    while (entity->parent != NULL)
+    {
+        entity = entity->parent;
+        global *= entity->transform;
+    }
+    return global;
 }

@@ -2,16 +2,19 @@
 #include "BillboardComponent.h"
 #include "Application.h"
 #include "Primitives.h"
+#include "Material.h"
 
 using namespace DrageEngine;
 
 void BillboardComponent::Init(const ParamList &params)
 {
     std::string materialName = params.Get<std::string>("material");
-    material = app->assets->GetMaterial(materialName);
+    Material *material = app->assets->GetMaterial(materialName);
+    
+    billboard = new Renderable(Primitive::Billboard(), material, entity);
 }
 
-void BillboardComponent::Render(Renderer *renderer, const Transform *transform) const
+BillboardComponent::~BillboardComponent()
 {
-    renderer->Render(&mesh, transform, material);
+    delete billboard;
 }

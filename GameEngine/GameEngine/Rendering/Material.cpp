@@ -12,9 +12,11 @@
 
 using namespace DrageEngine;
 
+unsigned Material::nextMaterialId = 1;
+
 Material::Material()
 {
-    
+    id = nextMaterialId++;
 }
 
 bool Material::Load(const std::string &filename)
@@ -28,8 +30,9 @@ bool Material::Load(const std::string &filename)
     ParamList params;
     xml.root.ToParamList(params);
     
-    std::string shaderFilename = params.Get<std::string>("shader");
+    transparent = params.Get<bool>("transparent", false);
     
+    std::string shaderFilename = params.Get<std::string>("shader");
     shader = app->assets->GetShader(shaderFilename);
     
     params.Merge(shader->GetDefaultUniformValues(), false);
@@ -91,7 +94,7 @@ bool Material::Load(const std::string &filename)
     return true;
 }
 
-Shader* Material::GetShader() const
+const Shader* Material::GetShader() const
 {
     return shader;
 }
@@ -136,4 +139,14 @@ void Material::ApplyUniforms() const
                 break;
         }
     }
+}
+
+unsigned Material::GetID() const
+{
+    return id;
+}
+
+bool Material::IsTransparent() const
+{
+    return transparent;
 }

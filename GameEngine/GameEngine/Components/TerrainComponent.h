@@ -6,6 +6,7 @@
 #include "Component.h"
 #include "Terrain.h"
 #include "Material.h"
+#include "Renderable.h"
 
 namespace DrageEngine
 {
@@ -13,11 +14,12 @@ namespace DrageEngine
     {
         public:
             void Init(const ParamList &params);
-            void Render(Renderer *renderer, const Transform *transform = NULL) const;
+            ~TerrainComponent();
         
         private:
             Material *material;
             bool disableDepthWrite;
+            Renderable *renderable;
     };
 }
 

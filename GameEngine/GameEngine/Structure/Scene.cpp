@@ -54,18 +54,6 @@ void Scene::Update()
     }
 }
 
-void Scene::Render(Renderer *renderer) const
-{
-    for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
-    {
-        int index = (int)(i - entities.begin());
-        renderer->SetSceneIndex(index);
-        
-        if ((*i)->IsActive())
-            (*i)->Render(renderer);
-    }
-}
-
 void Scene::Add(Entity *entity)
 {
     if (entity->GetParent() == NULL)

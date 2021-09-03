@@ -11,10 +11,11 @@
 		4048AEEC2312E01700A7152A /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4048AEEB2312E01700A7152A /* Main.cpp */; };
 		406327DB234B6F4D009B243F /* Racer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406327DA234B6F4D009B243F /* Racer.cpp */; };
 		406327DE234B7DE9009B243F /* Camera3rdPerson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */; };
-		406414752355F8DC000F994F /* Clouds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406414742355F8DC000F994F /* Clouds.cpp */; };
+		406414752355F8DC000F994F /* CloudGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406414742355F8DC000F994F /* CloudGenerator.cpp */; };
 		406DCA6F233E4076008C088E /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA6E233E4076008C088E /* Rotate.cpp */; };
 		40DD5597234FA00100BBA4A9 /* GameEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401184E9232E4B33000B19FB /* GameEngine.framework */; };
 		40DD5598234FA00100BBA4A9 /* GameEngine.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 401184E9232E4B33000B19FB /* GameEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D04077D326E2241E00D0396C /* Cloud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D04077D226E2241E00D0396C /* Cloud.cpp */; };
 		D06899742412E2C300ACAB1C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06899732412E2C300ACAB1C /* SDL2.framework */; };
 		D06899752412E2C300ACAB1C /* SDL2.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = D06899732412E2C300ACAB1C /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -56,8 +57,8 @@
 		406327DC234B7DE9009B243F /* Camera3rdPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera3rdPerson.h; sourceTree = "<group>"; };
 		406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera3rdPerson.cpp; sourceTree = "<group>"; };
 		4064146E2354D881000F994F /* Billboard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Billboard.shader; sourceTree = "<group>"; };
-		406414732355F8DC000F994F /* Clouds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Clouds.h; sourceTree = "<group>"; };
-		406414742355F8DC000F994F /* Clouds.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clouds.cpp; sourceTree = "<group>"; };
+		406414732355F8DC000F994F /* CloudGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudGenerator.h; sourceTree = "<group>"; };
+		406414742355F8DC000F994F /* CloudGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CloudGenerator.cpp; sourceTree = "<group>"; };
 		40641481235600C9000F994F /* Cloud07.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud07.material; sourceTree = "<group>"; };
 		40641482235600C9000F994F /* Cloud06.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud06.material; sourceTree = "<group>"; };
 		40641483235600C9000F994F /* Cloud01.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud01.material; sourceTree = "<group>"; };
@@ -98,6 +99,8 @@
 		4083B4E02324CB2A00A72B43 /* Lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Lighting.frag; sourceTree = "<group>"; };
 		4083B4E223250D4C00A72B43 /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
 		40978DA5233544A40082F63E /* Default.material */ = {isa = PBXFileReference; lastKnownFileType = text; name = Default.material; path = DemoGame/Assets/Default.material; sourceTree = SOURCE_ROOT; };
+		D04077D126E222BD00D0396C /* Cloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cloud.h; sourceTree = "<group>"; };
+		D04077D226E2241E00D0396C /* Cloud.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cloud.cpp; sourceTree = "<group>"; };
 		D06899732412E2C300ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		D0E64B7426DEA7E700B86CA3 /* Core.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Core.frag; sourceTree = "<group>"; };
 		D0E64B7526DF042700B86CA3 /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
@@ -154,8 +157,10 @@
 				406327DA234B6F4D009B243F /* Racer.cpp */,
 				406327DC234B7DE9009B243F /* Camera3rdPerson.h */,
 				406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */,
-				406414732355F8DC000F994F /* Clouds.h */,
-				406414742355F8DC000F994F /* Clouds.cpp */,
+				406414732355F8DC000F994F /* CloudGenerator.h */,
+				406414742355F8DC000F994F /* CloudGenerator.cpp */,
+				D04077D126E222BD00D0396C /* Cloud.h */,
+				D04077D226E2241E00D0396C /* Cloud.cpp */,
 			);
 			path = DemoGame;
 			sourceTree = "<group>";
@@ -352,7 +357,8 @@
 			files = (
 				406327DB234B6F4D009B243F /* Racer.cpp in Sources */,
 				406DCA6F233E4076008C088E /* Rotate.cpp in Sources */,
-				406414752355F8DC000F994F /* Clouds.cpp in Sources */,
+				D04077D326E2241E00D0396C /* Cloud.cpp in Sources */,
+				406414752355F8DC000F994F /* CloudGenerator.cpp in Sources */,
 				401B7890231B73B500E6B4F0 /* DemoGame.cpp in Sources */,
 				4048AEEC2312E01700A7152A /* Main.cpp in Sources */,
 				406327DE234B7DE9009B243F /* Camera3rdPerson.cpp in Sources */,

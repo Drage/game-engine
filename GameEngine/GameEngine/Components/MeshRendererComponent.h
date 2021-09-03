@@ -2,8 +2,10 @@
 #ifndef MESHRENDERERCOMPONENT_H
 #define MESHRENDERERCOMPONENT_H
 
+#include <vector>
 #include "Component.h"
 #include "Model.h"
+#include "Renderable.h"
 
 namespace DrageEngine
 {
@@ -11,11 +13,12 @@ namespace DrageEngine
     {
         public:
             void Init(const ParamList &params);
-            void Render(Renderer *renderer, const Transform *transform = NULL) const;
+            ~MeshRendererComponent();
         
         private:
             Model *model;
             Material *material;
+            std::vector<Renderable*> renderables;
     };
 }
 

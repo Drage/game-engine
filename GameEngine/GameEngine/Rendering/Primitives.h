@@ -2,55 +2,26 @@
 #ifndef PRIMITIVES_H
 #define PRIMITIVES_H
 
-#include "Renderable.h"
 #include "Mesh.h"
 
 namespace DrageEngine
 {
-    class Cube : public Renderable
+    class Primitive
     {
         public:
-            void Render() const;
+            static const Mesh* Cube();
+            static const Mesh* Sphere();
+            static const Mesh* Plane();
+            static const Mesh* Billboard();
         
         private:
-            static void Init();
-            static bool init;
-            static Mesh mesh;
-    };
-    
-    class Sphere : public Renderable
-    {
-        public:
-            void Render() const;
+            static Mesh *cube;
+            static Mesh *sphere;
+            static Mesh *plane;
+            static Mesh *billboard;
         
-        private:
-            static void Init();
-            static const int SLICES;
-            static const int STACKS;
-            static bool init;
-            static Mesh mesh;
-    };
-
-    class Plane : public Renderable
-    {
-        public:
-            void Render() const;
-        
-        private:
-            static void Init();
-            static bool init;
-            static Mesh mesh;
-    };
-
-    class Billboard : public Renderable
-    {
-        public:
-            void Render() const;
-        
-        private:
-            static void Init();
-            static bool init;
-            static Mesh mesh;
+            static const int SPHERE_SLICES;
+            static const int SPHERE_STACKS;
     };
 }
 

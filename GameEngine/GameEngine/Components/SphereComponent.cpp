@@ -1,6 +1,7 @@
 
 #include "SphereComponent.h"
 #include "Application.h"
+#include "Material.h"
 #include "Primitives.h"
 
 using namespace DrageEngine;
@@ -8,10 +9,12 @@ using namespace DrageEngine;
 void SphereComponent::Init(const ParamList &params)
 {
     std::string materialName = params.Get<std::string>("material");
-    material = app->assets->GetMaterial(materialName);
+    Material *material = app->assets->GetMaterial(materialName);
+    
+    sphere = new Renderable(Primitive::Sphere(), material, entity);
 }
 
-void SphereComponent::Render(Renderer *renderer, const Transform *transform) const
+SphereComponent::~SphereComponent()
 {
-    renderer->Render(&mesh, transform, material);
+    delete sphere;
 }

@@ -4,7 +4,8 @@
 #include "Rotate.h"
 #include "Racer.h"
 #include "Camera3rdPerson.h"
-#include "Clouds.h"
+#include "CloudGenerator.h"
+#include "Cloud.h"
 
 using namespace DrageEngine;
 
@@ -13,7 +14,8 @@ void RegisterCustomComponents()
     app->assets->RegisterComponent<Rotate>("Rotate");
     app->assets->RegisterComponent<Racer>("Racer");
     app->assets->RegisterComponent<Camera3rdPerson>("Camera3rdPerson");
-    app->assets->RegisterComponent<Clouds>("Clouds");
+    app->assets->RegisterComponent<CloudGenerator>("Clouds");
+    app->assets->RegisterComponent<Cloud>("Cloud");
 }
 
 int main(int argc, const char * argv[])
