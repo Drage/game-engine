@@ -38,9 +38,13 @@ namespace DrageEngine
             ~Shader();
         
             bool Load(const std::string &filename);
-            bool Compile(const std::string &vertexShaderCode, const std::string &fragmentShaderCode);
+            bool CompileFromSource(const std::string &vertexShaderCode, const std::string &fragmentShaderCode);
+            unsigned CompileShader(int shaderType, const std::string& shaderCode);
+            unsigned CompileProgram(unsigned vertexShaderID, unsigned fragmentShaderID);
         
             unsigned GetID() const;
+            unsigned GetVertexShaderId() const;
+            unsigned GetFragmentShaderId() const;
             const std::string& GetName() const;
         
             int GetAttributeLocation(const std::string &name) const;
@@ -73,8 +77,6 @@ namespace DrageEngine
         
         private:
             void InsertIncludes(std::string &shaderSource) const;
-            unsigned CompileShader(int shaderType, const std::string& shaderCode);
-            unsigned CompileProgram(unsigned vertexShaderID, unsigned fragmentShaderID);
             void CheckAndLogStatus(unsigned shaderID, int statusType);
         
             std::string GetArrayUniformName(const std::string &arrayName, int index, const std::string &propertyName) const;
@@ -84,6 +86,8 @@ namespace DrageEngine
             void LoadUniforms();
         
             std::string name;
+            unsigned vertexShaderId;
+            unsigned fragmentShaderId;
             unsigned id;
             UniformList uniforms;
             ParamList defaults;

@@ -34,20 +34,19 @@ namespace DrageEngine
             void Register(Renderable *renderable);
             void Unregister(Renderable *renderable);
         
-            void Render() const;
+            void Render();
         
             Entity* GetEntityAtScreenPosition(const Vector2 &coordinates) const;
-        
-            void SetEditorSelectionModeEnabled(bool enabled);
-            void SetSceneIndex(int index);
-            int GetSceneObjectIndexAtScreenPosition(const Vector2 &coordinates);
         
         private:
             friend class Application;
             Renderer();
-
+            void InitEditorSelection();
+            void SetDefaultUniforms(const Shader* shader) const;
+            void SetModelUniforms(const Shader* shader, const Renderable *renderable) const;
             void ApplyRenderOptions(unsigned options) const;
             void RenderMesh(const Mesh *mesh) const;
+            void RenderEditorSelection() const;
         
             Color clearColor;
         
@@ -57,12 +56,13 @@ namespace DrageEngine
             typedef std::multiset<Renderable*, CmpRenderablePtrs> RenderQueue;
             RenderQueue renderQueue;
         
-            bool editorSelectionMode;
-            int currentSceneIndex;
+            Matrix4x4 viewMatrix;
+            Matrix4x4 projectionMatrix;
+            Matrix4x4 viewProjectionMatrix;
         
-            unsigned selectedObjectsMaskFbo;
-            unsigned selectedObjectsMaskTexture;
-            unsigned selectedObjectsMaskDepthBuffer;
+            unsigned editorSelectionFbo;
+            unsigned editorSelectionTexture;
+            unsigned editorSelectionDepth;
             Shader* editorSelectionShader;
     };
 

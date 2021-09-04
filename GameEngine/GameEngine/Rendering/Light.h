@@ -12,9 +12,8 @@ namespace DrageEngine
         public:
             enum Type { DIRECTIONAL, POINT, SPOTLIGHT };
         
-            void ApplyUniforms(const Shader *shader, int index) const;
-        
         protected:
+            friend class Renderer;
             Light();
         
             Type type;

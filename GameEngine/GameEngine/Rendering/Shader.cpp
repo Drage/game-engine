@@ -49,7 +49,7 @@ bool Shader::Load(const std::string &filename)
     InsertIncludes(vertexShaderCode);
     InsertIncludes(fragmentShaderCode);
     
-    bool compileSuccess = Compile(vertexShaderCode, fragmentShaderCode);
+    bool compileSuccess = CompileFromSource(vertexShaderCode, fragmentShaderCode);
     
     const XMLDocument::Element *defaults = xml.root.GetSubElement("defaults");
     if (defaults != NULL)
@@ -58,21 +58,61 @@ bool Shader::Load(const std::string &filename)
     return compileSuccess;
 }
 
-bool Shader::Compile(const std::string &vertexShaderCode, const std::string &fragmentShaderCode)
+bool Shader::CompileFromSource(const std::string &vertexShaderCode, const std::string &fragmentShaderCode)
 {
-    unsigned vertexShaderID = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
-    unsigned fragmentShaderID = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
-    
-    id = CompileProgram(vertexShaderID, fragmentShaderID);
-
+    vertexShaderId = CompileShader(GL_VERTEX_SHADER, vertexShaderCode);
+    fragmentShaderId = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderCode);
+    id = CompileProgram(vertexShaderId, fragmentShaderId);
     LoadUniforms();
-    
     return id != 0;
+}
+
+unsigned Shader::CompileShader(int shaderType, const std::string& shaderCode)
+{
+    unsigned shaderID = glCreateShader(shaderType);
+    const char *source = shaderCode.c_str();
+    glShaderSource(shaderID, 1, &source, NULL);
+    glCompileShader(shaderID);
+    CheckAndLogStatus(shaderID, GL_COMPILE_STATUS);
+    return shaderID;
+}
+
+unsigned Shader::CompileProgram(unsigned vertexShaderID, unsigned fragmentShaderID)
+{
+    unsigned programID = glCreateProgram();
+    
+    glAttachShader(programID, vertexShaderID);
+    glAttachShader(programID, fragmentShaderID);
+    
+    glLinkProgram(programID);
+    
+    CheckAndLogStatus(programID, GL_LINK_STATUS);
+    
+    glDetachShader(programID, vertexShaderID);
+    glDetachShader(programID, fragmentShaderID);
+    
+    if (!app->IsInEditMode())
+    {
+        glDeleteShader(vertexShaderID);
+        glDeleteShader(fragmentShaderID);
+    }
+
+    return programID;
 }
 
 unsigned Shader::GetID() const
 {
     return id;
+}
+
+unsigned Shader::GetVertexShaderId() const
+{
+    return vertexShaderId;
+}
+
+unsigned Shader::GetFragmentShaderId() const
+{
+    return fragmentShaderId;
 }
 
 const std::string& Shader::GetName() const
@@ -221,40 +261,6 @@ void Shader::InsertIncludes(std::string &shaderSource) const
         
         start = shaderSource.find("#include \"", start);
     }
-}
-
-unsigned Shader::CompileShader(int shaderType, const std::string& shaderCode)
-{
-    unsigned shaderID = glCreateShader(shaderType);
-    
-    const char *source = shaderCode.c_str();
-    glShaderSource(shaderID, 1, &source, NULL);
-    
-    glCompileShader(shaderID);
-    
-    CheckAndLogStatus(shaderID, GL_COMPILE_STATUS);
-
-    return shaderID;
-}
-
-unsigned Shader::CompileProgram(unsigned vertexShaderID, unsigned fragmentShaderID)
-{
-    unsigned programID = glCreateProgram();
-    
-    glAttachShader(programID, vertexShaderID);
-    glAttachShader(programID, fragmentShaderID);
-    
-    glLinkProgram(programID);
-    
-    CheckAndLogStatus(programID, GL_LINK_STATUS);
-    
-    glDetachShader(programID, vertexShaderID);
-    glDetachShader(programID, fragmentShaderID);
-    
-    glDeleteShader(vertexShaderID);
-    glDeleteShader(fragmentShaderID);
-    
-    return programID;
 }
 
 void Shader::CheckAndLogStatus(unsigned shaderID, int statusType)

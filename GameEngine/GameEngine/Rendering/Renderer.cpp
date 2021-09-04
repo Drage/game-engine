@@ -35,11 +35,16 @@ Renderer::Renderer()
     
     ViewportResized(app->window->GetWidth(), app->window->GetHeight());
     
-    editorSelectionMode = false;
+    if (app->IsInEditMode())
+        InitEditorSelection();
+}
+
+void Renderer::InitEditorSelection()
+{
     editorSelectionShader = app->assets->GetShader("EditorSelection.shader");
     
-    glGenTextures(1, &selectedObjectsMaskTexture);
-    glBindTexture(GL_TEXTURE_2D, selectedObjectsMaskTexture);
+    glGenTextures(1, &editorSelectionTexture);
+    glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, app->window->GetWidth(), app->window->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -47,9 +52,18 @@ Renderer::Renderer()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
     
-    glGenFramebuffers(1, &selectedObjectsMaskFbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, selectedObjectsMaskFbo);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, selectedObjectsMaskTexture, 0);
+    glGenTextures(1, &editorSelectionDepth);
+    glBindTexture(GL_TEXTURE_2D, editorSelectionDepth);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, app->window->GetWidth(), app->window->GetHeight(), 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+    
+    glGenFramebuffers(1, &editorSelectionFbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, editorSelectionTexture, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, editorSelectionDepth, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -57,8 +71,10 @@ void Renderer::ViewportResized(int width, int height)
 {
     glViewport(0, 0, width, height);
     
-    glBindTexture(GL_TEXTURE_2D, selectedObjectsMaskTexture);
+    glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, app->window->GetWidth(), app->window->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glBindTexture(GL_TEXTURE_2D, editorSelectionDepth);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, app->window->GetWidth(), app->window->GetHeight(), 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -116,32 +132,23 @@ void Renderer::Unregister(Renderable *renderable)
     renderQueue.erase(renderable);
 }
 
-void Renderer::Render() const
+void Renderer::Render()
 {
     if (!camera)
     {
         ERROR("Unable to render - no camera set");
         return;
     }
+    viewMatrix = camera->GetViewMatrix();
+    projectionMatrix = camera->GetProjectionMatrix();
+    viewProjectionMatrix = projectionMatrix * viewMatrix;
 
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    Matrix4x4 viewMatrix = camera->GetViewMatrix();
-    Matrix4x4 projectionMatrix = camera->GetProjectionMatrix();
-    Matrix4x4 viewProjectionMatrix = projectionMatrix * viewMatrix;
-
     const Shader *activeShader = NULL;
     const Material *activeMaterial = NULL;
     const Mesh *activeMesh = NULL;
-    
-    if (app->IsInEditMode())
-    {
-        glBindFramebuffer(GL_FRAMEBUFFER, selectedObjectsMaskFbo);
-        glClearColor(1, 1, 1, 0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    }
     
     for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
     {
@@ -152,15 +159,7 @@ void Renderer::Render() const
         {
             activeShader = shader;
             glUseProgram(shader->GetID());
-            
-            shader->SetUniform("time", Time::RunTime());
-            shader->SetUniform("cameraPosition", camera->GetPosition());
-            shader->SetUniform("viewMatrix", viewMatrix);
-            shader->SetUniform("projectionMatrix", projectionMatrix);
-            shader->SetUniform("viewProjectionMatrix", viewProjectionMatrix);
-            shader->SetUniform("numLights", (int)lights.size());
-            for (int i = 0; i < lights.size(); i++)
-                lights[i]->ApplyUniforms(shader, i);
+            SetDefaultUniforms(shader);
         }
         
         const Material *material = renderable->GetMaterial();
@@ -170,48 +169,87 @@ void Renderer::Render() const
             material->ApplyUniforms();
         }
         
-        Matrix4x4 modelMatrix = renderable->GetEntity()->GetGlobalTransform().ToMatrix();
-        shader->SetUniform("modelMatrix", modelMatrix);
-        shader->SetUniform("modelViewMatrix", viewMatrix * modelMatrix);
-        shader->SetUniform("modelViewProjectionMatrix", viewProjectionMatrix * modelMatrix);
-        
-        unsigned options = renderable->GetOptions();
-        ApplyRenderOptions(options);
-        
         const Mesh *mesh = renderable->GetMesh();
         if (activeMesh != mesh)
         {
             activeMesh = mesh;
             glBindVertexArray(mesh->GetID());
         }
-        RenderMesh(mesh);
         
-        if (app->IsInEditMode() && app->editor->IsSelected(renderable->GetEntity()))
-        {
-            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, selectedObjectsMaskFbo);
-            GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
-            glDrawBuffers(1, &drawBuffer);
-            shader->SetUniform("editorSelectionStencil", true);
-            RenderMesh(mesh);
-            shader->SetUniform("editorSelectionStencil", false);
-            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-        }
+        SetModelUniforms(shader, renderable);
+        ApplyRenderOptions(renderable->GetOptions());
+        RenderMesh(mesh);
     }
     
     if (app->IsInEditMode())
+        RenderEditorSelection();
+}
+
+void Renderer::RenderEditorSelection() const
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
+    glClearColor(1, 1, 1, 0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
+    glDrawBuffers(1, &drawBuffer);
+    
+    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
     {
-        Shader *shader = editorSelectionShader;
-        glUseProgram(shader->GetID());
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, selectedObjectsMaskTexture);
-        shader->SetUniform("silhouette", 0);
-        shader->SetUniform("width", shader->GetDefaultUniformValues().Get<int>("width"));
-        shader->SetUniform("color", shader->GetDefaultUniformValues().Get<Vector4>("color"));
-        unsigned vao;
-        glGenVertexArrays(1, &vao);
-        glBindVertexArray(vao);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        const Renderable* renderable = (*i);
+        if (app->editor->IsSelected(renderable->GetEntity()))
+        {
+            const Shader *shader = renderable->GetMaterial()->GetShader();
+            glUseProgram(shader->GetID());
+            SetDefaultUniforms(shader);
+            SetModelUniforms(shader, renderable);
+            shader->SetUniform("colorOverride", Vector4(0, 0, 0, 1));
+            const Mesh *mesh = renderable->GetMesh();
+            glBindVertexArray(mesh->GetID());
+            RenderMesh(mesh);
+        }
     }
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    Shader *shader = editorSelectionShader;
+    glUseProgram(shader->GetID());
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
+    shader->SetUniform("silhouette", 0);
+    shader->SetUniform("width", shader->GetDefaultUniformValues().Get<int>("width"));
+    shader->SetUniform("color", shader->GetDefaultUniformValues().Get<Vector4>("color"));
+    unsigned vao;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+void Renderer::SetDefaultUniforms(const Shader* shader) const
+{
+    shader->SetUniform("time", Time::RunTime());
+    
+    shader->SetUniform("cameraPosition", camera->GetPosition());
+    shader->SetUniform("viewMatrix", viewMatrix);
+    shader->SetUniform("projectionMatrix", projectionMatrix);
+    shader->SetUniform("viewProjectionMatrix", projectionMatrix * viewMatrix);
+    
+    shader->SetUniform("numLights", (int)lights.size());
+    for (int i = 0; i < lights.size(); i++)
+    {
+        shader->SetUniform("lights", i, "position", lights[i]->position);
+        shader->SetUniform("lights", i, "intensities", lights[i]->color);
+        shader->SetUniform("lights", i, "attenuation", lights[i]->attenuation);
+        shader->SetUniform("lights", i, "ambientCoefficient", lights[i]->ambientCoefficient);
+        shader->SetUniform("lights", i, "coneDirection", lights[i]->coneDirection);
+        shader->SetUniform("lights", i, "coneAngle", lights[i]->coneAngle);
+    }
+}
+
+void Renderer::SetModelUniforms(const Shader* shader, const Renderable *renderable) const
+{
+    Matrix4x4 modelMatrix = renderable->GetEntity()->GetGlobalTransform().ToMatrix();
+    shader->SetUniform("modelMatrix", modelMatrix);
+    shader->SetUniform("modelViewMatrix", viewMatrix * modelMatrix);
+    shader->SetUniform("modelViewProjectionMatrix", viewProjectionMatrix * modelMatrix);
 }
 
 void Renderer::ApplyRenderOptions(unsigned options) const
@@ -235,128 +273,56 @@ void Renderer::RenderMesh(const Mesh *mesh) const
 
 Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates) const
 {
-    return NULL;
-}
-
-//void Renderer::BeginRender()
-//{
-//    static bool noCamErrorShown = false;
-//    if (!camera)
-//    {
-//        if (!noCamErrorShown)
-//        {
-//            noCamErrorShown = true;
-//            ERROR("Unable to render - no camera set");
-//        }
-//        return;
-//    }
-//
-//    glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//
-//    projectionMatrix = camera->GetProjectionMatrix();
-//    viewMatrix = camera->GetViewMatrix();
-//    viewProjectionMatrix = projectionMatrix * viewMatrix;
-//
-////    glBindFramebuffer(GL_FRAMEBUFFER, selectedObjectsMaskFbo);
-////    glClearColor(1, 1, 1, 0);
-////    glClear(GL_COLOR_BUFFER_BIT);
-////    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//}
-
-//void Renderer::Render(const Mesh *mesh, const Transform *transform, const Material *material, int options) const
-//{
-//    Matrix4x4 modelMatrix = transform->ToMatrix();
-//
-//    Shader *shader = material->GetShader();
-//    glUseProgram(shader->GetID());
-//
-//    material->ApplyUniforms();
-//
-//    shader->SetUniform("cameraPosition", camera->GetPosition());
-//    shader->SetUniform("numLights", (int)lights.size());
-//    for (int i = 0; i < lights.size(); i++)
-//        lights[i]->ApplyUniforms(shader, i);
-//
-//    shader->SetUniform("time", Time::RunTime());
-//    shader->SetUniform("modelMatrix", modelMatrix);
-//    shader->SetUniform("viewMatrix", viewMatrix);
-//    shader->SetUniform("projectionMatrix", projectionMatrix);
-//    shader->SetUniform("modelViewMatrix", viewMatrix * modelMatrix);
-//    shader->SetUniform("viewProjectionMatrix", viewProjectionMatrix);
-//    shader->SetUniform("modelViewProjectionMatrix", viewProjectionMatrix * modelMatrix);
-//
-//    shader->SetUniform("editorSelectMode", editorSelectionMode);
-//    if (editorSelectionMode)
-//    {
-//        int r = (currentSceneIndex & 0x000000FF) >>  0;
-//        int g = (currentSceneIndex & 0x0000FF00) >>  8;
-//        int b = (currentSceneIndex & 0x00FF0000) >> 16;
-//        shader->SetUniform("editorIndexColor", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
-//    }
-//
-//    if (app->IsInEditMode())
-//    {
-//        const std::vector<int> selection = app->editor->GetSelectionSceneIndexes();
-//        if (std::find(selection.begin(), selection.end(), currentSceneIndex) != selection.end())
-//        {
-//            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, selectedObjectsMaskFbo);
-//
-//            GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
-//            glDrawBuffers(1, &drawBuffer);
-//
-//            shader->SetUniform("editorSelectionStencil", true);
-//            mesh->Render();
-//            shader->SetUniform("editorSelectionStencil", false);
-//
-//            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-//        }
-//    }
-//
-//    ApplyRenderOptions(options);
-//
-//    mesh->Render();
-//
-//    RevertRenderOptions(options);
-//    glUseProgram(NULL);
-//}
-
-//void Renderer::EndRender()
-//{
-////    Shader *shader = editorSelectionShader;
-////    glUseProgram(shader->GetID());
-////
-////    shader->SetUniform("silhouette", 0);
-////    glActiveTexture(GL_TEXTURE0);
-////    glBindTexture(GL_TEXTURE_2D, selectedObjectsMaskTexture);
-////
-////    shader->SetUniform("width", shader->GetDefaultUniformValues().Get<int>("width"));
-////    shader->SetUniform("color", shader->GetDefaultUniformValues().Get<Vector4>("color"));
-////
-////    unsigned vao;
-////    glGenVertexArrays(1, &vao);
-////    glBindVertexArray(vao);
-////    glDrawArrays(GL_TRIANGLES, 0, 6);
-//
-//    glFlush();
-//}
-
-void Renderer::SetEditorSelectionModeEnabled(bool enabled)
-{
-    editorSelectionMode = enabled;
-}
-
-void Renderer::SetSceneIndex(int index)
-{
-    currentSceneIndex = index;
-}
-
-int Renderer::GetSceneObjectIndexAtScreenPosition(const Vector2 &coordinates)
-{
-    glFlush();
+    glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
+    glClearColor(1, 1, 1, 0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    const Shader *activeShader = NULL;
+    const Mesh *activeMesh = NULL;
+    
+    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
+    {
+        const Renderable* renderable = (*i);
+        
+        const Shader *shader = renderable->GetMaterial()->GetShader();
+        if (activeShader != shader)
+        {
+            activeShader = shader;
+            glUseProgram(shader->GetID());
+            SetDefaultUniforms(shader);
+        }
+        
+        const Mesh *mesh = renderable->GetMesh();
+        if (activeMesh != mesh)
+        {
+            activeMesh = mesh;
+            glBindVertexArray(mesh->GetID());
+        }
+        
+        SetModelUniforms(shader, renderable);
+        ApplyRenderOptions(renderable->GetOptions());
+        
+        int index = (int)std::distance(renderQueue.begin(), i);
+        int r = (index & 0x000000FF) >>  0;
+        int g = (index & 0x0000FF00) >>  8;
+        int b = (index & 0x00FF0000) >> 16;
+        shader->SetUniform("colorOverride", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
+        
+        RenderMesh(mesh);
+    }
+    
     glFinish();
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     unsigned char data[4];
     glReadPixels(coordinates.x, app->window->GetHeight() - coordinates.y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    return data[0] + data[1] * 256 + data[2] * 256*256;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    
+    int index = data[0] + data[1] * 256 + data[2] * 256*256;
+    if (index < renderQueue.size())
+    {
+        RenderQueue::const_iterator it = renderQueue.begin();
+        std::advance(it, index);
+        return (*it)->GetEntity();
+    }
+    return NULL;
 }
