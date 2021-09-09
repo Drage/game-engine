@@ -18,7 +18,7 @@ void TerrainComponent::Init(const ParamList &params)
     float renderPriority = params.Get<float>("renderPriority");
     
     renderable = new Renderable(GetMesh(), material, entity);
-    renderable->SetDepth(renderPriority);
+    renderable->SetDepthOrder(renderPriority);
 }
 
 TerrainComponent::~TerrainComponent()

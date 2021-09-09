@@ -11,7 +11,6 @@
 #include "Debug.h"
 #include "AssetManager.h"
 #include "Application.h"
-#include "VectorUtils.h"
 
 using namespace DrageEngine;
 
@@ -133,7 +132,14 @@ void Renderer::Register(Renderable *renderable)
 
 void Renderer::Unregister(Renderable *renderable)
 {
-    Vector::Remove<Renderable*>(renderQueue, renderable);
+    for (RenderQueue::iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
+    {
+        if (*i == renderable)
+        {
+            renderQueue.erase(i);
+            return;
+        }
+    }
 }
 
 void Renderer::Render()
@@ -152,12 +158,10 @@ void Renderer::Render()
     
     for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
     {
-        if ((*i)->GetMaterial()->IsTransparent())
-        {
-            Vector3 position = (*i)->GetEntity()->GetGlobalTransform().position;
-            float depthSqr = (position - camera->GetPosition()).MagnitudeSqr();
-            (*i)->SetDepth(depthSqr);
-        }
+        Vector3 position = (*i)->GetEntity()->GetGlobalTransform().position;
+        float depthSqr = (position - camera->GetPosition()).MagnitudeSqr();
+        bool isTransparent = (*i)->GetMaterial()->IsTransparent();
+        (*i)->SetDepthOrder(isTransparent ? depthSqr : -depthSqr);
     }
     
     RenderableComparitor renderableComparitor;

@@ -10,7 +10,7 @@ Renderable::Renderable(const Mesh *mesh, const Material *material, Entity *entit
     this->material = material;
     this->entity = entity;
     this->options = options;
-    this->depth = 0;
+    this->depthOrder = 0;
     
     app->renderer->Register(this);
 }
@@ -40,14 +40,14 @@ unsigned Renderable::GetOptions() const
     return options;
 }
 
-void Renderable::SetDepth(float depth)
+void Renderable::SetDepthOrder(float depthOrder)
 {
-    this->depth = depth;
+    this->depthOrder = depthOrder;
 }
 
-float Renderable::GetDepth() const
+float Renderable::GetDepthOrder() const
 {
-    return depth;
+    return depthOrder;
 }
 
 unsigned long Renderable::GetSortKey() const
@@ -57,9 +57,8 @@ unsigned long Renderable::GetSortKey() const
     unsigned long materialId = material->GetID();
     unsigned long meshId = mesh->GetID();
     
-    unsigned long depth = (unsigned)this->depth;
-    unsigned long renderPriority = material->GetRenderPriority();
-    unsigned long depthOrder = renderPriority == 0 ? depth : renderPriority;
+    unsigned long depthOrderOverride = material->GetRenderPriority();
+    unsigned long depthOrder = depthOrderOverride == 0 ? (unsigned)this->depthOrder : depthOrderOverride;
     
     // 1 bit for transparent/opaque, 8 bits for shader, 11 bits for material, 12 bits for mesh
     // Max 256 shaders, 2048 materials, and 4096 meshes

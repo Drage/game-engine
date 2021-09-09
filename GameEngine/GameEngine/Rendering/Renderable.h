@@ -20,8 +20,8 @@ namespace DrageEngine
             Entity* GetEntity() const;
             unsigned GetOptions() const;
         
-            void SetDepth(float depth);
-            float GetDepth() const;
+            void SetDepthOrder(float depth);
+            float GetDepthOrder() const;
         
             unsigned long GetSortKey() const;
         
@@ -29,7 +29,7 @@ namespace DrageEngine
             const Mesh *mesh;
             const Material *material;
             Entity *entity;
-            float depth;
+            float depthOrder;
             unsigned long sortKey;
             unsigned options;
             
