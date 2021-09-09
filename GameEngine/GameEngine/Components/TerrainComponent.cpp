@@ -15,9 +15,10 @@ void TerrainComponent::Init(const ParamList &params)
     std::string materialName = params.Get<std::string>("material");
     material = app->assets->GetMaterial(materialName);
     
-    disableDepthWrite = params.Get<bool>("disableDepthWrite");
+    float renderPriority = params.Get<float>("renderPriority");
     
-    renderable = new Renderable(GetMesh(), material, entity, disableDepthWrite ? RenderOption::NO_DEPTH_WRITE : 0);
+    renderable = new Renderable(GetMesh(), material, entity);
+    renderable->SetDepth(renderPriority);
 }
 
 TerrainComponent::~TerrainComponent()

@@ -5,11 +5,13 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 #include "Renderer.h"
 #include "Primitives.h"
 #include "Debug.h"
 #include "AssetManager.h"
 #include "Application.h"
+#include "VectorUtils.h"
 
 using namespace DrageEngine;
 
@@ -126,12 +128,12 @@ bool Renderer::RemoveLight(Light *light)
 
 void Renderer::Register(Renderable *renderable)
 {
-    renderQueue.insert(renderable);
+    renderQueue.push_back(renderable);
 }
 
 void Renderer::Unregister(Renderable *renderable)
 {
-    renderQueue.erase(renderable);
+    Vector::Remove<Renderable*>(renderQueue, renderable);
 }
 
 void Renderer::Render()
@@ -147,6 +149,19 @@ void Renderer::Render()
 
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
+    {
+        if ((*i)->GetMaterial()->IsTransparent())
+        {
+            Vector3 position = (*i)->GetEntity()->GetGlobalTransform().position;
+            float depthSqr = (position - camera->GetPosition()).MagnitudeSqr();
+            (*i)->SetDepth(depthSqr);
+        }
+    }
+    
+    RenderableComparitor renderableComparitor;
+    std::sort(renderQueue.begin(), renderQueue.end(), renderableComparitor);
     
     RenderPass();
     
@@ -278,6 +293,7 @@ void Renderer::OverrideColorBlack(RenderQueue::const_iterator i) const
 {
     const Shader *shader = (*i)->GetMaterial()->GetShader();
     shader->SetUniform("colorOverride", Vector4(0, 0, 0, 1));
+    glDepthMask(GL_TRUE);
 }
 
 void Renderer::OverrideColorFromIndex(RenderQueue::const_iterator i) const

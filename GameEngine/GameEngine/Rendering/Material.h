@@ -21,11 +21,13 @@ namespace DrageEngine
             unsigned GetID() const;
         
             bool IsTransparent() const;
+            unsigned GetRenderPriority() const;
         
         private:
             std::string name;
             Shader *shader;
             bool transparent;
+            unsigned renderPriority;
         
             typedef struct Attribute
             {

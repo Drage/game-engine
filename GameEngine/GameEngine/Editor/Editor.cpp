@@ -32,7 +32,10 @@ void Editor::Update()
 
         selection.clear();
         if (selected)
+        {
             selection.push_back(selected);
+            LOG(selected->GetName());
+        }
     }
 }
 

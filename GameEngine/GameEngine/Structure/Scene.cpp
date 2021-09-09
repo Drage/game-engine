@@ -1,6 +1,7 @@
 
 #include "Scene.h"
 #include "Application.h"
+#include "VectorUtils.h"
 
 using namespace DrageEngine;
 
@@ -62,16 +63,7 @@ void Scene::Add(Entity *entity)
 
 bool Scene::Remove(Entity *entity)
 {
-    for (EntityList::iterator i = entities.begin(); i != entities.end(); i++)
-    {
-        if ((*i) == entity)
-        {
-            delete (*i);
-            entities.erase(i);
-            return true;
-        }
-    }
-    return false;
+    return Vector::Remove(entities, entity);
 }
 
 bool Scene::Load(const std::string &filename)

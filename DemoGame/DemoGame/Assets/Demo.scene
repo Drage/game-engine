@@ -61,7 +61,6 @@
             <heightmap>WaterHeightmap.png</heightmap>
             <maxHeight>0.3</maxHeight>
             <material>Water.material</material>
-            <disableDepthWrite>1</disableDepthWrite>
         </Terrain>
     </Entity>
     <Entity>

@@ -22,9 +22,10 @@ namespace DrageEngine
             inline void Destroy() { destroyed = true; }
             inline bool IsDestroyed() const { return destroyed; }
         
-            inline void SetActive(bool active) { active = active; }
+            inline void SetActive(bool active) { this->active = active; }
             inline bool IsActive() { return active; }
         
+            inline void SetName(const std::string &name) { this->name = name; }
             inline const std::string& GetName() { return name; };
         
             inline const Entity* GetParent() const { return parent; }

@@ -18,7 +18,6 @@ namespace DrageEngine
         
         private:
             Material *material;
-            bool disableDepthWrite;
             Renderable *renderable;
     };
 }

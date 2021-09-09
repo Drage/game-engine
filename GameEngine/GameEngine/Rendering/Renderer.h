@@ -3,7 +3,6 @@
 #define RENDERER_H
 
 #include <vector>
-#include <set>
 #include "Camera.h"
 #include "Color.h"
 #include "Transform.h"
@@ -41,7 +40,7 @@ namespace DrageEngine
         private:
             friend class Application;
         
-            typedef std::multiset<Renderable*, CmpRenderablePtrs> RenderQueue;
+            typedef std::vector<Renderable*> RenderQueue;
             typedef bool (Renderer::*RenderFilterFunc)(RenderQueue::const_iterator i) const;
             typedef void (Renderer::*RenderCallbackFunc)(RenderQueue::const_iterator i) const;
         

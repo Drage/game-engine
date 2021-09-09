@@ -31,6 +31,7 @@ bool Material::Load(const std::string &filename)
     xml.root.ToParamList(params);
     
     transparent = params.Get<bool>("transparent", false);
+    renderPriority = params.Get<unsigned>("renderPriority", 0);
     
     std::string shaderFilename = params.Get<std::string>("shader");
     shader = app->assets->GetShader(shaderFilename);
@@ -149,4 +150,9 @@ unsigned Material::GetID() const
 bool Material::IsTransparent() const
 {
     return transparent;
+}
+
+unsigned Material::GetRenderPriority() const
+{
+    return renderPriority;
 }

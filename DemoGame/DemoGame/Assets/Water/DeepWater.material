@@ -2,4 +2,5 @@
     <shader>Unlit.shader</shader>
     <diffuseMap>DeepWater.tga</diffuseMap>
     <transparent>1</transparent>
+    <renderPriority>4294967295</renderPriotity>
 </Material>

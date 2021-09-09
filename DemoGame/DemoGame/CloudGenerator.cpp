@@ -16,6 +16,7 @@ void CloudGenerator::Init(const ParamList &params)
     for (int i = 0; i < numClouds; i++)
     {
         Entity *child = new Entity();
+        child->SetName("Cloud" + std::to_string(i));
         
         ParamList params;
         params.Set("orbitRadius", orbitRadius);
@@ -23,9 +24,7 @@ void CloudGenerator::Init(const ParamList &params)
         params.Set("size", Random::Float(minSize, maxSize));
         params.Set("speed", Random::Float(minSpeed, maxSpeed));
         
-        std::string material = "Cloud0";
-        material.append(1, (char)(Random::Int(1, NUM_CLOUD_TEXTURES) + (int)'0'));
-        material.append(".material");
+        std::string material = "Cloud0" + std::to_string(Random::Int(1, NUM_CLOUD_TEXTURES)) + ".material";
         params.Set("material", material);
         
         Cloud *cloud = new Cloud();

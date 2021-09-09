@@ -152,6 +152,7 @@
 		40DD559C234FA04700BBA4A9 /* GameTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40DD559A234FA04700BBA4A9 /* GameTime.cpp */; };
 		40EC7A0D234E117F00CA8DB3 /* TerrainComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 40EC7A0B234E117F00CA8DB3 /* TerrainComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40EC7A0E234E117F00CA8DB3 /* TerrainComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40EC7A0C234E117F00CA8DB3 /* TerrainComponent.cpp */; };
+		D00B828F26E9D34300DE5400 /* VectorUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D00B828E26E9D34300DE5400 /* VectorUtils.h */; };
 		D02BBDE126D8DBF900B3B639 /* EditorCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */; };
 		D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D02BBDE226D8DF5400B3B639 /* Editor.cpp */; };
 		D02BBDE726D8E20D00B3B639 /* Editor.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDE626D8E0A200B3B639 /* Editor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -311,6 +312,7 @@
 		40DD559A234FA04700BBA4A9 /* GameTime.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameTime.cpp; sourceTree = "<group>"; };
 		40EC7A0B234E117F00CA8DB3 /* TerrainComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TerrainComponent.h; sourceTree = "<group>"; };
 		40EC7A0C234E117F00CA8DB3 /* TerrainComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TerrainComponent.cpp; sourceTree = "<group>"; };
+		D00B828E26E9D34300DE5400 /* VectorUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VectorUtils.h; sourceTree = "<group>"; };
 		D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorCamera.h; sourceTree = "<group>"; };
 		D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorCamera.cpp; sourceTree = "<group>"; };
 		D02BBDE226D8DF5400B3B639 /* Editor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Editor.cpp; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				401B793A231D658300E6B4F0 /* FileSystem.cpp */,
 				4083B4E323251A0900A72B43 /* XMLDocument.h */,
 				4083B4E423251A0900A72B43 /* XMLDocument.cpp */,
+				D00B828E26E9D34300DE5400 /* VectorUtils.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				40708D1C23266B0800A796AD /* Material.h in Headers */,
 				4066CCF423464A5300496404 /* Joystick.h in Headers */,
 				40978D91233512C30082F63E /* Vertex.h in Headers */,
+				D00B828F26E9D34300DE5400 /* VectorUtils.h in Headers */,
 				40978D92233512C80082F63E /* Mesh.h in Headers */,
 				40978D9623352FF40082F63E /* Model.h in Headers */,
 				401B793F231D6D0500E6B4F0 /* ImagePNG.h in Headers */,

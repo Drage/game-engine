@@ -19,17 +19,23 @@ namespace DrageEngine
             const Material* GetMaterial() const;
             Entity* GetEntity() const;
             unsigned GetOptions() const;
-            unsigned GetSortKey() const;
+        
+            void SetDepth(float depth);
+            float GetDepth() const;
+        
+            unsigned long GetSortKey() const;
         
         private:
             const Mesh *mesh;
             const Material *material;
             Entity *entity;
+            float depth;
+            unsigned long sortKey;
             unsigned options;
-            unsigned sortKey;
+            
     };
 
-    struct CmpRenderablePtrs
+    struct RenderableComparitor
     {
         bool operator()(const Renderable* lhs, const Renderable* rhs) const
         {
