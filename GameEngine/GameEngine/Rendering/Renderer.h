@@ -40,20 +40,30 @@ namespace DrageEngine
         
         private:
             friend class Application;
+        
+            typedef std::multiset<Renderable*, CmpRenderablePtrs> RenderQueue;
+            typedef bool (Renderer::*RenderFilterFunc)(RenderQueue::const_iterator i) const;
+            typedef void (Renderer::*RenderCallbackFunc)(RenderQueue::const_iterator i) const;
+        
             Renderer();
             void InitEditorSelection();
+        
+            void RenderPass(RenderFilterFunc filter = NULL, RenderCallbackFunc preRender = NULL) const;
             void SetDefaultUniforms(const Shader* shader) const;
             void SetModelUniforms(const Shader* shader, const Renderable *renderable) const;
             void ApplyRenderOptions(unsigned options) const;
             void RenderMesh(const Mesh *mesh) const;
+        
             void RenderEditorSelection() const;
+            bool RenderableIsSelected(RenderQueue::const_iterator i) const;
+            void OverrideColorBlack(RenderQueue::const_iterator i) const;
+            void OverrideColorFromIndex(RenderQueue::const_iterator i) const;
         
             Color clearColor;
         
             Camera *camera;
             std::vector<Light*> lights;
         
-            typedef std::multiset<Renderable*, CmpRenderablePtrs> RenderQueue;
             RenderQueue renderQueue;
         
             Matrix4x4 viewMatrix;
@@ -63,6 +73,7 @@ namespace DrageEngine
             unsigned editorSelectionFbo;
             unsigned editorSelectionTexture;
             unsigned editorSelectionDepth;
+            unsigned editorSelectionVbo;
             Shader* editorSelectionShader;
     };
 

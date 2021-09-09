@@ -65,6 +65,8 @@ void Renderer::InitEditorSelection()
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, editorSelectionTexture, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, editorSelectionDepth, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    
+    glGenVertexArrays(1, &editorSelectionVbo);
 }
 
 void Renderer::ViewportResized(int width, int height)
@@ -145,7 +147,15 @@ void Renderer::Render()
 
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    RenderPass();
+    
+    if (app->IsInEditMode())
+        RenderEditorSelection();
+}
 
+void Renderer::RenderPass(RenderFilterFunc filter, RenderCallbackFunc preRender) const
+{
     const Shader *activeShader = NULL;
     const Material *activeMaterial = NULL;
     const Mesh *activeMesh = NULL;
@@ -153,6 +163,9 @@ void Renderer::Render()
     for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
     {
         const Renderable* renderable = (*i);
+        
+        if (filter && !(this->*filter)(i))
+            continue;
         
         const Shader *shader = renderable->GetMaterial()->GetShader();
         if (activeShader != shader)
@@ -178,49 +191,12 @@ void Renderer::Render()
         
         SetModelUniforms(shader, renderable);
         ApplyRenderOptions(renderable->GetOptions());
+        
+        if (preRender)
+            (this->*preRender)(i);
+            
         RenderMesh(mesh);
     }
-    
-    if (app->IsInEditMode())
-        RenderEditorSelection();
-}
-
-void Renderer::RenderEditorSelection() const
-{
-    glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
-    glClearColor(1, 1, 1, 0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
-    glDrawBuffers(1, &drawBuffer);
-    
-    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
-    {
-        const Renderable* renderable = (*i);
-        if (app->editor->IsSelected(renderable->GetEntity()))
-        {
-            const Shader *shader = renderable->GetMaterial()->GetShader();
-            glUseProgram(shader->GetID());
-            SetDefaultUniforms(shader);
-            SetModelUniforms(shader, renderable);
-            shader->SetUniform("colorOverride", Vector4(0, 0, 0, 1));
-            const Mesh *mesh = renderable->GetMesh();
-            glBindVertexArray(mesh->GetID());
-            RenderMesh(mesh);
-        }
-    }
-    
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    Shader *shader = editorSelectionShader;
-    glUseProgram(shader->GetID());
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
-    shader->SetUniform("silhouette", 0);
-    shader->SetUniform("width", shader->GetDefaultUniformValues().Get<int>("width"));
-    shader->SetUniform("color", shader->GetDefaultUniformValues().Get<Vector4>("color"));
-    unsigned vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void Renderer::SetDefaultUniforms(const Shader* shader) const
@@ -230,7 +206,7 @@ void Renderer::SetDefaultUniforms(const Shader* shader) const
     shader->SetUniform("cameraPosition", camera->GetPosition());
     shader->SetUniform("viewMatrix", viewMatrix);
     shader->SetUniform("projectionMatrix", projectionMatrix);
-    shader->SetUniform("viewProjectionMatrix", projectionMatrix * viewMatrix);
+    shader->SetUniform("viewProjectionMatrix", viewProjectionMatrix);
     
     shader->SetUniform("numLights", (int)lights.size());
     for (int i = 0; i < lights.size(); i++)
@@ -271,45 +247,56 @@ void Renderer::RenderMesh(const Mesh *mesh) const
         glDrawArrays(GL_TRIANGLES, 0, mesh->GetVertexCount());
 }
 
+void Renderer::RenderEditorSelection() const
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
+    glClearColor(1, 1, 1, 0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
+    glDrawBuffers(1, &drawBuffer);
+    
+    RenderPass(&Renderer::RenderableIsSelected, &Renderer::OverrideColorBlack);
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    Shader *shader = editorSelectionShader;
+    glUseProgram(editorSelectionShader->GetID());
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
+    shader->SetUniform("silhouette", 0);
+    shader->SetUniform("width", shader->GetDefaultUniformValues().Get<int>("width"));
+    shader->SetUniform("color", shader->GetDefaultUniformValues().Get<Vector4>("color"));
+    glBindVertexArray(editorSelectionVbo);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+bool Renderer::RenderableIsSelected(RenderQueue::const_iterator i) const
+{
+    return app->editor->IsSelected((*i)->GetEntity());
+}
+
+void Renderer::OverrideColorBlack(RenderQueue::const_iterator i) const
+{
+    const Shader *shader = (*i)->GetMaterial()->GetShader();
+    shader->SetUniform("colorOverride", Vector4(0, 0, 0, 1));
+}
+
+void Renderer::OverrideColorFromIndex(RenderQueue::const_iterator i) const
+{
+    int index = (int)std::distance(renderQueue.begin(), i);
+    int r = (index & 0x000000FF) >>  0;
+    int g = (index & 0x0000FF00) >>  8;
+    int b = (index & 0x00FF0000) >> 16;
+    const Shader *shader = (*i)->GetMaterial()->GetShader();
+    shader->SetUniform("colorOverride", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
+}
+
 Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates) const
 {
     glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
     glClearColor(1, 1, 1, 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    const Shader *activeShader = NULL;
-    const Mesh *activeMesh = NULL;
-    
-    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
-    {
-        const Renderable* renderable = (*i);
-        
-        const Shader *shader = renderable->GetMaterial()->GetShader();
-        if (activeShader != shader)
-        {
-            activeShader = shader;
-            glUseProgram(shader->GetID());
-            SetDefaultUniforms(shader);
-        }
-        
-        const Mesh *mesh = renderable->GetMesh();
-        if (activeMesh != mesh)
-        {
-            activeMesh = mesh;
-            glBindVertexArray(mesh->GetID());
-        }
-        
-        SetModelUniforms(shader, renderable);
-        ApplyRenderOptions(renderable->GetOptions());
-        
-        int index = (int)std::distance(renderQueue.begin(), i);
-        int r = (index & 0x000000FF) >>  0;
-        int g = (index & 0x0000FF00) >>  8;
-        int b = (index & 0x00FF0000) >> 16;
-        shader->SetUniform("colorOverride", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
-        
-        RenderMesh(mesh);
-    }
+    RenderPass(NULL, &Renderer::OverrideColorFromIndex);
     
     glFinish();
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
