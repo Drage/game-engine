@@ -1,0 +1,36 @@
+<Scene>
+    <Entity>
+        <name>Camera</name>
+        <position>0, 2, 8</position>
+        <rotation>0, 180, 0</rotation>
+        <Camera></Camera>
+        <AudioListener></AudioListener>
+    </Entity>
+    <Entity>
+        <name>Light</name>
+        <position>5, 5, 0</position>
+        <rotation>45, 0, 0</rotation>
+        <Light>
+            <type>1</type>
+            <color>#FFFFFF</color>
+            <attenuation>0.2</attenuation>
+            <ambient>0.005</ambient>
+        </Light>
+    </Entity>
+    <Entity>
+        <name>Sphere</name>
+        <position>0, 0, 0</position>
+        <scale>1, 1, 1</scale>
+        <Sphere>
+            <material>Sphere.material</material>
+        </Sphere>
+    </Entity>
+    <Entity>
+        <name>Sphere2</name>
+        <position>0, 2.5, 0</position>
+        <scale>1, 1, 1</scale>
+        <Sphere>
+            <material>Sphere2.material</material>
+        </Sphere>
+    </Entity>
+</Scene>

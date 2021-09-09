@@ -14,6 +14,7 @@ void LightComponent::Init(const ParamList &params)
     attenuation = params.Get<float>("attenuation");
     coneAngle = params.Get<float>("angle");
     app->renderer->AddLight(this);
+    Update();
 }
 
 LightComponent::~LightComponent()

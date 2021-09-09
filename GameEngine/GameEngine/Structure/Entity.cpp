@@ -130,7 +130,7 @@ Transform Entity::GetGlobalTransform() const
     while (entity->parent != NULL)
     {
         entity = entity->parent;
-        global *= entity->transform;
+        global = entity->transform * global;
     }
     return global;
 }

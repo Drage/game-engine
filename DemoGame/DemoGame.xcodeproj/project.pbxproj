@@ -99,6 +99,8 @@
 		4083B4E02324CB2A00A72B43 /* Lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Lighting.frag; sourceTree = "<group>"; };
 		4083B4E223250D4C00A72B43 /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
 		40978DA5233544A40082F63E /* Default.material */ = {isa = PBXFileReference; lastKnownFileType = text; name = Default.material; path = DemoGame/Assets/Default.material; sourceTree = SOURCE_ROOT; };
+		D00B828B26E3173200DE5400 /* LightTest.scene */ = {isa = PBXFileReference; lastKnownFileType = text; name = LightTest.scene; path = DemoGame/Assets/LightTest.scene; sourceTree = SOURCE_ROOT; };
+		D00B828C26E32F7E00DE5400 /* Sphere.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sphere.material; sourceTree = "<group>"; };
 		D04077D126E222BD00D0396C /* Cloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cloud.h; sourceTree = "<group>"; };
 		D04077D226E2241E00D0396C /* Cloud.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cloud.cpp; sourceTree = "<group>"; };
 		D06899732412E2C300ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -238,6 +240,8 @@
 				40641480235600C9000F994F /* Clouds */,
 				4083B4C5231FEE0000A72B43 /* Shaders */,
 				406DCA8B2341C0B3008C088E /* Demo.scene */,
+				D00B828B26E3173200DE5400 /* LightTest.scene */,
+				D00B828C26E32F7E00DE5400 /* Sphere.material */,
 				40978DA5233544A40082F63E /* Default.material */,
 			);
 			path = Assets;

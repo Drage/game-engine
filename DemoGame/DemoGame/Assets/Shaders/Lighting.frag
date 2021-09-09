@@ -2,6 +2,7 @@
 #version 410 core
 
 uniform sampler2D diffuseMap;
+
 uniform float shininess;
 uniform vec4 color;
 
@@ -69,12 +70,12 @@ vec4 ApplyLighting(mat4 modelMatrix, vec3 cameraPosition, vec3 position, vec3 no
     vec3 surfacePosition = vec3(modelMatrix * vec4(position, 1));
     vec4 surfaceColor = texture(diffuseMap, texCoord) * color;
     vec3 surfaceToCamera = normalize(cameraPosition - surfacePosition);
-    
+
     // Combine color from all the lights
     vec3 linearColor = vec3(0);
     for (int i = 0; i < numLights; i++)
         linearColor += ApplyLight(lights[i], surfaceColor.rgb, surfaceNormal, surfacePosition, surfaceToCamera);
-    
+
     // Final color (after gamma correction)
     vec3 gamma = vec3(1.0 / 2.2);
     return vec4(pow(linearColor, gamma), surfaceColor.a);

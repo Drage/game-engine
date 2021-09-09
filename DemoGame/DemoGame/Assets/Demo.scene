@@ -79,20 +79,4 @@
             <maxSize>90</maxSize>
         </Clouds>
     </Entity>
-    <Entity>
-        <name>Sphere</name>
-        <position>0, 10, 0</position>
-        <scale>10, 10, 10</scale>
-        <Sphere>
-            <material>Sphere.material</material>
-        </Sphere>
-    </Entity>
-    <Entity>
-        <name>Sphere2</name>
-        <position>20, 10, 0</position>
-        <scale>10, 10, 10</scale>
-        <Sphere>
-            <material>Sphere.material</material>
-        </Sphere>
-    </Entity>
 </Scene>
