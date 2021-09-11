@@ -35,7 +35,7 @@ namespace DrageEngine
         
             void Render();
         
-            Entity* GetEntityAtScreenPosition(const Vector2 &coordinates) const;
+            Entity* GetEntityAtScreenPosition(const Vector2 &coordinates);
         
         private:
             friend class Application;
@@ -47,14 +47,15 @@ namespace DrageEngine
             Renderer();
             void InitEditorSelection();
         
-            void RenderPass(RenderFilterFunc filter = NULL, RenderCallbackFunc preRender = NULL) const;
+            void RenderPass(RenderFilterFunc filter = NULL, RenderCallbackFunc preRender = NULL);
+            bool FilterInFrustum(RenderQueue::const_iterator i) const;
             void SetDefaultUniforms(const Shader* shader) const;
             void SetModelUniforms(const Shader* shader, const Renderable *renderable) const;
-            void ApplyRenderOptions(unsigned options) const;
+            void ApplyRenderOptions(const Renderable *renderable) const;
             void RenderMesh(const Mesh *mesh) const;
         
-            void RenderEditorSelection() const;
-            bool RenderableIsSelected(RenderQueue::const_iterator i) const;
+            void RenderEditorSelection();
+            bool FilterIsSelected(RenderQueue::const_iterator i) const;
             void OverrideColorBlack(RenderQueue::const_iterator i) const;
             void OverrideColorFromIndex(RenderQueue::const_iterator i) const;
         
@@ -74,6 +75,9 @@ namespace DrageEngine
             unsigned editorSelectionDepth;
             unsigned editorSelectionVbo;
             Shader* editorSelectionShader;
+        
+            int renderPasses = 0;
+            int drawCalls = 0;
     };
 
     class RenderOption
@@ -82,6 +86,8 @@ namespace DrageEngine
             static const unsigned RENDER_BACKFACE = 1 << 0;
             static const unsigned NO_DEPTH_WRITE = 1 << 1;
             static const unsigned NO_DEPTH_TEST = 1 << 2;
+            static const unsigned NO_FRUSTUM_CULL = 1 << 3;
+            static const unsigned NON_SELECTABLE = 1 << 4;
     };
 }
 

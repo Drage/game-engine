@@ -23,7 +23,7 @@
     <Prefab>
         <prefab>Car.prefab</prefab>
         <name>Player</name>
-        <position>0, 3, 0</position>
+        <position>0, 5, 10</position>
         <rotation>0, 45, 0</position>
         <Racer></Racer>
     </Prefab>

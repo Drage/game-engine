@@ -6,6 +6,7 @@
 #include <string>
 #include "Vertex.h"
 #include "Material.h"
+#include "Bounds.h"
 
 namespace DrageEngine
 {
@@ -23,7 +24,7 @@ namespace DrageEngine
             void Generate(const std::vector<Vertex> &vertices, const std::vector<unsigned> &indices, const std::vector<T> &extData)
             {
                 Generate(vertices, indices);
-                GenerateExtentedBuffer(extData);
+                GenerateExtendedBuffer(extData);
             }
         
             unsigned GetID() const;
@@ -35,10 +36,12 @@ namespace DrageEngine
             bool HasIndices() const;
             int GetVertexCount() const;
             int GetIndexCount() const;
+            Bounds GetBounds() const;
         
         private:
             template<class T>
-            void GenerateExtentedBuffer(const std::vector<T> &extData);
+            void GenerateExtendedBuffer(const std::vector<T> &extData);
+            void CalculateBounds(const std::vector<Vertex> &vertices);
         
             unsigned vao;
             unsigned verticesVbo;
@@ -48,6 +51,7 @@ namespace DrageEngine
             int indexCount;
             std::string name;
             Material *material;
+            Bounds bounds;
     };
 }
 

@@ -11,6 +11,7 @@
 #include "Debug.h"
 #include "AssetManager.h"
 #include "Application.h"
+#include "MathUtils.h"
 
 using namespace DrageEngine;
 
@@ -154,7 +155,11 @@ void Renderer::Render()
     viewProjectionMatrix = projectionMatrix * viewMatrix;
 
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+    glDepthMask(GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    renderPasses = 0;
+    drawCalls = 0;
     
     for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
     {
@@ -167,17 +172,22 @@ void Renderer::Render()
     RenderableComparitor renderableComparitor;
     std::sort(renderQueue.begin(), renderQueue.end(), renderableComparitor);
     
-    RenderPass();
+    RenderPass(&Renderer::FilterInFrustum);
     
-    if (app->IsInEditMode())
+    if (app->IsInEditMode() && app->editor->HasSelection())
         RenderEditorSelection();
 }
 
-void Renderer::RenderPass(RenderFilterFunc filter, RenderCallbackFunc preRender) const
+void Renderer::RenderPass(RenderFilterFunc filter, RenderCallbackFunc preRender)
 {
     const Shader *activeShader = NULL;
     const Material *activeMaterial = NULL;
     const Mesh *activeMesh = NULL;
+    
+    renderPasses++;
+    
+    std::stringstream ss;
+    ss << "Render: ";
     
     for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
     {
@@ -209,13 +219,31 @@ void Renderer::RenderPass(RenderFilterFunc filter, RenderCallbackFunc preRender)
         }
         
         SetModelUniforms(shader, renderable);
-        ApplyRenderOptions(renderable->GetOptions());
+        ApplyRenderOptions(renderable);
         
         if (preRender)
             (this->*preRender)(i);
             
         RenderMesh(mesh);
+        drawCalls++;
+        
+        ss << renderable->GetEntity()->GetName() << ", ";
     }
+    
+    LOG(ss.str());
+}
+
+bool Renderer::FilterInFrustum(RenderQueue::const_iterator i) const
+{
+    Renderable *renderable = (*i);
+
+    if (renderable->GetOptions() & RenderOption::NO_FRUSTUM_CULL)
+        return true;
+
+    Bounds bounds = renderable->GetMesh()->GetBounds();
+    Matrix4x4 modelMatrix = renderable->GetEntity()->GetGlobalTransform().ToMatrix();
+    
+    return camera->GetFrustum().CheckBounds(bounds, modelMatrix);
 }
 
 void Renderer::SetDefaultUniforms(const Shader* shader) const
@@ -247,8 +275,13 @@ void Renderer::SetModelUniforms(const Shader* shader, const Renderable *renderab
     shader->SetUniform("modelViewProjectionMatrix", viewProjectionMatrix * modelMatrix);
 }
 
-void Renderer::ApplyRenderOptions(unsigned options) const
+void Renderer::ApplyRenderOptions(const Renderable *renderable) const
 {
+    unsigned options = renderable->GetOptions();
+    
+    if (renderable->GetMaterial()->IsTransparent())
+        options |= RenderOption::NO_DEPTH_WRITE;
+    
     glCullFace(options & RenderOption::RENDER_BACKFACE ? GL_FRONT : GL_BACK);
     glDepthMask(options & RenderOption::NO_DEPTH_WRITE ? GL_FALSE : GL_TRUE);
     
@@ -266,15 +299,16 @@ void Renderer::RenderMesh(const Mesh *mesh) const
         glDrawArrays(GL_TRIANGLES, 0, mesh->GetVertexCount());
 }
 
-void Renderer::RenderEditorSelection() const
+void Renderer::RenderEditorSelection()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
     glClearColor(1, 1, 1, 0);
+    glDepthMask(GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLenum drawBuffer = GL_COLOR_ATTACHMENT0;
     glDrawBuffers(1, &drawBuffer);
     
-    RenderPass(&Renderer::RenderableIsSelected, &Renderer::OverrideColorBlack);
+    RenderPass(&Renderer::FilterIsSelected, &Renderer::OverrideColorBlack);
     
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     Shader *shader = editorSelectionShader;
@@ -288,7 +322,7 @@ void Renderer::RenderEditorSelection() const
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-bool Renderer::RenderableIsSelected(RenderQueue::const_iterator i) const
+bool Renderer::FilterIsSelected(RenderQueue::const_iterator i) const
 {
     return app->editor->IsSelected((*i)->GetEntity());
 }
@@ -297,7 +331,6 @@ void Renderer::OverrideColorBlack(RenderQueue::const_iterator i) const
 {
     const Shader *shader = (*i)->GetMaterial()->GetShader();
     shader->SetUniform("colorOverride", Vector4(0, 0, 0, 1));
-    glDepthMask(GL_TRUE);
 }
 
 void Renderer::OverrideColorFromIndex(RenderQueue::const_iterator i) const
@@ -310,9 +343,10 @@ void Renderer::OverrideColorFromIndex(RenderQueue::const_iterator i) const
     shader->SetUniform("colorOverride", Vector4(r/255.0f, g/255.0f, b/255.0f, 1.0f));
 }
 
-Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates) const
+Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
+    glDepthMask(GL_TRUE);
     glClearColor(1, 1, 1, 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -327,9 +361,12 @@ Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates) const
     int index = data[0] + data[1] * 256 + data[2] * 256*256;
     if (index < renderQueue.size())
     {
-        RenderQueue::const_iterator it = renderQueue.begin();
-        std::advance(it, index);
-        return (*it)->GetEntity();
+        RenderQueue::const_iterator i = renderQueue.begin();
+        std::advance(i, index);
+        Renderable *renderable = *i;
+        
+        if (!(renderable->GetOptions() & RenderOption::NON_SELECTABLE))
+            return renderable->GetEntity();
     }
     return NULL;
 }

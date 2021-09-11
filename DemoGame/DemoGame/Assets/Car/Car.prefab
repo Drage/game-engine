@@ -3,7 +3,7 @@
     <Entity>
         <name>Visual</name>
         <Entity>
-            <name>Offset</name>
+            <name>CarModel</name>
             <position>0, 0.2, 0</position>
             <MeshRenderer>
                 <model>Car.obj</model>

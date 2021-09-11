@@ -96,14 +96,25 @@ Matrix4x4 Matrix4x4::operator- (const Matrix4x4 &other) const
         return result;
 }
 
-Vector3 Matrix4x4::operator* (const Vector3 &point) const
+Vector4 Matrix4x4::operator* (const Vector4 &point) const
 {
-    Vector3 result;
+    Vector4 result;
     
     result[0] = values[0]*point[0] + values[4]*point[1] + values[8 ]*point[2] + values[12]*point[3];
     result[1] = values[1]*point[0] + values[5]*point[1] + values[9 ]*point[2] + values[13]*point[3];
     result[2] = values[2]*point[0] + values[6]*point[1] + values[10]*point[2] + values[14]*point[3];
     result[3] = values[3]*point[0] + values[7]*point[1] + values[11]*point[2] + values[15]*point[3];
+    
+    return result;
+}
+
+Vector3 Matrix4x4::operator* (const Vector3 &point) const
+{
+    Vector3 result;
+    
+    result[0] = values[0]*point[0] + values[4]*point[1] + values[8 ]*point[2];
+    result[1] = values[1]*point[0] + values[5]*point[1] + values[9 ]*point[2];
+    result[2] = values[2]*point[0] + values[6]*point[1] + values[10]*point[2];
     
     return result;
 }
@@ -492,6 +503,20 @@ Quaternion Matrix4x4::GetRotation() const
     
     q.Normalize();
     return q;
+}
+
+Vector4 Matrix4x4::GetColumn(int column) const
+{
+    switch (column)
+    {
+        case 0: return Vector4(values[0], values[1], values[2], values[3]);
+        case 1: return Vector4(values[4], values[5], values[6], values[7]);
+        case 2: return Vector4(values[8], values[9], values[10], values[11]);
+        case 3: return Vector4(values[12], values[13], values[14], values[15]);
+        default:
+            ERROR("Undefined matrix column index");
+            return Vector4(0);
+    }
 }
 
 float& Matrix4x4::operator[] (int i)

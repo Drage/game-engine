@@ -3,6 +3,7 @@
 #define MATRIX4X4_H
 
 #include "Vector3.h"
+#include "Vector4.h"
 #include "Quaternion.h"
 
 namespace DrageEngine
@@ -24,6 +25,7 @@ namespace DrageEngine
             Matrix4x4 operator* (const Matrix4x4 &other) const;
             Matrix4x4 operator+ (const Matrix4x4 &other) const;
             Matrix4x4 operator- (const Matrix4x4 &other) const;
+            Vector4 operator* (const Vector4 &point) const;
             Vector3 operator* (const Vector3 &point) const;
             void operator*= (const Matrix4x4 &other);
             void operator+= (const Matrix4x4 &other);
@@ -49,6 +51,8 @@ namespace DrageEngine
             Vector3 GetTranslation() const;
             Vector3 GetScale() const;
             Quaternion GetRotation() const;
+        
+            Vector4 GetColumn(int column) const;
         
             float& operator[] (int i);
             const float& operator[] (int i) const;

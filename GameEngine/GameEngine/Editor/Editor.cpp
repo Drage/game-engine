@@ -48,3 +48,8 @@ bool Editor::IsSelected(Entity* entity) const
     }
     return false;
 }
+
+bool Editor::HasSelection() const
+{
+    return selection.size() > 0;
+}

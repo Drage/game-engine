@@ -11,7 +11,9 @@ EditorCamera::EditorCamera()
     rotateSensitivity = 0.8f;
     panSensitivity = 0.2f;
     zoomSensitivity = 0.5f;
-    focus = Vector3(0, 0, 0);
+    position = Vector3(0, 5, 0);
+    focus = Vector3(0, 5, 10);
+    direction = (focus - position).Normalized();
 }
 
 void EditorCamera::Update()

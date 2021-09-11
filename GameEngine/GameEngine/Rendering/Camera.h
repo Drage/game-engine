@@ -4,6 +4,7 @@
 
 #include "Vector3.h"
 #include "Matrix4x4.h"
+#include "Frustum.h"
 
 namespace DrageEngine
 {
@@ -31,12 +32,15 @@ namespace DrageEngine
             Matrix4x4 GetViewMatrix() const;
             Matrix4x4 GetProjectionMatrix() const;
         
+            const Frustum& GetFrustum();
+        
         protected:
             Vector3 position;
             Vector3 direction;
             float fov;
             float nearClip;
             float farClip;
+            Frustum frustum;
         };
 }
 

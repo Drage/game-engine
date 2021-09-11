@@ -2,7 +2,9 @@
 #define GL_GLEXT_PROTOTYPES
 #include <SDL_opengl.h>
 #include <OpenGL/gl.h>
+#include <limits>
 #include "Mesh.h"
+#include "Debug.h"
 
 using namespace DrageEngine;
 
@@ -56,6 +58,8 @@ void Mesh::Generate(const std::vector<Vertex> &vertices)
     
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    CalculateBounds(vertices);
 }
 
 void Mesh::Generate(const std::vector<Vertex> &vertices, const std::vector<unsigned> &indices)
@@ -74,7 +78,7 @@ void Mesh::Generate(const std::vector<Vertex> &vertices, const std::vector<unsig
 }
 
 template <class T>
-void Mesh::GenerateExtentedBuffer(const std::vector<T> &extData)
+void Mesh::GenerateExtendedBuffer(const std::vector<T> &extData)
 {
     glBindVertexArray(vao);
     glGenBuffers(1, &extendedVbo);
@@ -85,9 +89,18 @@ void Mesh::GenerateExtentedBuffer(const std::vector<T> &extData)
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-template void Mesh::GenerateExtentedBuffer<float>(const std::vector<float> &extData);
-template void Mesh::GenerateExtentedBuffer<Vector2>(const std::vector<Vector2> &extData);
-template void Mesh::GenerateExtentedBuffer<Vector3>(const std::vector<Vector3> &extData);
+template void Mesh::GenerateExtendedBuffer<float>(const std::vector<float> &extData);
+template void Mesh::GenerateExtendedBuffer<Vector2>(const std::vector<Vector2> &extData);
+template void Mesh::GenerateExtendedBuffer<Vector3>(const std::vector<Vector3> &extData);
+
+void Mesh::CalculateBounds(const std::vector<Vertex> &vertices)
+{
+    auto x = std::minmax_element(vertices.begin(), vertices.end(), [](const Vertex& a, const Vertex& b) { return a.position.x < b.position.x; });
+    auto y = std::minmax_element(vertices.begin(), vertices.end(), [](const Vertex& a, const Vertex& b) { return a.position.y < b.position.y; });
+    auto z = std::minmax_element(vertices.begin(), vertices.end(), [](const Vertex& a, const Vertex& b) { return a.position.z < b.position.z; });
+    bounds.min = Vector3(x.first->position.x, y.first->position.y, z.first->position.z);
+    bounds.max = Vector3(x.second->position.x, y.second->position.y, z.second->position.z);
+}
 
 unsigned Mesh::GetID() const
 {
@@ -122,4 +135,9 @@ int Mesh::GetVertexCount() const
 int Mesh::GetIndexCount() const
 {
     return indexCount;
+}
+
+Bounds Mesh::GetBounds() const
+{
+    return bounds;
 }

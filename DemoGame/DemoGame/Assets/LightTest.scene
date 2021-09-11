@@ -25,12 +25,4 @@
             <material>Sphere.material</material>
         </Sphere>
     </Entity>
-    <Entity>
-        <name>Sphere2</name>
-        <position>0, 2.5, 0</position>
-        <scale>1, 1, 1</scale>
-        <Sphere>
-            <material>Sphere2.material</material>
-        </Sphere>
-    </Entity>
 </Scene>

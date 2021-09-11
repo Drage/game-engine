@@ -17,6 +17,7 @@ namespace DrageEngine
             void Update();
         
             bool IsSelected(Entity* entity) const;
+            bool HasSelection() const;
         
             EditorCamera *camera;
         

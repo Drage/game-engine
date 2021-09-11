@@ -11,7 +11,8 @@ void SkyboxComponent::Init(const ParamList &params)
     std::string materialName = params.Get<std::string>("material");
     Material *material = app->assets->GetMaterial(materialName);
     
-    skybox = new Renderable(Primitive::Cube(), material, entity, RenderOption::RENDER_BACKFACE | RenderOption::NO_DEPTH_WRITE);
+    unsigned renderOptions = RenderOption::RENDER_BACKFACE | RenderOption::NO_DEPTH_WRITE | RenderOption::NO_FRUSTUM_CULL | RenderOption::NON_SELECTABLE;
+    skybox = new Renderable(Primitive::Cube(), material, entity, renderOptions);
 }
 
 SkyboxComponent::~SkyboxComponent()

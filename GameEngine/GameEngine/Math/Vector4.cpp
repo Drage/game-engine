@@ -50,6 +50,11 @@ Vector4::Vector4(const Vector3 &vec3, float w)
     this->w = w;
 }
 
+Vector3 Vector4::xyz() const
+{
+    return Vector3(x, y, z);
+}
+
 Vector4 Vector4::operator+ (const Vector4 &other) const
 {
     return Vector4(x + other.x, y + other.y, z + other.z, w + other.w);

@@ -158,6 +158,8 @@
 		D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D054156A26E1C7E600600C98 /* Renderable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D054156926E1C7E600600C98 /* Renderable.cpp */; };
 		D054156B26E1E1C200600C98 /* Renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = D054156826E1C78100600C98 /* Renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D1426ED2FDC004051AD /* Frustum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D1626ED31B1004051AD /* Frustum.cpp */; };
 		D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E64B8626E0BC7C00B86CA3 /* SphereComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */; };
 /* End PBXBuildFile section */
@@ -318,6 +320,8 @@
 		D054156826E1C78100600C98 /* Renderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderable.h; sourceTree = "<group>"; };
 		D054156926E1C7E600600C98 /* Renderable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderable.cpp; sourceTree = "<group>"; };
 		D06899702412E27700ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		D0C44D1426ED2FDC004051AD /* Frustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
+		D0C44D1626ED31B1004051AD /* Frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
 		D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereComponent.h; sourceTree = "<group>"; };
 		D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereComponent.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -582,6 +586,8 @@
 				408377A8231B6E5700A63D8F /* Primitives.cpp */,
 				401B7894231B76CC00E6B4F0 /* Camera.h */,
 				401B7898231B76CC00E6B4F0 /* Camera.cpp */,
+				D0C44D1426ED2FDC004051AD /* Frustum.h */,
+				D0C44D1626ED31B1004051AD /* Frustum.cpp */,
 				401B7928231BC38A00E6B4F0 /* Color.h */,
 				401B7929231BC38A00E6B4F0 /* Color.cpp */,
 				401B7957231E8B9C00E6B4F0 /* Texture.h */,
@@ -716,6 +722,7 @@
 				4062B912231A7A8900F44658 /* GameEngine.h in Headers */,
 				40607DAF2344DBFE00F985CD /* AudioListenerComponent.h in Headers */,
 				400F3B41234A341E0062DBF5 /* PlaneComponent.h in Headers */,
+				D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */,
 				4083B4C0231FAC1E00A72B43 /* Shader.h in Headers */,
 				40607DA723434E0600F985CD /* AudioWAV.h in Headers */,
 				401B789A231B76CC00E6B4F0 /* Renderer.h in Headers */,
@@ -859,6 +866,7 @@
 				40DD559C234FA04700BBA4A9 /* GameTime.cpp in Sources */,
 				406414722354DFA3000F994F /* BillboardComponent.cpp in Sources */,
 				D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */,
+				D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */,
 				406DCA5D23392257008C088E /* Entity.cpp in Sources */,
 				4083B4E623251A0900A72B43 /* XMLDocument.cpp in Sources */,
 				406414C8235DFAAC000F994F /* ParticleAnimParameter.cpp in Sources */,

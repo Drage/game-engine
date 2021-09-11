@@ -92,3 +92,20 @@ Matrix4x4 Camera::GetProjectionMatrix() const
     projection.SetProjectionPerspective(fov, app->window->GetAspectRatio(), nearClip, farClip);
     return projection;
 }
+
+const Frustum& Camera::GetFrustum()
+{
+    static Vector3 lastPosition;
+    static Vector3 lastDirection;
+    static float lastFov;
+    
+    if (position != lastPosition || direction != lastDirection || fov != lastFov)
+    {
+        lastPosition = position;
+        lastDirection = direction;
+        lastFov = fov;
+        frustum.Update(position, direction, nearClip, farClip, fov);
+    }
+    
+    return frustum;
+}
