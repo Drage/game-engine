@@ -186,9 +186,6 @@ void Renderer::RenderPass(RenderFilterFunc filter, RenderCallbackFunc preRender)
     
     renderPasses++;
     
-    std::stringstream ss;
-    ss << "Render: ";
-    
     for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
     {
         const Renderable* renderable = (*i);
@@ -226,11 +223,7 @@ void Renderer::RenderPass(RenderFilterFunc filter, RenderCallbackFunc preRender)
             
         RenderMesh(mesh);
         drawCalls++;
-        
-        ss << renderable->GetEntity()->GetName() << ", ";
     }
-    
-    LOG(ss.str());
 }
 
 bool Renderer::FilterInFrustum(RenderQueue::const_iterator i) const
@@ -239,11 +232,22 @@ bool Renderer::FilterInFrustum(RenderQueue::const_iterator i) const
 
     if (renderable->GetOptions() & RenderOption::NO_FRUSTUM_CULL)
         return true;
-
-    Bounds bounds = renderable->GetMesh()->GetBounds();
-    Matrix4x4 modelMatrix = renderable->GetEntity()->GetGlobalTransform().ToMatrix();
     
-    return camera->GetFrustum().CheckBounds(bounds, modelMatrix);
+    if (renderable->GetOptions() & RenderOption::FRUSTUM_CULL_SPHERE)
+    {
+        Transform transform = renderable->GetEntity()->GetGlobalTransform();
+        Vector3 position = transform.position;
+        Vector3 scale = transform.scale;
+        float scaleFactor = std::max({scale.x, scale.y, scale.z});
+        float radius = renderable->GetMesh()->GetBounds().radius * scaleFactor;
+        return camera->GetFrustum().CheckSphere(position, radius);
+    }
+    else
+    {
+        Bounds bounds = renderable->GetMesh()->GetBounds();
+        Matrix4x4 modelMatrix = renderable->GetEntity()->GetGlobalTransform().ToMatrix();
+        return camera->GetFrustum().CheckBounds(bounds, modelMatrix);
+    }
 }
 
 void Renderer::SetDefaultUniforms(const Shader* shader) const

@@ -78,4 +78,24 @@
             <maxSize>90</maxSize>
         </Clouds>
     </Entity>
+    <Entity>
+        <name>PirateShip</name>
+        <position>20, -7, 365</position>
+        <rotation>0, -145, 0</rotation>
+        <scale>0.8, 0.8, 0.8</scale>
+        <MeshRenderer>
+            <model>PirateShip.obj</model>
+            <material>PirateShip.material</material>
+        </MeshRenderer>
+    </Entity>
+    <Entity>
+        <name>Anchor</name>
+        <position>335, 1, 127</position>
+        <rotation>17, 150, 24</rotation>
+        <scale>0.2, 0.2, 0.2</scale>
+        <MeshRenderer>
+            <model>Anchor.obj</model>
+            <material>Anchor.material</material>
+        </MeshRenderer>
+    </Entity>
 </Scene>

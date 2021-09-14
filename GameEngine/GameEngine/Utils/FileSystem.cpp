@@ -1,16 +1,34 @@
 
+#include <filesystem>
 #include <fstream>
 #include "FileSystem.h"
+#include "StringUtils.h"
 #include "Debug.h"
 
 #if defined(_WIN32)
   #include <windows.h>
+  #include <direct.h>
+  #define getcwd _getcwd
 #elif defined(__APPLE__)
   #include <dirent.h>
   #include <sys/types.h>
+  #include <unistd.h>
 #endif
 
 using namespace DrageEngine;
+
+std::string DrageEngine::RelativeToAbsolutePath(const std::string &relativePath)
+{
+    std::string path(relativePath);
+    std::string root(getcwd(NULL, 0));
+    while (String::StartsWith(path, "../"))
+    {
+        path = path.substr(3, path.length() - 3);
+        int lastSlash = (int)root.rfind('/');
+        root = root.substr(0, lastSlash);
+    }
+    return root + "/" + path;
+}
 
 #if defined(_WIN32)
 bool DrageEngine::GetFilesInDirectory(const std::string &directory, std::vector<std::string> &files, bool recursiveSearch)
@@ -56,7 +74,9 @@ bool DrageEngine::GetFilesInDirectory(const std::string &directory, std::vector<
 #if defined(__APPLE__)
 bool DrageEngine::GetFilesInDirectory(const std::string &directory, std::vector<std::string> &files, bool recursiveSearch)
 {
-    DIR *dir = opendir(directory.c_str());
+    std::string absolutePathToDirectory = RelativeToAbsolutePath(directory);
+    
+    DIR *dir = opendir(absolutePathToDirectory.c_str());
     if (dir == NULL)
     {
         ERROR("Could not open directory: " + directory);

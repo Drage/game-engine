@@ -62,6 +62,14 @@ bool String::IsNullOrEmpty(const std::string& str)
     return true;
 }
 
+bool String::StartsWith(const std::string& str, const std::string& find)
+{
+    if (str.length() >= find.length())
+        return str.compare(0, find.length(), find) == 0;
+    else
+        return false;
+}
+
 bool String::EndsWith(const std::string& str, const std::string& find)
 {
     if (str.length() >= find.length())

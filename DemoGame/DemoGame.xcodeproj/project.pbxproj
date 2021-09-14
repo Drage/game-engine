@@ -50,13 +50,10 @@
 		401B788F231B73B500E6B4F0 /* DemoGame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DemoGame.cpp; sourceTree = "<group>"; };
 		4048AEE82312E01700A7152A /* DemoGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		4048AEEB2312E01700A7152A /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
-		4062B8FE231818E400F44658 /* Standard.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Standard.vert; sourceTree = "<group>"; };
-		4062B8FF2318196000F44658 /* Standard.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Standard.frag; sourceTree = "<group>"; };
 		406327D9234B6F4D009B243F /* Racer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Racer.h; sourceTree = "<group>"; };
 		406327DA234B6F4D009B243F /* Racer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Racer.cpp; sourceTree = "<group>"; };
 		406327DC234B7DE9009B243F /* Camera3rdPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera3rdPerson.h; sourceTree = "<group>"; };
 		406327DD234B7DE9009B243F /* Camera3rdPerson.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera3rdPerson.cpp; sourceTree = "<group>"; };
-		4064146E2354D881000F994F /* Billboard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Billboard.shader; sourceTree = "<group>"; };
 		406414732355F8DC000F994F /* CloudGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudGenerator.h; sourceTree = "<group>"; };
 		406414742355F8DC000F994F /* CloudGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CloudGenerator.cpp; sourceTree = "<group>"; };
 		40641481235600C9000F994F /* Cloud07.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cloud07.material; sourceTree = "<group>"; };
@@ -85,29 +82,18 @@
 		406414C2235C768E000F994F /* Car.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Car.material; sourceTree = "<group>"; };
 		406414C3235C768E000F994F /* Car.prefab */ = {isa = PBXFileReference; lastKnownFileType = text; path = Car.prefab; sourceTree = "<group>"; };
 		406414C4235C768E000F994F /* Car.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Car.obj; sourceTree = "<group>"; };
-		40651BD523490D16003BBD50 /* EnvironmentMapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = EnvironmentMapping.frag; sourceTree = "<group>"; };
-		40651BDE234A0BA7003BBD50 /* Unlit.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Unlit.shader; sourceTree = "<group>"; };
-		40651BDF234A0BDC003BBD50 /* Unlit.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Unlit.frag; sourceTree = "<group>"; };
-		4065392F2354D52000644D01 /* Billboard.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Billboard.vert; sourceTree = "<group>"; };
-		4066CCF523477D5000496404 /* Skybox.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Skybox.vert; sourceTree = "<group>"; };
-		4066CCF623477F2000496404 /* Skybox.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Skybox.frag; sourceTree = "<group>"; };
-		4066CCF723477F9400496404 /* Skybox.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Skybox.shader; sourceTree = "<group>"; };
 		406DCA6C233E3C47008C088E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		406DCA6D233E4076008C088E /* Rotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
 		406DCA6E233E4076008C088E /* Rotate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
 		406DCA8B2341C0B3008C088E /* Demo.scene */ = {isa = PBXFileReference; lastKnownFileType = text; path = Demo.scene; sourceTree = "<group>"; };
-		4083B4E02324CB2A00A72B43 /* Lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Lighting.frag; sourceTree = "<group>"; };
-		4083B4E223250D4C00A72B43 /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
-		40978DA5233544A40082F63E /* Default.material */ = {isa = PBXFileReference; lastKnownFileType = text; name = Default.material; path = DemoGame/Assets/Default.material; sourceTree = SOURCE_ROOT; };
 		D00B828B26E3173200DE5400 /* LightTest.scene */ = {isa = PBXFileReference; lastKnownFileType = text; name = LightTest.scene; path = DemoGame/Assets/LightTest.scene; sourceTree = SOURCE_ROOT; };
 		D00B828C26E32F7E00DE5400 /* Sphere.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sphere.material; sourceTree = "<group>"; };
 		D04077D126E222BD00D0396C /* Cloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cloud.h; sourceTree = "<group>"; };
 		D04077D226E2241E00D0396C /* Cloud.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cloud.cpp; sourceTree = "<group>"; };
 		D06899732412E2C300ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		D0E64B7426DEA7E700B86CA3 /* Core.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Core.frag; sourceTree = "<group>"; };
-		D0E64B7526DF042700B86CA3 /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
-		D0E64B7626DF042E00B86CA3 /* FullScreenQuad.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = FullScreenQuad.vert; sourceTree = "<group>"; };
-		D0E64B7726DF087200B86CA3 /* Outline.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Outline.frag; sourceTree = "<group>"; };
+		D0C44D1926EE7EE6004051AD /* PirateShip.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = PirateShip.tga; sourceTree = "<group>"; };
+		D0C44D1A26EE7EE6004051AD /* PirateShip.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = PirateShip.obj; sourceTree = "<group>"; };
+		D0C44D1B26EE7F18004051AD /* PirateShip.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = PirateShip.material; sourceTree = "<group>"; };
 		D0E64B7A26DF513800B86CA3 /* Volcano.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = Volcano.obj; sourceTree = "<group>"; };
 		D0E64B7B26DF513800B86CA3 /* Volcano.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Volcano.tga; sourceTree = "<group>"; };
 		D0E64B7C26DF513800B86CA3 /* Volcano.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Volcano.material; sourceTree = "<group>"; };
@@ -233,6 +219,7 @@
 		4083B4C3231FEDDD00A72B43 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D0C44D1826EE7EE6004051AD /* PirateShip */,
 				D0E64B8026DF51E800B86CA3 /* Volcano */,
 				406414BD235C768E000F994F /* Car */,
 				406414AD2358D1D7000F994F /* Terrain */,
@@ -242,7 +229,6 @@
 				406DCA8B2341C0B3008C088E /* Demo.scene */,
 				D00B828B26E3173200DE5400 /* LightTest.scene */,
 				D00B828C26E32F7E00DE5400 /* Sphere.material */,
-				40978DA5233544A40082F63E /* Default.material */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -250,27 +236,21 @@
 		4083B4C5231FEE0000A72B43 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				4083B4E223250D4C00A72B43 /* Standard.shader */,
-				4062B8FE231818E400F44658 /* Standard.vert */,
-				4062B8FF2318196000F44658 /* Standard.frag */,
-				D0E64B7426DEA7E700B86CA3 /* Core.frag */,
-				D0E64B7726DF087200B86CA3 /* Outline.frag */,
-				D0E64B7526DF042700B86CA3 /* EditorSelection.shader */,
-				D0E64B7626DF042E00B86CA3 /* FullScreenQuad.vert */,
-				4083B4E02324CB2A00A72B43 /* Lighting.frag */,
-				40651BD523490D16003BBD50 /* EnvironmentMapping.frag */,
-				40651BDE234A0BA7003BBD50 /* Unlit.shader */,
-				40651BDF234A0BDC003BBD50 /* Unlit.frag */,
-				4066CCF723477F9400496404 /* Skybox.shader */,
-				4066CCF523477D5000496404 /* Skybox.vert */,
-				4066CCF623477F2000496404 /* Skybox.frag */,
-				4064146E2354D881000F994F /* Billboard.shader */,
-				4065392F2354D52000644D01 /* Billboard.vert */,
 				406414B22359D790000F994F /* Water.shader */,
 				406414B32359DD83000F994F /* Water.vert */,
 				406414B12359D781000F994F /* Water.frag */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		D0C44D1826EE7EE6004051AD /* PirateShip */ = {
+			isa = PBXGroup;
+			children = (
+				D0C44D1B26EE7F18004051AD /* PirateShip.material */,
+				D0C44D1926EE7EE6004051AD /* PirateShip.tga */,
+				D0C44D1A26EE7EE6004051AD /* PirateShip.obj */,
+			);
+			path = PirateShip;
 			sourceTree = "<group>";
 		};
 		D0E64B7926DF513800B86CA3 /* Volcano */ = {

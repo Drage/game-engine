@@ -10,9 +10,10 @@ namespace DrageEngine
     {
         Vector3 min;
         Vector3 max;
+        float radius;
         
         Bounds();
-        Bounds(const Vector3 &min, const Vector3 &max);
+        Bounds(const Vector3 &min, const Vector3 &max, float radius);
         
         Vector3 GetDimensions();
     };

@@ -322,6 +322,23 @@
 		D06899702412E27700ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		D0C44D1426ED2FDC004051AD /* Frustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
 		D0C44D1626ED31B1004051AD /* Frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
+		D0C44D1D26F087E0004051AD /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
+		D0C44D1E26F087E0004051AD /* Lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Lighting.frag; sourceTree = "<group>"; };
+		D0C44D1F26F087E0004051AD /* EnvironmentMapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = EnvironmentMapping.frag; sourceTree = "<group>"; };
+		D0C44D2026F087E0004051AD /* Default.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Default.material; sourceTree = "<group>"; };
+		D0C44D2126F087E0004051AD /* Standard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Standard.shader; sourceTree = "<group>"; };
+		D0C44D2226F087E0004051AD /* Skybox.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Skybox.frag; sourceTree = "<group>"; };
+		D0C44D2326F087E0004051AD /* Unlit.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Unlit.frag; sourceTree = "<group>"; };
+		D0C44D2426F087E0004051AD /* Standard.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Standard.vert; sourceTree = "<group>"; };
+		D0C44D2526F087E0004051AD /* Skybox.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Skybox.vert; sourceTree = "<group>"; };
+		D0C44D2626F087E0004051AD /* Unlit.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Unlit.shader; sourceTree = "<group>"; };
+		D0C44D2726F087E0004051AD /* FullScreenQuad.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = FullScreenQuad.vert; sourceTree = "<group>"; };
+		D0C44D2826F087E1004051AD /* Standard.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Standard.frag; sourceTree = "<group>"; };
+		D0C44D2926F087E1004051AD /* Billboard.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Billboard.shader; sourceTree = "<group>"; };
+		D0C44D2A26F087E1004051AD /* Core.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Core.frag; sourceTree = "<group>"; };
+		D0C44D2B26F087E1004051AD /* Outline.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Outline.frag; sourceTree = "<group>"; };
+		D0C44D2C26F087E1004051AD /* Billboard.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Billboard.vert; sourceTree = "<group>"; };
+		D0C44D2D26F087E1004051AD /* Skybox.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Skybox.shader; sourceTree = "<group>"; };
 		D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereComponent.h; sourceTree = "<group>"; };
 		D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereComponent.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -436,6 +453,7 @@
 				40978D982335320E0082F63E /* Physics */,
 				406414B4235C6927000F994F /* Particles */,
 				406DCA6B233D08CA008C088E /* Utils */,
+				D0C44D1C26F07722004051AD /* Standard Assets */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -647,6 +665,30 @@
 				D02BBDE226D8DF5400B3B639 /* Editor.cpp */,
 			);
 			path = Editor;
+			sourceTree = "<group>";
+		};
+		D0C44D1C26F07722004051AD /* Standard Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D0C44D2026F087E0004051AD /* Default.material */,
+				D0C44D2A26F087E1004051AD /* Core.frag */,
+				D0C44D2126F087E0004051AD /* Standard.shader */,
+				D0C44D2826F087E1004051AD /* Standard.frag */,
+				D0C44D2426F087E0004051AD /* Standard.vert */,
+				D0C44D2626F087E0004051AD /* Unlit.shader */,
+				D0C44D2326F087E0004051AD /* Unlit.frag */,
+				D0C44D1E26F087E0004051AD /* Lighting.frag */,
+				D0C44D1F26F087E0004051AD /* EnvironmentMapping.frag */,
+				D0C44D1D26F087E0004051AD /* EditorSelection.shader */,
+				D0C44D2B26F087E1004051AD /* Outline.frag */,
+				D0C44D2726F087E0004051AD /* FullScreenQuad.vert */,
+				D0C44D2926F087E1004051AD /* Billboard.shader */,
+				D0C44D2C26F087E1004051AD /* Billboard.vert */,
+				D0C44D2226F087E0004051AD /* Skybox.frag */,
+				D0C44D2D26F087E1004051AD /* Skybox.shader */,
+				D0C44D2526F087E0004051AD /* Skybox.vert */,
+			);
+			path = "Standard Assets";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

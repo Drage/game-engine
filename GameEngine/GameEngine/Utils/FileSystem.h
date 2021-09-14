@@ -9,6 +9,7 @@
 namespace DrageEngine
 {
     bool GetFilesInDirectory(const std::string &directory, std::vector<std::string> &files, bool recursiveSearch = false);
+    std::string RelativeToAbsolutePath(const std::string &relativePath);
     std::string FindFilePath(const std::string &directory, const std::string &filename);
     std::string ReadFileContents(const std::string &path);
     std::string GetFileExtension(const std::string &path);

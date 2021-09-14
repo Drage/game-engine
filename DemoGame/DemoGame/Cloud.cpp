@@ -17,7 +17,7 @@ void Cloud::Init(const ParamList &params)
     
     std::string materialName = params.Get<std::string>("material");
     Material *material = app->assets->GetMaterial(materialName);
-    renderable = new Renderable(Primitive::Billboard(), material, entity);
+    renderable = new Renderable(Primitive::Billboard(), material, entity, RenderOption::FRUSTUM_CULL_SPHERE);
 }
 
 void Cloud::Update()

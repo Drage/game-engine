@@ -100,6 +100,11 @@ void Mesh::CalculateBounds(const std::vector<Vertex> &vertices)
     auto z = std::minmax_element(vertices.begin(), vertices.end(), [](const Vertex& a, const Vertex& b) { return a.position.z < b.position.z; });
     bounds.min = Vector3(x.first->position.x, y.first->position.y, z.first->position.z);
     bounds.max = Vector3(x.second->position.x, y.second->position.y, z.second->position.z);
+    
+    auto r = std::max_element(vertices.begin(), vertices.end(), [](const Vertex& a, const Vertex& b) {
+        return a.position.MagnitudeSqr() < b.position.MagnitudeSqr();
+    });
+    bounds.radius = r->position.Magnitude();
 }
 
 unsigned Mesh::GetID() const

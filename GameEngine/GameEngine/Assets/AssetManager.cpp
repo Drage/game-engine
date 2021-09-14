@@ -6,12 +6,13 @@
 using namespace DrageEngine;
 
 const std::string AssetManager::ASSETS_DIR = "Assets/";
+const std::string AssetManager::STANDARD_ASSETS_DIR = "../../GameEngine/GameEngine/Standard Assets/";
 
 AssetManager::AssetManager()
 {
     // Load mapping from file name to path
     std::vector<std::string> files;
-    if (GetFilesInDirectory(AssetManager::ASSETS_DIR, files, true))
+    if (GetFilesInDirectory(AssetManager::ASSETS_DIR, files, true) && GetFilesInDirectory(AssetManager::STANDARD_ASSETS_DIR, files, true))
     {
         for (std::vector<std::string>::iterator i = files.begin(); i != files.end(); i++)
         {

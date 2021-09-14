@@ -31,6 +31,7 @@ namespace DrageEngine
         
         public:
             static const std::string ASSETS_DIR;
+            static const std::string STANDARD_ASSETS_DIR;
             std::string GetAssetPath(const std::string &name);
         
             Image* GetImage(const std::string &filename);

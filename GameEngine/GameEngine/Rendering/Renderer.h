@@ -87,7 +87,8 @@ namespace DrageEngine
             static const unsigned NO_DEPTH_WRITE = 1 << 1;
             static const unsigned NO_DEPTH_TEST = 1 << 2;
             static const unsigned NO_FRUSTUM_CULL = 1 << 3;
-            static const unsigned NON_SELECTABLE = 1 << 4;
+            static const unsigned FRUSTUM_CULL_SPHERE = 1 << 4;
+            static const unsigned NON_SELECTABLE = 1 << 5;
     };
 }
 
