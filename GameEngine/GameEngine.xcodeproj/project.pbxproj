@@ -160,6 +160,10 @@
 		D054156B26E1E1C200600C98 /* Renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = D054156826E1C78100600C98 /* Renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D1426ED2FDC004051AD /* Frustum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D1626ED31B1004051AD /* Frustum.cpp */; };
+		D0C44D3126F1D9A9004051AD /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D3026F1D9A9004051AD /* Font.h */; };
+		D0C44D3326F1DA02004051AD /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D3226F1DA02004051AD /* Font.cpp */; };
+		D0C44D3526F1DC4B004051AD /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */; };
+		D0C44D3726F1DC93004051AD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C44D3626F1DC93004051AD /* SDL2.framework */; };
 		D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E64B8626E0BC7C00B86CA3 /* SphereComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */; };
 /* End PBXBuildFile section */
@@ -319,7 +323,6 @@
 		D02BBDE626D8E0A200B3B639 /* Editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor.h; sourceTree = "<group>"; };
 		D054156826E1C78100600C98 /* Renderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderable.h; sourceTree = "<group>"; };
 		D054156926E1C7E600600C98 /* Renderable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderable.cpp; sourceTree = "<group>"; };
-		D06899702412E27700ACAB1C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		D0C44D1426ED2FDC004051AD /* Frustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
 		D0C44D1626ED31B1004051AD /* Frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
 		D0C44D1D26F087E0004051AD /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
@@ -339,6 +342,10 @@
 		D0C44D2B26F087E1004051AD /* Outline.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Outline.frag; sourceTree = "<group>"; };
 		D0C44D2C26F087E1004051AD /* Billboard.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Billboard.vert; sourceTree = "<group>"; };
 		D0C44D2D26F087E1004051AD /* Skybox.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Skybox.shader; sourceTree = "<group>"; };
+		D0C44D3026F1D9A9004051AD /* Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
+		D0C44D3226F1DA02004051AD /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
+		D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_ttf.framework; sourceTree = "<group>"; };
+		D0C44D3626F1DC93004051AD /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereComponent.h; sourceTree = "<group>"; };
 		D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereComponent.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -348,6 +355,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C44D3726F1DC93004051AD /* SDL2.framework in Frameworks */,
+				D0C44D3526F1DC4B004051AD /* SDL2_ttf.framework in Frameworks */,
 				4010F52D234256EC00D08A02 /* OpenAL.framework in Frameworks */,
 				408377AD231B6ED600A63D8F /* OpenGL.framework in Frameworks */,
 				401B7946231D703A00E6B4F0 /* libz.tbd in Frameworks */,
@@ -380,6 +389,7 @@
 				401B7936231D63AA00E6B4F0 /* Images */,
 				40978D9323352FD40082F63E /* Models */,
 				40607DA023434BC000F985CD /* Audio */,
+				D0C44D3A26F1E34F004051AD /* Fonts */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -585,7 +595,8 @@
 		408377A1231AEB6F00A63D8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D06899702412E27700ACAB1C /* SDL2.framework */,
+				D0C44D3626F1DC93004051AD /* SDL2.framework */,
+				D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */,
 				408377AC231B6ED600A63D8F /* OpenGL.framework */,
 				4010F52C234256EC00D08A02 /* OpenAL.framework */,
 				401B7945231D703A00E6B4F0 /* libz.tbd */,
@@ -691,6 +702,15 @@
 			path = "Standard Assets";
 			sourceTree = "<group>";
 		};
+		D0C44D3A26F1E34F004051AD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D0C44D3026F1D9A9004051AD /* Font.h */,
+				D0C44D3226F1DA02004051AD /* Font.cpp */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -711,6 +731,7 @@
 				D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */,
 				401B792A231BC38A00E6B4F0 /* Color.h in Headers */,
 				40837780231A8F2600A63D8F /* Vector4.h in Headers */,
+				D0C44D3126F1D9A9004051AD /* Font.h in Headers */,
 				406DCA602339227D008C088E /* Component.h in Headers */,
 				408377A5231B6DD500A63D8F /* Random.h in Headers */,
 				40978D9B233532220082F63E /* Bounds.h in Headers */,
@@ -880,6 +901,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C44D3326F1DA02004051AD /* Font.cpp in Sources */,
 				4010F5322342F6B100D08A02 /* AudioSource.cpp in Sources */,
 				40837783231A8F2600A63D8F /* MathUtils.cpp in Sources */,
 				40978DA0233535170082F63E /* ModelOBJ.cpp in Sources */,
@@ -1090,11 +1112,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/SDL2.framework/Headers\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GameEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1104,10 +1125,7 @@
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					SDL2,
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drage.GameEngine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1129,11 +1147,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/SDL2.framework/Headers\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = GameEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1143,10 +1160,7 @@
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					SDL2,
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drage.GameEngine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

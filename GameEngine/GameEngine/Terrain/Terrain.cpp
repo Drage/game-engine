@@ -1,6 +1,6 @@
 
 #define GL_GLEXT_PROTOTYPES
-#include <SDL_opengl.h>
+#include <SDL2/SDL_opengl.h>
 #include <OpenGL/gl.h>
 #include <vector>
 #include "Terrain.h"

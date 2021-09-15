@@ -1,6 +1,7 @@
 
 #define GL_GLEXT_PROTOTYPES
-#include <SDL_opengl.h>
+#include <SDL2/SDL_opengl.h>
+#include <SDL2_ttf/SDL_ttf.h>
 #include <OpenGL/gl.h>
 #include "Window.h"
 #include "Application.h"
@@ -34,6 +35,12 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         ERROR("Failed to initialize the SDL2 library");
+        return false;
+    }
+    
+    if (TTF_Init() < 0)
+    {
+        ERROR("Failed to initialize the SDL2 TTF library");
         return false;
     }
     

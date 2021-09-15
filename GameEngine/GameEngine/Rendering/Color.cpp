@@ -142,19 +142,28 @@ const float* Color::ToArray() const
     return &r;
 }
 
-Vector3 Color::ToVector3()
+Vector3 Color::ToVector3() const
 {
     return Vector3(r, g, b);
 }
 
-Vector4 Color::ToVector4()
+Vector4 Color::ToVector4() const
 {
     return Vector4(r, g, b, a);
 }
 
-float Color::ToGreyscale()
+float Color::ToGreyscale() const
 {
     return (r + g + b) / 3;
+}
+
+SDL_Color Color::ToSDLColor() const
+{
+    Uint8 red = r * 255;
+    Uint8 green = g * 255;
+    Uint8 blue = b * 255;
+    Uint8 alpha = a * 255;
+    return { red, green, blue, alpha };
 }
 
 std::string Color::ToString() const

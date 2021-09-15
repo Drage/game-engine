@@ -4,6 +4,7 @@
 
 #include "Vector3.h"
 #include "Vector4.h"
+#include <SDL2/SDL_pixels.h>
 
 namespace DrageEngine
 {
@@ -47,9 +48,11 @@ namespace DrageEngine
         const float& operator[] (int i) const;
         const float* ToArray() const;
         
-        Vector3 ToVector3();
-        Vector4 ToVector4();
-        float ToGreyscale();
+        Vector3 ToVector3() const;
+        Vector4 ToVector4() const;
+        float ToGreyscale() const;
+        
+        SDL_Color ToSDLColor() const;
         
         std::string ToString() const;
         static Color Parse(const std::string &str);
