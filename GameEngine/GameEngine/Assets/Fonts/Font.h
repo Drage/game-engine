@@ -5,6 +5,7 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include <string>
 #include "Color.h"
+#include "Texture.h"
 
 namespace DrageEngine
 {
@@ -14,9 +15,9 @@ namespace DrageEngine
             Font();
             ~Font();
             bool Load(const std::string &filename, int size);
-            void RenderText(const std::string &text, const Color &color);
+            Texture* Render(const std::string &text, const Color &color);
         
-        private:        
+        private:
             TTF_Font* font;
     };
 }

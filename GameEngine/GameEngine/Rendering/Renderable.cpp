@@ -52,6 +52,7 @@ float Renderable::GetDepthOrder() const
 
 unsigned long Renderable::GetSortKey() const
 {
+    unsigned long notUI = !material->IsUIOverlay();
     unsigned long opaque = !material->IsTransparent();
     unsigned long shaderId = material->GetShader()->GetID();
     unsigned long materialId = material->GetID();
@@ -60,7 +61,7 @@ unsigned long Renderable::GetSortKey() const
     unsigned long depthOrderOverride = material->GetRenderPriority();
     unsigned long depthOrder = depthOrderOverride == 0 ? (unsigned)this->depthOrder : depthOrderOverride;
     
-    // 1 bit for transparent/opaque, 8 bits for shader, 11 bits for material, 12 bits for mesh
-    // Max 256 shaders, 2048 materials, and 4096 meshes
-    return opaque << 63 | depthOrder << 31 | shaderId << 23 | materialId << 12 | meshId;
+    // 1 bit for UI, 1 bit for transparent/opaque, 7 bits for shader, 11 bits for material, 12 bits for mesh
+    // Max 128 shaders, 2048 materials, and 4096 meshes
+    return notUI << 63 | opaque << 62 | depthOrder << 30 | shaderId << 23 | materialId << 12 | meshId;
 }

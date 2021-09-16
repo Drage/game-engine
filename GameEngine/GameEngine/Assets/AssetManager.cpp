@@ -143,7 +143,10 @@ Model* AssetManager::GetModel(const std::string &filename)
     {
         Model *model = modelFactory.Create(extension);
         if (model->Load(GetAssetPath(filename)))
+        {
+            modelCache[filename] = model;
             return model;
+        }
     }
     else
     {
@@ -173,6 +176,31 @@ AudioClip* AssetManager::GetAudio(const std::string &filename)
     else
     {
         WARNING("Audio file format not supported: " + filename);
+    }
+    return NULL;
+}
+
+Font* AssetManager::GetFont(const std::string &filename, int size)
+{
+    std::string key = filename + "|" + std::to_string(size);
+    
+    FontCache::iterator i = fontCache.find(filename);
+    if (i != fontCache.end())
+        return i->second;
+    
+    std::string extension = GetFileExtension(filename);
+    if (extension == "ttf")
+    {
+        Font *font = new Font();
+        if (font->Load(GetAssetPath(filename), size))
+        {
+            fontCache[key] = font;
+            return font;
+        }
+    }
+    else
+    {
+        WARNING("Font file format not supported: " + filename);
     }
     return NULL;
 }

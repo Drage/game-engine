@@ -47,7 +47,7 @@ void Renderer::InitEditorSelection()
     
     glGenTextures(1, &editorSelectionTexture);
     glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, app->window->GetWidth(), app->window->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportWidth, viewportHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -60,7 +60,7 @@ void Renderer::InitEditorSelection()
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, app->window->GetWidth(), app->window->GetHeight(), 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportWidth, viewportHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
     
     glGenFramebuffers(1, &editorSelectionFbo);
     glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
@@ -73,12 +73,14 @@ void Renderer::InitEditorSelection()
 
 void Renderer::ViewportResized(int width, int height)
 {
-    glViewport(0, 0, width, height);
+    viewportWidth = width - 100;
+    viewportHeight = height - 100;
+    glViewport(0, 0, viewportWidth, viewportHeight);
     
     glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, app->window->GetWidth(), app->window->GetHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportWidth, viewportHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glBindTexture(GL_TEXTURE_2D, editorSelectionDepth);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, app->window->GetWidth(), app->window->GetHeight(), 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportWidth, viewportHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -253,6 +255,8 @@ bool Renderer::FilterInFrustum(RenderQueue::const_iterator i) const
 void Renderer::SetDefaultUniforms(const Shader* shader) const
 {
     shader->SetUniform("time", Time::RunTime());
+    shader->SetUniform("viewportWidth", viewportWidth);
+    shader->SetUniform("viewportHeight", viewportHeight);
     
     shader->SetUniform("cameraPosition", camera->GetPosition());
     shader->SetUniform("viewMatrix", viewMatrix);

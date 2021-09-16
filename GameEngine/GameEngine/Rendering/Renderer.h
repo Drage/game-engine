@@ -60,6 +60,8 @@ namespace DrageEngine
             void OverrideColorFromIndex(RenderQueue::const_iterator i) const;
         
             Color clearColor;
+            int viewportWidth;
+            int viewportHeight;
         
             Camera *camera;
             std::vector<Light*> lights;

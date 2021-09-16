@@ -6,9 +6,7 @@
 uniform sampler2D diffuseMap;
 uniform vec4 color;
 
-in vec3 fragPosition;
 in vec2 fragTexCoord;
-in vec3 fragNormal;
 
 void main()
 {

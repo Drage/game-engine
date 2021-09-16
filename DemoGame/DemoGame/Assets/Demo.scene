@@ -98,4 +98,13 @@
             <material>Anchor.material</material>
         </MeshRenderer>
     </Entity>
+    <Entity>
+        <name>SpriteTest</name>
+        <position>0, 0, 0</position>
+        <scale>1, 1, 1</scale>
+        <Sprite>
+            <texture>Cloud01.tga</texture>
+            <anchor>TopLeft</anchor>
+        </Sprite>
+    </Entity>
 </Scene>

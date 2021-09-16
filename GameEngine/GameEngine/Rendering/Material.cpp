@@ -19,6 +19,16 @@ Material::Material()
     id = nextMaterialId++;
 }
 
+Material::Material(const Material &other)
+{
+    id = nextMaterialId++;
+    isTransparent = other.isTransparent;
+    isUIOverlay = other.isUIOverlay;
+    renderPriority = other.renderPriority;
+    shader = other.shader;
+    attributes = other.attributes;
+}
+
 bool Material::Load(const std::string &filename)
 {
     name = GetFileName(filename);
@@ -30,7 +40,8 @@ bool Material::Load(const std::string &filename)
     ParamList params;
     xml.root.ToParamList(params);
     
-    transparent = params.Get<bool>("transparent", false);
+    isTransparent = params.Get<bool>("transparent", false);
+    isUIOverlay = params.Get<bool>("ui", false);
     renderPriority = params.Get<unsigned>("renderPriority", 0);
     
     std::string shaderFilename = params.Get<std::string>("shader");
@@ -149,7 +160,12 @@ unsigned Material::GetID() const
 
 bool Material::IsTransparent() const
 {
-    return transparent;
+    return isTransparent;
+}
+
+bool Material::IsUIOverlay() const
+{
+    return isUIOverlay;
 }
 
 unsigned Material::GetRenderPriority() const

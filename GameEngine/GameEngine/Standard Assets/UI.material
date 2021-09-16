@@ -1,0 +1,5 @@
+<Material>
+    <shader>UI.shader</shader>
+    <ui>1</ui>
+    <transparent>1</transparent>
+</Material>

@@ -11,6 +11,7 @@
 #include "SkyboxComponent.h"
 #include "TerrainComponent.h"
 #include "BillboardComponent.h"
+#include "SpriteComponent.h"
 
 using namespace DrageEngine;
 
@@ -27,6 +28,7 @@ ComponentFactory::ComponentFactory()
     factory.Register<SkyboxComponent>("Skybox");
     factory.Register<TerrainComponent>("Terrain");
     factory.Register<BillboardComponent>("Billboard");
+    factory.Register<SpriteComponent>("Sprite");
 }
 
 Component* ComponentFactory::Create(const std::string &type)

@@ -15,6 +15,7 @@
 #include "Material.h"
 #include "Model.h"
 #include "AudioClip.h"
+#include "Font.h"
 #include "Component.h"
 
 namespace DrageEngine
@@ -28,6 +29,7 @@ namespace DrageEngine
         typedef std::map<std::string, Material*> MaterialCache;
         typedef std::map<std::string, Model*> ModelCache;
         typedef std::map<std::string, AudioClip*> AudioCache;
+        typedef std::map<std::string, Font*> FontCache;
         
         public:
             static const std::string ASSETS_DIR;
@@ -41,6 +43,7 @@ namespace DrageEngine
             Material* GetMaterial(const std::string &filename);
             Model* GetModel(const std::string &filename);
             AudioClip* GetAudio(const std::string &filename);
+            Font* GetFont(const std::string &filename, int size);
             Component* GetComponent(const std::string &name);
         
             bool IsValidComponentType(const std::string &name);
@@ -69,6 +72,7 @@ namespace DrageEngine
             MaterialCache materialCache;
             ModelCache modelCache;
             AudioCache audioCache;
+            FontCache fontCache;
     };
 }
 

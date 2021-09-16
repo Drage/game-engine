@@ -160,10 +160,12 @@
 		D054156B26E1E1C200600C98 /* Renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = D054156826E1C78100600C98 /* Renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D1426ED2FDC004051AD /* Frustum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D1626ED31B1004051AD /* Frustum.cpp */; };
-		D0C44D3126F1D9A9004051AD /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D3026F1D9A9004051AD /* Font.h */; };
+		D0C44D3126F1D9A9004051AD /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D3026F1D9A9004051AD /* Font.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D3326F1DA02004051AD /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D3226F1DA02004051AD /* Font.cpp */; };
 		D0C44D3526F1DC4B004051AD /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */; };
 		D0C44D3726F1DC93004051AD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C44D3626F1DC93004051AD /* SDL2.framework */; };
+		D0C44D4826F311BB004051AD /* SpriteComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D4626F311BB004051AD /* SpriteComponent.cpp */; };
+		D0C44D4926F311BB004051AD /* SpriteComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D4726F311BB004051AD /* SpriteComponent.h */; };
 		D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E64B8626E0BC7C00B86CA3 /* SphereComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */; };
 /* End PBXBuildFile section */
@@ -346,6 +348,11 @@
 		D0C44D3226F1DA02004051AD /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_ttf.framework; sourceTree = "<group>"; };
 		D0C44D3626F1DC93004051AD /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		D0C44D3F26F30C16004051AD /* UI.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI.material; sourceTree = "<group>"; };
+		D0C44D4026F30C2F004051AD /* UI.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI.shader; sourceTree = "<group>"; };
+		D0C44D4126F30D6F004051AD /* UI.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = UI.vert; sourceTree = "<group>"; };
+		D0C44D4626F311BB004051AD /* SpriteComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteComponent.cpp; sourceTree = "<group>"; };
+		D0C44D4726F311BB004051AD /* SpriteComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteComponent.h; sourceTree = "<group>"; };
 		D0E64B8326E0BC7C00B86CA3 /* SphereComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereComponent.h; sourceTree = "<group>"; };
 		D0E64B8426E0BC7C00B86CA3 /* SphereComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SphereComponent.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -528,6 +535,8 @@
 				40EC7A0C234E117F00CA8DB3 /* TerrainComponent.cpp */,
 				4064146F2354DFA3000F994F /* BillboardComponent.h */,
 				406414702354DFA3000F994F /* BillboardComponent.cpp */,
+				D0C44D4626F311BB004051AD /* SpriteComponent.cpp */,
+				D0C44D4726F311BB004051AD /* SpriteComponent.h */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -698,6 +707,9 @@
 				D0C44D2226F087E0004051AD /* Skybox.frag */,
 				D0C44D2D26F087E1004051AD /* Skybox.shader */,
 				D0C44D2526F087E0004051AD /* Skybox.vert */,
+				D0C44D3F26F30C16004051AD /* UI.material */,
+				D0C44D4026F30C2F004051AD /* UI.shader */,
+				D0C44D4126F30D6F004051AD /* UI.vert */,
 			);
 			path = "Standard Assets";
 			sourceTree = "<group>";
@@ -786,6 +798,7 @@
 				40607DAF2344DBFE00F985CD /* AudioListenerComponent.h in Headers */,
 				400F3B41234A341E0062DBF5 /* PlaneComponent.h in Headers */,
 				D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */,
+				D0C44D4926F311BB004051AD /* SpriteComponent.h in Headers */,
 				4083B4C0231FAC1E00A72B43 /* Shader.h in Headers */,
 				40607DA723434E0600F985CD /* AudioWAV.h in Headers */,
 				401B789A231B76CC00E6B4F0 /* Renderer.h in Headers */,
@@ -908,6 +921,7 @@
 				4083778C231ADE0300A63D8F /* Vector4.cpp in Sources */,
 				400F3B42234A341E0062DBF5 /* PlaneComponent.cpp in Sources */,
 				401B793C231D658300E6B4F0 /* FileSystem.cpp in Sources */,
+				D0C44D4826F311BB004051AD /* SpriteComponent.cpp in Sources */,
 				4083B4CE2320120900A72B43 /* ImageBMP.cpp in Sources */,
 				40607DB02344DBFE00F985CD /* AudioListenerComponent.cpp in Sources */,
 				401B789F231B76CC00E6B4F0 /* Camera.cpp in Sources */,

@@ -13,6 +13,7 @@ namespace DrageEngine
     {
         public:
             Material();
+            Material(const Material &other);
             bool Load(const std::string &filename);
 
             const Shader* GetShader() const;
@@ -21,12 +22,28 @@ namespace DrageEngine
             unsigned GetID() const;
         
             bool IsTransparent() const;
+            bool IsUIOverlay() const;
             unsigned GetRenderPriority() const;
+        
+            template<typename T>
+            void SetAttributeValue(const std::string &name, T value)
+            {
+                int location = shader->GetUniformLocation(name);
+                for (int i = 0; i < attributes.size(); i++)
+                {
+                    if (attributes[i].location == location)
+                    {
+                        *(T*)(attributes[i].value) = value;
+                        break;
+                    }
+                }
+            }
         
         private:
             std::string name;
             Shader *shader;
-            bool transparent;
+            bool isTransparent;
+            bool isUIOverlay;
             unsigned renderPriority;
         
             typedef struct Attribute
@@ -35,7 +52,9 @@ namespace DrageEngine
                 int location;
                 void *value;
             } UniformAttribute;
+        
             typedef std::vector<Attribute> AttributeList;
+            AttributeList attributes;
         
             template<typename T>
             void AddAttribute(int location, Shader::Uniform::Type type, T value)
@@ -47,8 +66,6 @@ namespace DrageEngine
                 *(T*)(attribute.value) = value;
                 attributes.push_back(attribute);
             }
-        
-            AttributeList attributes;
         
             static unsigned nextMaterialId;
             unsigned id;

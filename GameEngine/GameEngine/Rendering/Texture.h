@@ -11,6 +11,7 @@ namespace DrageEngine
         public:
             Texture();
             Texture(Image *image);
+            Texture(unsigned id, int width, int height);
             ~Texture();
         
             unsigned Generate(Image *image);
@@ -18,10 +19,8 @@ namespace DrageEngine
             unsigned GetWidth() const;
             unsigned GetHeight() const;
             unsigned GetID() const;
-            const std::string& GetName() const;
         
         private:
-            std::string name;
             unsigned width;
             unsigned height;
             unsigned id;

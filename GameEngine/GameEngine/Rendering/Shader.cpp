@@ -292,6 +292,8 @@ std::string Shader::GetArrayUniformName(const std::string &arrayName, int index,
 const std::string Shader::BUILT_IN_UNIFORMS[] =
 {
     "time",
+    "viewportWidth",
+    "viewportHeight",
     "modelMatrix",
     "viewMatrix",
     "projectionMatrix",

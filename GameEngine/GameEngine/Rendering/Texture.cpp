@@ -21,6 +21,13 @@ Texture::Texture(Image *image)
     Generate(image);
 }
 
+Texture::Texture(unsigned id, int width, int height)
+{
+    this->id = id;
+    this->width = width;
+    this->height = height;
+}
+
 Texture::~Texture()
 {
     glDeleteTextures(1, &id);
@@ -30,7 +37,6 @@ unsigned Texture::Generate(Image *image)
 {
     width = image->GetWidth();
     height = image->GetHeight();
-    name = image->GetName();
     
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
@@ -64,9 +70,4 @@ unsigned Texture::GetHeight() const
 unsigned Texture::GetID() const
 {
     return id;
-}
-
-const std::string& Texture::GetName() const
-{
-    return name;
 }

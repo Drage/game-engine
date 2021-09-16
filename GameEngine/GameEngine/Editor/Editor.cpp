@@ -10,11 +10,6 @@ Editor::Editor()
 {
     camera = new EditorCamera();
     app->renderer->SetActiveCamera(camera);
-    
-    Font font;
-    std::string fontPath = app->assets->GetAssetPath("Roboto.ttf");
-    font.Load(fontPath, 12);
-    font.RenderText("Hello World", Color::BLACK);
 }
 
 Editor::~Editor()
