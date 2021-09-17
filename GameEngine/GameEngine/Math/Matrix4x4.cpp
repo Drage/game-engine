@@ -416,8 +416,8 @@ void Matrix4x4::SetProjectionOrthographic(int width, int height)
     float left, right, top, bottom, far, near;
     left = 0;
     right = (float)width;
-    top = 0;
-    bottom = (float)height;
+    top = (float)height;
+    bottom = 0;
     near = -1;
     far = 1;
     

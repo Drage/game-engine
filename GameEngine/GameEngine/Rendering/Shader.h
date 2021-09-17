@@ -23,6 +23,7 @@ namespace DrageEngine
                 {
                     Float = 5126,
                     Int = 5124,
+                    Bool = 35670,
                     Vec2 = 35664,
                     Vec3 = 35665,
                     Vec4 = 35666,
@@ -56,6 +57,7 @@ namespace DrageEngine
             void SetUniform(int location, const Vector4 &v) const;
             void SetUniform(int location, const Color &c) const;
             void SetUniform(int location, float f) const;
+            void SetUniform(int location, bool b) const;
             void SetUniform(int location, int i) const;
             void SetUniform(const std::string &name, const Matrix4x4 &m) const;
             void SetUniform(const std::string &name, const Vector2 &v) const;
@@ -63,6 +65,7 @@ namespace DrageEngine
             void SetUniform(const std::string &name, const Vector4 &v) const;
             void SetUniform(const std::string &name, const Color &c) const;
             void SetUniform(const std::string &name, float f) const;
+            void SetUniform(const std::string &name, bool b) const;
             void SetUniform(const std::string &name, int i) const;
             void SetUniform(const std::string &array, int index, const std::string &name, const Matrix4x4 &m) const;
             void SetUniform(const std::string &array, int index, const std::string &name, const Vector2 &v) const;
@@ -70,6 +73,7 @@ namespace DrageEngine
             void SetUniform(const std::string &array, int index, const std::string &name, const Vector4 &v) const;
             void SetUniform(const std::string &array, int index, const std::string &name, const Color &c) const;
             void SetUniform(const std::string &array, int index, const std::string &name, float f) const;
+            void SetUniform(const std::string &array, int index, const std::string &name, bool b) const;
             void SetUniform(const std::string &array, int index, const std::string &name, int i) const;
         
             const UniformList& GetActiveUniforms() const;

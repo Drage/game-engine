@@ -99,12 +99,19 @@
         </MeshRenderer>
     </Entity>
     <Entity>
-        <name>SpriteTest</name>
-        <position>0, 0, 0</position>
-        <scale>1, 1, 1</scale>
-        <Sprite>
-            <texture>Cloud01.tga</texture>
-            <anchor>TopLeft</anchor>
-        </Sprite>
+        <name>Anchor</name>
+        <ScreenSpaceAnchor>
+            <anchor>0, 1</anchor>
+        </ScreenSpaceAnchor>
+        <Entity>
+            <name>Sprite</name>
+            <position>20, -20, 0</position>
+            <scale>1, 1, 1</scale>
+            <Sprite>
+                <texture>Cloud01.tga</texture>
+                <origin>-1, 1</origin>
+                <nativeTextureScale>1</nativeTextureScale>
+            </Sprite>
+        </Entity>
     </Entity>
 </Scene>

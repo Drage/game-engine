@@ -12,6 +12,7 @@
 #include "TerrainComponent.h"
 #include "BillboardComponent.h"
 #include "SpriteComponent.h"
+#include "ScreenSpaceAnchorComponent.h"
 
 using namespace DrageEngine;
 
@@ -29,6 +30,7 @@ ComponentFactory::ComponentFactory()
     factory.Register<TerrainComponent>("Terrain");
     factory.Register<BillboardComponent>("Billboard");
     factory.Register<SpriteComponent>("Sprite");
+    factory.Register<ScreenSpaceAnchorComponent>("ScreenSpaceAnchor");
 }
 
 Component* ComponentFactory::Create(const std::string &type)

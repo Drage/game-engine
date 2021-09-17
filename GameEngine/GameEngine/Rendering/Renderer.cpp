@@ -73,8 +73,8 @@ void Renderer::InitEditorSelection()
 
 void Renderer::ViewportResized(int width, int height)
 {
-    viewportWidth = width - 100;
-    viewportHeight = height - 100;
+    viewportWidth = width;
+    viewportHeight = height;
     glViewport(0, 0, viewportWidth, viewportHeight);
     
     glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
@@ -155,6 +155,7 @@ void Renderer::Render()
     viewMatrix = camera->GetViewMatrix();
     projectionMatrix = camera->GetProjectionMatrix();
     viewProjectionMatrix = projectionMatrix * viewMatrix;
+    orthoProjectionMatrix.SetProjectionOrthographic(viewportWidth, viewportHeight);
 
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glDepthMask(GL_TRUE);
@@ -163,21 +164,33 @@ void Renderer::Render()
     renderPasses = 0;
     drawCalls = 0;
     
-    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
-    {
-        Vector3 position = (*i)->GetEntity()->GetGlobalTransform().position;
-        float depthSqr = (position - camera->GetPosition()).MagnitudeSqr();
-        bool isTransparent = (*i)->GetMaterial()->IsTransparent();
-        (*i)->SetDepthOrder(isTransparent ? depthSqr : -depthSqr);
-    }
-    
-    RenderableComparitor renderableComparitor;
-    std::sort(renderQueue.begin(), renderQueue.end(), renderableComparitor);
-    
+    SortRenderQueue();
     RenderPass(&Renderer::FilterInFrustum);
     
     if (app->IsInEditMode() && app->editor->HasSelection())
         RenderEditorSelection();
+}
+
+void Renderer::SortRenderQueue()
+{
+    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
+    {
+        Renderable *renderable = (*i);
+        const Material *material = renderable->GetMaterial();
+        Vector3 position = renderable->GetEntity()->GetGlobalTransform().position;
+        
+        if (material->IsUIOverlay())
+            renderable->SetDepthOrder(1000 - position.z);
+        else
+        {
+            bool isTransparent = (*i)->GetMaterial()->IsTransparent();
+            float depthSqr = (position - camera->GetPosition()).MagnitudeSqr();
+            (*i)->SetDepthOrder(isTransparent ? depthSqr : -depthSqr);
+        }
+    }
+    
+    RenderableComparitor renderableComparitor;
+    std::sort(renderQueue.begin(), renderQueue.end(), renderableComparitor);
 }
 
 void Renderer::RenderPass(RenderFilterFunc filter, RenderCallbackFunc preRender)
@@ -262,6 +275,7 @@ void Renderer::SetDefaultUniforms(const Shader* shader) const
     shader->SetUniform("viewMatrix", viewMatrix);
     shader->SetUniform("projectionMatrix", projectionMatrix);
     shader->SetUniform("viewProjectionMatrix", viewProjectionMatrix);
+    shader->SetUniform("orthoProjectionMatrix", orthoProjectionMatrix);
     
     shader->SetUniform("numLights", (int)lights.size());
     for (int i = 0; i < lights.size(); i++)

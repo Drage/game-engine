@@ -2,8 +2,9 @@
 #version 410 core
 
 uniform mat4 modelMatrix;
-uniform int viewportWidth;
-uniform int viewportHeight;
+uniform mat4 orthoProjectionMatrix;
+uniform vec2 origin;
+uniform bool nativeTextureScale;
 uniform int textureWidth;
 uniform int textureHeight;
 
@@ -17,9 +18,13 @@ void main()
 {
     fragTexCoord = vertTexCoord;
     
-    float xScale = float(textureWidth) / float(viewportWidth);
-    float yScale = float(textureHeight) / float(viewportHeight);
-    mat4 textureScale = mat4(mat2(xScale, 0, 0, yScale));
+    float modelScaleX = modelMatrix[0][0];
+    float modelScaleY = modelMatrix[1][1];
+    vec4 originOffset = vec4(-modelScaleX / 2 * origin.x, -modelScaleY / 2 * origin.y, 0, 0);
     
-    gl_Position = modelMatrix * textureScale * vec4(vertPosition, 1);
+    mat4 textureScale = mat4(1.0);
+    if (nativeTextureScale)
+        textureScale = mat4(mat2(textureWidth, 0, 0, textureHeight));
+    
+    gl_Position = orthoProjectionMatrix * (modelMatrix * textureScale * vec4(vertPosition, 1) + textureScale * originOffset);
 }

@@ -161,6 +161,11 @@ void Shader::SetUniform(int location, float f) const
     glUniform1f(location, f);
 }
 
+void Shader::SetUniform(int location, bool b) const
+{
+    glUniform1i(location, b);
+}
+
 void Shader::SetUniform(int location, int i) const
 {
     glUniform1i(location, i);
@@ -196,6 +201,11 @@ void Shader::SetUniform(const std::string &name, float f) const
     glUniform1f(GetUniformLocation(name), f);
 }
 
+void Shader::SetUniform(const std::string &name, bool b) const
+{
+    glUniform1i(GetUniformLocation(name), b);
+}
+
 void Shader::SetUniform(const std::string &name, int i) const
 {
     glUniform1i(GetUniformLocation(name), i);
@@ -229,6 +239,11 @@ void Shader::SetUniform(const std::string &array, int index, const std::string &
 void Shader::SetUniform(const std::string &array, int index, const std::string &name, float f) const
 {
     SetUniform(GetArrayUniformName(array, index, name), f);
+}
+
+void Shader::SetUniform(const std::string &array, int index, const std::string &name, bool b) const
+{
+    SetUniform(GetArrayUniformName(array, index, name), b);
 }
 
 void Shader::SetUniform(const std::string &array, int index, const std::string &name, int i) const
@@ -275,10 +290,13 @@ void Shader::CheckAndLogStatus(unsigned shaderID, int statusType)
     {
         int infoLogLength;
         GetInfo(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-        
-        std::vector<char> errorMessage(infoLogLength+1);
-        glGetShaderInfoLog(shaderID, infoLogLength, NULL, &errorMessage[0]);
-        ERROR(name + ": " + &errorMessage[0]);
+        char buffer[infoLogLength+1];
+        glGetShaderInfoLog(shaderID, infoLogLength, NULL, buffer);
+        if (buffer[0] != '#')
+        {
+            std::string errorMessage(buffer);
+            ERROR(name + ": " + errorMessage);
+        }
     }
 }
 
@@ -300,6 +318,7 @@ const std::string Shader::BUILT_IN_UNIFORMS[] =
     "modelViewMatrix",
     "viewProjectionMatrix",
     "modelViewProjectionMatrix",
+    "orthoProjectionMatrix",
     "cameraPosition",
     "numLights",
     "lights[].position",

@@ -47,6 +47,7 @@ namespace DrageEngine
             Renderer();
             void InitEditorSelection();
         
+            void SortRenderQueue();
             void RenderPass(RenderFilterFunc filter = NULL, RenderCallbackFunc preRender = NULL);
             bool FilterInFrustum(RenderQueue::const_iterator i) const;
             void SetDefaultUniforms(const Shader* shader) const;
@@ -71,6 +72,7 @@ namespace DrageEngine
             Matrix4x4 viewMatrix;
             Matrix4x4 projectionMatrix;
             Matrix4x4 viewProjectionMatrix;
+            Matrix4x4 orthoProjectionMatrix;
         
             unsigned editorSelectionFbo;
             unsigned editorSelectionTexture;

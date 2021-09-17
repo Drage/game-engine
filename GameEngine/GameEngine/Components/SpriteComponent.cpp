@@ -20,6 +20,8 @@ void SpriteComponent::Init(const ParamList &params)
     material->SetAttributeValue("diffuseMap", texture->GetID());
     material->SetAttributeValue("textureWidth", texture->GetWidth());
     material->SetAttributeValue("textureHeight", texture->GetHeight());
+    material->SetAttributeValue("origin", params.Get<Vector2>("origin", Vector2(0)));
+    material->SetAttributeValue("nativeTextureScale", params.Get<bool>("nativeTextureScale", false));
     
     billboard = new Renderable(Primitive::Billboard(), material, entity, RenderOption::NO_FRUSTUM_CULL);
 }

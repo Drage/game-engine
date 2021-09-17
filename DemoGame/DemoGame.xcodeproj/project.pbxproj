@@ -187,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				D0E64B7926DF513800B86CA3 /* Volcano */,
-				D0E64B7F26DF51C800B86CA3 /* Volcano */,
 				406414AE2358D1D7000F994F /* Terrain.material */,
 				406414AF2358D1D7000F994F /* Heightmap.tga */,
 				406414B02358D1D7000F994F /* Sand.tga */,
@@ -257,14 +256,6 @@
 			name = Volcano;
 			path = DemoGame/Assets/Terrain/Volcano;
 			sourceTree = SOURCE_ROOT;
-		};
-		D0E64B7F26DF51C800B86CA3 /* Volcano */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Volcano;
-			path = ../Volcano;
-			sourceTree = "<group>";
 		};
 		D0E64B8026DF51E800B86CA3 /* Volcano */ = {
 			isa = PBXGroup;

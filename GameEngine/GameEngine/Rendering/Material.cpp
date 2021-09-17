@@ -26,7 +26,42 @@ Material::Material(const Material &other)
     isUIOverlay = other.isUIOverlay;
     renderPriority = other.renderPriority;
     shader = other.shader;
-    attributes = other.attributes;
+    
+    for (int i = 0; i < other.attributes.size(); i++)
+    {
+        auto type = other.attributes[i].type;
+        int location = other.attributes[i].location;
+        void* value = other.attributes[i].value;
+        
+        switch (type)
+        {
+            case Shader::Uniform::Int:
+            case Shader::Uniform::Texture:
+            case Shader::Uniform::Cubemap:
+                AddAttribute<int>(location, type, *(int*)value);
+                break;
+                
+            case Shader::Uniform::Bool:
+                AddAttribute<bool>(location, type, *(bool*)value);
+                break;
+                
+            case Shader::Uniform::Float:
+                AddAttribute<float>(location, type, *(float*)value);
+                break;
+
+            case Shader::Uniform::Vec2:
+                AddAttribute<Vector2>(location, type, *(Vector2*)value);
+                break;
+                
+            case Shader::Uniform::Vec3:
+                AddAttribute<Vector3>(location, type, *(Vector3*)value);
+                break;
+                
+            case Shader::Uniform::Vec4:
+                AddAttribute<Vector4>(location, type, *(Vector4*)value);
+                break;
+        }
+    }
 }
 
 bool Material::Load(const std::string &filename)
@@ -57,6 +92,10 @@ bool Material::Load(const std::string &filename)
         {
             case Shader::Uniform::Float:
                 AddAttribute<float>(u.location, u.type, params.Get<float>(u.name));
+                break;
+                
+            case Shader::Uniform::Bool:
+                AddAttribute<bool>(u.location, u.type, params.Get<bool>(u.name));
                 break;
                 
             case Shader::Uniform::Int:
@@ -124,6 +163,10 @@ void Material::ApplyUniforms() const
                 
             case Shader::Uniform::Int:
                 shader->SetUniform(attributes[i].location, *(int*)attributes[i].value);
+                break;
+                
+            case Shader::Uniform::Bool:
+                shader->SetUniform(attributes[i].location, *(bool*)attributes[i].value);
                 break;
                 
             case Shader::Uniform::Vec2:
