@@ -12,6 +12,7 @@ namespace DrageEngine
     class Component
     {
         public:
+            Component();
             virtual void Init(const ParamList &params) {}
             virtual void Start() {}
             virtual void Update() {}
@@ -19,15 +20,16 @@ namespace DrageEngine
             void SetEnabled(bool enabled);
             bool IsEnabled() const;
         
+            bool ExecuteInEditMode() const;
+        
         protected:
             Entity *entity;
             Transform *transform;
-            
+            bool enabled;
+            bool executeInEditMode;
         
         private:
             friend class Entity;
-        
-            bool enabled;
     };
 }
 

@@ -30,7 +30,7 @@ Application::~Application()
 
 bool Application::Init()
 {
-    if (!window->Create(1280, 720, false, ""))
+    if (!window->Create(1440 / 1.5, 900 / 1.5, false, ""))
         return false;
 
     assets = new AssetManager();
@@ -77,9 +77,9 @@ void Application::Run(Game *game)
         
         Time::Update();
         
-        if (!editMode)
-            game->Update();
-        else
+        game->Update();
+        
+        if (editMode)
             editor->Update();
 
         renderer->Render();

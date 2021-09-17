@@ -12,6 +12,8 @@ namespace DrageEngine
         public:
             int GetWidth() const;
             int GetHeight() const;
+            int GetDrawableWidth() const;
+            int GetDrawableHeight() const;
             float GetAspectRatio() const;
             int GetScaleFactor() const;
             void SetSize(int width, int height);
@@ -37,6 +39,8 @@ namespace DrageEngine
             int flags;
             int width;
             int height;
+            int drawableWidth;
+            int drawableHeight;
             int scaleFactor;
             bool fullscreen;
             std::string caption;

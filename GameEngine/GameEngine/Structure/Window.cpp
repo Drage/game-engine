@@ -26,7 +26,7 @@ Window::~Window()
 
 bool Window::Create(int width, int height, bool fullscreen, const std::string &caption)
 {
-    flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE; // SDL_WINDOW_ALLOW_HIGHDPI
+    flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI;
     this->width = width;
     this->height = height;
     this->fullscreen = fullscreen;
@@ -45,7 +45,7 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
     }
     
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
     
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
@@ -70,11 +70,8 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
         return false;
     }
     
-    // Fix window size if not what we asked for
-    int drawableWidth, drawableHeight;
     SDL_GL_GetDrawableSize(window, &drawableWidth, &drawableHeight);
-    scaleFactor = drawableHeight / height;
-    SDL_SetWindowSize(window, width / scaleFactor, height / scaleFactor);
+    scaleFactor = 2; // Inital scale factor is incorrect with High DPI enabled
     
     // Use Vsync
     if (SDL_GL_SetSwapInterval(vsync) < 0)
@@ -111,9 +108,14 @@ int Window::HandleWindowEvents(void* data, SDL_Event* event)
 void Window::HandleResize()
 {
     SDL_GetWindowSize(window, &width, &height);
-    width *= scaleFactor;
-    height *= scaleFactor;
-    app->renderer->ViewportResized(width, height);
+    SDL_GL_GetDrawableSize(window, &drawableWidth, &drawableHeight);
+    scaleFactor = drawableHeight / height;
+    app->renderer->ViewportResized(drawableWidth, drawableHeight);
+}
+
+void Window::SetSize(int width, int height)
+{
+    SDL_SetWindowSize(window, width, height);
 }
 
 int Window::GetWidth() const
@@ -126,6 +128,16 @@ int Window::GetHeight() const
     return height;
 }
 
+int Window::GetDrawableWidth() const
+{
+    return drawableWidth;
+}
+
+int Window::GetDrawableHeight() const
+{
+    return drawableHeight;
+}
+
 float Window::GetAspectRatio() const
 {
     return 1.0f * width / height;
@@ -134,13 +146,6 @@ float Window::GetAspectRatio() const
 int Window::GetScaleFactor() const
 {
     return scaleFactor;
-}
-
-void Window::SetSize(int width, int height)
-{
-    width = width;
-    height = height;
-    app->renderer->ViewportResized(width, height);
 }
 
 void Window::EnableFullscreen()

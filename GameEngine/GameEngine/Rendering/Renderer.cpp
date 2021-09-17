@@ -35,7 +35,7 @@ Renderer::Renderer()
     glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
     glEnable(GL_POLYGON_SMOOTH);
     
-    ViewportResized(app->window->GetWidth(), app->window->GetHeight());
+    ViewportResized(app->window->GetDrawableWidth(), app->window->GetDrawableHeight());
     
     if (app->IsInEditMode())
         InitEditorSelection();
@@ -47,7 +47,7 @@ void Renderer::InitEditorSelection()
     
     glGenTextures(1, &editorSelectionTexture);
     glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportWidth, viewportHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportSize.x, viewportSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -60,7 +60,7 @@ void Renderer::InitEditorSelection()
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportWidth, viewportHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
     
     glGenFramebuffers(1, &editorSelectionFbo);
     glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
@@ -73,14 +73,13 @@ void Renderer::InitEditorSelection()
 
 void Renderer::ViewportResized(int width, int height)
 {
-    viewportWidth = width;
-    viewportHeight = height;
-    glViewport(0, 0, viewportWidth, viewportHeight);
+    viewportSize = Vector2(width, height);
+    glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
     
     glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportWidth, viewportHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportSize.x, viewportSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glBindTexture(GL_TEXTURE_2D, editorSelectionDepth);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportWidth, viewportHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -93,6 +92,16 @@ void Renderer::SetClearColor(const Color &color)
 const Color& Renderer::GetClearColor() const
 {
     return clearColor;
+}
+
+const Vector2& Renderer::GetViewportSize() const
+{
+    return viewportSize;
+}
+
+const Vector2& Renderer::GetViewportOffset() const
+{
+    return viewportOffset;
 }
 
 void Renderer::SetActiveCamera(Camera *camera)
@@ -155,7 +164,7 @@ void Renderer::Render()
     viewMatrix = camera->GetViewMatrix();
     projectionMatrix = camera->GetProjectionMatrix();
     viewProjectionMatrix = projectionMatrix * viewMatrix;
-    orthoProjectionMatrix.SetProjectionOrthographic(viewportWidth, viewportHeight);
+    orthoProjectionMatrix.SetProjectionOrthographic(viewportSize.x, viewportSize.y);
 
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glDepthMask(GL_TRUE);
@@ -268,8 +277,6 @@ bool Renderer::FilterInFrustum(RenderQueue::const_iterator i) const
 void Renderer::SetDefaultUniforms(const Shader* shader) const
 {
     shader->SetUniform("time", Time::RunTime());
-    shader->SetUniform("viewportWidth", viewportWidth);
-    shader->SetUniform("viewportHeight", viewportHeight);
     
     shader->SetUniform("cameraPosition", camera->GetPosition());
     shader->SetUniform("viewMatrix", viewMatrix);
@@ -324,6 +331,7 @@ void Renderer::RenderMesh(const Mesh *mesh) const
 void Renderer::RenderEditorSelection()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
+    glViewport(0, 0, viewportSize.x, viewportSize.y);
     glClearColor(1, 1, 1, 0);
     glDepthMask(GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -333,6 +341,7 @@ void Renderer::RenderEditorSelection()
     RenderPass(&Renderer::FilterIsSelected, &Renderer::OverrideColorBlack);
     
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
     Shader *shader = editorSelectionShader;
     glUseProgram(editorSelectionShader->GetID());
     glActiveTexture(GL_TEXTURE0);
@@ -368,6 +377,7 @@ void Renderer::OverrideColorFromIndex(RenderQueue::const_iterator i) const
 Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, editorSelectionFbo);
+    glViewport(0, 0, viewportSize.x, viewportSize.y);
     glDepthMask(GL_TRUE);
     glClearColor(1, 1, 1, 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -377,8 +387,11 @@ Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates)
     glFinish();
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     unsigned char data[4];
-    glReadPixels(coordinates.x, app->window->GetHeight() - coordinates.y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    float x = coordinates.x - viewportOffset.x;
+    float y = viewportSize.y - coordinates.y + viewportOffset.y;
+    glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
     
     int index = data[0] + data[1] * 256 + data[2] * 256*256;
     if (index < renderQueue.size())

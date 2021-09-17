@@ -24,6 +24,9 @@ namespace DrageEngine
             void SetClearColor(const Color &color);
             const Color& GetClearColor() const;
         
+            const Vector2& GetViewportSize() const;
+            const Vector2& GetViewportOffset() const;
+        
             void SetActiveCamera(Camera *camera);
             Camera* GetActiveCamera();
         
@@ -61,8 +64,8 @@ namespace DrageEngine
             void OverrideColorFromIndex(RenderQueue::const_iterator i) const;
         
             Color clearColor;
-            int viewportWidth;
-            int viewportHeight;
+            Vector2 viewportSize;
+            Vector2 viewportOffset;
         
             Camera *camera;
             std::vector<Light*> lights;

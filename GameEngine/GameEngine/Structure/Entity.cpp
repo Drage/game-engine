@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Debug.h"
 #include "Random.h"
+#include "Application.h"
 
 using namespace DrageEngine;
 
@@ -45,12 +46,12 @@ void Entity::Start()
 
 void Entity::Update()
 {
-    if (!started)
+    if (!started && !app->IsInEditMode())
         Start();
         
     for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
     {
-        if ((*i)->IsEnabled())
+        if ((*i)->IsEnabled() && ((*i)->ExecuteInEditMode() || !app->IsInEditMode()))
             (*i)->Update();
     }
     

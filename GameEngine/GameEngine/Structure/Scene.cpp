@@ -34,22 +34,19 @@ void Scene::Start()
 
 void Scene::Update()
 {
-    if (entities.size() > 0)
+    for (EntityList::iterator i = entities.begin(); i != (entities.end()--); )
     {
-        for (EntityList::iterator i = entities.begin(); i != (entities.end()--); )
+        if ((*i)->IsDestroyed())
         {
-            if ((*i)->IsDestroyed())
-            {
-                delete *i;
-                i = entities.erase(i);
-            }
-            else
-            {
-                if ((*i)->IsActive())
-                    (*i)->Update();
-                
-                i++;
-            }
+            delete *i;
+            i = entities.erase(i);
+        }
+        else
+        {
+            if ((*i)->IsActive())
+                (*i)->Update();
+            
+            i++;
         }
     }
 }

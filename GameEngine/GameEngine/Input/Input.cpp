@@ -202,10 +202,11 @@ void Input::CaptureInput(SDL_Event* event)
     }
     else if (event->type == SDL_MOUSEMOTION)
     {
-        mousePosition.x = event->motion.x * app->window->GetScaleFactor();
-        mousePosition.y = event->motion.y * app->window->GetScaleFactor();
-        mouseDelta.x = event->motion.xrel;
-        mouseDelta.y = event->motion.yrel;
+        float scaleFactor = app->window->GetScaleFactor();
+        mousePosition.x = event->motion.x * scaleFactor;
+        mousePosition.y = event->motion.y * scaleFactor;
+        mouseDelta.x = event->motion.xrel * scaleFactor;
+        mouseDelta.y = event->motion.yrel * scaleFactor;
     }
     else if (event->type == SDL_JOYAXISMOTION)
     {

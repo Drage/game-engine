@@ -99,7 +99,7 @@
         </MeshRenderer>
     </Entity>
     <Entity>
-        <name>Anchor</name>
+        <name>ScreenSpaceAnchor</name>
         <ScreenSpaceAnchor>
             <anchor>0, 1</anchor>
         </ScreenSpaceAnchor>
