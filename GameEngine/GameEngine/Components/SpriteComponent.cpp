@@ -14,9 +14,6 @@ void SpriteComponent::Init(const ParamList &params)
     std::string textureName = params.Get<std::string>("texture");
     Texture *texture = app->assets->GetTexture(textureName);
     
-//    Font *font = app->assets->GetFont("Roboto.ttf", 15);
-//    Texture *texture = font->Render("Hello World!", Color::BLACK);
-    
     material->SetAttributeValue("diffuseMap", texture->GetID());
     material->SetAttributeValue("textureWidth", texture->GetWidth());
     material->SetAttributeValue("textureHeight", texture->GetHeight());
