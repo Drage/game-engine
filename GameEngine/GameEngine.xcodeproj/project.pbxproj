@@ -158,6 +158,8 @@
 		D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D054156A26E1C7E600600C98 /* Renderable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D054156926E1C7E600600C98 /* Renderable.cpp */; };
 		D054156B26E1E1C200600C98 /* Renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = D054156826E1C78100600C98 /* Renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05CEE7D26F582ED009D4CFB /* TextComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE7C26F582ED009D4CFB /* TextComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05CEE7F26F58343009D4CFB /* TextComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE7E26F58343009D4CFB /* TextComponent.cpp */; };
 		D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D1426ED2FDC004051AD /* Frustum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D1626ED31B1004051AD /* Frustum.cpp */; };
 		D0C44D3126F1D9A9004051AD /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D3026F1D9A9004051AD /* Font.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -327,6 +329,8 @@
 		D02BBDE626D8E0A200B3B639 /* Editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor.h; sourceTree = "<group>"; };
 		D054156826E1C78100600C98 /* Renderable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderable.h; sourceTree = "<group>"; };
 		D054156926E1C7E600600C98 /* Renderable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderable.cpp; sourceTree = "<group>"; };
+		D05CEE7C26F582ED009D4CFB /* TextComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextComponent.h; sourceTree = "<group>"; };
+		D05CEE7E26F58343009D4CFB /* TextComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextComponent.cpp; sourceTree = "<group>"; };
 		D0C44D1426ED2FDC004051AD /* Frustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
 		D0C44D1626ED31B1004051AD /* Frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
 		D0C44D1D26F087E0004051AD /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
@@ -463,17 +467,17 @@
 				4062B911231A7A8900F44658 /* Info.plist */,
 				4062B910231A7A8900F44658 /* GameEngine.h */,
 				406DCA5923392239008C088E /* Structure */,
-				D02BBDDE26D8DBAA00B3B639 /* Editor */,
-				406DCA66233BC00D008C088E /* Components */,
-				40837765231A8F2600A63D8F /* Math */,
-				401B7931231D62D000E6B4F0 /* Assets */,
 				408377A7231B6E4000A63D8F /* Rendering */,
+				D02BBDDE26D8DBAA00B3B639 /* Editor */,
+				401B7931231D62D000E6B4F0 /* Assets */,
 				406DCA7F2340AA57008C088E /* Input */,
 				4010F52E2342F67D00D08A02 /* Audio */,
 				40EC7A0A234E115E00CA8DB3 /* Terrain */,
 				40978D982335320E0082F63E /* Physics */,
 				406414B4235C6927000F994F /* Particles */,
+				40837765231A8F2600A63D8F /* Math */,
 				406DCA6B233D08CA008C088E /* Utils */,
+				406DCA66233BC00D008C088E /* Components */,
 				D0C44D1C26F07722004051AD /* Standard Assets */,
 			);
 			path = GameEngine;
@@ -543,6 +547,8 @@
 				D0C44D4626F311BB004051AD /* SpriteComponent.cpp */,
 				D0C44D4B26F492B8004051AD /* ScreenSpaceAnchorComponent.h */,
 				D0C44D4D26F49370004051AD /* ScreenSpaceAnchorComponent.cpp */,
+				D05CEE7C26F582ED009D4CFB /* TextComponent.h */,
+				D05CEE7E26F58343009D4CFB /* TextComponent.cpp */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -754,6 +760,7 @@
 				408377A5231B6DD500A63D8F /* Random.h in Headers */,
 				40978D9B233532220082F63E /* Bounds.h in Headers */,
 				40651BDB2349D983003BBD50 /* Array2D.h in Headers */,
+				D05CEE7D26F582ED009D4CFB /* TextComponent.h in Headers */,
 				D0E64B8526E0BC7C00B86CA3 /* SphereComponent.h in Headers */,
 				406414C7235DFAAC000F994F /* ParticleAnimParameter.h in Headers */,
 				40837779231A8F2600A63D8F /* Vector2.h in Headers */,
@@ -993,6 +1000,7 @@
 				40607DA423434C6600F985CD /* Audio.cpp in Sources */,
 				40708D1D23266B0800A796AD /* Material.cpp in Sources */,
 				40651BD92349D5D2003BBD50 /* Terrain.cpp in Sources */,
+				D05CEE7F26F58343009D4CFB /* TextComponent.cpp in Sources */,
 				401B792F231BC89500E6B4F0 /* ParamList.cpp in Sources */,
 				4083777E231A8F2600A63D8F /* Matrix3x3.cpp in Sources */,
 			);

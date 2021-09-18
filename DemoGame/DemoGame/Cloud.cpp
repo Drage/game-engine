@@ -4,14 +4,14 @@
 void Cloud::Init(const ParamList &params)
 {
     size = params.Get<float>("size");
-    transform->Scale(Vector3(size));
+    transform->scale = Vector3(size);
     
     yPosition = params.Get<float>("yPosition");
     orbitRadius = params.Get<float>("orbitRadius");
     angle = DegToRad(Random::Float(0.0f, 360.0f));
     float x = orbitRadius * cos(angle);
     float z = orbitRadius * sin(angle);
-    transform->Translate(Vector3(x, yPosition, z));
+    transform->position = Vector3(x, yPosition, z);
     
     speed = params.Get<float>("speed");
     
@@ -26,7 +26,7 @@ void Cloud::Update()
     angle += DegToRad(speed * Time::DeltaTime());
     float x = orbitRadius * cos(angle) + cameraPosition.x;
     float z = orbitRadius * sin(angle) + cameraPosition.z;
-    transform->Translate(Vector3(x, yPosition, z));
+    transform->position = Vector3(x, yPosition, z);
 }
 
 Cloud::~Cloud()

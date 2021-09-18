@@ -106,12 +106,19 @@
         <Entity>
             <name>Sprite</name>
             <position>20, -20, 0</position>
-            <scale>1, 1, 1</scale>
             <Sprite>
                 <texture>Cloud01.tga</texture>
                 <origin>-1, 1</origin>
                 <nativeTextureScale>1</nativeTextureScale>
             </Sprite>
+        </Entity>
+        <Entity>
+            <name>Text</name>
+            <position>20, -20, 1</position>
+            <Text>
+                <text>Hello World!</text>
+                <color>#FFFFFF</color>
+            </Text>
         </Entity>
     </Entity>
 </Scene>
