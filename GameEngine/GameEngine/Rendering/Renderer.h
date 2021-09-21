@@ -19,13 +19,14 @@ namespace DrageEngine
     class Renderer
     {
         public:        
-            void ViewportResized(int width, int height);
+            void ViewportResized(int width, int height,  int offsetX = 0, int offsetY = 0);
         
             void SetClearColor(const Color &color);
             const Color& GetClearColor() const;
         
             const Vector2& GetViewportSize() const;
             const Vector2& GetViewportOffset() const;
+            float GetViewportAspectRatio() const;
         
             void SetActiveCamera(Camera *camera);
             Camera* GetActiveCamera();

@@ -71,16 +71,20 @@ void Renderer::InitEditorSelection()
     glGenVertexArrays(1, &editorSelectionVbo);
 }
 
-void Renderer::ViewportResized(int width, int height)
+void Renderer::ViewportResized(int width, int height, int offsetX, int offsetY)
 {
-    viewportSize = Vector2(width, height);
-    glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
-    
-    glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportSize.x, viewportSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glBindTexture(GL_TEXTURE_2D, editorSelectionDepth);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    if (viewportSize.x != width || viewportSize.y != height || viewportOffset.x != offsetX || viewportOffset.y != offsetY)
+    {
+        viewportSize = Vector2(width, height);
+        viewportOffset = Vector2(offsetX, offsetY);
+        glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
+        
+        glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportSize.x, viewportSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+        glBindTexture(GL_TEXTURE_2D, editorSelectionDepth);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, 0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
 }
 
 void Renderer::SetClearColor(const Color &color)
@@ -102,6 +106,11 @@ const Vector2& Renderer::GetViewportSize() const
 const Vector2& Renderer::GetViewportOffset() const
 {
     return viewportOffset;
+}
+
+float Renderer::GetViewportAspectRatio() const
+{
+    return viewportSize.x / viewportSize.y;
 }
 
 void Renderer::SetActiveCamera(Camera *camera)
@@ -388,7 +397,7 @@ Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates)
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     unsigned char data[4];
     float x = coordinates.x - viewportOffset.x;
-    float y = viewportSize.y - coordinates.y + viewportOffset.y;
+    float y = app->window->GetDrawableHeight() - coordinates.y - viewportOffset.y;
     glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);

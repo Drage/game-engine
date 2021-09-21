@@ -89,7 +89,7 @@ Matrix4x4 Camera::GetViewMatrix() const
 Matrix4x4 Camera::GetProjectionMatrix() const
 {
     Matrix4x4 projection;
-    projection.SetProjectionPerspective(fov, app->window->GetAspectRatio(), nearClip, farClip);
+    projection.SetProjectionPerspective(fov, app->renderer->GetViewportAspectRatio(), nearClip, farClip);
     return projection;
 }
 

@@ -24,6 +24,8 @@ namespace DrageEngine
         
         private:
             std::vector<Entity*> selection;
+            bool inspectorWindowOpen;
+            bool consoleWindowOpen;
     };
 }
 
