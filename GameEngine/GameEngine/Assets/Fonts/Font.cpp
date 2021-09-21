@@ -1,7 +1,7 @@
 
 #include "Font.h"
 #include "Debug.h"
-#include <SDL2/SDL_opengl.h>
+#include <SDL_opengl.h>
 
 using namespace DrageEngine;
 

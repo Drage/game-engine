@@ -15,6 +15,7 @@ namespace DrageEngine
             ~Editor();
         
             void Update();
+            void Render();
         
             bool IsSelected(Entity* entity) const;
             bool HasSelection() const;

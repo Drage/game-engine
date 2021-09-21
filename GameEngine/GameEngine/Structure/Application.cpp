@@ -1,6 +1,6 @@
 
 #define GL_GLEXT_PROTOTYPES
-#include <SDL2/SDL_opengl.h>
+#include <SDL_opengl.h>
 #include <OpenGL/gl.h>
 #include <iostream>
 #include "Application.h"
@@ -30,7 +30,7 @@ Application::~Application()
 
 bool Application::Init()
 {
-    if (!window->Create(1440 / 1.5, 900 / 1.5, false, ""))
+    if (!window->Create(1440 / 1.5, 900 / 1.5))
         return false;
 
     assets = new AssetManager();
@@ -83,6 +83,10 @@ void Application::Run(Game *game)
             editor->Update();
 
         renderer->Render();
+        
+        if (editMode)
+            editor->Render();
+        
         window->SwapBuffers();
     }
 }

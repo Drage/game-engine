@@ -160,6 +160,22 @@
 		D054156B26E1E1C200600C98 /* Renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = D054156826E1C78100600C98 /* Renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D05CEE7D26F582ED009D4CFB /* TextComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE7C26F582ED009D4CFB /* TextComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D05CEE7F26F58343009D4CFB /* TextComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE7E26F58343009D4CFB /* TextComponent.cpp */; };
+		D05CEE9226F5967A009D4CFB /* imgui.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8226F5967A009D4CFB /* imgui.h */; };
+		D05CEE9326F5967A009D4CFB /* imstb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8326F5967A009D4CFB /* imstb_textedit.h */; };
+		D05CEE9426F5967A009D4CFB /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8426F5967A009D4CFB /* imconfig.h */; };
+		D05CEE9526F5967A009D4CFB /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE8526F5967A009D4CFB /* imgui_widgets.cpp */; };
+		D05CEE9626F5967A009D4CFB /* imstb_truetype.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8626F5967A009D4CFB /* imstb_truetype.h */; };
+		D05CEE9726F5967A009D4CFB /* imgui_impl_sdl.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8726F5967A009D4CFB /* imgui_impl_sdl.h */; };
+		D05CEE9826F5967A009D4CFB /* imgui_impl_opengl3.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8826F5967A009D4CFB /* imgui_impl_opengl3.h */; };
+		D05CEE9926F5967A009D4CFB /* imgui_impl_opengl3_loader.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8926F5967A009D4CFB /* imgui_impl_opengl3_loader.h */; };
+		D05CEE9A26F5967A009D4CFB /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE8A26F5967A009D4CFB /* imgui.cpp */; };
+		D05CEE9B26F5967A009D4CFB /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8B26F5967A009D4CFB /* imgui_internal.h */; };
+		D05CEE9C26F5967A009D4CFB /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE8C26F5967A009D4CFB /* imgui_impl_opengl3.cpp */; };
+		D05CEE9D26F5967A009D4CFB /* imstb_rectpack.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEE8D26F5967A009D4CFB /* imstb_rectpack.h */; };
+		D05CEE9E26F5967A009D4CFB /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE8E26F5967A009D4CFB /* imgui_tables.cpp */; };
+		D05CEE9F26F5967A009D4CFB /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE8F26F5967A009D4CFB /* imgui_demo.cpp */; };
+		D05CEEA026F5967A009D4CFB /* imgui_impl_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE9026F5967A009D4CFB /* imgui_impl_sdl.cpp */; };
+		D05CEEA126F5967A009D4CFB /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE9126F5967A009D4CFB /* imgui_draw.cpp */; };
 		D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D1426ED2FDC004051AD /* Frustum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D1626ED31B1004051AD /* Frustum.cpp */; };
 		D0C44D3126F1D9A9004051AD /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D3026F1D9A9004051AD /* Font.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -331,6 +347,22 @@
 		D054156926E1C7E600600C98 /* Renderable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderable.cpp; sourceTree = "<group>"; };
 		D05CEE7C26F582ED009D4CFB /* TextComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextComponent.h; sourceTree = "<group>"; };
 		D05CEE7E26F58343009D4CFB /* TextComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextComponent.cpp; sourceTree = "<group>"; };
+		D05CEE8226F5967A009D4CFB /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		D05CEE8326F5967A009D4CFB /* imstb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_textedit.h; sourceTree = "<group>"; };
+		D05CEE8426F5967A009D4CFB /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		D05CEE8526F5967A009D4CFB /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
+		D05CEE8626F5967A009D4CFB /* imstb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_truetype.h; sourceTree = "<group>"; };
+		D05CEE8726F5967A009D4CFB /* imgui_impl_sdl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_sdl.h; sourceTree = "<group>"; };
+		D05CEE8826F5967A009D4CFB /* imgui_impl_opengl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3.h; sourceTree = "<group>"; };
+		D05CEE8926F5967A009D4CFB /* imgui_impl_opengl3_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3_loader.h; sourceTree = "<group>"; };
+		D05CEE8A26F5967A009D4CFB /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		D05CEE8B26F5967A009D4CFB /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		D05CEE8C26F5967A009D4CFB /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_opengl3.cpp; sourceTree = "<group>"; };
+		D05CEE8D26F5967A009D4CFB /* imstb_rectpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_rectpack.h; sourceTree = "<group>"; };
+		D05CEE8E26F5967A009D4CFB /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_tables.cpp; sourceTree = "<group>"; };
+		D05CEE8F26F5967A009D4CFB /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		D05CEE9026F5967A009D4CFB /* imgui_impl_sdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_sdl.cpp; sourceTree = "<group>"; };
+		D05CEE9126F5967A009D4CFB /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
 		D0C44D1426ED2FDC004051AD /* Frustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
 		D0C44D1626ED31B1004051AD /* Frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
 		D0C44D1D26F087E0004051AD /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
@@ -691,12 +723,36 @@
 		D02BBDDE26D8DBAA00B3B639 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				D05CEE8126F5967A009D4CFB /* ImGui */,
 				D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */,
 				D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */,
 				D02BBDE626D8E0A200B3B639 /* Editor.h */,
 				D02BBDE226D8DF5400B3B639 /* Editor.cpp */,
 			);
 			path = Editor;
+			sourceTree = "<group>";
+		};
+		D05CEE8126F5967A009D4CFB /* ImGui */ = {
+			isa = PBXGroup;
+			children = (
+				D05CEE8226F5967A009D4CFB /* imgui.h */,
+				D05CEE8326F5967A009D4CFB /* imstb_textedit.h */,
+				D05CEE8426F5967A009D4CFB /* imconfig.h */,
+				D05CEE8526F5967A009D4CFB /* imgui_widgets.cpp */,
+				D05CEE8626F5967A009D4CFB /* imstb_truetype.h */,
+				D05CEE8726F5967A009D4CFB /* imgui_impl_sdl.h */,
+				D05CEE8826F5967A009D4CFB /* imgui_impl_opengl3.h */,
+				D05CEE8926F5967A009D4CFB /* imgui_impl_opengl3_loader.h */,
+				D05CEE8A26F5967A009D4CFB /* imgui.cpp */,
+				D05CEE8B26F5967A009D4CFB /* imgui_internal.h */,
+				D05CEE8C26F5967A009D4CFB /* imgui_impl_opengl3.cpp */,
+				D05CEE8D26F5967A009D4CFB /* imstb_rectpack.h */,
+				D05CEE8E26F5967A009D4CFB /* imgui_tables.cpp */,
+				D05CEE8F26F5967A009D4CFB /* imgui_demo.cpp */,
+				D05CEE9026F5967A009D4CFB /* imgui_impl_sdl.cpp */,
+				D05CEE9126F5967A009D4CFB /* imgui_draw.cpp */,
+			);
+			path = ImGui;
 			sourceTree = "<group>";
 		};
 		D0C44D1C26F07722004051AD /* Standard Assets */ = {
@@ -742,6 +798,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D05CEE9226F5967A009D4CFB /* imgui.h in Headers */,
 				4083777C231A8F2600A63D8F /* Matrix3x3.h in Headers */,
 				D02BBDE726D8E20D00B3B639 /* Editor.h in Headers */,
 				40837790231ADE4900A63D8F /* Vector3.h in Headers */,
@@ -780,9 +837,11 @@
 				4083B4E523251A0900A72B43 /* XMLDocument.h in Headers */,
 				401B789B231B76CC00E6B4F0 /* Camera.h in Headers */,
 				406414712354DFA3000F994F /* BillboardComponent.h in Headers */,
+				D05CEE9D26F5967A009D4CFB /* imstb_rectpack.h in Headers */,
 				40978DA3233535280082F63E /* ModelFactory.h in Headers */,
 				40837778231A8F2600A63D8F /* Matrix4x4.h in Headers */,
 				D054156B26E1E1C200600C98 /* Renderable.h in Headers */,
+				D05CEE9626F5967A009D4CFB /* imstb_truetype.h in Headers */,
 				40607D9E23434B6D00F985CD /* AudioClip.h in Headers */,
 				40607D9A2343480700F985CD /* AudioManager.h in Headers */,
 				401B7943231D6F4300E6B4F0 /* ArrayUtils.h in Headers */,
@@ -790,16 +849,20 @@
 				4066CCFA234781F000496404 /* Cubemap.h in Headers */,
 				40978D9F233535170082F63E /* ModelOBJ.h in Headers */,
 				40837785231A8F2600A63D8F /* MathUtils.h in Headers */,
+				D05CEE9726F5967A009D4CFB /* imgui_impl_sdl.h in Headers */,
 				406DCA72233F5F2B008C088E /* LightComponent.h in Headers */,
 				40DD559B234FA04700BBA4A9 /* GameTime.h in Headers */,
 				40DCFED72329358100164DE9 /* StringUtils.h in Headers */,
 				406414BB235C6AF4000F994F /* ParticleEmitter.h in Headers */,
 				4010F5352342F85600D08A02 /* AudioListener.h in Headers */,
 				4083B4CD2320120900A72B43 /* ImageBMP.h in Headers */,
+				D05CEE9326F5967A009D4CFB /* imstb_textedit.h in Headers */,
+				D05CEE9926F5967A009D4CFB /* imgui_impl_opengl3_loader.h in Headers */,
 				4083B4C92320107F00A72B43 /* ImageTGA.h in Headers */,
 				40837781231A8F2600A63D8F /* Transform.h in Headers */,
 				401B7949231D70BD00E6B4F0 /* Factory.h in Headers */,
 				406DCA7D233FD399008C088E /* CameraComponent.h in Headers */,
+				D05CEE9426F5967A009D4CFB /* imconfig.h in Headers */,
 				406DCA812340AA81008C088E /* KeyCodes.h in Headers */,
 				401B7934231D632000E6B4F0 /* Image.h in Headers */,
 				406DCA9723420B0A008C088E /* ComponentFactory.h in Headers */,
@@ -820,10 +883,12 @@
 				408377AB231B6E5700A63D8F /* Primitives.h in Headers */,
 				401B7959231E8B9C00E6B4F0 /* Texture.h in Headers */,
 				40EC7A0D234E117F00CA8DB3 /* TerrainComponent.h in Headers */,
+				D05CEE9826F5967A009D4CFB /* imgui_impl_opengl3.h in Headers */,
 				401B794D231D713C00E6B4F0 /* ImageFactory.h in Headers */,
 				4083B4DD2323607900A72B43 /* Light.h in Headers */,
 				406DCA842340AB9B008C088E /* Input.h in Headers */,
 				401B792E231BC89500E6B4F0 /* ParamList.h in Headers */,
+				D05CEE9B26F5967A009D4CFB /* imgui_internal.h in Headers */,
 				4010F5312342F6B100D08A02 /* AudioSource.h in Headers */,
 				406414B7235C693E000F994F /* Particle.h in Headers */,
 				401B789C231B76CC00E6B4F0 /* Application.h in Headers */,
@@ -841,7 +906,6 @@
 				4062B909231A7A8900F44658 /* Sources */,
 				4062B90A231A7A8900F44658 /* Frameworks */,
 				401184E6232E4986000B19FB /* Run Script - Copy Products */,
-				406DCA76233F8F9D008C088E /* Run Script - Flag Todos */,
 			);
 			buildRules = (
 			);
@@ -903,24 +967,6 @@
 			shellPath = /bin/sh;
 			shellScript = "#cp -rf ${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}.framework ${PROJECT_DIR}/../DemoGame/${EXECUTABLE_NAME}.framework\n\n#cp -rf ${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}.framework ${PROJECT_DIR}/../EditorMac/${EXECUTABLE_NAME}.framework\n";
 		};
-		406DCA76233F8F9D008C088E /* Run Script - Flag Todos */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script - Flag Todos";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#exit\nTAGS=\"TODO:|FIXME:\"\nfind \"${SRCROOT}/GameEngine\" \\( -type f -name \"*.cpp\" -o -name \"*.h\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -933,6 +979,8 @@
 				40837783231A8F2600A63D8F /* MathUtils.cpp in Sources */,
 				D0C44D4E26F49370004051AD /* ScreenSpaceAnchorComponent.cpp in Sources */,
 				40978DA0233535170082F63E /* ModelOBJ.cpp in Sources */,
+				D05CEEA026F5967A009D4CFB /* imgui_impl_sdl.cpp in Sources */,
+				D05CEE9A26F5967A009D4CFB /* imgui.cpp in Sources */,
 				4083778C231ADE0300A63D8F /* Vector4.cpp in Sources */,
 				400F3B42234A341E0062DBF5 /* PlaneComponent.cpp in Sources */,
 				401B793C231D658300E6B4F0 /* FileSystem.cpp in Sources */,
@@ -943,6 +991,7 @@
 				40978DA4233535280082F63E /* ModelFactory.cpp in Sources */,
 				40607D9F23434B6D00F985CD /* AudioClip.cpp in Sources */,
 				406DCA7A233FC23B008C088E /* Window.cpp in Sources */,
+				D05CEE9C26F5967A009D4CFB /* imgui_impl_opengl3.cpp in Sources */,
 				4083777F231A8F2600A63D8F /* Transform.cpp in Sources */,
 				40978D9723352FF40082F63E /* Model.cpp in Sources */,
 				406DCA612339227D008C088E /* Component.cpp in Sources */,
@@ -964,6 +1013,7 @@
 				4083B4E623251A0900A72B43 /* XMLDocument.cpp in Sources */,
 				406414C8235DFAAC000F994F /* ParticleAnimParameter.cpp in Sources */,
 				401B78A0231B76CC00E6B4F0 /* Renderer.cpp in Sources */,
+				D05CEE9E26F5967A009D4CFB /* imgui_tables.cpp in Sources */,
 				4062B91A231A7AEF00F44658 /* Debug.cpp in Sources */,
 				406DCA9823420B0A008C088E /* ComponentFactory.cpp in Sources */,
 				4083B4C1231FAC1E00A72B43 /* Shader.cpp in Sources */,
@@ -987,7 +1037,9 @@
 				406DCA7E233FD399008C088E /* CameraComponent.cpp in Sources */,
 				40837782231A8F2600A63D8F /* Quaternion.cpp in Sources */,
 				406414B8235C693E000F994F /* Particle.cpp in Sources */,
+				D05CEE9526F5967A009D4CFB /* imgui_widgets.cpp in Sources */,
 				40607DAC2343D0CF00F985CD /* AudioFactory.cpp in Sources */,
+				D05CEEA126F5967A009D4CFB /* imgui_draw.cpp in Sources */,
 				D02BBDE126D8DBF900B3B639 /* EditorCamera.cpp in Sources */,
 				401B7940231D6D0500E6B4F0 /* ImagePNG.cpp in Sources */,
 				408377A6231B6DD500A63D8F /* Random.cpp in Sources */,
@@ -1002,6 +1054,7 @@
 				40651BD92349D5D2003BBD50 /* Terrain.cpp in Sources */,
 				D05CEE7F26F58343009D4CFB /* TextComponent.cpp in Sources */,
 				401B792F231BC89500E6B4F0 /* ParamList.cpp in Sources */,
+				D05CEE9F26F5967A009D4CFB /* imgui_demo.cpp in Sources */,
 				4083777E231A8F2600A63D8F /* Matrix3x3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1145,7 +1198,10 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/SDL2.framework/Headers\"",
+					"\"$(SRCROOT)/SDL2_ttf.framework/Headers\"",
+				);
 				INFOPLIST_FILE = GameEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1180,7 +1236,10 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/SDL2.framework/Headers\"",
+					"\"$(SRCROOT)/SDL2_ttf.framework/Headers\"",
+				);
 				INFOPLIST_FILE = GameEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (

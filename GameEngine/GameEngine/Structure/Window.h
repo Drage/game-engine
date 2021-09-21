@@ -27,10 +27,11 @@ namespace DrageEngine
         
         private:
             friend class Application;
+            friend class Editor;
         
             Window();
             ~Window();
-            bool Create(int width, int height, bool fullscreen, const std::string &caption);
+            bool Create(int width, int height, bool fullscreen = false, const std::string &caption = "");
             void SwapBuffers();
         
             static int HandleWindowEvents(void* data, SDL_Event* event);

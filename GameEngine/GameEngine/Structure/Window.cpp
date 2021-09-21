@@ -1,7 +1,7 @@
 
 #define GL_GLEXT_PROTOTYPES
-#include <SDL2/SDL_opengl.h>
-#include <SDL2_ttf/SDL_ttf.h>
+#include <SDL_opengl.h>
+#include <SDL_ttf.h>
 #include <OpenGL/gl.h>
 #include "Window.h"
 #include "Application.h"
