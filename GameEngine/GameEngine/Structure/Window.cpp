@@ -8,40 +8,25 @@
 
 using namespace DrageEngine;
 
-Window::Window()
-{
-    flags = 0;
-    width = 0;
-    height = 0;
-    fullscreen = false;
-    vsync = true;
-}
-
-Window::~Window()
-{
-    SDL_GL_DeleteContext(glContext);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-}
-
-bool Window::Create(int width, int height, bool fullscreen, const std::string &caption)
+Window::Window(int width, int height, bool fullscreen, const std::string &caption)
 {
     flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI;
     this->width = width;
     this->height = height;
     this->fullscreen = fullscreen;
     this->caption = caption;
+    this->vsync = true;
     
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         ERROR("Failed to initialize the SDL2 library");
-        return false;
+        return;
     }
     
     if (TTF_Init() < 0)
     {
         ERROR("Failed to initialize the SDL2 TTF library");
-        return false;
+        return;
     }
     
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
@@ -60,14 +45,14 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
     if (!window)
     {
         ERROR("Failed to create window");
-        return false;
+        return;
     }
     
     glContext = SDL_GL_CreateContext(window);
     if (!glContext)
     {
         ERROR("Failed to create the openGL context");
-        return false;
+        return;
     }
     
     SDL_GL_GetDrawableSize(window, &drawableWidth, &drawableHeight);
@@ -87,7 +72,19 @@ bool Window::Create(int width, int height, bool fullscreen, const std::string &c
     // Listen for resize events
     SDL_AddEventWatch(HandleWindowEvents, window);
     
-    return true;
+    init = true;
+}
+
+bool Window::IsInitialized() const
+{
+    return init;
+}
+
+Window::~Window()
+{
+    SDL_GL_DeleteContext(glContext);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }
 
 void Window::SwapBuffers()

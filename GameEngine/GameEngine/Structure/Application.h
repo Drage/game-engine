@@ -23,7 +23,6 @@ namespace DrageEngine
             ~Application();
         
             bool Init();
-            bool EditorInit();
             void Run(Game *game);
             void Quit();
         
@@ -37,13 +36,13 @@ namespace DrageEngine
             const Scene* GetActiveScene() const;
             void SetActiveScene(Scene *scene);
         
+            bool IsEditorEnabled() const;
             bool IsInEditMode() const;
         
         private:
-            bool init;
             bool quit;
-            int fps;
             Scene *activeScene;
+            bool editorEnabled;
             bool editMode;
     };
 

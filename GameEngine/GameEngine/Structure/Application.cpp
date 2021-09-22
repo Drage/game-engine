@@ -14,10 +14,11 @@ Application *DrageEngine::app = new Application();
 
 Application::Application()
 {
-    init = false;
-    fps = 60;
-    editMode = true;
-    window = new Window();
+    if (std::getenv("EDITOR") != NULL)
+    {
+        editorEnabled = true;
+        editMode = true;
+    }
 }
  
 Application::~Application()
@@ -30,28 +31,16 @@ Application::~Application()
 
 bool Application::Init()
 {
-    if (!window->Create(1440 / 1.5, 900 / 1.5))
-        return false;
-
+    window = new Window(1440 / 1.5, 900 / 1.5);
     assets = new AssetManager();
     renderer = new Renderer();
     input = new Input();
     audio = new AudioManager();
-    editor = new Editor();
     
-    init = true;
-    return true;
-}
-
-bool Application::EditorInit()
-{
-    renderer = new Renderer();
-    assets = new AssetManager();
-    input = new Input();
-    audio = new AudioManager();
+    if (editorEnabled)
+        editor = new Editor();
     
-    init = true;
-    return true;
+    return window->IsInitialized();
 }
 
 void Application::Run(Game *game)
@@ -104,6 +93,11 @@ const Scene* Application::GetActiveScene() const
 void Application::SetActiveScene(Scene *scene)
 {
     activeScene = scene;
+}
+
+bool Application::IsEditorEnabled() const
+{
+    return editorEnabled;
 }
 
 bool Application::IsInEditMode() const

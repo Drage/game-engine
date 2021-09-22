@@ -10,6 +10,8 @@ namespace DrageEngine
     class Window
     {
         public:
+            bool IsInitialized() const;
+        
             int GetWidth() const;
             int GetHeight() const;
             int GetDrawableWidth() const;
@@ -29,14 +31,15 @@ namespace DrageEngine
             friend class Application;
             friend class Editor;
         
-            Window();
+            Window(int width, int height, bool fullscreen = false, const std::string &caption = "");
             ~Window();
-            bool Create(int width, int height, bool fullscreen = false, const std::string &caption = "");
+
             void SwapBuffers();
         
             static int HandleWindowEvents(void* data, SDL_Event* event);
             void HandleResize();
         
+            bool init;
             int flags;
             int width;
             int height;

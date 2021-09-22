@@ -91,11 +91,8 @@ unsigned Shader::CompileProgram(unsigned vertexShaderID, unsigned fragmentShader
     glDetachShader(programID, vertexShaderID);
     glDetachShader(programID, fragmentShaderID);
     
-    if (!app->IsInEditMode())
-    {
-        glDeleteShader(vertexShaderID);
-        glDeleteShader(fragmentShaderID);
-    }
+    glDeleteShader(vertexShaderID);
+    glDeleteShader(fragmentShaderID);
 
     return programID;
 }
