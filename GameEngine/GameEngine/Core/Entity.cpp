@@ -16,11 +16,11 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-    for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
-        delete (*i);
+    for (auto i : components)
+        delete i;
     
-    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
-        delete (*i);
+    for (auto i : children)
+        delete i;
 }
 
 void Entity::Init(ParamList &params)
@@ -37,11 +37,11 @@ void Entity::Start()
 {
     started = true;
     
-    for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
-        (*i)->Start();
+    for (auto i : components)
+        i->Start();
     
-    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
-        (*i)->Start();
+    for (auto i : children)
+        i->Start();
 }
 
 void Entity::Update()
@@ -49,14 +49,14 @@ void Entity::Update()
     if (!started && !app->IsInEditMode())
         Start();
         
-    for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
+    for (auto i : components)
     {
-        if ((*i)->IsEnabled() && ((*i)->ExecuteInEditMode() || !app->IsInEditMode()))
-            (*i)->Update();
+        if (i->IsEnabled() && (i->ExecuteInEditMode() || !app->IsInEditMode()))
+            i->Update();
     }
     
-    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
-        (*i)->Update();
+    for (auto i : children)
+        i->Update();
 }
 
 void Entity::SetParent(Entity *obj)
@@ -77,7 +77,7 @@ void Entity::AddChild(Entity *obj)
 
 bool Entity::RemoveChild(Entity *obj)
 {
-    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
+    for (auto i = children.begin(); i != children.end(); i++)
     {
         if (*i == obj)
         {
@@ -90,7 +90,7 @@ bool Entity::RemoveChild(Entity *obj)
 
 Entity* Entity::GetChild(const std::string &name)
 {
-    for (EntityList::iterator i = children.begin(); i != children.end(); i++)
+    for (auto i = children.begin(); i != children.end(); i++)
     {
         if ((*i)->GetName() == name)
             return *i;
@@ -113,7 +113,7 @@ void Entity::AddComponent(Component *component)
 
 bool Entity::RemoveComponent(Component *component)
 {
-    for (ComponentList::iterator i = components.begin(); i != components.end(); i++)
+    for (auto i = components.begin(); i != components.end(); i++)
     {
         if (*i == component)
         {

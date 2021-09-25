@@ -176,6 +176,19 @@
 		D05CEE9F26F5967A009D4CFB /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE8F26F5967A009D4CFB /* imgui_demo.cpp */; };
 		D05CEEA026F5967A009D4CFB /* imgui_impl_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE9026F5967A009D4CFB /* imgui_impl_sdl.cpp */; };
 		D05CEEA126F5967A009D4CFB /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEE9126F5967A009D4CFB /* imgui_draw.cpp */; };
+		D05CEEA726FB30A8009D4CFB /* Icons.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEEA626FB30A8009D4CFB /* Icons.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05CEEA926FE84A9009D4CFB /* EditorWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEEA826FE84A9009D4CFB /* EditorWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05CEEAB26FE85A0009D4CFB /* EditorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEEAA26FE85A0009D4CFB /* EditorWindow.cpp */; };
+		D05CEEAD26FE8E83009D4CFB /* ConsoleWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEEAC26FE8E83009D4CFB /* ConsoleWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05CEEAF26FE8F7B009D4CFB /* ConsoleWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEEAE26FE8F7B009D4CFB /* ConsoleWindow.cpp */; };
+		D05CEEB126FE9FB9009D4CFB /* ImGuiEx.h in Headers */ = {isa = PBXBuildFile; fileRef = D05CEEB026FE9FB9009D4CFB /* ImGuiEx.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05CEEB326FEA085009D4CFB /* ImGuiEx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D05CEEB226FEA085009D4CFB /* ImGuiEx.cpp */; };
+		D0ABFADC26FEE20900442B61 /* InspectorWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0ABFADB26FEE20900442B61 /* InspectorWindow.cpp */; };
+		D0ABFADE26FEE21700442B61 /* InspectorWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = D0ABFADD26FEE21700442B61 /* InspectorWindow.h */; };
+		D0ABFAE026FEE29A00442B61 /* AssetsWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = D0ABFADF26FEE29A00442B61 /* AssetsWindow.h */; };
+		D0ABFAE226FEE2C300442B61 /* AssetsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0ABFAE126FEE2C300442B61 /* AssetsWindow.cpp */; };
+		D0ABFAE426FEE30200442B61 /* HierarchyWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = D0ABFAE326FEE30200442B61 /* HierarchyWindow.h */; };
+		D0ABFAE626FEE33100442B61 /* HierarchyWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0ABFAE526FEE33100442B61 /* HierarchyWindow.cpp */; };
 		D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D1426ED2FDC004051AD /* Frustum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D1626ED31B1004051AD /* Frustum.cpp */; };
 		D0C44D3126F1D9A9004051AD /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D3026F1D9A9004051AD /* Font.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -363,6 +376,19 @@
 		D05CEE8F26F5967A009D4CFB /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
 		D05CEE9026F5967A009D4CFB /* imgui_impl_sdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_sdl.cpp; sourceTree = "<group>"; };
 		D05CEE9126F5967A009D4CFB /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		D05CEEA626FB30A8009D4CFB /* Icons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Icons.h; sourceTree = "<group>"; };
+		D05CEEA826FE84A9009D4CFB /* EditorWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorWindow.h; sourceTree = "<group>"; };
+		D05CEEAA26FE85A0009D4CFB /* EditorWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorWindow.cpp; sourceTree = "<group>"; };
+		D05CEEAC26FE8E83009D4CFB /* ConsoleWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConsoleWindow.h; sourceTree = "<group>"; };
+		D05CEEAE26FE8F7B009D4CFB /* ConsoleWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConsoleWindow.cpp; sourceTree = "<group>"; };
+		D05CEEB026FE9FB9009D4CFB /* ImGuiEx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImGuiEx.h; sourceTree = "<group>"; };
+		D05CEEB226FEA085009D4CFB /* ImGuiEx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiEx.cpp; sourceTree = "<group>"; };
+		D0ABFADB26FEE20900442B61 /* InspectorWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InspectorWindow.cpp; sourceTree = "<group>"; };
+		D0ABFADD26FEE21700442B61 /* InspectorWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InspectorWindow.h; sourceTree = "<group>"; };
+		D0ABFADF26FEE29A00442B61 /* AssetsWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsWindow.h; sourceTree = "<group>"; };
+		D0ABFAE126FEE2C300442B61 /* AssetsWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetsWindow.cpp; sourceTree = "<group>"; };
+		D0ABFAE326FEE30200442B61 /* HierarchyWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HierarchyWindow.h; sourceTree = "<group>"; };
+		D0ABFAE526FEE33100442B61 /* HierarchyWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HierarchyWindow.cpp; sourceTree = "<group>"; };
 		D0C44D1426ED2FDC004051AD /* Frustum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
 		D0C44D1626ED31B1004051AD /* Frustum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
 		D0C44D1D26F087E0004051AD /* EditorSelection.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = EditorSelection.shader; sourceTree = "<group>"; };
@@ -498,7 +524,7 @@
 			children = (
 				4062B911231A7A8900F44658 /* Info.plist */,
 				4062B910231A7A8900F44658 /* GameEngine.h */,
-				406DCA5923392239008C088E /* Structure */,
+				406DCA5923392239008C088E /* Core */,
 				408377A7231B6E4000A63D8F /* Rendering */,
 				D02BBDDE26D8DBAA00B3B639 /* Editor */,
 				401B7931231D62D000E6B4F0 /* Assets */,
@@ -528,7 +554,7 @@
 			path = Particles;
 			sourceTree = "<group>";
 		};
-		406DCA5923392239008C088E /* Structure */ = {
+		406DCA5923392239008C088E /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				401B7895231B76CC00E6B4F0 /* Application.h */,
@@ -545,7 +571,7 @@
 				406DCA5E2339227D008C088E /* Component.h */,
 				406DCA5F2339227D008C088E /* Component.cpp */,
 			);
-			path = Structure;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		406DCA66233BC00D008C088E /* Components */ = {
@@ -724,10 +750,23 @@
 			isa = PBXGroup;
 			children = (
 				D05CEE8126F5967A009D4CFB /* ImGui */,
-				D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */,
-				D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */,
 				D02BBDE626D8E0A200B3B639 /* Editor.h */,
 				D02BBDE226D8DF5400B3B639 /* Editor.cpp */,
+				D02BBDDF26D8DBE000B3B639 /* EditorCamera.h */,
+				D02BBDE026D8DBF900B3B639 /* EditorCamera.cpp */,
+				D05CEEA826FE84A9009D4CFB /* EditorWindow.h */,
+				D05CEEAA26FE85A0009D4CFB /* EditorWindow.cpp */,
+				D05CEEAC26FE8E83009D4CFB /* ConsoleWindow.h */,
+				D05CEEAE26FE8F7B009D4CFB /* ConsoleWindow.cpp */,
+				D0ABFAE326FEE30200442B61 /* HierarchyWindow.h */,
+				D0ABFAE526FEE33100442B61 /* HierarchyWindow.cpp */,
+				D0ABFADD26FEE21700442B61 /* InspectorWindow.h */,
+				D0ABFADB26FEE20900442B61 /* InspectorWindow.cpp */,
+				D0ABFADF26FEE29A00442B61 /* AssetsWindow.h */,
+				D0ABFAE126FEE2C300442B61 /* AssetsWindow.cpp */,
+				D05CEEA626FB30A8009D4CFB /* Icons.h */,
+				D05CEEB026FE9FB9009D4CFB /* ImGuiEx.h */,
+				D05CEEB226FEA085009D4CFB /* ImGuiEx.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -799,6 +838,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D05CEE9226F5967A009D4CFB /* imgui.h in Headers */,
+				D05CEEB126FE9FB9009D4CFB /* ImGuiEx.h in Headers */,
 				4083777C231A8F2600A63D8F /* Matrix3x3.h in Headers */,
 				D02BBDE726D8E20D00B3B639 /* Editor.h in Headers */,
 				40837790231ADE4900A63D8F /* Vector3.h in Headers */,
@@ -809,6 +849,7 @@
 				40607DAB2343D0CF00F985CD /* AudioFactory.h in Headers */,
 				406DCA5C23392257008C088E /* Entity.h in Headers */,
 				406DCA79233FC23B008C088E /* Window.h in Headers */,
+				D0ABFADE26FEE21700442B61 /* InspectorWindow.h in Headers */,
 				D02BBDE826D8E21900B3B639 /* EditorCamera.h in Headers */,
 				401B792A231BC38A00E6B4F0 /* Color.h in Headers */,
 				40837780231A8F2600A63D8F /* Vector4.h in Headers */,
@@ -833,6 +874,7 @@
 				40978D9623352FF40082F63E /* Model.h in Headers */,
 				401B793F231D6D0500E6B4F0 /* ImagePNG.h in Headers */,
 				406DCA69233BC054008C088E /* MeshRendererComponent.h in Headers */,
+				D05CEEA926FE84A9009D4CFB /* EditorWindow.h in Headers */,
 				40651BD3234902D2003BBD50 /* SkyboxComponent.h in Headers */,
 				4083B4E523251A0900A72B43 /* XMLDocument.h in Headers */,
 				401B789B231B76CC00E6B4F0 /* Camera.h in Headers */,
@@ -846,6 +888,7 @@
 				40607D9A2343480700F985CD /* AudioManager.h in Headers */,
 				401B7943231D6F4300E6B4F0 /* ArrayUtils.h in Headers */,
 				4083B4D12320134300A72B43 /* ImagePCX.h in Headers */,
+				D05CEEA726FB30A8009D4CFB /* Icons.h in Headers */,
 				4066CCFA234781F000496404 /* Cubemap.h in Headers */,
 				40978D9F233535170082F63E /* ModelOBJ.h in Headers */,
 				40837785231A8F2600A63D8F /* MathUtils.h in Headers */,
@@ -854,6 +897,7 @@
 				40DD559B234FA04700BBA4A9 /* GameTime.h in Headers */,
 				40DCFED72329358100164DE9 /* StringUtils.h in Headers */,
 				406414BB235C6AF4000F994F /* ParticleEmitter.h in Headers */,
+				D05CEEAD26FE8E83009D4CFB /* ConsoleWindow.h in Headers */,
 				4010F5352342F85600D08A02 /* AudioListener.h in Headers */,
 				4083B4CD2320120900A72B43 /* ImageBMP.h in Headers */,
 				D05CEE9326F5967A009D4CFB /* imstb_textedit.h in Headers */,
@@ -871,6 +915,7 @@
 				406DCA642339229C008C088E /* Scene.h in Headers */,
 				4083779B231AE9F500A63D8F /* Timer.h in Headers */,
 				4062B912231A7A8900F44658 /* GameEngine.h in Headers */,
+				D0ABFAE426FEE30200442B61 /* HierarchyWindow.h in Headers */,
 				40607DAF2344DBFE00F985CD /* AudioListenerComponent.h in Headers */,
 				400F3B41234A341E0062DBF5 /* PlaneComponent.h in Headers */,
 				D0C44D1526ED2FDC004051AD /* Frustum.h in Headers */,
@@ -880,6 +925,7 @@
 				401B789A231B76CC00E6B4F0 /* Renderer.h in Headers */,
 				D0C44D4C26F492B8004051AD /* ScreenSpaceAnchorComponent.h in Headers */,
 				40607DA323434C6600F985CD /* Audio.h in Headers */,
+				D0ABFAE026FEE29A00442B61 /* AssetsWindow.h in Headers */,
 				408377AB231B6E5700A63D8F /* Primitives.h in Headers */,
 				401B7959231E8B9C00E6B4F0 /* Texture.h in Headers */,
 				40EC7A0D234E117F00CA8DB3 /* TerrainComponent.h in Headers */,
@@ -983,6 +1029,7 @@
 				D05CEE9A26F5967A009D4CFB /* imgui.cpp in Sources */,
 				4083778C231ADE0300A63D8F /* Vector4.cpp in Sources */,
 				400F3B42234A341E0062DBF5 /* PlaneComponent.cpp in Sources */,
+				D0ABFADC26FEE20900442B61 /* InspectorWindow.cpp in Sources */,
 				401B793C231D658300E6B4F0 /* FileSystem.cpp in Sources */,
 				D0C44D4826F311BB004051AD /* SpriteComponent.cpp in Sources */,
 				4083B4CE2320120900A72B43 /* ImageBMP.cpp in Sources */,
@@ -1008,9 +1055,11 @@
 				40DD559C234FA04700BBA4A9 /* GameTime.cpp in Sources */,
 				406414722354DFA3000F994F /* BillboardComponent.cpp in Sources */,
 				D02BBDE426D8DF5400B3B639 /* Editor.cpp in Sources */,
+				D0ABFAE626FEE33100442B61 /* HierarchyWindow.cpp in Sources */,
 				D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */,
 				406DCA5D23392257008C088E /* Entity.cpp in Sources */,
 				4083B4E623251A0900A72B43 /* XMLDocument.cpp in Sources */,
+				D05CEEAF26FE8F7B009D4CFB /* ConsoleWindow.cpp in Sources */,
 				406414C8235DFAAC000F994F /* ParticleAnimParameter.cpp in Sources */,
 				401B78A0231B76CC00E6B4F0 /* Renderer.cpp in Sources */,
 				D05CEE9E26F5967A009D4CFB /* imgui_tables.cpp in Sources */,
@@ -1029,6 +1078,7 @@
 				4083B4D22320134300A72B43 /* ImagePCX.cpp in Sources */,
 				401B792B231BC38A00E6B4F0 /* Color.cpp in Sources */,
 				401B794E231D713C00E6B4F0 /* ImageFactory.cpp in Sources */,
+				D0ABFAE226FEE2C300442B61 /* AssetsWindow.cpp in Sources */,
 				40651BD4234902D2003BBD50 /* SkyboxComponent.cpp in Sources */,
 				406DCA73233F5F2B008C088E /* LightComponent.cpp in Sources */,
 				406DCA652339229C008C088E /* Scene.cpp in Sources */,
@@ -1051,11 +1101,13 @@
 				401B7938231D645400E6B4F0 /* Image.cpp in Sources */,
 				40607DA423434C6600F985CD /* Audio.cpp in Sources */,
 				40708D1D23266B0800A796AD /* Material.cpp in Sources */,
+				D05CEEB326FEA085009D4CFB /* ImGuiEx.cpp in Sources */,
 				40651BD92349D5D2003BBD50 /* Terrain.cpp in Sources */,
 				D05CEE7F26F58343009D4CFB /* TextComponent.cpp in Sources */,
 				401B792F231BC89500E6B4F0 /* ParamList.cpp in Sources */,
 				D05CEE9F26F5967A009D4CFB /* imgui_demo.cpp in Sources */,
 				4083777E231A8F2600A63D8F /* Matrix3x3.cpp in Sources */,
+				D05CEEAB26FE85A0009D4CFB /* EditorWindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

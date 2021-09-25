@@ -6,6 +6,11 @@
 #include "Editor.h"
 #include "Application.h"
 #include "Debug.h"
+#include "Icons.h"
+#include "ConsoleWindow.h"
+#include "HierarchyWindow.h"
+#include "InspectorWindow.h"
+#include "AssetsWindow.h"
 
 using namespace DrageEngine;
 
@@ -19,8 +24,8 @@ Editor::Editor()
     ImGui::StyleColorsDark();
     ImGui_ImplSDL2_InitForOpenGL(app->window->window, app->window->glContext);
     ImGui_ImplOpenGL3_Init("#version 410 core");
-    ImGuiIO& io = ImGui::GetIO();
     
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     
@@ -32,17 +37,34 @@ Editor::Editor()
     io.Fonts->AddFontFromFileTTF(fontFile.c_str(), 26.0f);
     io.FontGlobalScale = 0.5f;
     
-    inspectorWindowOpen = true;
-    consoleWindowOpen = true;
+    ImFontConfig config;
+    config.MergeMode = true;
+    config.GlyphOffset = ImVec2(0, 1);
+    const ImWchar icon_ranges[] = { ICON_MIN, ICON_MAX, 0 };
+    std::string iconFontFile = app->assets->GetAssetPath("ForkAwesome.ttf");
+    io.Fonts->AddFontFromFileTTF(iconFontFile.c_str(), 28.0f, &config, icon_ranges);
+    
+    windows.push_back(new ConsoleWindow());
+    windows.push_back(new HierarchyWindow());
+    windows.push_back(new InspectorWindow());
+    windows.push_back(new AssetsWindow());
 }
 
 Editor::~Editor()
 {
     delete camera;
     
+    for (std::vector<EditorWindow*>::iterator i = windows.begin(); i != windows.end(); i++)
+        delete *i;
+    
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
+}
+
+void Editor::HandleInput(const SDL_Event* event)
+{
+    ImGui_ImplSDL2_ProcessEvent(event);
 }
 
 void Editor::Update()
@@ -62,7 +84,10 @@ void Editor::Update()
 
             selection.clear();
             if (selected)
+            {
                 selection.push_back(selected);
+                LOG(selected->GetName());
+            }
         }
     }
 }
@@ -76,20 +101,8 @@ void Editor::Render()
     int dockspaceFlags = ImGuiDockNodeFlags_PassthruCentralNode | ImGuiDockNodeFlags_NoDockingInCentralNode;
     int dockspaceId = ImGui::DockSpaceOverViewport(NULL, dockspaceFlags);
     
-    if (inspectorWindowOpen)
-    {
-        ImGui::Begin("Inspector", &inspectorWindowOpen, ImGuiWindowFlags_NoCollapse);
-        if (selection.size() > 0)
-            ImGui::Text("%s", selection[0]->GetName().c_str());
-        ImGui::End();
-    }
-    
-    if (consoleWindowOpen)
-    {
-        ImGui::Begin("Console", &consoleWindowOpen, ImGuiWindowFlags_NoCollapse);
-        
-        ImGui::End();
-    }
+    for (std::vector<EditorWindow*>::const_iterator i = windows.begin(); i != windows.end(); i++)
+        (*i)->Render();
     
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -116,4 +129,9 @@ bool Editor::IsSelected(Entity* entity) const
 bool Editor::HasSelection() const
 {
     return selection.size() > 0;
+}
+
+const std::vector<Entity*>& Editor::GetSelection() const
+{
+    return selection;
 }

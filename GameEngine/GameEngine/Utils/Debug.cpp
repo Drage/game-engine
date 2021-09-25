@@ -1,12 +1,14 @@
 
 #include <execinfo.h>
-#include <sstream>
 #include <dlfcn.h>
 #include <cxxabi.h>
 #include "Debug.h"
 #include "StringUtils.h"
 
 using namespace DrageEngine;
+
+Debug::LogHistory Debug::history;
+unsigned Debug::nextLogId = 0;
 
 std::string Debug::Backtrace()
 {
@@ -16,7 +18,7 @@ std::string Debug::Backtrace()
     char **symbols = backtrace_symbols(callstack, frameCount);
     
     std::ostringstream ss;
-    for (int i = 2; i < frameCount; i++)
+    for (int i = 3; i < frameCount; i++)
     {
         Dl_info info;
         if (dladdr(callstack[i], &info))
@@ -27,10 +29,10 @@ std::string Debug::Backtrace()
             if (status == 0)
             {
                 std::string line = std::string(demangled);
-                String::Replace(line, "DrageEngine::", "");
-                String::Replace(line, "std::__1::", "");
-                String::Replace(line, "basic_string<char, char_traits<char>, allocator<char> >", "string");
-                String::Replace(line, ", allocator<%> ", "");
+                String::ReplaceAll(line, "DrageEngine::", "");
+                String::ReplaceAll(line, "std::__1::", "");
+                String::ReplaceAll(line, "basic_string<char, char_traits<char>, allocator<char> >", "string");
+                String::ReplaceAll(line, ", allocator<%> ", "");
                 ss << " ↳ " << line << std::endl;
             }
             free(demangled);
@@ -45,4 +47,19 @@ std::string Debug::Backtrace()
     ss << std::endl;
     
     return ss.str();
+}
+
+const std::deque<Debug::LogMessage>& Debug::GetLogHistory()
+{
+    return history;
+}
+
+int Debug::GetLogHistoryCount()
+{
+    return nextLogId;
+}
+
+void Debug::ClearLogHistory()
+{
+    history.clear();
 }

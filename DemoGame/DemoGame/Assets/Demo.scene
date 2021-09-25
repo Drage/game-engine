@@ -69,13 +69,13 @@
         <Clouds>
             <enabled>false</enabled>
             <count>10</count>
-            <orbitRadius>500</orbitRadius>
-            <minYPosition>25</minYPosition>
-            <maxYPosition>75</maxYPosition>
-            <minSpeed>0.2</minSpeed>
-            <maxSpeed>0.7</maxSpeed>
-            <minSize>50</minSize>
-            <maxSize>90</maxSize>
+            <orbitRadius>1000</orbitRadius>
+            <minYPosition>50</minYPosition>
+            <maxYPosition>150</maxYPosition>
+            <minSpeed>0.1</minSpeed>
+            <maxSpeed>0.4</maxSpeed>
+            <minSize>100</minSize>
+            <maxSize>160</maxSize>
         </Clouds>
     </Entity>
     <Entity>

@@ -21,20 +21,20 @@ Scene::~Scene()
 
 void Scene::Clear()
 {
-    for (EntityList::iterator i = entities.begin(); i != entities.end(); i++)
-        delete (*i);
+    for (auto i : entities)
+        delete i;
     entities.clear();
 }
 
 void Scene::Start()
 {
-    for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
-        (*i)->Start();
+    for (auto i : entities)
+        i->Start();
 }
 
 void Scene::Update()
 {
-    for (EntityList::iterator i = entities.begin(); i != (entities.end()--); )
+    for (auto i = entities.begin(); i != entities.end(); )
     {
         if ((*i)->IsDestroyed())
         {
@@ -104,7 +104,7 @@ Entity* Scene::LoadPrefab(const std::string &filename, ParamList *params)
 
 void Scene::LoadEntities(const XMLDocument::Element *xml, Entity *parent, ParamList *overrideParams)
 {
-    for (XMLDocument::ElementList::const_iterator i = xml->subElements.begin(); i != xml->subElements.end(); i++)
+    for (auto i = xml->subElements.begin(); i != xml->subElements.end(); i++)
     {
         std::string tag = (*i)->name;
         if (tag == "Entity")
@@ -172,14 +172,14 @@ Entity* Scene::Find(const std::string &path, Entity *parent) const
     
     if (!parent)
     {
-        for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
+        for (auto i : entities)
         {
-            if ((*i)->GetName() == name)
+            if (i->GetName() == name)
             {
                 if (subPath == "")
-                    return (*i);
+                    return i;
                 else
-                    return Find(subPath, *i);
+                    return Find(subPath, i);
             }
         }
     }
@@ -195,17 +195,7 @@ Entity* Scene::Find(const std::string &path, Entity *parent) const
     return NULL;
 }
 
-Entity* Scene::GetEntityByIndex(int index) const
+const Scene::EntityList& Scene::GetEntities() const
 {
-    return index >= 0 && index < entities.size() ? entities[index] : NULL;
-}
-
-int Scene::GetIndexOfEntity(const Entity* entity) const
-{
-    for (EntityList::const_iterator i = entities.begin(); i != entities.end(); i++)
-    {
-        if ((*i) == entity)
-            return (int)(i - entities.begin());
-    }
-    return -1;
+    return entities;
 }

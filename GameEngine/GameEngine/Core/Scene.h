@@ -11,6 +11,8 @@ namespace DrageEngine
     class Scene
     {
         public:
+            typedef std::vector<Entity*> EntityList;
+        
             Scene();
             Scene(const std::string filename);
             ~Scene();
@@ -27,11 +29,9 @@ namespace DrageEngine
             Entity* LoadPrefab(const std::string &filename, ParamList *params = NULL);
         
             Entity* Find(const std::string &path, Entity *parent = NULL) const;
-            Entity* GetEntityByIndex(int index) const;
-            int GetIndexOfEntity(const Entity* entity) const;
+            const EntityList& GetEntities() const;
         
         private:
-            typedef std::vector<Entity*> EntityList;
             void LoadEntities(const XMLDocument::Element *xml, Entity *parent = NULL, ParamList *params = NULL);
             EntityList entities;
     };

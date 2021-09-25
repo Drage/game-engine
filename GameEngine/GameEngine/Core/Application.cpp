@@ -7,6 +7,7 @@
 #include "Debug.h"
 #include "Timer.h"
 #include "Editor.h"
+#include "MathUtils.h"
 
 using namespace DrageEngine;
 
@@ -14,6 +15,9 @@ Application *DrageEngine::app = new Application();
 
 Application::Application()
 {
+    quit = false;
+    activeScene = NULL;
+    
     if (std::getenv("EDITOR") != NULL)
     {
         editorEnabled = true;
@@ -59,9 +63,11 @@ void Application::Run(Game *game)
         SDL_Event event;
         if (SDL_PollEvent(&event))
         {
-            // Clicked on close button or press escape
             if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
                 quit = true;
+            
+            if (editorEnabled)
+                editor->HandleInput(&event);
         }
         
         Time::Update();

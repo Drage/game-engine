@@ -44,6 +44,7 @@ void Input::Clear()
     mouseButtonPresses.clear();
     mouseButtonReleases.clear();
     mouseDelta = Vector2(0);
+    mouseScroll = Vector2(0);
     
     for (int i = 0; i < joystickInput.size(); i++)
     {
@@ -112,6 +113,11 @@ Vector2 Input::GetMouseDelta() const
     return mouseDelta;
 }
 
+Vector2 Input::GetMouseScroll() const
+{
+    return mouseScroll;
+}
+
 bool Input::GetJoystickButtonDown(Joystick::Button button, int index) const
 {
     if (joystickInput.size() <= index)
@@ -165,7 +171,7 @@ Vector2 Input::GetJoystickAxis(Joystick::Axis axis, int index) const
 int Input::HandleInputEvents(void* data, SDL_Event* event)
 {
     if (event->type == SDL_KEYDOWN || event->type == SDL_KEYUP
-        || event->type == SDL_MOUSEBUTTONDOWN || event->type == SDL_MOUSEBUTTONUP || event->type == SDL_MOUSEMOTION
+        || event->type == SDL_MOUSEBUTTONDOWN || event->type == SDL_MOUSEBUTTONUP || event->type == SDL_MOUSEMOTION || event->type == SDL_MOUSEWHEEL
         || event->type == SDL_JOYBUTTONDOWN || event->type == SDL_JOYBUTTONUP || event->type == SDL_JOYAXISMOTION)
     {
         app->input->CaptureInput(event);
@@ -207,6 +213,11 @@ void Input::CaptureInput(SDL_Event* event)
         mousePosition.y = event->motion.y * scaleFactor;
         mouseDelta.x = event->motion.xrel * scaleFactor;
         mouseDelta.y = event->motion.yrel * scaleFactor;
+    }
+    else if (event->type == SDL_MOUSEWHEEL)
+    {
+        mouseScroll.x = event->wheel.x;
+        mouseScroll.y = event->wheel.y;
     }
     else if (event->type == SDL_JOYAXISMOTION)
     {

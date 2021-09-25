@@ -2,6 +2,8 @@
 #ifndef TIME_H
 #define TIME_H
 
+#include <string>
+
 namespace DrageEngine
 {
     class Time
@@ -14,6 +16,8 @@ namespace DrageEngine
             static void SetTimeScale(float timeScale);
 
             static float UnscaledDeltaTime();
+        
+            static std::string Now();
 
         private:
             friend class Application;

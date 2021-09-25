@@ -5,6 +5,7 @@
 #include <vector>
 #include "Entity.h"
 #include "EditorCamera.h"
+#include "EditorWindow.h"
 
 namespace DrageEngine
 {
@@ -14,18 +15,20 @@ namespace DrageEngine
             Editor();
             ~Editor();
         
+            void HandleInput(const SDL_Event* event);
+        
             void Update();
             void Render();
         
             bool IsSelected(Entity* entity) const;
             bool HasSelection() const;
+            const std::vector<Entity*>& GetSelection() const;
         
             EditorCamera *camera;
         
         private:
             std::vector<Entity*> selection;
-            bool inspectorWindowOpen;
-            bool consoleWindowOpen;
+            std::vector<EditorWindow*> windows;
     };
 }
 

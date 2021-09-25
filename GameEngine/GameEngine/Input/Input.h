@@ -23,6 +23,7 @@ namespace DrageEngine
             bool GetMouseButton(Mouse::Button button) const;
             Vector2 GetMousePosition() const;
             Vector2 GetMouseDelta() const;
+            Vector2 GetMouseScroll() const;
         
             bool GetJoystickButtonDown(Joystick::Button button, int index = 0) const;
             bool GetJoystickButtonUp(Joystick::Button button, int index = 0) const;
@@ -34,6 +35,7 @@ namespace DrageEngine
             friend class Application;
             Input();
             ~Input();
+            void Update();
             void Clear();
         
             static int HandleInputEvents(void* data, SDL_Event* event);
@@ -48,6 +50,7 @@ namespace DrageEngine
             bool mouseButtonState[Mouse::BUTTON_COUNT];
             Vector2 mousePosition;
             Vector2 mouseDelta;
+            Vector2 mouseScroll;
         
             std::vector<SDL_Joystick*> joysticks;
             typedef struct JoystickInput

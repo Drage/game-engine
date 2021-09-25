@@ -1,6 +1,10 @@
 
 #include <SDL.h>
 #include <iostream>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 #include "GameTime.h"
 #include "Application.h"
 #include "Debug.h"
@@ -25,9 +29,6 @@ void Time::Update()
     unsigned long previousFrameTime = currentTime;
     currentTime = SDL_GetPerformanceCounter();
     deltaTime = (currentTime - previousFrameTime) / (float)tickFrequency;
-    
-    if (app->window->VSync())
-        deltaTime = 1.0f / app->window->GetRefreshRate();
 }
 
 float Time::RunTime()
@@ -53,4 +54,17 @@ void Time::SetTimeScale(float timeScale)
 float Time::UnscaledDeltaTime()
 {
     return deltaTime;
+}
+
+std::string Time::Now()
+{
+    using namespace std::chrono;
+    auto now = system_clock::now();
+    auto ms = duration_cast<milliseconds>(now.time_since_epoch()) % 1000;
+    auto time = system_clock::to_time_t(now);
+    std::tm local = *std::localtime(&time);
+    std::stringstream ss;
+    ss << std::put_time(&local, "%H:%M:%S");
+    ss << '.' << std::setfill('0') << std::setw(3) << ms.count();
+    return ss.str();
 }

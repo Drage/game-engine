@@ -107,7 +107,11 @@ void Window::HandleResize()
     SDL_GetWindowSize(window, &width, &height);
     SDL_GL_GetDrawableSize(window, &drawableWidth, &drawableHeight);
     scaleFactor = drawableHeight / height;
-    app->renderer->ViewportResized(drawableWidth, drawableHeight);
+    
+    if (!app->IsEditorEnabled())
+        app->renderer->ViewportResized(drawableWidth, drawableHeight);
+    else
+        app->renderer->ViewportResized();
 }
 
 void Window::SetSize(int width, int height)

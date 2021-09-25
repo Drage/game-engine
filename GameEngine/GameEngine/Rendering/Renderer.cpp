@@ -73,11 +73,20 @@ void Renderer::InitEditorSelection()
 
 void Renderer::ViewportResized(int width, int height, int offsetX, int offsetY)
 {
+    if (width == 0 || height == 0)
+    {
+        width = viewportSize.x;
+        height = viewportSize.y;
+        offsetX = viewportOffset.x;
+        offsetY = viewportOffset.y;
+    }
+    
     if (viewportSize.x != width || viewportSize.y != height || viewportOffset.x != offsetX || viewportOffset.y != offsetY)
     {
         viewportSize = Vector2(width, height);
         viewportOffset = Vector2(offsetX, offsetY);
-        glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
+        
+        LOG(width);
         
         glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportSize.x, viewportSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -175,6 +184,7 @@ void Renderer::Render()
     viewProjectionMatrix = projectionMatrix * viewMatrix;
     orthoProjectionMatrix.SetProjectionOrthographic(viewportSize.x, viewportSize.y);
 
+    glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glDepthMask(GL_TRUE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

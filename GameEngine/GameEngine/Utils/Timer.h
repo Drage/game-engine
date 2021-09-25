@@ -9,20 +9,14 @@ namespace DrageEngine
         public:
             Timer();
             void Start();
-            void Pause();
-            void Stop();
             void Reset();
         
-            bool IsPaused() const;
-            bool IsStarted() const;
-        
-            float ElapsedSeconds() const;
+            double ElapsedSeconds() const;
+            double ElapsedMilliseconds() const;
         
         private:
-            unsigned long startTicks;
-            unsigned long pausedTicks;
-            bool paused;
             bool started;
+            unsigned long startTicks;
     };
 }
 

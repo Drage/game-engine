@@ -19,7 +19,7 @@ namespace DrageEngine
     class Renderer
     {
         public:        
-            void ViewportResized(int width, int height,  int offsetX = 0, int offsetY = 0);
+            void ViewportResized(int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
         
             void SetClearColor(const Color &color);
             const Color& GetClearColor() const;

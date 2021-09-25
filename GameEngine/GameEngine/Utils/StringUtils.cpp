@@ -1,4 +1,5 @@
 
+#include <sstream>
 #include "StringUtils.h"
 
 using namespace DrageEngine;
@@ -27,7 +28,7 @@ int String::Find(const std::string& str, const std::string& find, int &length, i
     return start;
 }
 
-std::string& String::Replace(std::string& str, const std::string& find, const std::string& replace)
+std::string& String::ReplaceAll(std::string& str, const std::string& find, const std::string& replace)
 {
     int pos = 0, length;
     while ((pos = Find(str, find, length, pos)) != std::string::npos)
@@ -35,6 +36,14 @@ std::string& String::Replace(std::string& str, const std::string& find, const st
         str.replace(pos, length, replace);
         pos += replace.length();
     }
+    return str;
+}
+
+std::string& String::Replace(std::string& str, const std::string& find, const std::string& replace)
+{
+    int pos = 0, length;
+    if ((pos = Find(str, find, length, pos)) != std::string::npos)
+        str.replace(pos, length, replace);
     return str;
 }
 
@@ -81,4 +90,12 @@ bool String::EndsWith(const std::string& str, const std::string& find)
 bool String::Contains(const std::string& str, const std::string& find)
 {
     return str.find(find) != std::string::npos;
+}
+
+std::string String::Join(std::initializer_list<std::string> list)
+{
+    std::stringstream ss;
+    for (auto elem : list)
+        ss << elem;
+    return ss.str();
 }
