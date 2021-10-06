@@ -98,6 +98,11 @@ Entity* Entity::GetChild(const std::string &name)
     return NULL;
 }
 
+const std::vector<Entity*>& Entity::GetChildren() const
+{
+    return children;
+}
+
 void Entity::AddComponent(Component *component)
 {
     if (component == NULL)

@@ -88,7 +88,7 @@ void ConsoleWindow::RenderLogList()
     auto logHistory = Debug::GetLogHistory();
     for (Debug::LogHistory::const_iterator i = logHistory.begin(); i != logHistory.end(); i++)
     {
-        if (searchFilterApplied && !String::Contains(i->message, std::string(searchInput)))
+        if (searchFilterApplied && !String::ContainsIgnoreCase(i->message, std::string(searchInput)))
             continue;
             
         if (selectedSourceFilter != 0 && i->originFile != sourceFilterOptions[selectedSourceFilter])

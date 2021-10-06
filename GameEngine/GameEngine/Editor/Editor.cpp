@@ -135,3 +135,9 @@ const std::vector<Entity*>& Editor::GetSelection() const
 {
     return selection;
 }
+
+void Editor::SetSelection(Entity* entity)
+{
+    selection.clear();
+    selection.push_back(entity);
+}

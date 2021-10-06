@@ -1,5 +1,6 @@
 
 #include <sstream>
+#include <algorithm>
 #include "StringUtils.h"
 
 using namespace DrageEngine;
@@ -90,6 +91,16 @@ bool String::EndsWith(const std::string& str, const std::string& find)
 bool String::Contains(const std::string& str, const std::string& find)
 {
     return str.find(find) != std::string::npos;
+}
+
+bool String::ContainsIgnoreCase(const std::string& str, const std::string& find)
+{
+    auto it = std::search(
+        str.begin(), str.end(),
+        find.begin(), find.end(),
+        [](char ch1, char ch2) { return std::toupper(ch1) == std::toupper(ch2); }
+    );
+    return (it != str.end());
 }
 
 std::string String::Join(std::initializer_list<std::string> list)

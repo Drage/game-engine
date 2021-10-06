@@ -5978,8 +5978,6 @@ bool ImGui::TreeNodeBehavior(ImGuiID id, ImGuiTreeNodeFlags flags, const char* l
             RenderArrow(window->DrawList, ImVec2(text_pos.x - text_offset_x + padding.x, text_pos.y + g.FontSize * 0.15f), text_col, is_open ? ImGuiDir_Down : ImGuiDir_Right, 0.70f);
         if (g.LogEnabled)
             LogSetNextTextDecoration(">", NULL);
-        if (flags & ImGuiTreeNodeFlags_NoArrow)
-            text_pos.x -= text_offset_x;
         RenderText(text_pos, label, label_end, false);
     }
 

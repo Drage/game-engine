@@ -19,6 +19,7 @@ namespace DrageEngine
             static bool StartsWith(const std::string& str, const std::string& find);
             static bool EndsWith(const std::string& str, const std::string& find);
             static bool Contains(const std::string& str, const std::string& find);
+            static bool ContainsIgnoreCase(const std::string& str, const std::string& find);
             static std::string Join(std::initializer_list<std::string> list);
     };
 }

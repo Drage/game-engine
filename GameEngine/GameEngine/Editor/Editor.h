@@ -23,6 +23,7 @@ namespace DrageEngine
             bool IsSelected(Entity* entity) const;
             bool HasSelection() const;
             const std::vector<Entity*>& GetSelection() const;
+            void SetSelection(Entity* entity);
         
             EditorCamera *camera;
         

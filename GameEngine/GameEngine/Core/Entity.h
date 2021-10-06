@@ -33,6 +33,7 @@ namespace DrageEngine
             void AddChild(Entity *obj);
             bool RemoveChild(Entity *obj);
             Entity* GetChild(const std::string &name);
+            const std::vector<Entity*>& GetChildren() const;
         
             void AddComponent(Component *component);
             bool RemoveComponent(Component *component);
