@@ -43,6 +43,7 @@ Editor::Editor()
     const ImWchar icon_ranges[] = { ICON_MIN, ICON_MAX, 0 };
     std::string iconFontFile = app->assets->GetAssetPath("ForkAwesome.ttf");
     io.Fonts->AddFontFromFileTTF(iconFontFile.c_str(), 28.0f, &config, icon_ranges);
+    io.Fonts->Build();
     
     windows.push_back(new ConsoleWindow());
     windows.push_back(new HierarchyWindow());
@@ -86,6 +87,7 @@ void Editor::Update()
             if (selected)
             {
                 selection.push_back(selected);
+                camera->SetFocus(selected->transform.position);
                 LOG(selected->GetName());
             }
         }
