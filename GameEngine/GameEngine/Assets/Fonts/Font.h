@@ -2,7 +2,7 @@
 #ifndef FONT_H
 #define FONT_H
 
-#include <SDL2_ttf/SDL_ttf.h>
+//#include <SDL2_ttf/SDL_ttf.h>
 #include <string>
 #include "Color.h"
 #include "Texture.h"
@@ -18,7 +18,7 @@ namespace DrageEngine
             Texture* Render(const std::string &text, const Color &color);
         
         private:
-            TTF_Font* font;
+            //TTF_Font* font;
     };
 }
 

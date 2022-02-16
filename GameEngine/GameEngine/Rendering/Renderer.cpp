@@ -86,8 +86,6 @@ void Renderer::ViewportResized(int width, int height, int offsetX, int offsetY)
         viewportSize = Vector2(width, height);
         viewportOffset = Vector2(offsetX, offsetY);
         
-        LOG(width);
-        
         glBindTexture(GL_TEXTURE_2D, editorSelectionTexture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, viewportSize.x, viewportSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
         glBindTexture(GL_TEXTURE_2D, editorSelectionDepth);

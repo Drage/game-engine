@@ -1,7 +1,7 @@
 
 #define GL_GLEXT_PROTOTYPES
 #include <SDL_opengl.h>
-#include <SDL_ttf.h>
+//#include <SDL_ttf.h>
 #include <OpenGL/gl.h>
 #include "Window.h"
 #include "Application.h"
@@ -23,11 +23,11 @@ Window::Window(int width, int height, bool fullscreen, const std::string &captio
         return;
     }
     
-    if (TTF_Init() < 0)
-    {
-        ERROR("Failed to initialize the SDL2 TTF library");
-        return;
-    }
+//    if (TTF_Init() < 0)
+//    {
+//        ERROR("Failed to initialize the SDL2 TTF library");
+//        return;
+//    }
     
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);

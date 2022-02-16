@@ -100,6 +100,7 @@
 		406DCA9823420B0A008C088E /* ComponentFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 406DCA9623420B0A008C088E /* ComponentFactory.cpp */; };
 		40708D1C23266B0800A796AD /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 40708D1A23266B0800A796AD /* Material.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40708D1D23266B0800A796AD /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40708D1B23266B0800A796AD /* Material.cpp */; };
+		407417E127AA8A6700D84B3D /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407417E027AA8A6700D84B3D /* SDL2.framework */; };
 		40837778231A8F2600A63D8F /* Matrix4x4.h in Headers */ = {isa = PBXBuildFile; fileRef = 40837768231A8F2600A63D8F /* Matrix4x4.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40837779231A8F2600A63D8F /* Vector2.h in Headers */ = {isa = PBXBuildFile; fileRef = 40837769231A8F2600A63D8F /* Vector2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4083777A231A8F2600A63D8F /* Matrix4x4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4083776A231A8F2600A63D8F /* Matrix4x4.cpp */; };
@@ -193,8 +194,6 @@
 		D0C44D1726ED31B1004051AD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D1626ED31B1004051AD /* Frustum.cpp */; };
 		D0C44D3126F1D9A9004051AD /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D3026F1D9A9004051AD /* Font.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0C44D3326F1DA02004051AD /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D3226F1DA02004051AD /* Font.cpp */; };
-		D0C44D3526F1DC4B004051AD /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */; };
-		D0C44D3726F1DC93004051AD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C44D3626F1DC93004051AD /* SDL2.framework */; };
 		D0C44D4826F311BB004051AD /* SpriteComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0C44D4626F311BB004051AD /* SpriteComponent.cpp */; };
 		D0C44D4926F311BB004051AD /* SpriteComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D4726F311BB004051AD /* SpriteComponent.h */; };
 		D0C44D4C26F492B8004051AD /* ScreenSpaceAnchorComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C44D4B26F492B8004051AD /* ScreenSpaceAnchorComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -299,6 +298,7 @@
 		406DCA9623420B0A008C088E /* ComponentFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentFactory.cpp; sourceTree = "<group>"; };
 		40708D1A23266B0800A796AD /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		40708D1B23266B0800A796AD /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		407417E027AA8A6700D84B3D /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		40837761231A811500A63D8F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		40837766231A8F2600A63D8F /* Vector4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector4.cpp; sourceTree = "<group>"; };
 		40837768231A8F2600A63D8F /* Matrix4x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4x4.h; sourceTree = "<group>"; };
@@ -410,8 +410,6 @@
 		D0C44D2D26F087E1004051AD /* Skybox.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = Skybox.shader; sourceTree = "<group>"; };
 		D0C44D3026F1D9A9004051AD /* Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
 		D0C44D3226F1DA02004051AD /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
-		D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_ttf.framework; sourceTree = "<group>"; };
-		D0C44D3626F1DC93004051AD /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		D0C44D3F26F30C16004051AD /* UI.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI.material; sourceTree = "<group>"; };
 		D0C44D4026F30C2F004051AD /* UI.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI.shader; sourceTree = "<group>"; };
 		D0C44D4126F30D6F004051AD /* UI.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = UI.vert; sourceTree = "<group>"; };
@@ -428,9 +426,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0C44D3726F1DC93004051AD /* SDL2.framework in Frameworks */,
-				D0C44D3526F1DC4B004051AD /* SDL2_ttf.framework in Frameworks */,
 				4010F52D234256EC00D08A02 /* OpenAL.framework in Frameworks */,
+				407417E127AA8A6700D84B3D /* SDL2.framework in Frameworks */,
 				408377AD231B6ED600A63D8F /* OpenGL.framework in Frameworks */,
 				401B7946231D703A00E6B4F0 /* libz.tbd in Frameworks */,
 			);
@@ -674,8 +671,7 @@
 		408377A1231AEB6F00A63D8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0C44D3626F1DC93004051AD /* SDL2.framework */,
-				D0C44D3426F1DC4A004051AD /* SDL2_ttf.framework */,
+				407417E027AA8A6700D84B3D /* SDL2.framework */,
 				408377AC231B6ED600A63D8F /* OpenGL.framework */,
 				4010F52C234256EC00D08A02 /* OpenAL.framework */,
 				401B7945231D703A00E6B4F0 /* libz.tbd */,
