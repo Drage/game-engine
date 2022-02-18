@@ -95,14 +95,14 @@ Entity* Scene::LoadPrefab(const std::string &filename, ParamList *params)
     if (params)
         instance->Init(*params);
     
-    LoadEntities(&xml.root, instance);
+    LoadEntities(&xml.root, instance, instance);
     
     Add(instance);
     
     return instance;
 }
 
-void Scene::LoadEntities(const XMLDocument::Element *xml, Entity *parent, ParamList *overrideParams)
+void Scene::LoadEntities(const XMLDocument::Element *xml, Entity *parent, Entity *prefabRoot, ParamList *overrideParams)
 {
     for (auto i = xml->subElements.begin(); i != xml->subElements.end(); i++)
     {
@@ -115,6 +115,9 @@ void Scene::LoadEntities(const XMLDocument::Element *xml, Entity *parent, ParamL
                 parent->AddChild(entity);
             else
                 Add(entity);
+
+            if (prefabRoot)
+                entity->SetPrefabRoot(prefabRoot);
             
             ParamList params;
             (*i)->ToParamList(params);
@@ -123,7 +126,7 @@ void Scene::LoadEntities(const XMLDocument::Element *xml, Entity *parent, ParamL
              
             entity->Init(params);
             
-            LoadEntities((*i), entity);
+            LoadEntities((*i), entity, prefabRoot);
         }
         else if (tag == "Prefab")
         {
@@ -134,7 +137,7 @@ void Scene::LoadEntities(const XMLDocument::Element *xml, Entity *parent, ParamL
             params.Remove("prefab");
             
             Entity *instance = LoadPrefab(filename, &params);
-            LoadEntities((*i), instance);
+            LoadEntities((*i), instance, instance);
             
             if (parent)
                 parent->AddChild(instance);

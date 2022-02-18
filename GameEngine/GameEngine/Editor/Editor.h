@@ -20,16 +20,21 @@ namespace DrageEngine
             void Update();
             void Render();
         
-            bool IsSelected(Entity* entity) const;
+            bool IsSelected(const Entity* entity) const;
             bool HasSelection() const;
             const std::vector<Entity*>& GetSelection() const;
             void SetSelection(Entity* entity);
         
             EditorCamera *camera;
+
+            enum Origin { Center, Pivot };
         
         private:
             std::vector<Entity*> selection;
             std::vector<EditorWindow*> windows;
+
+            Origin origin;
+
     };
 }
 

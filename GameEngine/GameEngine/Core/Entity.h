@@ -28,15 +28,19 @@ namespace DrageEngine
             inline void SetName(const std::string &name) { this->name = name; }
             inline const std::string& GetName() { return name; };
         
-            inline const Entity* GetParent() const { return parent; }
-            void SetParent(Entity *obj);
-            void AddChild(Entity *obj);
-            bool RemoveChild(Entity *obj);
+            inline Entity* GetParent() const { return parent; }
+            void SetParent(Entity *entity);
+            void AddChild(Entity *entity);
+            bool RemoveChild(Entity *entity);
             Entity* GetChild(const std::string &name);
+            void GetAllChildrenInHierarchy(std::vector<Entity*> &children);
             const std::vector<Entity*>& GetChildren() const;
         
             void AddComponent(Component *component);
             bool RemoveComponent(Component *component);
+
+            void SetPrefabRoot(Entity *entity);
+            inline Entity* GetPrefabRoot() const { return prefabRoot; }
         
             template<typename T>
             T* GetComponent() const
@@ -67,6 +71,8 @@ namespace DrageEngine
             bool started;
             bool destroyed;
             bool active;
+
+            Entity *prefabRoot;
     };
 }
 

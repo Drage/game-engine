@@ -93,6 +93,13 @@ Matrix4x4 Camera::GetProjectionMatrix() const
     return projection;
 }
 
+Vector3 Camera::WorldToScreenPoint(const Vector3 &point)
+{
+    Matrix4x4 view = GetViewMatrix();
+    Matrix4x4 projection = GetProjectionMatrix();
+    return projection * view * point;
+}
+
 const Frustum& Camera::GetFrustum()
 {
     static Vector3 lastPosition;

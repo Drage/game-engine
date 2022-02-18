@@ -36,6 +36,9 @@ namespace DrageEngine
         
             void Register(Renderable *renderable);
             void Unregister(Renderable *renderable);
+
+            void GetRenderablesForEntity(const Entity *entity, std::vector<Renderable*> &renderables) const;
+            void GetRenderablesForEntities(const std::vector<Entity*> &entities, std::vector<Renderable*> &renderables) const;
         
             void Render();
         

@@ -31,6 +31,8 @@ namespace DrageEngine
 
             Matrix4x4 GetViewMatrix() const;
             Matrix4x4 GetProjectionMatrix() const;
+
+            Vector3 WorldToScreenPoint(const Vector3 &point);
         
             const Frustum& GetFrustum();
         

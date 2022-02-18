@@ -78,8 +78,8 @@ const Mesh* Primitive::Cube()
 
 Mesh* Primitive::sphere = NULL;
 
-const int Primitive::SPHERE_SLICES = 64;
-const int Primitive::SPHERE_STACKS = 64;
+const int Primitive::SPHERE_H_SEGMENTS = 64;
+const int Primitive::SPHERE_V_SEGMENTS = 64;
 
 const Mesh* Primitive::Sphere()
 {
@@ -88,14 +88,14 @@ const Mesh* Primitive::Sphere()
     
     std::vector<Vertex> vertices;
     
-    for (int i = 0; i <= SPHERE_STACKS; i++)
+    for (int i = 0; i <= SPHERE_V_SEGMENTS; i++)
     {
-        float v = i / (float)SPHERE_STACKS;
+        float v = i / (float)SPHERE_V_SEGMENTS;
         float phi = v * PI;
 
-        for (int j = 0; j <= SPHERE_SLICES; j++)
+        for (int j = 0; j <= SPHERE_H_SEGMENTS; j++)
         {
-            float u = j / (float)SPHERE_SLICES;
+            float u = j / (float)SPHERE_H_SEGMENTS;
             float theta = u * PI * 2;
 
             float x = cos(theta) * sin(phi);
@@ -107,13 +107,13 @@ const Mesh* Primitive::Sphere()
     }
     
     std::vector<unsigned> indicies;
-    for (int i = 0; i < SPHERE_SLICES * SPHERE_STACKS + SPHERE_SLICES; i++)
+    for (int i = 0; i < SPHERE_H_SEGMENTS * SPHERE_V_SEGMENTS + SPHERE_H_SEGMENTS; i++)
     {
         indicies.push_back(i);
-        indicies.push_back(i + SPHERE_SLICES + 1);
-        indicies.push_back(i + SPHERE_SLICES);
+        indicies.push_back(i + SPHERE_H_SEGMENTS + 1);
+        indicies.push_back(i + SPHERE_H_SEGMENTS);
     
-        indicies.push_back(i + SPHERE_SLICES + 1);
+        indicies.push_back(i + SPHERE_H_SEGMENTS + 1);
         indicies.push_back(i);
         indicies.push_back(i + 1);
     }

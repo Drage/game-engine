@@ -32,7 +32,7 @@ namespace DrageEngine
             const EntityList& GetEntities() const;
         
         private:
-            void LoadEntities(const XMLDocument::Element *xml, Entity *parent = NULL, ParamList *params = NULL);
+            void LoadEntities(const XMLDocument::Element *xml, Entity *parent = NULL, Entity *prefabRoot = NULL, ParamList *params = NULL);
             EntityList entities;
     };
 }

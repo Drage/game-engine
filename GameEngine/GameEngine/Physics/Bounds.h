@@ -16,6 +16,8 @@ namespace DrageEngine
         Bounds(const Vector3 &min, const Vector3 &max, float radius);
         
         Vector3 GetDimensions();
+
+        static Bounds Combine(const Bounds &a, const Bounds &b);
     };
 }
 

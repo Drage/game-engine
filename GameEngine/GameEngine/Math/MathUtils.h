@@ -2,6 +2,8 @@
 #ifndef MATHUTILS_H
 #define MATHUTILS_H
 
+#include <initializer_list>
+
 namespace DrageEngine
 {
     extern const float PI;
@@ -15,11 +17,23 @@ namespace DrageEngine
     {
         return (a < b) ? a : b;
     }
+
+    template <typename T, typename ... Args>
+    T Min(T a, T b, Args ... args)
+    {
+        return Min(Min(a, b), args...);
+    }
     
     template<typename T>
     T Max(T a, T b)
     {
         return (a > b) ? a : b;
+    }
+
+    template <typename T, typename ... Args>
+    T Max(T a, T b, Args ... args)
+    {
+        return Max(Max(a, b), args...);
     }
     
     template<typename T>

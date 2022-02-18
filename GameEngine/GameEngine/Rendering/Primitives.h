@@ -20,8 +20,8 @@ namespace DrageEngine
             static Mesh *plane;
             static Mesh *billboard;
         
-            static const int SPHERE_SLICES;
-            static const int SPHERE_STACKS;
+            static const int SPHERE_H_SEGMENTS;
+            static const int SPHERE_V_SEGMENTS;
     };
 }
 

@@ -32,7 +32,6 @@ namespace DrageEngine
             float depthOrder;
             unsigned long sortKey;
             unsigned options;
-            
     };
 
     struct RenderableComparitor

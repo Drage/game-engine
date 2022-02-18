@@ -35,10 +35,14 @@
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.xml</string>
 			</array>
+			<key>UTTypeIcons</key>
+			<dict/>
 			<key>UTTypeIdentifier</key>
 			<string>com.drage.shader-source</string>
 			<key>UTTypeTagSpecification</key>
@@ -106,21 +110,6 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>prefab</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.xml</string>
-			</array>
-			<key>UTTypeIdentifier</key>
-			<string>com.drage.prefab</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>.prefab</string>
 				</array>
 			</dict>
 		</dict>

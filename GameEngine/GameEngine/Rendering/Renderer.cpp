@@ -132,9 +132,9 @@ Camera* Renderer::GetActiveCamera()
 
 void Renderer::AddLight(Light *light)
 {
-    for (std::vector<Light*>::iterator i = lights.begin(); i != lights.end(); i++)
+    for (auto i : lights)
     {
-        if (*i == light)
+        if (i == light)
             return;
     }
     lights.push_back(light);
@@ -170,6 +170,24 @@ void Renderer::Unregister(Renderable *renderable)
     }
 }
 
+void Renderer::GetRenderablesForEntity(const Entity *entity, std::vector<Renderable*> &renderables) const
+{
+    for (auto renderable : renderQueue)
+    {
+        if (renderable->GetEntity() == entity)
+            renderables.push_back(renderable);
+    }
+}
+
+void Renderer::GetRenderablesForEntities(const std::vector<Entity*> &entities, std::vector<Renderable*> &renderables) const
+{
+    for (auto renderable : renderQueue)
+    {
+        if (std::find(entities.begin(), entities.end(), renderable->GetEntity()) != entities.end())
+            renderables.push_back(renderable);
+    }
+}
+
 void Renderer::Render()
 {
     if (!camera)
@@ -199,9 +217,8 @@ void Renderer::Render()
 
 void Renderer::SortRenderQueue()
 {
-    for (RenderQueue::const_iterator i = renderQueue.begin(); i != renderQueue.end(); i++)
+    for (auto renderable : renderQueue)
     {
-        Renderable *renderable = (*i);
         const Material *material = renderable->GetMaterial();
         Vector3 position = renderable->GetEntity()->GetGlobalTransform().position;
         
@@ -209,9 +226,9 @@ void Renderer::SortRenderQueue()
             renderable->SetDepthOrder(1000 - position.z);
         else
         {
-            bool isTransparent = (*i)->GetMaterial()->IsTransparent();
+            bool isTransparent = renderable->GetMaterial()->IsTransparent();
             float depthSqr = (position - camera->GetPosition()).MagnitudeSqr();
-            (*i)->SetDepthOrder(isTransparent ? depthSqr : -depthSqr);
+            renderable->SetDepthOrder(isTransparent ? depthSqr : -depthSqr);
         }
     }
     
@@ -372,7 +389,14 @@ void Renderer::RenderEditorSelection()
 
 bool Renderer::FilterIsSelected(RenderQueue::const_iterator i) const
 {
-    return app->editor->IsSelected((*i)->GetEntity());
+    const Entity *entity = (*i)->GetEntity();
+    while (entity != NULL)
+    {
+        if (app->editor->IsSelected(entity))
+            return true;
+        entity = entity->GetParent();
+    }
+    return false;
 }
 
 void Renderer::OverrideColorBlack(RenderQueue::const_iterator i) const
@@ -410,7 +434,7 @@ Entity* Renderer::GetEntityAtScreenPosition(const Vector2 &coordinates)
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glViewport(viewportOffset.x, viewportOffset.y, viewportSize.x, viewportSize.y);
     
-    int index = data[0] + data[1] * 256 + data[2] * 256*256;
+    int index = data[0] + data[1] * 256 + data[2] * 256 * 256;
     if (index < renderQueue.size())
     {
         RenderQueue::const_iterator i = renderQueue.begin();

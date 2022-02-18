@@ -12,6 +12,7 @@ Entity::Entity()
     parent = NULL;
     destroyed = false;
     started = false;
+    prefabRoot = NULL;
 }
 
 Entity::~Entity()
@@ -59,27 +60,27 @@ void Entity::Update()
         i->Update();
 }
 
-void Entity::SetParent(Entity *obj)
+void Entity::SetParent(Entity *entity)
 {
-    parent = obj;
+    parent = entity;
     
-    if (std::find(obj->children.begin(), obj->children.end(), this) == obj->children.end())
-        obj->children.push_back(this);
+    if (std::find(entity->children.begin(), entity->children.end(), this) == entity->children.end())
+        entity->children.push_back(this);
 }
 
-void Entity::AddChild(Entity *obj)
+void Entity::AddChild(Entity *entity)
 {
-    if (std::find(obj->children.begin(), obj->children.end(), this) == obj->children.end())
-        children.push_back(obj);
+    if (std::find(entity->children.begin(), entity->children.end(), this) == entity->children.end())
+        children.push_back(entity);
     
-    obj->parent = this;
+    entity->parent = this;
 }
 
-bool Entity::RemoveChild(Entity *obj)
+bool Entity::RemoveChild(Entity *entity)
 {
     for (auto i = children.begin(); i != children.end(); i++)
     {
-        if (*i == obj)
+        if (*i == entity)
         {
             children.erase(i);
             return true;
@@ -90,12 +91,21 @@ bool Entity::RemoveChild(Entity *obj)
 
 Entity* Entity::GetChild(const std::string &name)
 {
-    for (auto i = children.begin(); i != children.end(); i++)
+    for (auto child : children)
     {
-        if ((*i)->GetName() == name)
-            return *i;
+        if (child->GetName() == name)
+            return child;
     }
     return NULL;
+}
+
+void Entity::GetAllChildrenInHierarchy(std::vector<Entity*> &entities)
+{
+    for (auto child : children)
+    {
+        entities.push_back(child);
+        child->GetAllChildrenInHierarchy(entities);
+    }
 }
 
 const std::vector<Entity*>& Entity::GetChildren() const
@@ -127,6 +137,11 @@ bool Entity::RemoveComponent(Component *component)
         }
     }
     return false;
+}
+
+void Entity::SetPrefabRoot(Entity *entity)
+{
+    prefabRoot = entity;
 }
 
 Transform Entity::GetGlobalTransform() const

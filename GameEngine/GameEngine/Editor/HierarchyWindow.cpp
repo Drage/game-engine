@@ -21,7 +21,7 @@ void HierarchyWindow::RenderEntities(const std::vector<Entity*> entities)
 {
     for (auto i : entities)
     {
-        int flags = ImGuiTreeNodeFlags_OpenOnArrow;
+        int flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
         
         if (i->GetChildren().size() == 0)
             flags |= ImGuiTreeNodeFlags_NoArrow;
@@ -30,7 +30,9 @@ void HierarchyWindow::RenderEntities(const std::vector<Entity*> entities)
             flags |= ImGuiTreeNodeFlags_Selected;
         
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0.0f, 0.0f });
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, { 0.0f, 10.0f });
         bool open = ImGui::TreeNodeEx(i->GetName().c_str(), flags);
+        ImGui::PopStyleVar();
         ImGui::PopStyleVar();
         
         if (ImGui::IsItemClicked())
